@@ -1,8 +1,18 @@
 import { getDBConnection } from "../db/db";
-import { joinToScreenChannel } from "./connection";
+import { getUserChannel, joinToScreenChannel } from "./connection";
 import uuid from 'react-native-uuid';
 import { saveScreen } from "../db/screen/screen_write_model";
 import { setCurrentScreen } from "../redux/screens";
+
+export const pushEventToUserChannel = (params) => {
+  const channel = getUserChannel();
+  channel.push(params.event_name, {
+    type: params.type,
+    user_id: params.userId,
+    screen_name: params.screenName,
+    query: params.query
+  });
+}
 
 export const pushEvent = (channel, params) => {
   channel.push(params.event_name, {

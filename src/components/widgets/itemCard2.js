@@ -3,7 +3,6 @@ import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
 
 export default function ItemCard2({ data }) {
-    console.log("ItemCard2", data)
     const renderLabel = ({ item }) => (
         <Text>LABEL: {item.text}</Text>
     );

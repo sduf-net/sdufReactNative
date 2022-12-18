@@ -1,10 +1,26 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View, VirtualizedList } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, View, VirtualizedList } from 'react-native'
 import uuid from 'react-native-uuid';
+import { pushEventToUserChannel } from '../../socket/socketAction';
 
 export default function Footer({ data }) {
+    const onPress = (actions) => {
+        if (actions.click) {
+            // TODO
+            const params = {
+                type: "click",
+                user_id: "123",
+                screen_name: "router",
+                query: ""
+            }
+            pushEventToUserChannel(params);
+            console.log("ON PRESS", actions)
+        }
+    }
     const renderWidget = ({ item }) => (
-        <Image source={{ uri: item.src }} style={[styles.img]} />
+        <TouchableHighlight onPress={() => onPress(item.actions)}>
+            <Image source={{ uri: item.src }} style={[styles.img]} />
+        </TouchableHighlight>
     );
     const getItemCount = (item) => item.length;
     const getItem = (data, index) => {

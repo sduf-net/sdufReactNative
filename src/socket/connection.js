@@ -75,3 +75,12 @@ export const closeSocketConnection = () => {
 
   socket = null;
 };
+
+export const getUserChannel = () => {
+  if (!socket) {
+    return false;
+  }
+  if (userChannel) {
+    return userChannel;
+  }
+}

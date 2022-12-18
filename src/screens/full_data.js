@@ -18,44 +18,13 @@ const actions = {
 
 const list = [
     {
-        id: 1,
-        name: "FooterWidget",
-        data: {
-            style: {
-                'background-color': 'aqua'
-            },
-            images: [
-                {
-                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
-                    alt: "",
-                    actions: actions
-                },
-                {
-                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
-                    alt: "",
-                    actions: actions
-                },
-                {
-                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
-                    alt: "",
-                    actions: actions
-                },
-                {
-                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
-                    alt: "",
-                    actions: actions
-                }
-            ]
-        }
-    },
-    {
         id: 2,
         name: "HeaderWidget",
         data: {
             title: "HeaderWidget",
             images: [
                 {
-                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
+                    src: "https://cdn-icons-png.flaticon.com/512/2459/2459427.png",
                     alt: "",
                     actions: actions
                 },
@@ -73,6 +42,37 @@ const list = [
             style: {
                 background: "#db5c4c"
             }
+        }
+    },
+    {
+        id: 1,
+        name: "FooterWidget",
+        data: {
+            style: {
+                'background-color': 'aqua'
+            },
+            images: [
+                {
+                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
+                    alt: "",
+                    actions: actions
+                },
+                {
+                    src: "https://cdn-icons-png.flaticon.com/512/2544/2544087.png",
+                    alt: "",
+                    actions: actions
+                },
+                {
+                    src: "https://cdn-icons-png.flaticon.com/512/854/854878.png",
+                    alt: "",
+                    actions: actions
+                },
+                {
+                    src: "https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA=w240-h480-rw",
+                    alt: "",
+                    actions: actions
+                }
+            ]
         }
     },
     {
