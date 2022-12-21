@@ -1,14 +1,14 @@
-import { View, VirtualizedList } from 'react-native';
+import { Text, View, VirtualizedList } from 'react-native';
 import { useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 // import data from './../screens/data';
 import data from '../screens/full_data';
 
-export default function WidgetList({ widgets, navigation }) {
+export default function FixedTop({ widgets }) {
     // const { nestedComponents } = useSelector(state => state.screen);
 
     const renderWidget = ({ item }) => {
-        return <ComponentFactory props={item} navigation={navigation} />
+        return <ComponentFactory props={item} />
     };
 
     const getItemCount = (item) => item.length;
@@ -20,13 +20,7 @@ export default function WidgetList({ widgets, navigation }) {
 
     return (
         <View>
-            {nestedComponents ? <VirtualizedList
-                data={nestedComponents}
-                renderItem={renderWidget}
-                keyExtractor={item => item.id}
-                getItemCount={getItemCount}
-                getItem={getItem}
-            /> : nestedComponents}
+            <Text>Fixed top</Text>
         </View>
     );
 

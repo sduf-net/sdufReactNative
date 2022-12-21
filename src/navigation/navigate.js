@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 export default function Navigate() {
     return <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen options={{ headerShown: false }} name="index" children={IndexScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="Index" children={IndexScreen} />
         </Stack.Navigator>
     </NavigationContainer>
 }

@@ -43,6 +43,7 @@ export default function ComponentFactory(config) {
         getComponentName(config.props.name),
         {
             data: config.props.data,
+            navigation: config.navigation,
             nestedComponents: config.props.nestedComponents ? config.props.nestedComponents : null
         }
     );

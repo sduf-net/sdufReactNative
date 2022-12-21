@@ -1,7 +1,7 @@
 const actions = {
     click: {
         type: "routeToLocal",
-        screen_name: "home"
+        screen_name: "Index"
     },
     scroll: {
         type: "asyncPost",

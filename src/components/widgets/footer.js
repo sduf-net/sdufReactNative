@@ -1,8 +1,8 @@
 import React from 'react'
 import { Image, StyleSheet, Text, TouchableHighlight, View, VirtualizedList } from 'react-native'
 import uuid from 'react-native-uuid';
-import { pushEventToUserChannel } from '../../socket/socketAction';
 import { useRoute } from '@react-navigation/native';
+import { handleEventAction } from '../../event_handler';
 
 
 // const processAction = (name, actions) => {
@@ -34,22 +34,13 @@ import { useRoute } from '@react-navigation/native';
 
 
 
-export default function Footer({ data }) {
+export default function Footer({ data, navigation }) {
     const route = useRoute();
 
     const onPress = (actions) => {
         
         if (actions.click) {
-            // processClickAction(actions.click)
-            // TODO
-            const params = {
-                type: "click",
-                user_id: "123",
-                screen_name: route.name,
-                query: route.params
-            }
-            pushEventToUserChannel(params);
-            console.log("ON PRESS", actions)
+            handleEventAction(actions.click, navigation);
         }
     }
 
