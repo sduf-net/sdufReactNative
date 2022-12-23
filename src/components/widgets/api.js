@@ -22,33 +22,26 @@
 //   store.dispatch("pushScreenEvent", actions[name]);
 
 import { useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { pushEventToUserChannel } from '../../socket/socketAction';
-class ApiWidget extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
+export default function ApiWidget({data, route}) {
 
-    componentDidMount() {
-        console.log("API WIDGET", this.props)
+    useEffect(() => {
+        console.log("API WIDGET", data)
 
         const params = {
             type: "screen:event",
             user_id: "123",
-            screen_name: this.props.route.name,
-            query: this.props.route.params,
-            callback_url: this.props.data.callbackUrl
+            screen_name: route.name,
+            query: route.params,
+            callback_url: data.callbackUrl
         }
         pushEventToUserChannel(params);
-    }
+    });
 
-    render() {
-        return (
-            <View><Text>ApiWidget</Text></View>
-        );
-    }
+    return (
+        <View><Text>ApiWidget</Text></View>
+    );
 }
-
-export default ApiWidget;
