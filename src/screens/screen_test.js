@@ -322,7 +322,14 @@ const list = [
     {
         id: 37,
         name: "LineWidget",
-    }
+    },
+    {
+        id: 17,
+        name: "ApiWidget",
+        data: {
+            callbackUrl: "http://localhost:4000/api/v1/test"
+        }
+    },
 ]
 
 export default list

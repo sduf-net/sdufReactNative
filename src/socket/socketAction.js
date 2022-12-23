@@ -10,7 +10,8 @@ export const pushEventToUserChannel = (params) => {
     type: params.type,
     user_id: params.userId,
     screen_name: params.screenName,
-    query: params.query
+    query: params.query,
+    callback_url: params.callbackUrl
   });
 }
 

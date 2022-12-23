@@ -35,8 +35,6 @@ import { handleEventAction } from '../../event_handler';
 
 
 export default function Footer({ data, navigation }) {
-    const route = useRoute();
-
     const onPress = (actions) => {
         if (actions.click) {
             handleEventAction(actions.click, navigation);
@@ -57,7 +55,7 @@ export default function Footer({ data, navigation }) {
         <View>
             {data ? <VirtualizedList
                 data={data.images}
-                contentContainerStyle={[styles.justifyContent]}
+                contentContainerStyle={[styles.justifyContent, styles.bgColor]}
                 renderItem={renderWidget}
                 keyExtractor={item => uuid.v4()}
                 getItemCount={getItemCount}
@@ -76,5 +74,8 @@ const styles = StyleSheet.create({
     img: {
         width: 50,
         height: 50
+    },
+    bgColor: {
+        backgroundColor: 'white'
     }
 });

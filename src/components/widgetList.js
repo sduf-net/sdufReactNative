@@ -1,13 +1,16 @@
+import { useRoute } from '@react-navigation/native';
 import { View, VirtualizedList } from 'react-native';
 import { useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 
 export default function WidgetList({ navigation }) {
+    const route = useRoute();
+
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !["HeaderWidget", "FooterWidget"].includes(widget.name)));
     console.log("nestedComponents", nestedComponents)
 
     const renderWidget = ({ item }) => {
-        return <ComponentFactory props={item} navigation={navigation} />
+        return <ComponentFactory props={item} navigation={navigation} route={route} />
     };
 
     const getItemCount = (item) => item.length;

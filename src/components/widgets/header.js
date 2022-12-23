@@ -3,9 +3,7 @@ import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { pushEventToUserChannel } from '../../socket/socketAction';
 import { useRoute } from '@react-navigation/native';
 
-export default function Header({ data }) {
-    const route = useRoute();
-
+export default function Header({ data, route }) {
     const onPress = (actions) => {
         if (actions.click) {
             // TODO
@@ -16,8 +14,6 @@ export default function Header({ data }) {
                 query: route.params
             }
             pushEventToUserChannel(params);
-            console.log("ON PRESS", actions);
-            console.log("ON PRESS ROUTER", route);
         }
     }
 
