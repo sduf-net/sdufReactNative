@@ -1,10 +1,16 @@
 import React from 'react'
-import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
+import { Image, StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native'
 import uuid from 'react-native-uuid';
+import { handleEventAction } from '../../event_handler';
 import Label1 from './label1';
 import Label2 from './label2';
 
-export default function ItemCard1({ data }) {
+export default function ItemCard1({ data, navigation }) {
+    const onPress = (actions) => {
+        if (actions.click) {
+            handleEventAction(actions.click, navigation);
+        }
+    }
     const renderLabel = ({ item }) => (
         <Label2 data={{ text: item.text }} />
     );
@@ -14,37 +20,39 @@ export default function ItemCard1({ data }) {
         </View>
     );
     return (
-        <View>
-            {data ?
-                <>
-                    <Image
-                        resizeMode={'cover'}
-                        style={[styles.image, { width: '100%', height: 200 }]}
-                        source={{ uri: data.src }}
-                    />
-                    <Text style={[styles.title]}>{data.title}</Text>
-                    <View style={[styles.prices_list]}>
-                        <Text style={[styles.price_usd]}>{data.price.usd}$</Text>
-                        <Text style={[styles.price]}>{data.price.uah}грн</Text>
-                    </View>
+        <TouchableOpacity onPress={() => onPress(data.actions)}>
+            <View>
+                {data ?
+                    <>
+                        <Image
+                            resizeMode={'cover'}
+                            style={[styles.image, { width: '100%', height: 200 }]}
+                            source={{ uri: data.src }}
+                        />
+                        <Text style={[styles.title]}>{data.title}</Text>
+                        <View style={[styles.prices_list]}>
+                            <Text style={[styles.price_usd]}>{data.price.usd}$</Text>
+                            <Text style={[styles.price]}>{data.price.uah}грн</Text>
+                        </View>
 
-                    <FlatList
-                        data={data.labels}
-                        numColumns={2}
-                        renderItem={renderLabel}
-                        listKey={uuid.v4()}
-                        keyExtractor={(item) => item.id}
-                    />
-                    <FlatList
-                        data={data.characteristics}
-                        numColumns={2}
-                        renderItem={renderCharacteristics}
-                        listKey={uuid.v4()}
-                        keyExtractor={(item) => item.id}
-                    />
-                </>
-                : null}
-        </View>
+                        <FlatList
+                            data={data.labels}
+                            numColumns={2}
+                            renderItem={renderLabel}
+                            listKey={uuid.v4()}
+                            keyExtractor={(item) => item.id}
+                        />
+                        <FlatList
+                            data={data.characteristics}
+                            numColumns={2}
+                            renderItem={renderCharacteristics}
+                            listKey={uuid.v4()}
+                            keyExtractor={(item) => item.id}
+                        />
+                    </>
+                    : null}
+            </View>
+        </TouchableOpacity>
     );
 }
 

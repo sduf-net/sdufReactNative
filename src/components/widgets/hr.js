@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default function Hr({ data }) {
     return (
@@ -7,9 +7,9 @@ export default function Hr({ data }) {
             style={{
                 borderBottomColor: 'black',
                 borderBottomWidth: StyleSheet.hairlineWidth,
+                paddingTop: 5,
+                paddingBottom: 5
             }}
         />
     );
 }
-
-

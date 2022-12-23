@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, View, VirtualizedList } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View, VirtualizedList } from 'react-native'
 import uuid from 'react-native-uuid';
 import { useRoute } from '@react-navigation/native';
 import { handleEventAction } from '../../event_handler';
@@ -38,16 +38,15 @@ export default function Footer({ data, navigation }) {
     const route = useRoute();
 
     const onPress = (actions) => {
-        
         if (actions.click) {
             handleEventAction(actions.click, navigation);
         }
     }
 
     const renderWidget = ({ item }) => (
-        <TouchableHighlight onPress={() => onPress(item.actions)}>
+        <TouchableOpacity onPress={() => onPress(item.actions)}>
             <Image source={{ uri: item.src }} style={[styles.img]} />
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
     const getItemCount = (item) => item.length;
     const getItem = (data, index) => {

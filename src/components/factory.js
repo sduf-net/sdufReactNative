@@ -28,7 +28,6 @@ const keysToComponentMap = {
     TextWidget: TextWidget,
     ItemCard1: ItemCard1,
     ItemCard2: ItemCard2,
-    LineWidget: LineWidget,
     Label1Widget: Label1,
     Label2Widget: Label2,
     Label3Widget: Label3,
