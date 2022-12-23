@@ -11,7 +11,7 @@ import FixedBottom from '../components/fixedBottom';
 
 export default function IndexScreen({ route, navigation }) {
     const [refresh, setRefresh] = useState(true);
-    const { widgets, loading, error, refetchPages } = useSQLite(route, setRefresh);
+    // const { widgets, loading, error, refetchPages } = useSQLite(route, setRefresh);
 
     useEffect(() => {
         initSocket();
@@ -30,9 +30,9 @@ export default function IndexScreen({ route, navigation }) {
     console.log("route", route);
     return (
         <View>
-            <FixedTop />
-            <WidgetList navigation={navigation}/>
-            <FixedBottom />
+            <FixedTop navigation={navigation} />
+            <WidgetList navigation={navigation} />
+            <View style={{ position: 'absolute', left: 0, right: 0, bottom: 40 }}><FixedBottom navigation={navigation} /></View>
         </View>
     );
 

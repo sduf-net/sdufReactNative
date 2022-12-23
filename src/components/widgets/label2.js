@@ -6,7 +6,7 @@ export default function Label2({ data }) {
         <View>
             {data ?
                 <>
-                    <Text>LAbel2 {data.text}</Text>
+                    <Text style={[styles.label]}>{data.text}</Text>
                 </>
                 : null}
         </View>
@@ -15,14 +15,11 @@ export default function Label2({ data }) {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    image: {
-        width: 100,
-        height: 100,
+    label: {
+        borderWidth: 1,
+        borderColor: "blue",
+        borderRadius: 5,
+        padding: 5,
+        marginRight: 10
     }
 });

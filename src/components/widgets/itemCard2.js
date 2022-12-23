@@ -1,10 +1,11 @@
 import React from 'react'
 import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
+import Label3 from './label3';
 
 export default function ItemCard2({ data }) {
     const renderLabel = ({ item }) => (
-        <Text>LABEL: {item.text}</Text>
+        <Label3 data={{text: item.text}}/>
     );
     const renderParams = ({ item }) => (
         <View>
@@ -16,26 +17,29 @@ export default function ItemCard2({ data }) {
             {data ?
                 <>
                     <Image
-                        style={[styles.image]}
+                        resizeMode={'cover'}
+                        style={[styles.image, { width: '100%', height: 200 }]}
                         source={{ uri: data.src }}
                     />
-                    <Text>{data.title}</Text>
-                    <Text>{data.sub_title}</Text>
-                    
-                    <Text>UAH {data.price.uah}</Text>
-                    <Text>USD {data.price.usd}</Text>
+                    <Text style={[styles.title]}>{data.title}</Text>
+                    <Text style={[styles.sub_title]}>{data.sub_title}</Text>
+
+                    <View style={[styles.prices_list]}>
+                        <Text style={[styles.price_usd]}>USD {data.price.usd}</Text>
+                        <Text style={[styles.price]}>UAH {data.price.uah}</Text>
+                    </View>
 
                     <FlatList
                         data={data.labels}
-                        numColumns={2}
+                        numColumns={5}
                         renderItem={renderLabel}
                         listKey={uuid.v4()}
                         keyExtractor={(item) => item.id}
                     />
-                    <Text>USD {data.date}</Text>
+                    <Text>{data.date}</Text>
                     <FlatList
                         data={data.params}
-                        numColumns={2}
+                        numColumns={5}
                         renderItem={renderParams}
                         listKey={uuid.v4()}
                         keyExtractor={(item) => item.id}
@@ -48,14 +52,21 @@ export default function ItemCard2({ data }) {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+    title: {
+        fontSize: 20
     },
-    image: {
-        width: 100,
-        height: 100,
+    sub_title: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    prices_list: {
+        flex: 1,
+        flexDirection: 'row',
+        fontSize: 16
+    },
+    price_usd: {
+        color: 'green',
+        fontWeight: 'bold',
+        paddingRight: 10
     }
 });

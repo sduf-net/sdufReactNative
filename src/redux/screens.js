@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import data from './../screens/screen_test'
 
 const initialState = {
-  id: null,
-  name: "null",
-  nestedComponents: null
+  id: 1,
+  name: "index",
+  nestedComponents: data
 }
 
 export const currentScreen = createSlice({
@@ -18,7 +19,7 @@ export const currentScreen = createSlice({
       state.nestedComponents = value.payload.nestedComponents
       state.id = value.payload.id
       state.name = value.payload.name
-    },
+    }
   },
 })
 

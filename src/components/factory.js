@@ -13,12 +13,14 @@ import LineWidget from './widgets/line'
 import Label1 from './widgets/label1'
 import Label2 from './widgets/label2'
 import Label3 from './widgets/label3'
+import Hr from './widgets/hr'
 
 const keysToComponentMap = {
     // layouts
     Column: Column,
     Row: Row,
     SimpleRow: Row,
+    LineWidget: Hr,
     // widgets
     HeaderWidget: Header,
     FooterWidget: Footer,

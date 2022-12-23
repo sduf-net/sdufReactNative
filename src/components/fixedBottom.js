@@ -1,14 +1,13 @@
 import { Text, View, VirtualizedList } from 'react-native';
 import { useSelector } from 'react-redux';
 import ComponentFactory from './factory';
-// import data from './../screens/data';
-import data from '../screens/full_data';
 
-export default function FixedBottom({ widgets }) {
-    // const { nestedComponents } = useSelector(state => state.screen);
+export default function FixedBottom({ navigation }) {
+    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "FooterWidget"));
+    console.log("FooterWidget", nestedComponents)
 
     const renderWidget = ({ item }) => {
-        return <ComponentFactory props={item} />
+        return <ComponentFactory props={item} navigation={navigation} />
     };
 
     const getItemCount = (item) => item.length;
@@ -16,12 +15,15 @@ export default function FixedBottom({ widgets }) {
         return data[index];
     };
 
-    const nestedComponents = data;
-
     return (
         <View>
-            <Text>Fixed Bottom</Text>
+            {nestedComponents ? <VirtualizedList
+                data={nestedComponents}
+                renderItem={renderWidget}
+                keyExtractor={item => item.id}
+                getItemCount={getItemCount}
+                getItem={getItem}
+            /> : nestedComponents}
         </View>
     );
-
 }

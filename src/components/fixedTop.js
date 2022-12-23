@@ -1,14 +1,11 @@
 import { Text, View, VirtualizedList } from 'react-native';
 import { useSelector } from 'react-redux';
 import ComponentFactory from './factory';
-// import data from './../screens/data';
-import data from '../screens/full_data';
 
-export default function FixedTop({ widgets }) {
-    // const { nestedComponents } = useSelector(state => state.screen);
-
+export default function FixedTop({ navigation }) {
+    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "HeaderWidget"));
     const renderWidget = ({ item }) => {
-        return <ComponentFactory props={item} />
+        return <ComponentFactory props={item} navigation={navigation} />
     };
 
     const getItemCount = (item) => item.length;
@@ -16,12 +13,15 @@ export default function FixedTop({ widgets }) {
         return data[index];
     };
 
-    const nestedComponents = data;
-
     return (
         <View>
-            <Text>Fixed top</Text>
+            {nestedComponents ? <VirtualizedList
+                data={nestedComponents}
+                renderItem={renderWidget}
+                keyExtractor={item => item.id}
+                getItemCount={getItemCount}
+                getItem={getItem}
+            /> : nestedComponents}
         </View>
     );
-
 }
