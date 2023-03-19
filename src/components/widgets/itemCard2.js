@@ -9,7 +9,7 @@ export default function ItemCard2({ data }) {
     );
     const renderParams = ({ item }) => (
         <View>
-            <Text>Characteristic: {item.text}</Text>
+            <Text>• {item.text} </Text>
         </View>
     );
     return (

@@ -16,7 +16,7 @@ export default function ItemCard1({ data, navigation }) {
     );
     const renderCharacteristics = ({ item }) => (
         <View>
-            <Label1 daya={{ text: item.text, src: item.src }} />
+            <Label1 data={{ text: item.text, src: item.src }} />
         </View>
     );
     return (
@@ -36,18 +36,21 @@ export default function ItemCard1({ data, navigation }) {
                         </View>
 
                         <FlatList
+                            style={[styles.labels]}
                             data={data.labels}
                             numColumns={2}
                             renderItem={renderLabel}
                             listKey={uuid.v4()}
-                            keyExtractor={(item) => item.id}
+                            keyExtractor={(item) => uuid.v4()}
                         />
                         <FlatList
+                            style={[styles.characteristics]}
+                            columnWrapperStyle={{paddingRight: 5}}
                             data={data.characteristics}
                             numColumns={2}
                             renderItem={renderCharacteristics}
                             listKey={uuid.v4()}
-                            keyExtractor={(item) => item.id}
+                            keyExtractor={(item) =>uuid.v4()}
                         />
                     </>
                     : null}
@@ -68,11 +71,14 @@ const styles = StyleSheet.create({
         maxHeight: 300
     },
     title: {
-        fontSize: 20
+        fontSize: 20,
+        alignItems: 'center'
     },
     prices_list: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom: 3
     },
     price: {
         fontSize: 22
@@ -82,5 +88,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingRight: 10,
         fontSize: 20
+    },
+    labels: {
+        paddingBottom: 3
+    },
+    characteristics: {
+        paddingBottom: 3
     }
 });

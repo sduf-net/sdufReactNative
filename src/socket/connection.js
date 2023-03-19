@@ -4,16 +4,13 @@ import uuid from 'react-native-uuid';
 let socket = null;
 let userChannel = null;
 
-export const initSocketConnection = (token, userId) => {
+export const initSocketConnection = (token) => {
   // TODO get token from memory
-  const SOCKET_URL = "ws://localhost:4000/socket"
-  // const SOCKET_URL = "ws://sduf-platform.herokuapp.com//socket"
-
-  
+  const SOCKET_URL = "wss://e0da-142-188-130-158.ngrok.io/socket"
   token = uuid.v4();
 
   if (socket) {
-    console.error("Socket is not connected");
+    console.log("Socket is already connected");
     return;
   }
   socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000, params: { userToken: token } })

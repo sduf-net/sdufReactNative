@@ -3,14 +3,14 @@ import { Image, StyleSheet, View, Text } from 'react-native'
 
 export default function Label1({ data }) {
     return (
-        <View>
+        <View style={[styles.container]}>
             {data ?
                 <>
                     <Image
                         style={[styles.image]}
                         source={{ uri: data.src }}
                     />
-                    <Text>LAbel1 {data.text}</Text>
+                    <Text>{data.text}</Text>
                 </>
                 : null}
         </View>
@@ -21,12 +21,14 @@ export default function Label1({ data }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        width: 80
     },
     image: {
-        width: 100,
-        height: 100,
+        width: 20,
+        height: 30,
+        resizeMode: 'contain',
+        paddingRight: 5
     }
 });

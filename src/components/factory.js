@@ -14,6 +14,8 @@ import Label1 from './widgets/label1'
 import Label2 from './widgets/label2'
 import Label3 from './widgets/label3'
 import Hr from './widgets/hr'
+import CarouselReanimated from './widgets/carousel'
+import InputWidget from './widgets/input'
 
 const keysToComponentMap = {
     // layouts
@@ -31,8 +33,9 @@ const keysToComponentMap = {
     Label1Widget: Label1,
     Label2Widget: Label2,
     Label3Widget: Label3,
+    ImageCarouselWidget: CarouselReanimated,
+    InputWidget: InputWidget,
     ApiWidget: ApiWidget
-
 }
 
 const getComponentName = (key) => {

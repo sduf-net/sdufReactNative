@@ -4,6 +4,7 @@ import { pushEventToUserChannel } from '../../socket/socketAction';
 import { useRoute } from '@react-navigation/native';
 
 export default function Header({ data, route }) {
+    console.log("sssssssssssss", data)
     const onPress = (actions) => {
         if (actions.click) {
             // TODO
@@ -18,9 +19,9 @@ export default function Header({ data, route }) {
     }
 
     return (
-        <View style={[styles.container]}>
+        <View>
             {data ?
-                <>
+                <View style={[styles.container, {backgroundColor: data?.style?.background}]}>
                     <TouchableOpacity onPress={() => onPress(data.images[0].actions)}>
                         {data.images[0].src ? <Image source={{ uri: data.images[0].src }} style={[styles.img]} /> : null}
                     </TouchableOpacity>
@@ -35,7 +36,7 @@ export default function Header({ data, route }) {
                         </TouchableOpacity>
 
                     </View>
-                </>
+                </View>
                 : null
             }
         </View >
@@ -47,16 +48,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: 50,
+        paddingLeft: 8,
+        paddingRight: 8
     },
     subContainer: {
-        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: "space-between",
+        width: 80
     },
     img: {
-        width: 40,
-        height: 40
+        width: 30,
+        height: 30
     },
     title: {
         fontSize: 18,

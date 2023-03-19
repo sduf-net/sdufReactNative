@@ -53,27 +53,31 @@ export default function Footer({ data, navigation }) {
 
     return (
         <View>
-            {data ? <VirtualizedList
-                data={data.images}
-                contentContainerStyle={[styles.justifyContent, styles.bgColor]}
-                renderItem={renderWidget}
-                keyExtractor={item => uuid.v4()}
-                getItemCount={getItemCount}
-                getItem={getItem}
-                horizontal
-            /> : null}
+                {data ? <VirtualizedList
+                    data={data.images}
+                    contentContainerStyle={[styles.content_container, styles.bgColor, {backgroundColor: data?.style?.background}]}
+                    renderItem={renderWidget}
+                    keyExtractor={item => uuid.v4()}
+                    getItemCount={getItemCount}
+                    getItem={getItem}
+                    horizontal
+                /> : null}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    justifyContent: {
+    content_container: {
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: 50,
+        paddingLeft: 10,
+        paddingRight: 10
     },
     img: {
-        width: 50,
-        height: 50
+        width: 30,
+        height: 30
     },
     bgColor: {
         backgroundColor: 'white'

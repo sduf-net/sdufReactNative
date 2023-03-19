@@ -1,41 +1,47 @@
-import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-
 import React from 'react';
-import { initSocketConnection, joinToUserChannel } from '../socket/connection';
-import { getScreenThroughSocket, listenUserChannelEvents } from '../socket/socketAction';
-import { useSQLite } from './useSql';
+import { initSocketConnection, joinToScreenChannel, joinToUserChannel } from '../socket/connection';
+import { getScreenThroughSocket, listenScreenChannelEvents, listenUserChannelEvents } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
+import { useLayoutEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-export default function IndexScreen({ route, navigation }) {
-    const [refresh, setRefresh] = useState(true);
-    // const { widgets, loading, error, refetchPages } = useSQLite(route, setRefresh);
+export default function IndexScreen({ route }) {
+    const userId = useSelector(state => state.user.id);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         initSocket();
-    }, [initSocket]);
+    });
 
     const initSocket = () => {
-        let token = "ototot";
-        let userId = "user1";
+        const token = "ototot";
+        const screenName = route?.params?.screenName || "index";
 
         initSocketConnection(token);
-        userChannel = joinToUserChannel(userId);
+        const userChannel = joinToUserChannel(userId);
+        const screenChannel = joinToScreenChannel(screenName);
         listenUserChannelEvents(userChannel);
-        getScreenThroughSocket("index", route);
+        listenScreenChannelEvents(screenChannel);
+
+
+        const queryString = route && route.params ? route.params : null;
+        const actionName = "action_performed";
+        getScreenThroughSocket(
+            userChannel,
+            actionName,
+            { userId: userId, queryString: queryString, screenName: screenName }
+        );
     }
 
-    console.log("route", route);
     return (
         <View>
-            <FixedTop navigation={navigation} />
-            <WidgetList navigation={navigation} />
-            <View style={{ position: 'absolute', left: 0, right: 0, bottom: 40 }}><FixedBottom navigation={navigation} /></View>
+            <FixedTop style={[{ flex: 1 }]}/>
+            <WidgetList style={[{ flex: 1 }]} />
+            <FixedBottom />
         </View>
     );
-
 }
 
 const styles = StyleSheet.create({
