@@ -1,10 +1,9 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { pushEventToUserChannel } from '../../socket/socketAction';
+// import { pushEventToUserChannel } from '../../socket/socketAction';
 import { useRoute } from '@react-navigation/native';
 
 export default function Header({ data, route }) {
-    console.log("sssssssssssss", data)
     const onPress = (actions) => {
         if (actions.click) {
             // TODO
@@ -14,7 +13,7 @@ export default function Header({ data, route }) {
                 screen_name: route.name,
                 query: route.params
             }
-            pushEventToUserChannel(params);
+            // pushEventToUserChannel(params);/
         }
     }
 

@@ -5,39 +5,37 @@ import { getScreenThroughSocket, listenScreenChannelEvents, listenUserChannelEve
 import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
-import { useLayoutEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useLayoutEffect, useEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 
 export default function IndexScreen({ route }) {
-    const userId = useSelector(state => state.user.id);
+    const userId = useSelector(state => state.user.id, shallowEqual);
+    const screenName = route?.params?.screenName || "index";
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         initSocket();
-    });
+    }, [screenName]);
 
     const initSocket = () => {
         const token = "ototot";
-        const screenName = route?.params?.screenName || "index";
 
         initSocketConnection(token);
         const userChannel = joinToUserChannel(userId);
-        const screenChannel = joinToScreenChannel(screenName);
         listenUserChannelEvents(userChannel);
-        listenScreenChannelEvents(screenChannel);
+        // const screenChannel = joinToScreenChannel(screenName);
+        // listenScreenChannelEvents(screenChannel);
 
 
         const queryString = route && route.params ? route.params : null;
-        const actionName = "action_performed";
         getScreenThroughSocket(
             userChannel,
-            actionName,
             { userId: userId, queryString: queryString, screenName: screenName }
         );
     }
 
     return (
-        <View>
-            <FixedTop style={[{ flex: 1 }]}/>
+        <View style={[{ flex: 1 }]}>
+            <FixedTop style={[{ flex: 1 }]} />
             <WidgetList style={[{ flex: 1 }]} />
             <FixedBottom />
         </View>

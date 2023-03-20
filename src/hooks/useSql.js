@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getScreen } from '../db/screen/screen_read_model';
 import { setupDb } from '../db/setup';
 import { setCurrentScreen } from '../redux/screens';
-import { getScreenThroughSocket } from '../socket/socketAction';
+// import { getScreenThroughSocket } from '../socket/socketAction';
 
 const useSQLite = (route) => {
     const [widgets, setWidgets] = useState([]);
@@ -25,7 +25,7 @@ const useSQLite = (route) => {
                 // push event throught the socket
                 // and get async responce
                 // listener screenReceivedCallback handle responce and save it to db and dispatch event to update state
-                getScreenThroughSocket(screenName, route);
+                // getScreenThroughSocket(screenName, route);
                 setLoading(false);
             }
         } catch (err) {

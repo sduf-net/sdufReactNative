@@ -21,25 +21,23 @@
 
 //   store.dispatch("pushScreenEvent", actions[name]);
 
-import { useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
-import { pushEventToUserChannel } from '../../socket/socketAction';
+import { useSelector } from 'react-redux';
+import { getUserChannel } from '../../socket/connection';
+import { pushEventToChannel } from '../../socket/socketAction';
 
-export default function ApiWidget({data, route}) {
+export default function ApiWidget({ data, id }) {
+    const userId = useSelector(state => state.user.id);
 
     useEffect(() => {
-        console.log("API WIDGET", data)
-
-        const params = {
-            type: "screen:event",
-            user_id: "123",
-            screen_name: route.name,
-            query: route.params,
-            callback_url: data.callbackUrl
-        }
-        pushEventToUserChannel(params);
-    });
+        const userChannel = getUserChannel();
+        pushEventToChannel(userChannel, {
+            userId: userId,
+            actionName: "request_widget",
+            payload: { parent_id: id, callback_url: data.callbackUrl }
+        })
+    }, []);
 
     return (
         <View><Text>ApiWidget</Text></View>

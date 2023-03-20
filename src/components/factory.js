@@ -47,6 +47,7 @@ export default function ComponentFactory(config) {
         getComponentName(config.props.name),
         {
             data: config.props.data,
+            id: config.props.id,
             navigation: config.navigation,
             route: config.route,
             nestedComponents: config.props.nestedComponents ? config.props.nestedComponents : null

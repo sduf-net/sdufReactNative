@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
 import Label3 from './label3';
 
-export default function ItemCard2({ data }) {
+export default function ItemCard2({ data, id }) {
     const renderLabel = ({ item }) => (
         <Label3 data={{text: item.text}}/>
     );
@@ -16,11 +16,13 @@ export default function ItemCard2({ data }) {
         <View>
             {data ?
                 <>
+
                     <Image
                         resizeMode={'cover'}
                         style={[styles.image, { width: '100%', height: 200 }]}
                         source={{ uri: data.src }}
                     />
+                    <Text style={[styles.title]}>{id}</Text>
                     <Text style={[styles.title]}>{data.title}</Text>
                     <Text style={[styles.sub_title]}>{data.sub_title}</Text>
 

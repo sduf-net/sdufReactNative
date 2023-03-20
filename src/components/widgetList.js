@@ -1,15 +1,15 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, VirtualizedList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 
 export default function WidgetList() {
     const navigation = useNavigation();
     const route = useRoute();
 
-    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !["HeaderWidget", "FooterWidget"].includes(widget.name)));
+    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !["HeaderWidget", "FooterWidget"].includes(widget.name)), shallowEqual);
     // console.log("nestedComponents", nestedComponents)
-
+    
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     };
@@ -19,6 +19,7 @@ export default function WidgetList() {
         return data[index];
     };
 
+    console.log("WIDEGTLITS", nestedComponents)
     return (
         <View>
             {nestedComponents ? <VirtualizedList

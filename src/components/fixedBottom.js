@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, VirtualizedList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 
 export default function FixedBottom() {
     const navigation = useNavigation();
-    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "FooterWidget"));
-    console.log("FooterWidget", nestedComponents)
+    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "FooterWidget"), shallowEqual);
+    // console.log("FooterWidget", nestedComponents)
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} />
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        bottom: 50
+        bottom: 0
     },
 });
 

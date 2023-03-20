@@ -14,6 +14,7 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "@reduxjs/toolkit": "^1.9.0",
+    "lodash": "^4.17.21",
     "phoenix": "^1.7.0-rc.0",
     "react": "18.1.0",
     "react-devtools": "^4.26.1",
