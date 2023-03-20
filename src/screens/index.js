@@ -12,9 +12,13 @@ export default function IndexScreen({ route }) {
     const userId = useSelector(state => state.user.id, shallowEqual);
     const screenName = route?.params?.screenName || "index";
 
+    // useEffect(() => {
+    //     initSocket();
+    // }, [screenName]);
+
     useEffect(() => {
         initSocket();
-    }, [screenName]);
+    });
 
     const initSocket = () => {
         const token = "ototot";
