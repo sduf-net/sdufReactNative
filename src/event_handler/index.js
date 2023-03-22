@@ -1,3 +1,8 @@
+import { getUserChannel } from "../socket/connection";
+import { pushEventToChannel } from "../socket/socketAction";
+import store from "../redux/store";
+
+const userId = store.getState().user.id;
 export const handleEventAction = (event, navigation, route) => {
     switch (event.type) {
         case "routeToLocal":
@@ -16,8 +21,13 @@ export const handleEventAction = (event, navigation, route) => {
         case "routeToScreenFromApi":
         case "asyncPost":
         case "asyncGet":
-            // store.dispatch("pushScreenEvent", actions[name]);
-            console.log("push SOCkEKT EVENT")
+            console.log("push SOCkEKT EVENT", event);
+            const userChannel = getUserChannel();
+            pushEventToChannel(userChannel, {
+                userId: userId,
+                actionName: "async_post",
+                payload: { parent_id: "id", callback_url: event.url, params: event.params ?? {} }
+            })
             break;
 
         default:
