@@ -24,6 +24,7 @@ export default function WidgetList() {
         <View>
             {nestedComponents ? <VirtualizedList
                 data={nestedComponents}
+                initialNumToRender={2} 
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
