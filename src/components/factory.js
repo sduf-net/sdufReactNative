@@ -16,6 +16,7 @@ import Label3 from './widgets/label3'
 import Hr from './widgets/hr'
 import CarouselReanimated from './widgets/carousel'
 import InputWidget from './widgets/input'
+import ItemHeader2 from './widgets/itemHeader2'
 
 const keysToComponentMap = {
     // layouts
@@ -24,6 +25,7 @@ const keysToComponentMap = {
     SimpleRow: Row,
     LineWidget: Hr,
     // widgets
+    Item2Header: ItemHeader2,
     HeaderWidget: Header,
     FooterWidget: Footer,
     ImageWidget: ImageWidget,
