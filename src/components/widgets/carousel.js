@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { memo } from 'react';
 import { Button, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
-export default function CarouselReanimated({ data, navigation }) {
+function CarouselReanimated({ data, navigation }) {
     const width = Dimensions.get('window').width;
     const ref = React.useRef(null);
 
@@ -57,6 +58,7 @@ export default function CarouselReanimated({ data, navigation }) {
     );
 }
 
+export default memo(CarouselReanimated);
 
 const styles = StyleSheet.create({
     image: {

@@ -2,8 +2,9 @@ import { Text, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { useNavigation } from '@react-navigation/native';
+import { memo } from 'react';
 
-export default function FixedTop() {
+function FixedTop() {
     const navigation = useNavigation();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "HeaderWidget"), shallowEqual);
     // console.log("HeaderWidget", nestedComponents)
@@ -29,3 +30,5 @@ export default function FixedTop() {
         </View>
     );
 }
+
+export default memo(FixedTop)

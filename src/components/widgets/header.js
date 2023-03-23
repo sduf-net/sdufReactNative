@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 // import { pushEventToUserChannel } from '../../socket/socketAction';
-import { useRoute } from '@react-navigation/native';
 import { handleEventAction } from '../../event_handler';
 
-export default function Header({ data, navigation }) {
+function Header({ data, navigation }) {
     const onPress = (actions) => {
         if (actions.click) {
             handleEventAction(actions.click, navigation);
@@ -46,6 +45,7 @@ export default function Header({ data, navigation }) {
     );
 }
 
+export default memo(Header);
 
 const styles = StyleSheet.create({
     container: {

@@ -1,40 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View, VirtualizedList } from 'react-native'
 import uuid from 'react-native-uuid';
-import { useRoute } from '@react-navigation/native';
 import { handleEventAction } from '../../event_handler';
 
-
-// const processAction = (name, actions) => {
-//     if (actions && actions[name]) {
-//         switch (actions[name].type) {
-//             case "routeBack":
-//                 router.go(-1)
-//                 break;
-//             case "routeToExternal":
-//                 // window.location.href = actions[name].url;
-//                 window.open(actions[name].url)
-//                 break;
-//             case "routeToLocal":
-//                 router.push({
-//                     path: "/" + actions[name].screen_name,
-//                     query: actions[name].params,
-//                 });
-//                 break;
-//             case "routeToScreenFromApi":
-//             case "asyncPost":
-//             case "asyncGet":
-//                 store.dispatch("pushScreenEvent", actions[name]);
-//                 break;
-//             default:
-//                 console.log("default action processAction");
-//         }
-//     }
-// }
-
-
-
-export default function Footer({ data, navigation }) {
+function Footer({ data, navigation }) {
     const onPress = (actions) => {
         if (actions.click) {
             handleEventAction(actions.click, navigation);
@@ -65,6 +34,8 @@ export default function Footer({ data, navigation }) {
         </View>
     );
 }
+
+export default memo(Footer);
 
 const styles = StyleSheet.create({
     content_container: {

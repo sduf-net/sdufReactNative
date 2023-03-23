@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
-import React from 'react';
-import { initSocketConnection, joinToScreenChannel, joinToUserChannel } from '../socket/connection';
+import React, { useCallback } from 'react';
+import { getUserChannel, initSocketConnection, joinToScreenChannel, joinToUserChannel } from '../socket/connection';
 import { getScreenThroughSocket, listenScreenChannelEvents, listenUserChannelEvents } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
@@ -16,11 +16,12 @@ export default function IndexScreen({ route }) {
     //     initSocket();
     // }, [screenName]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         initSocket();
+        getScreen();
     });
 
-    const initSocket = () => {
+    const initSocket = useCallback(() => {
         const token = "ototot";
 
         initSocketConnection(token);
@@ -28,14 +29,16 @@ export default function IndexScreen({ route }) {
         listenUserChannelEvents(userChannel);
         // const screenChannel = joinToScreenChannel(screenName);
         // listenScreenChannelEvents(screenChannel);
+    }, [userId])
 
-
+    const getScreen = useCallback(() => {
         const queryString = route && route.params ? route.params : null;
+        const userChannel = getUserChannel();
         getScreenThroughSocket(
             userChannel,
             { userId: userId, queryString: queryString, screenName: screenName }
         );
-    }
+    }, [screenName])
 
     return (
         <View style={[{ flex: 1 }]}>
@@ -45,17 +48,3 @@ export default function IndexScreen({ route }) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    text: {
-        flex: 1,
-        backgroundColor: 'red',
-        color: "red"
-    }
-});

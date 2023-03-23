@@ -1,4 +1,4 @@
-import { createElement } from 'react'
+import { createElement, memo, useCallback } from 'react'
 import Header from './widgets/header'
 import Footer from './widgets/footer'
 import Error from './widgets/error'
@@ -40,11 +40,12 @@ const keysToComponentMap = {
     ApiWidget: ApiWidget
 }
 
-const getComponentName = (key) => {
-    return keysToComponentMap[key] ? keysToComponentMap[key] : Error
-}
 
-export default function ComponentFactory(config) {
+function ComponentFactory(config) {
+    const getComponentName = useCallback((key) => {
+        return keysToComponentMap[key] ? keysToComponentMap[key] : Error
+    }, [config.props.name])
+
     return createElement(
         getComponentName(config.props.name),
         {
@@ -56,5 +57,8 @@ export default function ComponentFactory(config) {
         }
     );
 }
+
+
+export default memo(ComponentFactory);
 
 

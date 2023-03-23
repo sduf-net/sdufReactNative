@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import {  StyleSheet, View, Text,  TouchableOpacity } from 'react-native'
 
-export default function ItemHeader2({ data, navigation }) {
+function ItemHeader2({ data, navigation }) {
     return (
         <TouchableOpacity onPress={() => onPress(data.actions)}>
             <View>
@@ -21,6 +21,7 @@ export default function ItemHeader2({ data, navigation }) {
     );
 }
 
+export default memo(ItemHeader2);
 
 const styles = StyleSheet.create({
     title: {

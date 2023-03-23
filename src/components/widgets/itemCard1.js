@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Image, StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native'
 import uuid from 'react-native-uuid';
 import { handleEventAction } from '../../event_handler';
 import Label1 from './label1';
 import Label2 from './label2';
 
-export default function ItemCard1({ data, navigation }) {
+function ItemCard1({ data, navigation }) {
     const onPress = (actions) => {
         if (actions.click) {
             handleEventAction(actions.click, navigation);
@@ -59,6 +59,7 @@ export default function ItemCard1({ data, navigation }) {
     );
 }
 
+export default memo(ItemCard1);
 
 const styles = StyleSheet.create({
     container: {

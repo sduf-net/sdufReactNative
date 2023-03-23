@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
 import Label3 from './label3';
 
-export default function ItemCard2({ data, id }) {
+function ItemCard2({ data, id }) {
     const renderLabel = ({ item }) => (
         <Label3 data={{text: item.text}}/>
     );
@@ -52,6 +52,7 @@ export default function ItemCard2({ data, id }) {
     );
 }
 
+export default memo(ItemCard2);
 
 const styles = StyleSheet.create({
     title: {

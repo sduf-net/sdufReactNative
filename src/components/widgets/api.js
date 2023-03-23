@@ -21,13 +21,13 @@
 
 //   store.dispatch("pushScreenEvent", actions[name]);
 
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getUserChannel } from '../../socket/connection';
 import { pushEventToChannel } from '../../socket/socketAction';
 
-export default function ApiWidget({ data, id }) {
+function ApiWidget({ data, id }) {
     const userId = useSelector(state => state.user.id);
 
     useEffect(() => {
@@ -43,3 +43,5 @@ export default function ApiWidget({ data, id }) {
         <View><Text>ApiWidget</Text></View>
     );
 }
+
+export default memo(ApiWidget);
