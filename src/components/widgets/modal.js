@@ -32,9 +32,11 @@ function CustomModal({ nestedComponents, navigation }) {
         onSwipeComplete={() => setIsVisible(false)}
         onBackdropPress={() => setIsVisible(false)}
         swipeDirection={['up', 'left', 'right', 'down']}
-        style={styles.view}>
+        style={styles.view}
+        >
         {nestedComponents ? <VirtualizedList
           data={nestedComponents}
+          contentContainerStyle={styles.view}
           initialNumToRender={2}
           renderItem={renderWidget}
           keyExtractor={item => item.id}
@@ -52,6 +54,11 @@ export default memo(CustomModal);
 const styles = StyleSheet.create({
   view: {
     justifyContent: 'flex-end',
-    margin: 0,
+    backgroundColor: 'white',
+    margin: 10
+  },
+  page: {
+    flex: 1,
+    backgroundColor: 'white'
   }
 });
