@@ -17,6 +17,8 @@ import Hr from './widgets/hr'
 import CarouselReanimated from './widgets/carousel'
 import InputWidget from './widgets/input'
 import ItemHeader2 from './widgets/itemHeader2'
+import CustomModal from './widgets/modal'
+
 
 const keysToComponentMap = {
     // layouts
@@ -26,6 +28,7 @@ const keysToComponentMap = {
     LineWidget: Hr,
     // widgets
     Item2Header: ItemHeader2,
+    PopupWidget: CustomModal,
     HeaderWidget: Header,
     FooterWidget: Footer,
     ImageWidget: ImageWidget,
