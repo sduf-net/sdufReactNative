@@ -29,7 +29,7 @@ export const pushEvent = (channel, action, params) => {
 }
 
 export const getScreenThroughSocket = async (channel, params) => {
-  console.log("getScreenThroughSocket", params)
+  console.log("getScreenThroughSocket")
   const opts = {
     user_id: params.userId,
     action: GET_SCREEN_BY_NAME,
@@ -64,11 +64,11 @@ const addListeners = (channel) => {
     console.log("insertBeforeCallback", data);
   };
   let insertAfterCallback = (data) => {
-    console.log("insertAfterCallback", data);
+    console.log("insertAfterCallback");
     store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget}))
   };
   let removeCallback = (data) => {
-    console.log("removeCallback", data);
+    console.log("removeCallback");
     store.dispatch(remove({ parent_id: data.id}))
   };
   let changeCallback = (data) => {
@@ -84,7 +84,7 @@ const addListeners = (channel) => {
     console.log("logInCallback", data);
   };
   let screenReceivedCallback = (data) => {
-    console.log("screenReceivedCallback", data, Date.now());
+    console.log("screenReceivedCallback");
     // getDBConnection().then(db => saveScreen(db, data));
     store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
   };

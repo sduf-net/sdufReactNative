@@ -18,6 +18,7 @@ import CarouselReanimated from './widgets/carousel'
 import InputWidget from './widgets/input'
 import ItemHeader2 from './widgets/itemHeader2'
 import CustomModal from './widgets/modal'
+import chatPreview from './widgets/chatPreview'
 
 
 const keysToComponentMap = {
@@ -27,6 +28,7 @@ const keysToComponentMap = {
     SimpleRow: Row,
     LineWidget: Hr,
     // widgets
+    ChatPreviewWidget: chatPreview,
     Item2Header: ItemHeader2,
     PopupWidget: CustomModal,
     HeaderWidget: Header,

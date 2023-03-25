@@ -17,14 +17,12 @@ export const currentScreen = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       if (state.name != value.payload.name) {
-        console.log("UPDATE", state.name, value.payload.name)
         state.nestedComponents = value.payload.nestedComponents
         state.id = value.payload.id
         state.name = value.payload.name
       }
     },
     insertAfter: (state, value) => {
-
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
@@ -37,8 +35,6 @@ export const currentScreen = createSlice({
     },
     remove: (state, value) => {
       state.nestedComponents = state.nestedComponents.filter((widget => widget.id != value.payload.parent_id));
-
-      console.log("REMOVE", state.nestedComponents)
     }
   },
 })

@@ -7,7 +7,6 @@ function CarouselReanimated({ data, navigation }) {
     const width = Dimensions.get('window').width;
     const ref = React.useRef(null);
 
-    console.log("CarouselReanimated", data.images)
     return (
         <View style={{ flex: 1 }}>
             <Carousel
@@ -20,7 +19,6 @@ function CarouselReanimated({ data, navigation }) {
                 // scrollAnimationDuration={5000}
                 onSnapToItem={(index) => console.log('current index:', index)}
                 renderItem={({ item }) => {
-                    console.log("OMAGE", item)
                     return (
                         <View
                             style={{

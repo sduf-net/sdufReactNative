@@ -1,27 +1,5 @@
-// import React, { useState } from 'react'
-// import { Text, View } from 'react-native'
-
-// export default function ApiWidget(config) {
-
-//     return (
-//         <View><Text>ApiWidget</Text></View>
-//     );
-// }
-
-// pushScreenEvent: function (context, data) {
-//     data = {
-//       ...data,
-//       screenName: context.getters.currentScreenName,
-//       userId: getUserId(),
-//     }
-
-//     getScreenChannel().push("screen:event", data, TIMEOUT)
-//   },
-
-
-//   store.dispatch("pushScreenEvent", actions[name]);
-
 import React, { memo, useEffect } from 'react';
+import { useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getUserChannel } from '../../socket/connection';
@@ -31,6 +9,10 @@ function ApiWidget({ data, id }) {
     const userId = useSelector(state => state.user.id);
 
     useEffect(() => {
+        handleImageVisibility();
+    })
+
+    const handleImageVisibility = useCallback(() => {
         const userChannel = getUserChannel();
         pushEventToChannel(userChannel, {
             userId: userId,
@@ -40,7 +22,7 @@ function ApiWidget({ data, id }) {
     }, []);
 
     return (
-        <View><Text>ApiWidget</Text></View>
+        <View></View>
     );
 }
 

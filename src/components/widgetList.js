@@ -20,6 +20,10 @@ function WidgetList() {
         return data[index];
     };
 
+    const onViewableItemsChanged = (item) => {
+        // console.log("onViewableItemsChanged", item)
+    }
+
     // console.log("WIDEGTLITS", nestedComponents)
     return (
         <View>
@@ -30,6 +34,7 @@ function WidgetList() {
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
+                onViewableItemsChanged={onViewableItemsChanged}
             /> : nestedComponents}
         </View>
     );
