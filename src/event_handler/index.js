@@ -40,6 +40,13 @@ export const handleEventAction = (event, navigation, route) => {
                 payload: { parent_id: "id", callback_url: event.url, params: event.params ?? {} }
             })
             break;
+        case "getPagination":
+            console.log("push SOCkEKT EVENT getPagination");
+            pushEventToChannel(userChannel, {
+                userId: userId,
+                actionName: "getPagination",
+                payload: { parent_id: "id", callback_url: event.url, params: event.params ?? {} }
+            })
 
         default:
             console.log("default action");

@@ -4,19 +4,29 @@ import { View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
+import { handleEventAction } from '../event_handler';
 
 function WidgetList() {
     const navigation = useNavigation();
     const route = useRoute();
-
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !["HeaderWidget", "FooterWidget"].includes(widget.name)), shallowEqual);
 
     const renderWidget = useCallback(({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     });
 
+    // when PaginationWidget is visible call pagination api
+    // TODO add load state
     const onViewableItemsChanged = (item) => {
-        // console.log("onViewableItemsChanged", item)
+        item.changed.forEach(element => {
+            if (element.item.name === 'PaginationWidget') {
+                handleEventAction({
+                    type: "getPagination",
+                    url: element.callbackUrl,
+                    params: element.params ?? {}
+                }, navigation);
+            }
+        });
     }
 
     return (

@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import uuid from 'react-native-uuid';
 import { handleEventAction } from '../../event_handler';
 
 function ChatPreview({ data, navigation }) {
@@ -12,7 +11,7 @@ function ChatPreview({ data, navigation }) {
 
     return (
         <TouchableOpacity onPress={() => onPress(data.actions)}>
-            <View style={[styles.container]}>
+            <View style={[styles.container, { backgroundColor: data?.style?.background }]}>
                 {data ?
                     <>
                         <Image
@@ -37,13 +36,15 @@ export default memo(ChatPreview);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffd',
         alignItems: 'center',
         flexDirection: 'row',
-        marginBottom: 8
+        padding: 5
     },
     image: {
         maxHeight: 300,
+        borderRadius: 50,
+        maxWidth: 80,
+        maxHeight: 80
     },
     sub_container: {
         paddingLeft: 10

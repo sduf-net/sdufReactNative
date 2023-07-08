@@ -9,16 +9,16 @@ import ImageWidget from './widgets/image'
 import TextWidget from './widgets/text'
 import ItemCard1 from './widgets/itemCard1'
 import ItemCard2 from './widgets/itemCard2'
-import LineWidget from './widgets/line'
 import Label1 from './widgets/label1'
 import Label2 from './widgets/label2'
 import Label3 from './widgets/label3'
 import Hr from './widgets/hr'
-import CarouselReanimated from './widgets/carousel'
+import MyCarousel from './widgets/carousel'
 import InputWidget from './widgets/input'
 import ItemHeader2 from './widgets/itemHeader2'
 import CustomModal from './widgets/modal'
 import chatPreview from './widgets/chatPreview'
+import ChatMessage from './widgets/ChatMessage'
 
 
 const keysToComponentMap = {
@@ -40,9 +40,10 @@ const keysToComponentMap = {
     Label1Widget: Label1,
     Label2Widget: Label2,
     Label3Widget: Label3,
-    ImageCarouselWidget: CarouselReanimated,
+    ImageCarouselWidget: MyCarousel,
     InputWidget: InputWidget,
-    ApiWidget: ApiWidget
+    ApiWidget: ApiWidget,
+    ChatMessageWidget: ChatMessage
 }
 
 

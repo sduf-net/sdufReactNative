@@ -24,34 +24,39 @@ function ItemCard1({ data, navigation }) {
             <View>
                 {data ?
                     <>
-                        <Image
-                            resizeMode={'cover'}
-                            style={[styles.image, { width: '100%', height: 200 }]}
-                            source={{ uri: data.src }}
-                        />
-                        <Text style={[styles.title]}>{data.title}</Text>
-                        <View style={[styles.prices_list]}>
-                            <Text style={[styles.price_usd]}>{data.price.usd}$</Text>
-                            <Text style={[styles.price]}>{data.price.uah}грн</Text>
+                        <View style={[styles.wrap_img]}>
+                            <Image
+                                resizeMode={'cover'}
+                                style={[styles.image, { width: '100%', height: 200 }]}
+                                source={{ uri: data.src }}
+                            />
+                        </View>
+                        <View style={[styles.wrap_info]}>
+                            <Text style={[styles.title]}>{data.title}</Text>
+                            <View style={[styles.prices_list]}>
+                                <Text style={[styles.price_usd]}>{data.price.usd}$</Text>
+                                <Text style={[styles.price]}>{data.price.uah}грн</Text>
+                            </View>
+
+                            <FlatList
+                                style={[styles.labels]}
+                                data={data.labels}
+                                numColumns={2}
+                                renderItem={renderLabel}
+                                listKey={uuid.v4()}
+                                keyExtractor={(item) => uuid.v4()}
+                            />
+                            <FlatList
+                                style={[styles.characteristics]}
+                                columnWrapperStyle={{ paddingRight: 5 }}
+                                data={data.characteristics}
+                                numColumns={2}
+                                renderItem={renderCharacteristics}
+                                listKey={uuid.v4()}
+                                keyExtractor={(item) => uuid.v4()}
+                            />
                         </View>
 
-                        <FlatList
-                            style={[styles.labels]}
-                            data={data.labels}
-                            numColumns={2}
-                            renderItem={renderLabel}
-                            listKey={uuid.v4()}
-                            keyExtractor={(item) => uuid.v4()}
-                        />
-                        <FlatList
-                            style={[styles.characteristics]}
-                            columnWrapperStyle={{paddingRight: 5}}
-                            data={data.characteristics}
-                            numColumns={2}
-                            renderItem={renderCharacteristics}
-                            listKey={uuid.v4()}
-                            keyExtractor={(item) =>uuid.v4()}
-                        />
                     </>
                     : null}
             </View>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     image: {
-        maxHeight: 300
+        maxHeight: 300,
     },
     title: {
         fontSize: 20,
@@ -95,5 +100,12 @@ const styles = StyleSheet.create({
     },
     characteristics: {
         paddingBottom: 3
+    },
+    wrap_info: {
+        paddingLeft: '5%',
+        paddingRight: '5%'
+    },
+    wrap_img: {
+        paddingBottom: 7
     }
 });
