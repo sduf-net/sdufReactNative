@@ -1,15 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, VirtualizedList } from 'react-native'
-import ComponentFactory from '../factory';
+import { getItem, getItemCount } from '../../utils';
 
 export default function Row(config) {
     const renderWidget = ({ item }) => (
-        <ComponentFactory props={item} />
+        <config.factory props={item} />
     );
-    const getItemCount = (item) => item.length;
-    const getItem = (data, index) => {
-        return data[index];
-    };
 
     return (
         <View style={[styles.container, { flexDirection: "row" }]}>

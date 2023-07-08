@@ -1,10 +1,9 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import ComponentFactory from '../factory';
 
 export default function Column(config) {
     const renderWidget = ({ item }) => (
-        <ComponentFactory props={item} />
+        <config.factory props={item} />
     );
 
     return (

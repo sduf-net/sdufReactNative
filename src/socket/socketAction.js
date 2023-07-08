@@ -60,41 +60,44 @@ export const listenScreenChannelEvents = (channel) => {
 }
 
 const addListeners = (channel) => {
-  let insertBeforeCallback = (data) => {
+  const insertBeforeCallback = (data) => {
     console.log("insertBeforeCallback", data);
   };
-  let insertAfterCallback = (data) => {
+  const insertAfterCallback = (data) => {
     console.log("insertAfterCallback");
     store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget}))
   };
-  let removeCallback = (data) => {
+  const removeCallback = (data) => {
     console.log("removeCallback");
     store.dispatch(remove({ parent_id: data.id}))
   };
-  let changeCallback = (data) => {
+  const changeCallback = (data) => {
     console.log("changeCallback", data);
   };
-  let replaceCallback = (data) => {
+  const replaceCallback = (data) => {
     console.log("replaceCallback", data);
   };
-  let appendCallback = (data) => {
+  const appendCallback = (data) => {
     console.log("appendCallback", data);
   };
-  let logInCallback = (data) => {
+  const logInCallback = (data) => {
     console.log("logInCallback", data);
   };
-  let screenReceivedCallback = (data) => {
+  const screenReceivedCallback = (data) => {
     console.log("screenReceivedCallback");
-    // getDBConnection().then(db => saveScreen(db, data));
-    store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
+    if(store.getState().screen.id !== data.id){
+      console.log("store", store.getState().screen);
+      store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
+    }
+    // getDBConnection().then(db => saveScreen(db, {id: data.id, name: data.name, nestedComponents: data.nestedComponents}));
   };
-  let openPopupCallback = (data) => {
+  const openPopupCallback = (data) => {
     console.log("openPopupCallback", data);
   };
-  let closePopupCallback = (data) => {
+  const closePopupCallback = (data) => {
     console.log("closePopupCallback", data);
   };
-  let openScreenCallback = (data) => {
+  const openScreenCallback = (data) => {
     console.log("openScreenCallback", data);
   };
 

@@ -6,15 +6,11 @@ import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { useLayoutEffect, useEffect } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 export default function IndexScreen({ route }) {
     const userId = useSelector(state => state.user.id, shallowEqual);
     const screenName = route?.params?.screenName || "index";
-
-    // useEffect(() => {
-    //     initSocket();
-    // }, [screenName]);
 
     useLayoutEffect(() => {
         initSocket();
@@ -27,13 +23,12 @@ export default function IndexScreen({ route }) {
         initSocketConnection(token);
         const userChannel = joinToUserChannel(userId);
         listenUserChannelEvents(userChannel);
-        // const screenChannel = joinToScreenChannel(screenName);
-        // listenScreenChannelEvents(screenChannel);
     }, [userId])
 
     const getScreen = useCallback(() => {
         const queryString = route && route.params ? route.params : null;
         const userChannel = getUserChannel();
+
         getScreenThroughSocket(
             userChannel,
             { userId: userId, queryString: queryString, screenName: screenName }

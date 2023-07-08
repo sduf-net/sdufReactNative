@@ -1,7 +1,6 @@
 import uuid from 'react-native-uuid';
 // import { useDispatch } from 'react-redux';
 import { setCurrentScreen } from '../../redux/screens';
-
 const tableName = "screens";
 const expiredTableName = "screens_expiration_dates";
 // const dispatch = useDispatch();
@@ -14,26 +13,27 @@ Screen
   nestedComponents: array<object>
   expitedAt: timestamp
 */
-export const saveScreen = async (db, screen) => {
-  if (screen && screen.nestedComponents && screen.nestedComponents.length) {
-    screen.nestedComponents.forEach(widget => {
+
+export const saveScreen = async (db, { id, name, nestedComponents }) => {
+  if (nestedComponents && nestedComponents.length) {
+    nestedComponents.forEach(widget => {
       const query =
         `INSERT OR REPLACE INTO ${tableName}(id, screenId, screenName, widgetId, widgetName, data, nestedComponents, updated_at) values` +
         `(
         '${uuid.v4()}', 
-        '${screen.id}', 
-        '${screen.name}', 
+        '${id}', 
+        '${name}', 
         '${widget.id}', 
         '${widget.name}', 
         '${widget.data ? JSON.stringify(widget.data) : null}',
-        '${widget.nestedComponents ? JSON.stringify(widget.nestedComponents) : null}',
+        ${widget.nestedComponents ? JSON.stringify(widget.nestedComponents) : null},
         strftime('%s','now')
         )`;
 
       const expitedQuery = `INSERT OR REPLACE INTO ${expiredTableName}(screenName, expired_at, updated_at) values` +
         `(
-          '${screen.name}', 
-          '${screen.expitedAt ? new Date(screen.expitedAt).getTime() : null}', 
+          '${name}', 
+          '${new Date().getTime()}', 
           strftime('%s','now')
           )`;
 
@@ -49,7 +49,7 @@ export const saveScreen = async (db, screen) => {
       });
     });
     console.log("=========================");
-    store.dispatch(setCurrentScreen(screen));
+    // store.dispatch(setCurrentScreen(screen));
   } else {
     console.warn("empty screen");
   }

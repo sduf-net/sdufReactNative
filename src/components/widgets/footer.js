@@ -15,7 +15,7 @@ function Footer({ data, navigation }) {
             <Image source={{ uri: item.src }} style={[styles.img]} />
         </TouchableOpacity>
     );
-    const getItemCount = (item) => item.length;
+    const getItemCount = (item) => item.length || 0;
     const getItem = (data, index) => {
         return data[index];
     };

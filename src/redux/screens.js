@@ -2,31 +2,31 @@ import { createSlice } from '@reduxjs/toolkit'
 import _ from "lodash";
 
 const initialState = {
-  id: 1,
-  name: "",
-  nestedComponents: []
+  id: null,
+  name: null,
+  nestedComponents: [],
+  loading: false
 }
 
 export const currentScreen = createSlice({
   name: 'counter',
   initialState,
   reducers: {
+    startLoading: (state, value) => {
+      state.loading = true;
+    },
+    endLoading: (state, value) => {
+      state.loading = false;
+    },
     setCurrentScreen: (state, value) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       if (state.name != value.payload.name) {
-        state.nestedComponents = value.payload.nestedComponents
-        state.id = value.payload.id
-        state.name = value.payload.name
+        state.nestedComponents = value.payload.nestedComponents;
+        state.id = value.payload.id;
+        state.name = value.payload.name;
+        state.loading = false;
       }
     },
     insertAfter: (state, value) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
       let is_exist = state.nestedComponents.filter(widget => widget.id == value.payload.widget.id).length;
 
       if (value.payload.widget && !is_exist) {
@@ -40,6 +40,6 @@ export const currentScreen = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentScreen, insertAfter, remove } = currentScreen.actions
+export const { setCurrentScreen, insertAfter, remove, resetCurrentScreen } = currentScreen.actions
 
 export default currentScreen.reducer

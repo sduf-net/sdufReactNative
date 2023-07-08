@@ -6,7 +6,7 @@ let userChannel = null;
 
 export const initSocketConnection = (token) => {
   // TODO get token from memory
-  const SOCKET_URL = "wss://eb5e-142-188-130-158.ngrok.io/socket"
+  const SOCKET_URL = "wss://e49a-184-146-59-253.ngrok-free.app/socket"
   token = uuid.v4();
 
   if (socket) {

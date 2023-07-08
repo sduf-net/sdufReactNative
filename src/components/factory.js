@@ -54,6 +54,7 @@ function ComponentFactory(config) {
     return createElement(
         getComponentName(config.props.name),
         {
+            factory: ComponentFactory,
             data: config.props.data,
             id: config.props.id,
             navigation: config.navigation,

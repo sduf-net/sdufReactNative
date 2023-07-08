@@ -3,33 +3,27 @@ import { memo, useCallback } from 'react';
 import { View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
+import { getItem, getItemCount } from '../utils';
 
 function WidgetList() {
     const navigation = useNavigation();
     const route = useRoute();
 
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !["HeaderWidget", "FooterWidget"].includes(widget.name)), shallowEqual);
-    // console.log("nestedComponents", nestedComponents)
-    
+
     const renderWidget = useCallback(({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     });
-
-    const getItemCount = (item) => item.length;
-    const getItem = (data, index) => {
-        return data[index];
-    };
 
     const onViewableItemsChanged = (item) => {
         // console.log("onViewableItemsChanged", item)
     }
 
-    // console.log("WIDEGTLITS", nestedComponents)
     return (
         <View>
             {nestedComponents ? <VirtualizedList
                 data={nestedComponents}
-                initialNumToRender={2} 
+                initialNumToRender={2}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}

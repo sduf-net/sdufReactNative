@@ -14,6 +14,9 @@ export const handleEventAction = (event, navigation, route) => {
                 screenName: event.screen_name,
                 query: queryString
             });
+
+            // store.dispatch(resetCurrentScreen());
+            
             break;
 
         case "routeBack":

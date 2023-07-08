@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
 import { Button, StyleSheet, View, VirtualizedList } from 'react-native';
-import ComponentFactory  from '../factory'
 import Modal from 'react-native-modal';
 import { useRoute } from '@react-navigation/native';
 
@@ -14,7 +13,7 @@ function CustomModal({ nestedComponents, navigation }) {
   };
 
   const renderWidget = useCallback(({ item }) => {
-    return <ComponentFactory props={item} navigation={navigation} route={route} />
+    return <config.factory props={item} navigation={navigation} route={route} />
   });
 
   const getItemCount = (item) => {

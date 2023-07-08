@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { StyleSheet, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
+import { getItem, getItemCount } from '../utils';
 
 function FixedBottom() {
     const navigation = useNavigation();
@@ -11,11 +12,6 @@ function FixedBottom() {
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} />
-    };
-
-    const getItemCount = (item) => item.length;
-    const getItem = (data, index) => {
-        return data[index];
     };
 
     return (
