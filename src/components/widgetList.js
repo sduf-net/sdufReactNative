@@ -22,8 +22,8 @@ function WidgetList() {
             if (element.item.name === 'PaginationWidget') {
                 handleEventAction({
                     type: "getPagination",
-                    url: element.callbackUrl,
-                    params: element.params ?? {}
+                    url: element.item.data.callbackUrl,
+                    id: element.item.id
                 }, navigation);
             }
         });

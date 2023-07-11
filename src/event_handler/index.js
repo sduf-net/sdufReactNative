@@ -44,8 +44,8 @@ export const handleEventAction = (event, navigation, route) => {
             console.log("push SOCkEKT EVENT getPagination");
             pushEventToChannel(userChannel, {
                 userId: userId,
-                actionName: "getPagination",
-                payload: { parent_id: "id", callback_url: event.url, params: event.params ?? {} }
+                actionName: "pagination",
+                payload: { parent_id: event.id, callback_url: event.url }
             })
 
         default:

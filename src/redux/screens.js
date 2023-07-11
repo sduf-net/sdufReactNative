@@ -27,10 +27,12 @@ export const currentScreen = createSlice({
       }
     },
     insertAfter: (state, value) => {
-      let is_exist = state.nestedComponents.filter(widget => widget.id == value.payload.widget.id).length;
+      let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
-      if (value.payload.widget && !is_exist) {
-        state.nestedComponents.push(value.payload.widget);
+      if (value.payload.widget && index !== -1) {
+          value.payload.widget.forEach(item => {
+            state.nestedComponents.push(item);
+          });
       }
     },
     remove: (state, value) => {
@@ -40,6 +42,6 @@ export const currentScreen = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentScreen, insertAfter, remove, resetCurrentScreen } = currentScreen.actions
+export const { setCurrentScreen, insertAfter, remove, replace, resetCurrentScreen } = currentScreen.actions
 
 export default currentScreen.reducer

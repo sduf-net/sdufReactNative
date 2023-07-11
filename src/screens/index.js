@@ -1,13 +1,14 @@
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import React, { useCallback } from 'react';
-import { getUserChannel, initSocketConnection, joinToScreenChannel, joinToUserChannel } from '../socket/connection';
-import { getScreenThroughSocket, listenScreenChannelEvents, listenUserChannelEvents } from '../socket/socketAction';
+import { getUserChannel, initSocketConnection, joinToUserChannel } from '../socket/connection';
+import { getScreenThroughSocket, listenUserChannelEvents } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
-import { useLayoutEffect, useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useLayoutEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 
+// TODO add consts for all actions
 export default function IndexScreen({ route }) {
     const userId = useSelector(state => state.user.id, shallowEqual);
     const screenName = route?.params?.screenName || "index";
