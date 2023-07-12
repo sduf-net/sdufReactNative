@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { handleEventAction } from '../../event_handler';
-import { LightboxView } from './LightboxView';
 
 function ChatMessage({ data, navigation }) {
     const onPress = (actions) => {
@@ -13,12 +12,12 @@ function ChatMessage({ data, navigation }) {
     return (
         <TouchableOpacity onPress={() => onPress(data.actions)}>
             {/* TODO if isOwner do 'flex-end' */}
-            <View style={[styles.align, {alignItems: data?.isOwner}]}>
+            <View style={[styles.align, data?.is_owner ? { alignItems: 'flex-end' } : '']}>
                 <View style={[styles.container]}>
                     {data ?
                         <>
-                            <Text style={[styles.name]}>{data.name}</Text>
-                            <Text style={[styles.text]}>{data.text}</Text>
+                            <Text style={[styles.name, data?.is_owner ? { textAlign: 'right' } : '']}>{data.name}</Text>
+                            <Text style={[styles.text, data?.is_owner ? { textAlign: 'right' } : '']}>{data.text}</Text>
 
                             {/* TODO add img support */}
                             {/* <LightboxView /> */}
@@ -35,8 +34,9 @@ export default memo(ChatMessage);
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
         padding: '3%',
+        paddingRight: '5%',
+        paddingLeft: '5%',
         backgroundColor: '#eeffde',
         borderRadius: 20
     },

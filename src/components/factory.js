@@ -14,11 +14,14 @@ import Label2 from './widgets/label2'
 import Label3 from './widgets/label3'
 import Hr from './widgets/hr'
 import MyCarousel from './widgets/carousel'
-import InputWidget from './widgets/input'
+import InputWidget from './widgets/form/input'
 import ItemHeader2 from './widgets/itemHeader2'
 import CustomModal from './widgets/modal'
 import chatPreview from './widgets/chatPreview'
 import ChatMessage from './widgets/ChatMessage'
+import SelectWidget from './widgets/form/select'
+import ButtonWidget from './widgets/form/button'
+import FormWidget from './widgets/form/form'
 
 
 const keysToComponentMap = {
@@ -42,6 +45,10 @@ const keysToComponentMap = {
     Label3Widget: Label3,
     ImageCarouselWidget: MyCarousel,
     InputWidget: InputWidget,
+    TextAreaWidget: InputWidget,
+    SelectWidget: SelectWidget,
+    ButtonWidget: ButtonWidget,
+    FormWidget: FormWidget,
     ApiWidget: ApiWidget,
     ChatMessageWidget: ChatMessage
 }
