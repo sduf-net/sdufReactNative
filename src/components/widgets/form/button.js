@@ -1,12 +1,23 @@
 import React from 'react'
 import { View, StyleSheet, Button } from 'react-native'
+import { useSelector } from 'react-redux';
 
 export default function ButtonWidget({ data }) {
+    const currentForm = useSelector(state => state.form);
+    
+    const onPressLearnMore = () => {
+        sendCurrentForm();
+    }
+
+    const sendCurrentForm = async () => {
+        console.log(currentForm);
+    }
     // TODO add click handled
     // and send form to backend
     return (
         <View>
             {data ? <Button
+                onPress={onPressLearnMore}
                 style={[styles.input]}
                 title={data.text}
                 name={data?.name}
