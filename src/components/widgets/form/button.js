@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, StyleSheet, Button } from 'react-native'
 import { useSelector } from 'react-redux';
+import { handleEventAction } from '../../../event_handler';
 
-export default function ButtonWidget({ data }) {
+export default function ButtonWidget({ data, navigation }) {
     const currentForm = useSelector(state => state.form);
     
     const onPressLearnMore = () => {
@@ -10,7 +11,10 @@ export default function ButtonWidget({ data }) {
     }
 
     const sendCurrentForm = async () => {
-        console.log(currentForm);
+        handleEventAction({
+            type: "submitForm",
+            form: currentForm
+        }, navigation);
     }
     // TODO add click handled
     // and send form to backend

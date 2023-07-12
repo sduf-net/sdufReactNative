@@ -44,6 +44,14 @@ export const handleEventAction = (event, navigation, route) => {
                 actionName: "pagination",
                 payload: { parent_id: event.id, callback_url: event.url }
             })
+        case "submitForm": 
+            pushEventToChannel(userChannel, {
+                userId: userId,
+                actionName: "submit_form",
+                payload: event.form
+            })
+             
+            break;
 
         default:
             console.log("default action");
