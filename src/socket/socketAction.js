@@ -2,7 +2,7 @@ import { getDBConnection } from "../db/db";
 import { getUserChannel, joinToScreenChannel } from "./connection";
 import uuid from 'react-native-uuid';
 import { saveScreen } from "../db/screen/screen_write_model";
-import { insertAfter, remove, replace, setCurrentScreen } from "../redux/screens";
+import { append, insertAfter, insertBefore, remove, replace, setCurrentScreen } from "../redux/screens";
 import store from '../redux/store'
 
 const GET_SCREEN_BY_NAME = "request_screen";
@@ -61,32 +61,28 @@ export const listenScreenChannelEvents = (channel) => {
 
 const addListeners = (channel) => {
   const insertBeforeCallback = (data) => {
-    console.log("insertBeforeCallback", data);
+    store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget}))
   };
   const insertAfterCallback = (data) => {
-    console.log("insertAfterCallback");
     store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget}))
   };
   const removeCallback = (data) => {
-    console.log("removeCallback");
     store.dispatch(remove({ parent_id: data.parent_id}))
   };
   const changeCallback = (data) => {
     console.log("changeCallback", data);
   };
   const replaceCallback = (data) => {
-    console.log("replaceCallback");
     store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget}));
     store.dispatch(remove({ parent_id: data.parent_id}));
   };
   const appendCallback = (data) => {
-    console.log("appendCallback", data);
+    store.dispatch(append({ widget: data.widget}));
   };
   const logInCallback = (data) => {
     console.log("logInCallback", data);
   };
   const screenReceivedCallback = (data) => {
-    console.log("screenReceivedCallback");
     if(store.getState().screen.id !== data.id){
       store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
     }

@@ -26,22 +26,39 @@ export const currentScreen = createSlice({
         state.loading = false;
       }
     },
+    insertBefore: (state, value) => {
+      let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
+
+      if (value.payload.widget && index !== -1) {
+        value.payload.widget.reverse().forEach(item => {
+          state.nestedComponents.splice(index, 0, item);
+        });
+      }
+    },
     insertAfter: (state, value) => {
       let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
       if (value.payload.widget && index !== -1) {
-          value.payload.widget.forEach(item => {
-            state.nestedComponents.push(item);
-          });
+        value.payload.widget.forEach(item => {
+          state.nestedComponents.push(item);
+        });
       }
     },
     remove: (state, value) => {
       state.nestedComponents = state.nestedComponents.filter((widget => widget.id != value.payload.parent_id));
+    },
+    append: (state, value) => {
+      value.payload.widget.forEach((item) => {
+        let index = state.nestedComponents.findIndex(element => element.id === item.id);
+        if (index === -1) {
+          state.nestedComponents.splice(index, 0, item);
+        }
+      });
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentScreen, insertAfter, remove, replace, resetCurrentScreen } = currentScreen.actions
+export const { setCurrentScreen, insertAfter, insertBefore, remove, append, replace, resetCurrentScreen } = currentScreen.actions
 
 export default currentScreen.reducer
