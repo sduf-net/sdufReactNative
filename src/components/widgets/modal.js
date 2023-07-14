@@ -3,7 +3,8 @@ import { Button, StyleSheet, View, VirtualizedList } from 'react-native';
 import Modal from 'react-native-modal';
 import { useRoute } from '@react-navigation/native';
 
-function CustomModal({ nestedComponents, navigation }) {
+function CustomModal(config) {
+  const { nestedComponents, navigation } = config;
   const route = useRoute();
 
   [isVisible, setIsVisible] = useState(false);
@@ -30,6 +31,7 @@ function CustomModal({ nestedComponents, navigation }) {
         isVisible={isVisible}
         onSwipeComplete={() => setIsVisible(false)}
         onBackdropPress={() => setIsVisible(false)}
+        onRequestClose= {() =>  setIsVisible(false)}
         swipeDirection={['up', 'left', 'right', 'down']}
         style={styles.view}
         >
