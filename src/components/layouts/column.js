@@ -1,9 +1,11 @@
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
 
 export default function Column(config) {
     const renderWidget = ({ item }) => (
-        <config.factory props={item} />
+        <View style={[styles.container]}>
+            <config.factory props={item} />
+        </View>
     );
 
     return (
@@ -11,7 +13,8 @@ export default function Column(config) {
             <FlatList
                 // style={[styles.item]}
                 data={config.nestedComponents}
-                numColumns={2}
+                numColumns={config.data.columns ?? 2}
+                columnWrapperStyle={{ justifyContent: "space-between", marginBottom: 8 }}
                 renderItem={renderWidget}
                 keyExtractor={(item) => item.id}
             />
@@ -19,7 +22,10 @@ export default function Column(config) {
     );
 }
 
-
+const width = new Dimensions.get('window').width - 40;
 const styles = StyleSheet.create({
-
+    container: {
+        width: width / 2 - 10,
+        padding: 8
+    }
 })

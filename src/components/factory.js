@@ -27,6 +27,7 @@ import FormWidget from './widgets/form/form'
 const keysToComponentMap = {
     // layouts
     Column: Column,
+    TwoColumn: Column,
     Row: Row,
     SimpleRow: Row,
     LineWidget: Hr,
