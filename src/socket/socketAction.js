@@ -1,3 +1,4 @@
+import { GET_SCREEN_BY_NAME } from "../utils/constants";
 import {
   appendCallback,
   changeCallback,
@@ -12,7 +13,6 @@ import {
   screenReceivedCallback
 } from "./_actions";
 
-const GET_SCREEN_BY_NAME = "request_screen";
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {
@@ -66,12 +66,15 @@ export const listenScreenChannelEvents = (channel) => {
   addListeners(channel);
 }
 
+const addListener = (channel, params) => {
+  channel.on(params.event_name, params.callback)
+}
+
 const addListeners = (channel) => {
   addListener(channel, { event_name: "insertBefore", callback: insertBeforeCallback });
   addListener(channel, { event_name: "insert_after", callback: insertAfterCallback });
   addListener(channel, { event_name: "remove", callback: removeCallback });
   addListener(channel, { event_name: "change", callback: changeCallback });
-  // addListener({ event_name: "update", callback: changeCallback });
   addListener(channel, { event_name: "replace", callback: replaceCallback });
   addListener(channel, { event_name: "append", callback: appendCallback });
   addListener(channel, { event_name: "login", callback: logInCallback });
@@ -79,8 +82,4 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "closePopup", callback: closePopupCallback });
   addListener(channel, { event_name: "openScreen", callback: openScreenCallback });
   addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
-}
-
-const addListener = (channel, params) => {
-  channel.on(params.event_name, params.callback)
 }
