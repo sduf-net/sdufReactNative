@@ -15,11 +15,6 @@ import PushNotification from 'react-native-push-notification';
 
 export default function App() {
   useEffect(() => {
-    console.log(
-      PushNotification.getChannels ( function  ( channel_ids )  { 
-        console.log ( channel_ids ) ;  // ['channel_id_1'] 
-      })
-    );
     getFCMToken();
     const unsubscribe = notificationListener();
     return unsubscribe;

@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from "react-native-push-notification";
+import store from "../redux/store";
 import { PermissionsAndroid, Platform } from "react-native";
 
 export const checkApplicationPermission = async () => {
@@ -16,17 +17,44 @@ export const checkApplicationPermission = async () => {
 };
 
 export const getFCMToken = async () => {
-    const fcmtoken = await AsyncStorage.getItem('fcmtoken');
+    let fcmtoken = await AsyncStorage.getItem('fcmtoken');
     if (!fcmtoken) {
         try {
-            const token = await messaging().getToken();
-            if (token) {
-                await AsyncStorage.setItem('fcmtoken', token);
+            fcmtoken = await messaging().getToken();
+            if (fcmtoken) {
+                await AsyncStorage.setItem('fcmtoken', fcmtoken);
             }
 
         } catch (error) {
             console.log("[ERROR]", error)
         }
+    }
+
+    await updateToken(fcmtoken);
+}
+
+const updateToken = async (token) => {
+    const user_id = store.getState().user.id;
+
+    if (!user_id && !token) {
+        return;
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, user_id })
+    };
+
+    try {
+        await fetch(
+            'https://d01d-184-146-59-253.ngrok-free.app/api/v1/fcm/update', requestOptions)
+            .then(response => {
+                console.log("Post created at : ", response);
+            })
+    }
+    catch (error) {
+        console.error(error);
     }
 }
 

@@ -4,7 +4,11 @@ npx react-native run-android
 
 https://www.npmjs.com/package/react-native-modal
 
-
+    console.log(
+      PushNotification.getChannels ( function  ( channel_ids )  { 
+        console.log ( channel_ids ) ;  // ['channel_id_1'] 
+      })
+    );
 
     PushNotification.localNotification({
       /* Android Only Properties */
