@@ -3,6 +3,7 @@ import messaging from '@react-native-firebase/messaging';
 import PushNotification from "react-native-push-notification";
 import store from "../redux/store";
 import { PermissionsAndroid, Platform } from "react-native";
+import { URL } from "../utils/constants";
 
 export const checkApplicationPermission = async () => {
     if (Platform.OS === 'android') {
@@ -48,7 +49,7 @@ const updateToken = async (token) => {
 
     try {
         await fetch(
-            'https://d01d-184-146-59-253.ngrok-free.app/api/v1/fcm/update', requestOptions)
+            URL + '/api/v1/fcm/update', requestOptions)
             .then(response => {
                 console.log("Post created at : ", response);
             })

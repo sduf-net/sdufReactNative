@@ -1,12 +1,12 @@
 import { Socket } from 'phoenix'
 import uuid from 'react-native-uuid';
+import { SOCKET_URL } from '../utils/constants';
 
 let socket = null;
 let userChannel = null;
 
 export const initSocketConnection = (token) => {
   // TODO get token from memory
-  const SOCKET_URL = "wss://d01d-184-146-59-253.ngrok-free.app/socket"
   token = uuid.v4();
 
   if (socket) {
