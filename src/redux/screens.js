@@ -4,8 +4,7 @@ import _ from "lodash";
 const initialState = {
   id: null,
   name: null,
-  nestedComponents: [],
-  loading: false
+  nestedComponents: []
 }
 
 export const currentScreen = createSlice({
@@ -51,7 +50,7 @@ export const currentScreen = createSlice({
         let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
 
         // if widget is already in place
-        if(index !== -1){
+        if (index !== -1) {
           return;
         }
 
@@ -73,6 +72,14 @@ export const currentScreen = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setCurrentScreen, insertAfter, insertBefore, remove, append, replace, resetCurrentScreen } = currentScreen.actions
+export const {
+  setCurrentScreen,
+  insertAfter,
+  insertBefore,
+  remove,
+  append,
+  replace,
+  resetCurrentScreen
+} = currentScreen.actions
 
 export default currentScreen.reducer

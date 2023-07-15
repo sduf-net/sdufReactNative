@@ -1,3 +1,4 @@
+import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
 import { append, insertAfter, insertBefore, remove, setCurrentScreen } from "../redux/screens";
 import store from "../redux/store";
 
@@ -34,6 +35,15 @@ export const openPopupCallback = (data) => {
 };
 export const closePopupCallback = (data) => {
     console.log("closePopupCallback", data);
+};
+export const showFloatCardCallback = (data) => {
+    store.dispatch(showFloatCard());
+    store.dispatch(setFloatCardWidgets({nestedComponents: data.widget }))
+
+    console.log("showFloatCallback", data);
+};
+export const hideFloatCardCallback = (data) => {
+    console.log("hideFloatCallback", data);
 };
 export const openScreenCallback = (data) => {
     console.log("openScreenCallback", data);

@@ -6,6 +6,7 @@ import {
   insertAfterCallback,
   insertBeforeCallback,
   logInCallback,
+  showFloatCardCallback,
   openPopupCallback,
   openScreenCallback,
   removeCallback,
@@ -71,7 +72,7 @@ const addListener = (channel, params) => {
 }
 
 const addListeners = (channel) => {
-  addListener(channel, { event_name: "insertBefore", callback: insertBeforeCallback });
+  addListener(channel, { event_name: "insert_before", callback: insertBeforeCallback });
   addListener(channel, { event_name: "insert_after", callback: insertAfterCallback });
   addListener(channel, { event_name: "remove", callback: removeCallback });
   addListener(channel, { event_name: "change", callback: changeCallback });
@@ -82,4 +83,5 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "closePopup", callback: closePopupCallback });
   addListener(channel, { event_name: "openScreen", callback: openScreenCallback });
   addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
+  addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
 }

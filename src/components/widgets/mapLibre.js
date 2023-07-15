@@ -1,79 +1,85 @@
-// import React, { memo } from 'react';
-// import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-// import MapLibreGL from '@maplibre/maplibre-react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import MapLibreGL from '@maplibre/maplibre-react-native';
+import Geolocation from '@react-native-community/geolocation';
+import { styleURL } from '../../utils/constants';
+import { handleEventAction } from '../../event_handler';
+MapLibreGL.setAccessToken(null);
 
-// // Will be null for most users (only Mapbox authenticates this way).
-// // Required on Android. See Android installation notes.
-// MapLibreGL.setAccessToken(null);
+export default function MapWidget(config) {
+    const { data, navigation } = config;
 
-// const coordinates = [
-//     [-73.99155, 40.73581],
-//     [-73.99155, 40.73681],
-//   ]
-//   const AnnotationContent = ({title}) => (
-//     <View style={styles.touchableContainer}>
-//       <Text>{title}</Text>
-//       <TouchableOpacity style={styles.touchable}>
-//         <Text style={styles.touchableText}>Btn</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// function mapLibre({ data, navigation }) {
-//     return (
-//         <View style={styles.page}>
-//             {/* <MapLibreGL.MarkerView
-//                 coordinate={[-73.970895, 40.723279]}
-//                 style={styles.map}
-//                 logoEnabled={false}
-//                 styleURL="https://demotiles.maplibre.org/style.json"
-//             /> */}
-//             <MapLibreGL.MapView
-//                 style={styles.map}>
-//                 <MapLibreGL.Camera
-//                     zoomLevel={5}
-//                     centerCoordinate={coordinates[0]}
-//                 />
+    const mapRef = useRef(null);
+    const [visibleRegion, setVisibleRegion] = useState(null);
+    const [centerCoordinate, setCenterCoordinate] = useState([0, 0]);
+    const [markers, setMarkers] = useState(null);
 
-//                 <MapLibreGL.PointAnnotation
-//                     coordinate={coordinates[1]}
-//                     id="pt-ann">
-//                     <AnnotationContent title={'this is a point annotation'} />
-//                 </MapLibreGL.PointAnnotation>
+    const onRegionDidChange = async () => {
+        if (mapRef.current) {
+            const region = await mapRef.current.getVisibleBounds();
+            console.log(region);
+            setVisibleRegion(region);
+        }
+    };
 
-//                 <MapLibreGL.MarkerView coordinate={coordinates[0]}>
-//                     <AnnotationContent title={'this is a marker view'} />
-//                 </MapLibreGL.MarkerView>
-//             </MapLibreGL.MapView>
-//         </View>
-//     );
-// }
+    const currentLocation = () => {
+        if (data?.center) {
+            setCenterCoordinate([data.center.lng, data.center.lat]);
+        } else {
+            Geolocation.getCurrentPosition(
+                //Will give you the current location
+                (position) => {
+                    setCenterCoordinate([position.coords.longitude, position.coords.latitude]);
 
-// export default memo(mapLibre);
+                }, (error) => alert(error.message), {
+                enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
+            }
+            );
+        }
+    }
 
-// const styles = StyleSheet.create({
-//     page: {
-//         flex: 1,
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         backgroundColor: '#F5FCFF',
-//     },
-//     map: {
-//         flex: 1,
-//         alignSelf: 'stretch',
-//         width: 300,
-//         height: 300
-//     },
-//     touchableContainer: {borderColor: 'black', borderWidth: 1.0, width: 60},
-//     touchable: {
-//       backgroundColor: 'blue',
-//       width: 40,
-//       height: 40,
-//       borderRadius: 20,
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//     },
-//     touchableText: {
-//       color: 'white',
-//       fontWeight: 'bold',
-//     },
-// });
+    const onMarkerSelected = (marker) => {
+        // Handle the marker click event here
+        console.log('Marker clicked:', marker);
+        if (marker.click) {
+            handleEventAction(marker.click, navigation);
+        }
+        // You can perform any desired action based on the marker click.
+    };
+
+    useEffect(() => {
+        currentLocation();
+
+        if (data?.markers && data.markers.length) {
+            setMarkers(data.markers);
+        }
+    }, [])
+
+    return (
+        <View style={{ flex: 1, width: 600, height: 600 }}>
+            {data ? <MapLibreGL.MapView
+                style={{ flex: 1, alignSelf: 'stretch' }}
+                logoEnabled={false}
+                styleURL={styleURL}
+                onRegionDidChange={onRegionDidChange}
+                ref={mapRef}>
+
+                {centerCoordinate ? <MapLibreGL.Camera
+                    zoomLevel={12}
+                    centerCoordinate={centerCoordinate}
+                /> : null}
+
+                {markers ? markers.map((marker) => {
+                    return <MapLibreGL.PointAnnotation
+                        id={marker.name}
+                        key={marker.name}
+                        coordinate={[marker.position.lng, marker.position.lat]}
+                        onSelected={() => onMarkerSelected(marker)}
+                    >
+                        {/* <Text>s;ldkfs;lfklskdf;lskd;flksl;dfk</Text> */}
+                    </MapLibreGL.PointAnnotation>
+                }) : null}
+            </MapLibreGL.MapView> : null}
+        </View >
+    );
+};

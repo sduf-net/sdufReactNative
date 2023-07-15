@@ -7,6 +7,7 @@ import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { useLayoutEffect } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
+import FloatingCard from '../components/layouts/floatingCard';
 
 // TODO add consts for all actions
 export default function IndexScreen({ route }) {
@@ -41,6 +42,7 @@ export default function IndexScreen({ route }) {
             <FixedTop style={[{ flex: 1 }]} />
             <WidgetList style={[{ flex: 1 }]} />
             <FixedBottom />
+            <FloatingCard/>
         </View>
     );
 }
