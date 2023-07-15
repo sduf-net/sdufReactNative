@@ -7,8 +7,8 @@ import { getItem, getItemCount } from '../utils';
 
 function FixedBottom() {
     const navigation = useNavigation();
-    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "FooterWidget"), shallowEqual);
-    // console.log("FooterWidget", nestedComponents)
+    const fixedBottom = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedBottom"), shallowEqual);
+    // console.log("FooterWidget", fixedBottom)
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} />
@@ -16,13 +16,13 @@ function FixedBottom() {
 
     return (
         <View style={[styles.container]}>
-            {nestedComponents ? <VirtualizedList
-                data={nestedComponents}
+            {fixedBottom ? <VirtualizedList
+                data={fixedBottom.nestedComponents}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
-            /> : nestedComponents}
+            /> : null}
         </View>
     );
 }

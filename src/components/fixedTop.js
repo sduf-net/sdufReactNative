@@ -7,8 +7,8 @@ import { getItem, getItemCount } from '../utils';
 
 function FixedTop() {
     const navigation = useNavigation();
-    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => widget.name == "HeaderWidget"), shallowEqual);
-    // console.log("HeaderWidget", nestedComponents)
+    const fixedTop = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedTop"), shallowEqual);
+    // console.log("fixedTop", fixedTop?.nestedComponents)
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} />
@@ -16,13 +16,13 @@ function FixedTop() {
 
     return (
         <View>
-            {nestedComponents ? <VirtualizedList
-                data={nestedComponents}
+            {fixedTop ? <VirtualizedList
+                data={fixedTop.nestedComponents}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
-            /> : nestedComponents}
+            /> : null}
         </View>
     );
 }
