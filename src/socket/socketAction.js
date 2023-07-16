@@ -11,7 +11,8 @@ import {
   openScreenCallback,
   removeCallback,
   replaceCallback,
-  screenReceivedCallback
+  screenReceivedCallback,
+  updateMapMarkersCallback
 } from "./_actions";
 
 
@@ -84,4 +85,5 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "openScreen", callback: openScreenCallback });
   addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
   addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
+  addListener(channel, { event_name: "update_map_markers", callback: updateMapMarkersCallback });
 }

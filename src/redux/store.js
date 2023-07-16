@@ -3,12 +3,14 @@ import currentScreenReducer from './screens'
 import currentUserReducer from './users'
 import currentFormReducer from './form'
 import floatCardReducer from './floatCard'
+import currentMapReducer from './map'
 
 export default configureStore({
     reducer: {
         screen: currentScreenReducer,
         floatCard: floatCardReducer,
         user: currentUserReducer,
-        form: currentFormReducer
+        form: currentFormReducer,
+        map: currentMapReducer
     }
 })

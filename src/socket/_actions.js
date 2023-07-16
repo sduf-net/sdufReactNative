@@ -1,4 +1,5 @@
 import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
+import { setMarkers } from "../redux/map";
 import { append, insertAfter, insertBefore, remove, setCurrentScreen } from "../redux/screens";
 import store from "../redux/store";
 
@@ -47,4 +48,8 @@ export const hideFloatCardCallback = (data) => {
 };
 export const openScreenCallback = (data) => {
     console.log("openScreenCallback", data);
+};
+export const updateMapMarkersCallback = (data) => {
+    console.log("updateMapMarkersCallback", data);
+    store.dispatch(setMarkers(data.markers));
 };

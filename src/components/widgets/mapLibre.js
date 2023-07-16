@@ -4,15 +4,19 @@ import MapLibreGL from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { styleURL } from '../../utils/constants';
 import { handleEventAction } from '../../event_handler';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { setMarkers } from '../../redux/map';
 MapLibreGL.setAccessToken(null);
 
 export default function MapWidget(config) {
     const { data, navigation } = config;
 
     const mapRef = useRef(null);
+    const dispatch = useDispatch();
+
     const [visibleRegion, setVisibleRegion] = useState(null);
     const [centerCoordinate, setCenterCoordinate] = useState([0, 0]);
-    const [markers, setMarkers] = useState(null);
+    const markers = useSelector(state => state.map.markers, shallowEqual);
 
     const onRegionDidChange = async () => {
         if (mapRef.current) {
@@ -55,7 +59,7 @@ export default function MapWidget(config) {
         currentLocation();
 
         if (data?.markers && data.markers.length) {
-            setMarkers(data.markers);
+            dispatch(setMarkers(data.markers));
         }
     }, [])
 
@@ -80,7 +84,7 @@ export default function MapWidget(config) {
                         coordinate={[marker.position.lng, marker.position.lat]}
                         onSelected={() => onMarkerSelected(marker)}
                     >
-                        {/* <Text>s;ldkfs;lfklskdf;lskd;flksl;dfk</Text> */}
+                       {marker.type === 'text' ?  <Text>{marker.text}</Text> : null}
                     </MapLibreGL.PointAnnotation>
                 }) : null}
             </MapLibreGL.MapView> : null}
