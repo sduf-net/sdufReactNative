@@ -1,13 +1,20 @@
 import { getUserChannel } from "../socket/connection";
 import { pushEventToChannel } from "../socket/socketAction";
 import store from "../redux/store";
+import { hideFloatCard } from "../redux/floatCard";
 
 const userId = store.getState().user.id;
 const userChannel = getUserChannel();
 
+export const onRouteSideActions = () => {
+    store.dispatch(hideFloatCard());
+}
+
 export const handleEventAction = (event, navigation, route) => {
     switch (event.type) {
         case "routeToLocal":
+            onRouteSideActions();
+
             const queryString = route && route.params ? route.params : null;
 
             navigation.push("Index", {
@@ -17,6 +24,8 @@ export const handleEventAction = (event, navigation, route) => {
             break;
 
         case "routeBack":
+            onRouteSideActions();
+
             navigation.goBack();
             break;
 

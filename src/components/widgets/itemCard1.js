@@ -7,7 +7,7 @@ import Label2 from './label2';
 
 function ItemCard1({ data, navigation }) {
     const onPress = (actions) => {
-        if (actions.click) {
+        if (actions?.click) {
             handleEventAction(actions.click, navigation);
         }
     }
@@ -20,10 +20,11 @@ function ItemCard1({ data, navigation }) {
         </View>
     );
     return (
-        <TouchableOpacity onPress={() => onPress(data.actions)}>
-            <View>
-                {data ?
-                    <>
+        <View>
+            {data ?
+                <>
+                    <TouchableOpacity onPress={() => onPress(data.actions)}>
+
                         <View style={[styles.wrap_img]}>
                             <Image
                                 resizeMode={'cover'}
@@ -56,11 +57,10 @@ function ItemCard1({ data, navigation }) {
                                 keyExtractor={(item) => uuid.v4()}
                             />
                         </View>
-
-                    </>
-                    : null}
-            </View>
-        </TouchableOpacity>
+                    </TouchableOpacity>
+                </>
+                : null}
+        </View>
     );
 }
 

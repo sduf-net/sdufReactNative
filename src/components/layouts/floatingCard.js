@@ -38,7 +38,7 @@ const FloatingCard = () => {
     });
 
     return (
-        <View style={styles.container} onRequestClose={() => console.log("Jjsjsjsjjsjsj")}>
+        <View style={styles.container}>
             {floatCard && floatCard.showFloatCard && <VirtualizedList
                 data={floatCard.nestedComponents}
                 contentContainerStyle={[styles.justifyContent]}
@@ -54,11 +54,9 @@ const FloatingCard = () => {
 
 const styles = StyleSheet.create({
     container: {
-        maxWidth: 400,
+        maxWidth: 300,
         position: 'absolute',
         bottom: 70,
-        left: 0,
-        right: 0,
         padding: 0,
         backgroundColor: 'white',
         borderRadius: 8,
@@ -67,7 +65,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 }, // For iOS shadow
         shadowOpacity: 0.2, // For iOS shadow
         shadowRadius: 4, // For iOS shadow
-    },
+        justifyContent: 'center', // Center horizontally
+        alignItems: 'center', // Center vertically
+        alignSelf: 'center', // Center horizontally (this is required for Android),
+      },
     closeButton: {
         position: 'absolute',
         top: 8,

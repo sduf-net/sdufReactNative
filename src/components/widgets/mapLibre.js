@@ -19,6 +19,10 @@ export default function MapWidget(config) {
             const region = await mapRef.current.getVisibleBounds();
             console.log(region);
             setVisibleRegion(region);
+
+            if(data?.actions?.track_position){
+                handleEventAction({...data.actions.track_position, params: {region}}, navigation);
+            }
         }
     };
 
