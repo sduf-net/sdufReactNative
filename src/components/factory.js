@@ -23,6 +23,7 @@ import SelectWidget from './widgets/form/select'
 import ButtonWidget from './widgets/form/button'
 import FormWidget from './widgets/form/form'
 import MapWidget from './widgets/mapLibre'
+import WebViewWidget from './widgets/webView'
 
 
 const keysToComponentMap = {
@@ -53,7 +54,8 @@ const keysToComponentMap = {
     FormWidget: FormWidget,
     MaplibreWidget: MapWidget,
     ApiWidget: ApiWidget,
-    ChatMessageWidget: ChatMessage
+    ChatMessageWidget: ChatMessage,
+    WebViewWidget: WebViewWidget
 }
 
 

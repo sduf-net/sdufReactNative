@@ -8,6 +8,7 @@ import FixedBottom from '../components/fixedBottom';
 import { useLayoutEffect } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
+import WebViewWidget from '../components/widgets/webView';
 
 // TODO add consts for all actions
 export default function IndexScreen({ route }) {
