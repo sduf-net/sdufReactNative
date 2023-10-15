@@ -1,8 +1,9 @@
-import { initSocketConnection, joinToUserChannel } from '../socket/connection';
 import { listenUserChannelEvents } from '../socket/socketAction';
+import { joinToUserChannel } from '../socket/user_channel';
+import { initConnection } from '../socket/user_conn';
 
 export default function useUserChannel(userId) {
-    initSocketConnection();
+    initConnection();
     const userChannel = joinToUserChannel(userId);
     listenUserChannelEvents(userChannel);
 

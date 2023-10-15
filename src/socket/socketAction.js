@@ -14,6 +14,7 @@ import {
   screenReceivedCallback,
   updateMapMarkersCallback
 } from "./_actions";
+import { checkUserToken } from "./auth";
 
 
 // FIXME push event must have same format for all event
@@ -34,6 +35,8 @@ export const pushEventToChannel = async (channel, params) => {
 }
 
 export const pushEvent = (channel, action, params) => {
+  checkUserToken();
+
   channel.push(action, params);
 }
 

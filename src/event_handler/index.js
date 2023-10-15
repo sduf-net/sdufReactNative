@@ -2,9 +2,10 @@ import { getUserChannel } from "../socket/connection";
 import { pushEventToChannel } from "../socket/socketAction";
 import store from "../redux/store";
 import { hideFloatCard } from "../redux/floatCard";
+import { joinToUserChannel } from "../socket/user_channel";
 
 const userId = store.getState().user.id;
-const userChannel = getUserChannel();
+const userChannel = joinToUserChannel(userId);
 
 export const onRouteSideActions = () => {
     store.dispatch(hideFloatCard());
@@ -53,14 +54,23 @@ export const handleEventAction = (event, navigation, route) => {
                 actionName: "pagination",
                 payload: { parent_id: event.id, callback_url: event.url }
             })
-        case "submitForm": 
+        case "submitForm":
             pushEventToChannel(userChannel, {
                 userId: userId,
                 actionName: "submit_form",
                 payload: event.form
             })
-             
+
             break;
+        case "request_widget":
+            pushEventToChannel(userChannel, {
+                userId: userId,
+                actionName: "request_widget",
+                payload: { parent_id: event.id, callback_url: event.callbackUrl }
+            })
+
+            break;
+
 
         default:
             console.log("default action");

@@ -13,6 +13,7 @@ export const removeCallback = (data) => {
     store.dispatch(remove({ parent_id: data.parent_id }))
 };
 export const changeCallback = (data) => {
+    //update current screen
     console.log("changeCallback", data);
 };
 export const replaceCallback = (data) => {

@@ -4,22 +4,26 @@ import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getUserChannel } from '../../socket/connection';
 import { pushEventToChannel } from '../../socket/socketAction';
+import { handleEventAction } from '../../event_handler';
+import { useNavigation } from '@react-navigation/native';
 
 function ApiWidget({ data, id }) {
     const userId = useSelector(state => state.user.id);
+    const navigation = useNavigation();
 
     useEffect(() => {
-        handleImageVisibility();
+        // handleVisibility();
+        handleEventAction({id, callbackUrl: data.callbackUrl}, navigation);
     })
 
-    const handleImageVisibility = useCallback(() => {
-        const userChannel = getUserChannel();
-        pushEventToChannel(userChannel, {
-            userId: userId,
-            actionName: "request_widget",
-            payload: { parent_id: id, callback_url: data.callbackUrl }
-        })
-    }, []);
+    // const handleVisibility = useCallback(() => {
+    //     const userChannel = getUserChannel();
+    //     pushEventToChannel(userChannel, {
+    //         userId: userId,
+    //         actionName: "request_widget",
+    //         payload: { parent_id: id, callback_url: data.callbackUrl }
+    //     })
+    // }, []);
 
     return (
         <View></View>
