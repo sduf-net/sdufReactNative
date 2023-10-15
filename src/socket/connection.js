@@ -10,8 +10,8 @@ export const initSocketConnection = (token) => {
   token = uuid.v4();
 
   if (socket) {
-    console.log("Socket is already connected");
-    return;
+    // console.log("Socket is already connected");
+    return socket;
   }
   socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000, params: { userToken: token } })
 
@@ -19,13 +19,17 @@ export const initSocketConnection = (token) => {
   
   socket.onError(data => {
     if (!data?.message.includes('403')) {
+      console.log('Socket connection error')
       return;
     }
   });
+
+  return socket;
 }
 
 export const joinToUserChannel = (userId) => {
   if (!socket) {
+    console.log("joinToUserChannel socket is null")
     return;
   }
   if (userChannel) {
