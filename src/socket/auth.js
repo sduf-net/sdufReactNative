@@ -10,4 +10,8 @@ export const saveUserToken = async (token) => {
     await AsyncStorage.setItem('usertoken', token);
 }
 
+export const removeUserToken = async () => {
+    await AsyncStorage.removeItem('usertoken');
+}
+
 

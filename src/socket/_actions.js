@@ -2,7 +2,7 @@ import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
 import { setMarkers } from "../redux/map";
 import { append, insertAfter, insertBefore, remove, setCurrentScreen } from "../redux/screens";
 import store from "../redux/store";
-import { saveUserToken } from "./auth";
+import { removeUserToken, saveUserToken } from "./auth";
 
 export const insertBeforeCallback = (data) => {
     store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }))
@@ -27,6 +27,10 @@ export const appendCallback = (data) => {
 export const logInCallback = (data) => {
     saveUserToken(data.token);
     console.log("logInCallback", data);
+};
+export const logOutCallback = (data) => {
+    removeUserToken();
+    console.log("logOutCallback", data);
 };
 export const screenReceivedCallback = (data) => {
     if (store.getState().screen.id !== data.id) {
