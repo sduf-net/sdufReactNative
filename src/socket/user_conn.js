@@ -4,21 +4,10 @@ import { SOCKET_URL } from '../utils/constants';
 
 let socket = null;
 
-export const initConnection = (token) => {
-    if (!token) {
-        console.log("TOKEN IS EMPTY")
-    }
-
+export const initConnection = () => {
     if (socket) return socket;
 
-    // TODO get token from memory
-    token = uuid.v4();
-
-    if (socket) {
-        // console.log("Socket is already connected");
-        return socket;
-    }
-    socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000, params: { userToken: token } })
+    socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000})
 
     socket.connect();
 

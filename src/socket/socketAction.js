@@ -14,14 +14,16 @@ import {
   screenReceivedCallback,
   updateMapMarkersCallback
 } from "./_actions";
-import { checkUserToken } from "./auth";
+import { getUserToken } from "./auth";
 
+const userToken = getUserToken();
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {
   console.log("pushEventToChannel")
   const opts = {
     user_id: params.userId,
+    user_token: userToken,
     action: params.actionName,
     payload: params.payload,
     metadata: {
@@ -35,8 +37,6 @@ export const pushEventToChannel = async (channel, params) => {
 }
 
 export const pushEvent = (channel, action, params) => {
-  checkUserToken();
-
   channel.push(action, params);
 }
 
@@ -44,6 +44,7 @@ export const getScreenThroughSocket = async (channel, params) => {
   console.log("getScreenThroughSocket")
   const opts = {
     user_id: params.userId,
+    user_token: userToken,
     action: GET_SCREEN_BY_NAME,
     payload: {
       query: params.queryString,

@@ -8,13 +8,9 @@ import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
 import useUserChannel from '../hooks/useUserChannel';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { getAppConfigByKey } from '../api/config';
-import { INDEX_SCREEN, LOGIN_SCREEN } from '../utils/constants';
+import { INDEX_SCREEN } from '../utils/constants';
 
 export default function IndexScreen({ route }) {
-    const user = useSelector(state => state.user, shallowEqual);
-    const loginConfig = getAppConfigByKey("login");
-
     const navigation = useNavigation();
     const userId = useSelector(state => state.user.id, shallowEqual);
     const { userChannel } = useUserChannel(userId);
@@ -34,11 +30,6 @@ export default function IndexScreen({ route }) {
         // Route params
         const queryString = route?.params || null;
         let screenName = route?.params?.screenName || INDEX_SCREEN;
-
-        //if login is required and user not loggin yet render LOGIN screen
-        if (loginConfig.required && user.loggedIn === false) {
-            screenName = LOGIN_SCREEN;
-        }
 
         getScreenThroughSocket(
             userChannel,
