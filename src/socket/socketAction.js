@@ -1,3 +1,4 @@
+import store from "../redux/store";
 import { GET_SCREEN_BY_NAME } from "../utils/constants";
 import {
   appendCallback,
@@ -16,14 +17,14 @@ import {
 } from "./_actions";
 import { getUserToken } from "./auth";
 
-const userToken = getUserToken();
+const userId = store.getState().user.id;
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {
   console.log("pushEventToChannel")
   const opts = {
-    user_id: params.userId,
-    user_token: userToken,
+    user_id: userId,
+    user_token: await getUserToken(),
     action: params.actionName,
     payload: params.payload,
     metadata: {
@@ -43,8 +44,8 @@ export const pushEvent = (channel, action, params) => {
 export const getScreenThroughSocket = async (channel, params) => {
   console.log("getScreenThroughSocket")
   const opts = {
-    user_id: params.userId,
-    user_token: userToken,
+    user_id: userId,
+    user_token: await getUserToken(),
     action: GET_SCREEN_BY_NAME,
     payload: {
       query: params.queryString,
