@@ -18,12 +18,10 @@ export const currentScreen = createSlice({
       state.loading = false;
     },
     setCurrentScreen: (state, value) => {
-      if (state.name != value.payload.name) {
-        state.nestedComponents = value.payload.nestedComponents;
-        state.id = value.payload.id;
-        state.name = value.payload.name;
-        state.loading = false;
-      }
+      state.nestedComponents = value.payload.nestedComponents;
+      state.id = value.payload.id;
+      state.name = value.payload.name;
+      state.loading = false;
     },
     insertBefore: (state, value) => {
       let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);

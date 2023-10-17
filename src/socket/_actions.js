@@ -33,9 +33,8 @@ export const logOutCallback = (data) => {
     console.log("logOutCallback", data);
 };
 export const screenReceivedCallback = (data) => {
-    if (store.getState().screen.id !== data.id) {
-        store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
-    }
+    console.log('screenReceivedCallback')
+    store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
     // getDBConnection().then(db => saveScreen(db, {id: data.id, name: data.name, nestedComponents: data.nestedComponents}));
 };
 export const openPopupCallback = (data) => {
@@ -46,7 +45,7 @@ export const closePopupCallback = (data) => {
 };
 export const showFloatCardCallback = (data) => {
     store.dispatch(showFloatCard());
-    store.dispatch(setFloatCardWidgets({nestedComponents: data.widget }))
+    store.dispatch(setFloatCardWidgets({ nestedComponents: data.widget }))
 
     console.log("showFloatCallback", data);
 };

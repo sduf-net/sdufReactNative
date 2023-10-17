@@ -64,6 +64,7 @@ export const listenUserChannelEvents = (channel) => {
   if (!channel) {
     return;
   }
+  removeListeners(channel);
   addListeners(channel);
 }
 
@@ -76,6 +77,10 @@ export const listenScreenChannelEvents = (channel) => {
 
 const addListener = (channel, params) => {
   channel.on(params.event_name, params.callback)
+}
+
+const removeListener = (channel, params) => {
+  channel.off(params.event_name)
 }
 
 const addListeners = (channel) => {
@@ -94,3 +99,21 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
   addListener(channel, { event_name: "update_map_markers", callback: updateMapMarkersCallback });
 }
+
+const removeListeners = (channel) => {
+  removeListener(channel, { event_name: "insert_before" });
+  removeListener(channel, { event_name: "insert_after" });
+  removeListener(channel, { event_name: "remove" });
+  removeListener(channel, { event_name: "change" });
+  removeListener(channel, { event_name: "replace" });
+  removeListener(channel, { event_name: "append" });
+  removeListener(channel, { event_name: "login" });
+  removeListener(channel, { event_name: "logout" });
+  removeListener(channel, { event_name: "openPopup" });
+  removeListener(channel, { event_name: "closePopup" });
+  removeListener(channel, { event_name: "openScreen" });
+  removeListener(channel, { event_name: "screen_received" });
+  removeListener(channel, { event_name: "show_float_card" });
+  removeListener(channel, { event_name: "update_map_markers" });
+}
+

@@ -12,7 +12,7 @@ function WidgetList() {
     const navigation = useNavigation();
     const route = useRoute();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
-
+console.log('WidgetList')
     const renderWidget = useCallback(({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     });

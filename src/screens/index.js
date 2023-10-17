@@ -9,11 +9,25 @@ import FloatingCard from '../components/layouts/floatingCard';
 import useUserChannel from '../hooks/useUserChannel';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { INDEX_SCREEN } from '../utils/constants';
+import { ScrollView, RefreshControl } from 'react-native';
+import { useState } from 'react';
 
 export default function IndexScreen({ route }) {
     const navigation = useNavigation();
     const userId = useSelector(state => state.user.id, shallowEqual);
     const { userChannel } = useUserChannel(userId);
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        console.log("onRefresh")
+        setRefreshing(true);
+        getScreen();
+
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
 
     // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
     useFocusEffect(
@@ -38,11 +52,17 @@ export default function IndexScreen({ route }) {
     }, [])
 
     return (
-        <View style={[{ flex: 1 }]}>
-            <FixedTop style={[{ flex: 1 }]} />
-            <WidgetList style={[{ flex: 1 }]} />
-            <FixedBottom />
-            <FloatingCard />
-        </View>
+        <ScrollView
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            horizontal>
+            <View style={[{ flex: 1 }]}>
+                <FixedTop />
+                <WidgetList />
+                <FixedBottom />
+                <FloatingCard />
+            </View>
+        </ScrollView>
     );
 }
