@@ -8,7 +8,7 @@ import { handleEventAction } from '../event_handler';
 
 const excludeWidgets = ["FixedTop", "FixedBottom"];
 
-function WidgetList() {
+function WidgetList({onRefresh, refreshing}) {
     const navigation = useNavigation();
     const route = useRoute();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
@@ -41,6 +41,8 @@ function WidgetList() {
                 getItemCount={getItemCount}
                 getItem={getItem}
                 onViewableItemsChanged={onViewableItemsChanged}
+                onRefresh={onRefresh}
+                refreshing={refreshing}
             /> : nestedComponents}
         </View>
     );

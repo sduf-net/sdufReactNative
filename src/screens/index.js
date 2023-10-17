@@ -9,7 +9,6 @@ import FloatingCard from '../components/layouts/floatingCard';
 import useUserChannel from '../hooks/useUserChannel';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { INDEX_SCREEN } from '../utils/constants';
-import { ScrollView, RefreshControl } from 'react-native';
 
 export default function IndexScreen({ route }) {
     const navigation = useNavigation();
@@ -66,19 +65,13 @@ export default function IndexScreen({ route }) {
     }, [])
 
     return (
-        <ScrollView
-            refreshControl={
-                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            horizontal
-        >
+
             <View style={styles.container}>
                 <FixedTop />
-                <WidgetList />
+                <WidgetList onRefresh={onRefresh} refreshing={refreshing} />
                 <FixedBottom />
                 <FloatingCard />
             </View>
-        </ScrollView>
     );
 }
 
