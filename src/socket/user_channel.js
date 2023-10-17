@@ -2,17 +2,20 @@ import { initConnection } from './user_conn';
 
 const socket = initConnection();
 let userChannel = null;
+let currentUserId = null;
 
 export const joinToUserChannel = (userId) => {
     if (!socket) {
         console.log("joinToUserChannel socket is null")
         return;
     }
-    if (userChannel) {
+    if (userChannel && userId === currentUserId ) {
+        console.log("RETURN SAME userChannel")
         return userChannel;
     }
 
     userChannel = socket.channel(`user:${userId}`);
+    currentUserId = userId;
 
     userChannel
         .join()

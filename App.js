@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
-import { getAppConfig } from './src/api/config';
+import { restoreUserToState } from './src/socket/auth';
 
 
 export default function App() {
@@ -26,7 +26,8 @@ export default function App() {
   }, []);
 
   const loadDataBeforeStart = async () => {
-    await getAppConfig();
+    console.log("loadDataBeforeStart")
+    await restoreUserToState();
   }
 
   if(loading) return null;
