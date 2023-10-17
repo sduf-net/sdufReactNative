@@ -26,11 +26,9 @@ export const appendCallback = (data) => {
 };
 export const logInCallback = (data) => {
     saveUserToken(data.token);
-    console.log("logInCallback", data);
 };
 export const logOutCallback = (data) => {
     removeUserToken();
-    console.log("logOutCallback", data);
 };
 export const screenReceivedCallback = (data) => {
     console.log('screenReceivedCallback')

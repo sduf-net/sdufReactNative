@@ -20,7 +20,6 @@ export default function IndexScreen({ route }) {
     const [refreshing, setRefreshing] = useState(false);
 
     const onRefresh = useCallback(() => {
-        console.log("onRefresh")
         setRefreshing(true);
         getScreen();
 

@@ -32,7 +32,6 @@ export const handleEventAction = (event, navigation, route) => {
 
         case "routeToScreenFromApi":
         case "asyncPost":
-            console.log("push SOCkEKT EVENT asyncPOST");
             pushEventToChannel(userChannel, {
                 userId: userId,
                 actionName: "async_post",
@@ -40,7 +39,6 @@ export const handleEventAction = (event, navigation, route) => {
             })
             break;
         case "asyncGet":
-            console.log("push SOCkEKT EVENT asyncGet");
             pushEventToChannel(userChannel, {
                 userId: userId,
                 actionName: "async_get",
@@ -48,7 +46,6 @@ export const handleEventAction = (event, navigation, route) => {
             })
             break;
         case "getPagination":
-            console.log("push SOCkEKT EVENT getPagination");
             pushEventToChannel(userChannel, {
                 userId: userId,
                 actionName: "pagination",

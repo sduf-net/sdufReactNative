@@ -8,7 +8,6 @@ import { getItem, getItemCount } from '../utils';
 function FixedBottom() {
     const navigation = useNavigation();
     const fixedBottom = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedBottom"), shallowEqual);
-    // console.log("FooterWidget", fixedBottom)
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} />

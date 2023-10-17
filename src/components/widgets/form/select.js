@@ -11,7 +11,6 @@ export default function SelectWidget({ data }) {
     const handleChanges = (value) => {
         setSelectedValue(value);
         dispatch(setForm({[data.name]: value }));
-        console.log({[data.name]: value })
     };
 
     return (

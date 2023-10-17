@@ -4,7 +4,6 @@ import { handleEventAction } from '../../event_handler';
 
 export default function ImageWidget({ data, navigation, route }) {
     const onPress = (actions) => {
-        console.log("click", actions)
         if (actions.click) {
             handleEventAction(actions.click, navigation, route);
         }

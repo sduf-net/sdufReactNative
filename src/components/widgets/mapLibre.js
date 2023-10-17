@@ -21,7 +21,6 @@ export default function MapWidget(config) {
     const onRegionDidChange = async () => {
         if (mapRef.current) {
             const region = await mapRef.current.getVisibleBounds();
-            console.log(region);
             setVisibleRegion(region);
 
             if(data?.actions?.track_position){
@@ -48,7 +47,6 @@ export default function MapWidget(config) {
 
     const onMarkerSelected = (marker) => {
         // Handle the marker click event here
-        console.log('Marker clicked:', marker);
         if (marker.click) {
             handleEventAction(marker.click, navigation);
         }

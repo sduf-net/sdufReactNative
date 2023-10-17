@@ -10,7 +10,6 @@ export default function InputWidget({ data }) {
     const handleChanges = (text) => {
         onChangeText(text);
         dispatch(setForm({[data.name]: text }));
-        console.log({[data.name]: text })
     };
 
 
