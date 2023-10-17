@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import React, { useCallback } from 'react';
 import { getScreenThroughSocket } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
@@ -56,8 +56,9 @@ export default function IndexScreen({ route }) {
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
-            horizontal>
-            <View style={[{ flex: 1 }]}>
+            horizontal
+        >
+            <View style={styles.container}>
                 <FixedTop />
                 <WidgetList />
                 <FixedBottom />
@@ -66,3 +67,11 @@ export default function IndexScreen({ route }) {
         </ScrollView>
     );
 }
+
+const windowWidth = Dimensions.get('window').width;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: windowWidth
+    },
+});
