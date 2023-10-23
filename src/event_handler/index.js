@@ -1,4 +1,3 @@
-import { getUserChannel } from "../socket/connection";
 import { pushEventToChannel } from "../socket/socketAction";
 import store from "../redux/store";
 import { hideFloatCard } from "../redux/floatCard";

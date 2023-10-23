@@ -1,6 +1,6 @@
-import { initConnection } from './user_conn';
+import { getSocket } from './user_conn';
 
-const socket = initConnection();
+const socket = getSocket();
 let userChannel = null;
 let currentUserId = null;
 

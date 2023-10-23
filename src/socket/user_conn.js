@@ -1,11 +1,10 @@
 import { Socket } from 'phoenix'
-import uuid from 'react-native-uuid';
 import { SOCKET_URL } from '../utils/constants';
 
 let socket = null;
 
-export const initConnection = () => {
-    if (socket) return socket;
+export const initSocketConnection = () => {
+    if (socket) return;
 
     socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000})
 
@@ -13,21 +12,27 @@ export const initConnection = () => {
 
     socket.onError(data => {
         if (!data?.message.includes('403')) {
-            console.log('Socket connection error')
-            return;
+            console.error("Socket is empty")
+            return false;
         }
     });
 
-    return socket;
+    return true;
 }
 
 export const closeConnection = () => {
-    if (!socket) {
-        return;
-    }
+    if (!socket) return;
 
     socket.disconnect();
 
     socket = null;
+
+    return true;
 };
 
+
+export const getSocket = () => {
+    if (socket) return socket;
+
+    console.error("Socket is empty")
+};

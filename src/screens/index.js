@@ -66,12 +66,12 @@ export default function IndexScreen({ route }) {
 
     return (
 
-            <View style={styles.container}>
-                <FixedTop />
-                <WidgetList onRefresh={onRefresh} refreshing={refreshing} />
-                <FixedBottom />
-                <FloatingCard />
-            </View>
+        <View style={styles.container}>
+            <FixedTop />
+            <WidgetList onRefresh={onRefresh} refreshing={refreshing} />
+            <FixedBottom />
+            <FloatingCard />
+        </View>
     );
 }
 

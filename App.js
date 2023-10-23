@@ -12,22 +12,25 @@ import store from './src/redux/store';
 import { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { restoreUserToState } from './src/socket/auth';
+import { initSocketConnection } from './src/socket/user_conn';
 
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getFCMToken();
     const unsubscribe = notificationListener();
 
-    loadDataBeforeStart().then(() => setLoading(false))
+    loadDataBeforeStart().then(() => setLoading(false));
+
     return unsubscribe;
   }, []);
 
   const loadDataBeforeStart = async () => {
     console.log("loadDataBeforeStart")
     await restoreUserToState();
+    await getFCMToken();
+    initSocketConnection();
   }
 
   if(loading) return null;

@@ -22,8 +22,6 @@ export const removeUser = async () => {
 export const restoreUserToState = async () => {
     const user = await getUser();
 
-    console.log("USER FROM MEMPRY", user)
-
     if (user) {
         store.dispatch(setCurrentUser(user));
     }
