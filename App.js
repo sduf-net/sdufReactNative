@@ -33,14 +33,12 @@ export default function App() {
   }, [userId]);
 
   const loadDataBeforeStart = async () => {
-    console.log("loadDataBeforeStart")
     await restoreUserToState();
     await getFCMToken();
     connectToUserChannel();
   }
 
   const connectToUserChannel = () => {
-    console.log("USER ID");
     initSocketConnection();
     joinToUserChannel(userId);
   }

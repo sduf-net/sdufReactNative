@@ -40,7 +40,6 @@ export const pushEventToChannel = async (channel, params) => {
 }
 
 export const pushEvent = (channel, action, params) => {
-  console.log('pushEvent', action, params)
   channel.push(action, params);
 }
 
@@ -48,8 +47,6 @@ export const getScreenThroughSocket = async (channel, params) => {
   console.log("getScreenThroughSocket", params)
 
   const user = store.getState().user;
-
-  console.log("USER", user)
 
   const opts = {
     user_id: user.id,
