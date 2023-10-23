@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { removeUser, saveUser } from '../socket/auth'
+import { removeUser, saveUser } from '../auth/auth'
 
 const initialState = {
   id: "user:anonim:123456788",

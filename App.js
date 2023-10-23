@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
-import { restoreUserToState } from './src/socket/auth';
+import { restoreUserToState } from './src/auth/auth';
 import { initSocketConnection } from './src/socket/user_conn';
 import { joinToUserChannel } from './src/socket/user_channel';
 
