@@ -6,14 +6,14 @@ import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
-import useUserChannel from '../hooks/useUserChannel';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { INDEX_SCREEN } from '../utils/constants';
+import { getUserChannel } from '../socket/user_channel';
 
 export default function IndexScreen({ route }) {
     const navigation = useNavigation();
     const userId = useSelector(state => state.user.id, shallowEqual);
-    const { userChannel } = useUserChannel(userId);
+    const userChannel = getUserChannel();
 
     const [refreshing, setRefreshing] = useState(false);
     const [loading, setLoading] = useState(false);

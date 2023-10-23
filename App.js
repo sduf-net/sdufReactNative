@@ -13,9 +13,11 @@ import { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { restoreUserToState } from './src/socket/auth';
 import { initSocketConnection } from './src/socket/user_conn';
+import { joinToUserChannel } from './src/socket/user_channel';
 
 
 export default function App() {
+  const userId = store.getState().user.id;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,11 +28,21 @@ export default function App() {
     return unsubscribe;
   }, []);
 
+  useEffect(() => {
+    connectToUserChannel();
+  }, [userId]);
+
   const loadDataBeforeStart = async () => {
     console.log("loadDataBeforeStart")
     await restoreUserToState();
     await getFCMToken();
+    connectToUserChannel();
+  }
+
+  const connectToUserChannel = () => {
+    console.log("USER ID");
     initSocketConnection();
+    joinToUserChannel(userId);
   }
 
   if(loading) return null;

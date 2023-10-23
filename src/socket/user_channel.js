@@ -1,3 +1,4 @@
+import { listenUserChannelEvents } from './socketAction';
 import { getSocket } from './user_conn';
 
 const socket = getSocket();
@@ -6,10 +7,10 @@ let currentUserId = null;
 
 export const joinToUserChannel = (userId) => {
     if (!socket) {
-        console.log("joinToUserChannel socket is null")
+        console.error("joinToUserChannel socket is null")
         return;
     }
-    if (userChannel && userId === currentUserId ) {
+    if (userChannel && userId === currentUserId) {
         console.log("RETURN SAME userChannel")
         return userChannel;
     }
@@ -21,6 +22,7 @@ export const joinToUserChannel = (userId) => {
         .join()
         .receive('ok', () => {
             console.log('Channel connection succsses')
+            listenUserChannelEvents(userChannel);
         })
         .receive('error', err =>
             console.log('Channel connection error', err)
@@ -31,3 +33,9 @@ export const joinToUserChannel = (userId) => {
 
     return userChannel;
 };
+
+export const getUserChannel = () => {
+    if (userChannel) return userChannel;
+
+    console.error("userChannel is empty")
+}
