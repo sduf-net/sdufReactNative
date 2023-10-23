@@ -12,18 +12,8 @@ function ApiWidget({ data, id }) {
     const navigation = useNavigation();
 
     useEffect(() => {
-        // handleVisibility();
         handleEventAction({id, type: "request_widget", callbackUrl: data.callbackUrl}, navigation);
     })
-
-    // const handleVisibility = useCallback(() => {
-    //     const userChannel = getUserChannel();
-    //     pushEventToChannel(userChannel, {
-    //         userId: userId,
-    //         actionName: "request_widget",
-    //         payload: { parent_id: id, callback_url: data.callbackUrl }
-    //     })
-    // }, []);
 
     return (
         <View></View>
