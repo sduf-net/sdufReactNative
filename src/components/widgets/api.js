@@ -13,7 +13,7 @@ function ApiWidget({ data, id }) {
 
     useEffect(() => {
         // handleVisibility();
-        handleEventAction({id, callbackUrl: data.callbackUrl}, navigation);
+        handleEventAction({id, type: "request_widget", callbackUrl: data.callbackUrl}, navigation);
     })
 
     // const handleVisibility = useCallback(() => {
