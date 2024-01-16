@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { removeUser, saveUser } from '../auth/auth'
+import uuid from 'react-native-uuid';
 
 const initialState = {
-  id: "user:anonim:123456788",
+  id: "user:anonym:" + uuid.v4(),
   token: null,
   loggedIn: false
 }
@@ -19,7 +20,7 @@ export const currentUser = createSlice({
       saveUser(state);
     },
     logOut: (state) => {
-      state.id = "user:anonim:123456788"
+      state.id = "user:anonym:" + uuid.v4(),
       state.token = null
       state.loggedIn = false
 
