@@ -4,7 +4,7 @@ import { setCurrentUser } from "../redux/users";
 
 export const getUser = async () => {
     let user = await AsyncStorage.getItem('user');
-    if(user) {
+    if (user) {
         user = JSON.parse(user)
     }
     return user;
@@ -19,11 +19,12 @@ export const removeUser = async () => {
     await AsyncStorage.removeItem('user');
 }
 
-export const restoreUserToState = async () => {
+export const generateOrRestoreUserToState = async () => {
     const user = await getUser();
-
     if (user) {
         store.dispatch(setCurrentUser(user));
+    } else {
+        const defaultUser = store.getState().user;
+        store.dispatch(setCurrentUser(defaultUser));
     }
 }
-

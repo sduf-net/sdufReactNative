@@ -1,5 +1,5 @@
 import { listenUserChannelEvents } from './socketAction';
-import { getSocket } from './user_conn';
+import { getSocket } from './userConn';
 
 const socket = getSocket();
 let userChannel = null;
@@ -37,5 +37,6 @@ export const joinToUserChannel = (userId) => {
 export const getUserChannel = () => {
     if (userChannel) return userChannel;
 
-    console.error("userChannel is empty")
+    console.error("userChannel is empty");
+    return null;
 }

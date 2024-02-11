@@ -1,9 +1,8 @@
-import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
-import { setMarkers } from "../redux/map";
 import { append, insertAfter, insertBefore, remove, setCurrentScreen } from "../redux/screens";
-import store from "../redux/store";
+import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
 import { logOut, setCurrentUser } from "../redux/users";
-
+import { setMarkers } from "../redux/map";
+import store from "../redux/store";
 
 export const insertBeforeCallback = (data) => {
     store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }))
@@ -35,7 +34,6 @@ export const logOutCallback = (data) => {
 export const screenReceivedCallback = (data) => {
     console.log('screenReceivedCallback', data)
     store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
-    // getDBConnection().then(db => saveScreen(db, {id: data.id, name: data.name, nestedComponents: data.nestedComponents}));
 };
 export const openPopupCallback = (data) => {
     console.log("openPopupCallback", data);

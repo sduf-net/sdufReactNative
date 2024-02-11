@@ -1,5 +1,4 @@
 import store from "../redux/store";
-import { GET_SCREEN_BY_NAME } from "../utils/constants";
 import {
   appendCallback,
   changeCallback,
@@ -15,7 +14,7 @@ import {
   replaceCallback,
   screenReceivedCallback,
   updateMapMarkersCallback
-} from "./_actions";
+} from "./actionCallbacks";
 
 
 // FIXME push event must have same format for all event
@@ -30,7 +29,8 @@ export const pushEventToChannel = async (channel, params) => {
     action: params.actionName,
     payload: params.payload,
     metadata: {
-      date: Date.now()
+      date: Date.now(),
+      ...params.metadata ?? {},
     }
   }
 
@@ -39,29 +39,8 @@ export const pushEventToChannel = async (channel, params) => {
   }
 }
 
-export const pushEvent = (channel, action, params) => {
+const pushEvent = (channel, action, params) => {
   channel.push(action, params);
-}
-
-export const getScreenThroughSocket = async (channel, params) => {
-  console.log("getScreenThroughSocket", params)
-
-  const user = store.getState().user;
-
-  const opts = {
-    user_id: user.id,
-    user_token: user.token,
-    action: GET_SCREEN_BY_NAME,
-    payload: {
-      query: params.queryString,
-      screen_name: params.screenName
-    },
-    metadata: {}
-  }
-
-  if (channel) {
-    pushEvent(channel, "action_performed", opts);
-  }
 }
 
 export const listenUserChannelEvents = (channel) => {
@@ -120,4 +99,3 @@ const removeListeners = (channel) => {
   removeListener(channel, { event_name: "show_float_card" });
   removeListener(channel, { event_name: "update_map_markers" });
 }
-

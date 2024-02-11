@@ -23,7 +23,6 @@ function ItemCard2({ data, id, navigation }) {
             {data ?
                 <>
                     <TouchableOpacity onPress={() => onPress(data.actions)}>
-
                         <Image
                             resizeMode={'cover'}
                             style={[styles.image, { width: '100%', height: 200 }]}

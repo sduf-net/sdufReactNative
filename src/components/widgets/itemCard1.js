@@ -24,7 +24,6 @@ function ItemCard1({ data, navigation }) {
             {data ?
                 <>
                     <TouchableOpacity onPress={() => onPress(data.actions)}>
-
                         <View style={[styles.wrap_img]}>
                             <Image
                                 resizeMode={'cover'}

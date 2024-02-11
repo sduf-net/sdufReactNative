@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet, View, Text } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { getScreenThroughSocket } from '../socket/socketAction';
+import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
@@ -8,7 +8,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { INDEX_SCREEN } from '../utils/constants';
-import { getUserChannel } from '../socket/user_channel';
+import { getUserChannel } from '../socket/userChannel';
+import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 
 export default function IndexScreen({ route }) {
     const navigation = useNavigation();
@@ -52,12 +53,16 @@ export default function IndexScreen({ route }) {
 
     const getScreen = useCallback(() => {
         const queryString = route?.params || null;
-        let screenName = route?.params?.screenName || INDEX_SCREEN;
+        const screenName = route?.params?.screenName || INDEX_SCREEN;
 
-        getScreenThroughSocket(
-            userChannel,
-            { userId: userId, queryString: queryString, screenName: screenName }
-        );
+        pushEventToChannel(userChannel, {
+            userId: userId,
+            actionName: GET_SCREEN_BY_NAME,
+            payload: {
+                query: queryString,
+                screen_name: screenName
+            }
+        })
 
         setTimeout(() => {
             setLoading(false);
@@ -65,7 +70,6 @@ export default function IndexScreen({ route }) {
     }, [])
 
     return (
-
         <View style={styles.container}>
             <FixedTop />
             <WidgetList onRefresh={onRefresh} refreshing={refreshing} />

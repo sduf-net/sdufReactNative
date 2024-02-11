@@ -22,9 +22,10 @@ function Footer({ data, navigation }) {
 
     return (
         <View>
-                {data ? <VirtualizedList
+            {data ?
+                <VirtualizedList
                     data={data.images}
-                    contentContainerStyle={[styles.content_container, styles.bgColor, {backgroundColor: data?.style?.background}]}
+                    contentContainerStyle={[styles.content_container, styles.bgColor, { backgroundColor: data?.style?.background }]}
                     renderItem={renderWidget}
                     keyExtractor={item => uuid.v4()}
                     getItemCount={getItemCount}

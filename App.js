@@ -11,9 +11,9 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
-import { restoreUserToState } from './src/auth/auth';
-import { initSocketConnection } from './src/socket/user_conn';
-import { joinToUserChannel } from './src/socket/user_channel';
+import { generateOrRestoreUserToState } from './src/auth/auth';
+import { initSocketConnection } from './src/socket/userConn';
+import { joinToUserChannel } from './src/socket/userChannel';
 
 
 export default function App() {
@@ -33,7 +33,7 @@ export default function App() {
   }, [userId]);
 
   const loadDataBeforeStart = async () => {
-    await restoreUserToState();
+    await generateOrRestoreUserToState();
     await getFCMToken();
     connectToUserChannel();
   }
