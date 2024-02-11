@@ -55,6 +55,7 @@ export const listenScreenChannelEvents = (channel) => {
   if (!channel) {
     return;
   }
+  removeListeners(channel);
   addListeners(channel);
 }
 

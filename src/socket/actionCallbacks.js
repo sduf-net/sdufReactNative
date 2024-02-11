@@ -33,7 +33,11 @@ export const logOutCallback = (data) => {
 };
 export const screenReceivedCallback = (data) => {
     console.log('screenReceivedCallback', data)
-    store.dispatch(setCurrentScreen({ id: data.id, name: data.name, nestedComponents: data.nestedComponents }))
+    store.dispatch(setCurrentScreen({
+        id: data.id,
+        name: data.name,
+        nestedComponents: data.nestedComponents
+    }))
 };
 export const openPopupCallback = (data) => {
     console.log("openPopupCallback", data);
