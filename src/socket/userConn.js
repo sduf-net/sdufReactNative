@@ -1,5 +1,5 @@
 import { Socket } from 'phoenix'
-import { SOCKET_URL } from '../utils/constants';
+import { SOCKET_URL } from "@env";
 
 let socket = null;
 

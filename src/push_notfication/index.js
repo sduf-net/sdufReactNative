@@ -3,7 +3,7 @@ import messaging from '@react-native-firebase/messaging';
 import PushNotification from "react-native-push-notification";
 import store from "../redux/store";
 import { PermissionsAndroid, Platform } from "react-native";
-import { URL } from "../utils/constants";
+import { URL } from "@env";
 
 export const checkApplicationPermission = async () => {
     if (Platform.OS === 'android') {
@@ -122,12 +122,3 @@ export const configurePushNotification = () => {
         requestPermissions: true,
     });
 }
-
-
-
-
-
-
-
-
-
