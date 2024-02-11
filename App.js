@@ -43,7 +43,7 @@ export default function App() {
     joinToUserChannel(userId);
   }
 
-  if(loading) return null;
+if(loading) return null;
 
   return (
     <Provider store={store}>

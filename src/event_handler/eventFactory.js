@@ -9,11 +9,11 @@ import {
 } from "../socket/actionName";
 import store from "../redux/store";
 import { hideFloatCard } from "../redux/floatCard";
-import { joinToUserChannel } from "../socket/userChannel";
+import { getUserChannel } from "../socket/userChannel";
 import { pushEventToChannel } from "../socket/socketAction";
 
 const userId = store.getState().user.id;
-const userChannel = joinToUserChannel(userId);
+const userChannel = getUserChannel();
 
 // Private funcs
 const onRouteSideActions = () => {
