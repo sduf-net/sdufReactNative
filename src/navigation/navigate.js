@@ -9,7 +9,7 @@ export default function Navigate() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen options={{ headerShown: false }} name="Index" children={IndexScreen} />
+                <Stack.Screen options={{ headerShown: false, animation: 'none' }} name="Index" children={IndexScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )
