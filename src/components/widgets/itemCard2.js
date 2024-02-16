@@ -13,11 +13,15 @@ function ItemCard2({ data, id, navigation }) {
     const renderLabel = ({ item }) => (
         <Label3 data={{ text: item.text }} />
     );
+    const renderPrice = ({ item }) => (
+        <Text style={[styles.price_usd]}>{item} {data.price[item]}</Text>
+    );
     const renderParams = ({ item }) => (
         <View>
             <Text>• {item.text} </Text>
         </View>
     );
+
     return (
         <View>
             {data ?
@@ -28,30 +32,36 @@ function ItemCard2({ data, id, navigation }) {
                             style={[styles.image, { width: '100%', height: 200 }]}
                             source={{ uri: data.src }}
                         />
-                        <Text style={[styles.title]}>{id}</Text>
-                        <Text style={[styles.title]}>{data.title}</Text>
-                        <Text style={[styles.sub_title]}>{data.sub_title}</Text>
+                        <View style={[styles.wrap_info]}>
+                            <Text style={[styles.title]}>{data.title}</Text>
+                            <Text style={[styles.sub_title]}>{data.sub_title}</Text>
 
-                        <View style={[styles.prices_list]}>
-                            <Text style={[styles.price_usd]}>USD {data.price.usd}</Text>
-                            <Text style={[styles.price]}>UAH {data.price.uah}</Text>
+                            {data.price ? <View style={[styles.prices_list]}>
+                                <FlatList
+                                    data={Object.keys(data.price)}
+                                    numColumns={5}
+                                    renderItem={renderPrice}
+                                    listKey={uuid.v4()}
+                                    keyExtractor={(item) => item.id}
+                                />
+                            </View> : null}
+
+                            <FlatList
+                                data={data.labels}
+                                numColumns={5}
+                                renderItem={renderLabel}
+                                listKey={uuid.v4()}
+                                keyExtractor={(item) => item.id}
+                            />
+                            <Text>{data.date}</Text>
+                            <FlatList
+                                data={data.params}
+                                numColumns={5}
+                                renderItem={renderParams}
+                                listKey={uuid.v4()}
+                                keyExtractor={(item) => item.id}
+                            />
                         </View>
-
-                        <FlatList
-                            data={data.labels}
-                            numColumns={5}
-                            renderItem={renderLabel}
-                            listKey={uuid.v4()}
-                            keyExtractor={(item) => item.id}
-                        />
-                        <Text>{data.date}</Text>
-                        <FlatList
-                            data={data.params}
-                            numColumns={5}
-                            renderItem={renderParams}
-                            listKey={uuid.v4()}
-                            keyExtractor={(item) => item.id}
-                        />
                     </TouchableOpacity>
 
                 </>
@@ -79,5 +89,9 @@ const styles = StyleSheet.create({
         color: 'green',
         fontWeight: 'bold',
         paddingRight: 10
-    }
+    },
+    wrap_info: {
+        paddingLeft: '3%',
+        paddingRight: '3%'
+    },
 });
