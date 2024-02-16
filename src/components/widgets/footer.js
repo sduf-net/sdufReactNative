@@ -41,7 +41,7 @@ export default memo(Footer);
 const styles = StyleSheet.create({
     content_container: {
         flex: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         height: 50,
         paddingLeft: 10,
