@@ -11,7 +11,8 @@ function ApiWidget({ data, id }) {
 
     useEffect(() => {
         handleEventAction({
-            id, type: "request_widget",
+            id,
+            type: "request_widget",
             callbackUrl: data.callbackUrl,
             params: data
         }, navigation, route);

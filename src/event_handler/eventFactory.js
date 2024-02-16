@@ -41,7 +41,11 @@ const asyncRequestCallback = (event, navigation, route) => {
     pushEventToChannel(userChannel, {
         userId: userId,
         actionName: event.type,
-        payload: { parent_id: "id", callback_url: event.url, params: event.params ?? {} }
+        payload: {
+            parent_id: "id",
+            callback_url: event.url,
+            params: event,
+        }
     })
 }
 
