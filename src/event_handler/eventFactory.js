@@ -27,7 +27,8 @@ const routeToLocalFormCallback = (event, navigation, route) => {
 
     navigation.push("Index", {
         screenName: event.screen_name,
-        query: queryString
+        query: queryString,
+        event: event
     });
 }
 
@@ -52,10 +53,17 @@ const paginationCallback = (event, navigation, route) => {
     })
 }
 const requestWidgetCallback = (event, navigation, route) => {
+    const queryString = route.params ? route.params : null;
+
     pushEventToChannel(userChannel, {
         userId: userId,
         actionName: REQUEST_WIDGET,
-        payload: { parent_id: event.id, callback_url: event.callbackUrl }
+        payload: {
+            parent_id: event.id,
+            callback_url: event.callbackUrl,
+            params: queryString?.event,
+            method: event.method ?? "POST"
+        }
     })
 }
 const submitFormCallback = (event, navigation, route) => {
