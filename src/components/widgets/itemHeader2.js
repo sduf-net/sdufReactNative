@@ -1,7 +1,12 @@
 import React, { memo } from 'react'
-import {  StyleSheet, View, Text,  TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native'
+import uuid from 'react-native-uuid';
 
 function ItemHeader2({ data, navigation }) {
+    const renderPrice = ({ item }) => (
+        <Text style={[styles.price_usd]}>{item} {data.price[item]}</Text>
+    );
+
     return (
         <TouchableOpacity onPress={() => onPress(data.actions)}>
             <View>
@@ -10,10 +15,15 @@ function ItemHeader2({ data, navigation }) {
                         <Text style={[styles.title]}>{data.title}</Text>
                         <Text style={[styles.sub_title]}>{data.sub_title}</Text>
 
-                        <View style={[styles.prices_list]}>
-                            <Text style={[styles.price_usd]}>USD {data.price.usd}</Text>
-                            <Text style={[styles.price]}>UAH {data.price.uah}</Text>
-                        </View>
+                        {data.price ? <View style={[styles.prices_list]}>
+                            <FlatList
+                                data={Object.keys(data.price)}
+                                numColumns={5}
+                                renderItem={renderPrice}
+                                listKey={uuid.v4()}
+                                keyExtractor={(item) => item.id}
+                            />
+                        </View> : null}
                     </>
                     : null}
             </View>

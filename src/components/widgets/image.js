@@ -13,6 +13,7 @@ export default function ImageWidget({ data, navigation, route }) {
         <TouchableOpacity onPress={() => onPress(data.actions)}>
             <View>
                 {data ? <Image
+                    resizeMode={'cover'}
                     style={[styles.image]}
                     source={{ uri: data.src }}
                 /> : null}
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     image: {
-        width: 300,
+        width: '100%',
         height: 300,
     }
 });

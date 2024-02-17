@@ -24,6 +24,7 @@ import ButtonWidget from './widgets/form/button'
 import FormWidget from './widgets/form/form'
 import MapWidget from './widgets/mapLibre'
 import WebViewWidget from './widgets/webView'
+import ItemList from './widgets/list'
 
 
 const keysToComponentMap = {
@@ -55,7 +56,8 @@ const keysToComponentMap = {
     MaplibreWidget: MapWidget,
     ApiWidget: ApiWidget,
     ChatMessageWidget: ChatMessage,
-    WebViewWidget: WebViewWidget
+    WebViewWidget: WebViewWidget,
+    ListWidget: ItemList
 }
 
 
@@ -79,5 +81,3 @@ function ComponentFactory(config) {
 
 
 export default memo(ComponentFactory);
-
-

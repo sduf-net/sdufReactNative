@@ -14,6 +14,9 @@ export const currentForm = createSlice({
     setForm: (state, value) => {
       state.form = {...state.form, ...value.payload};
     },
+    resetForm: (state) => {
+      state.form = {};
+    },
     setUpForm: (state, value) => {
       state.action = value.payload.action;
       state.method = value.payload.method;
@@ -22,6 +25,6 @@ export const currentForm = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setForm, setUpForm } = currentForm.actions
+export const { setForm, setUpForm, resetForm } = currentForm.actions
 
 export default currentForm.reducer

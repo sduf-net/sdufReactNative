@@ -14,6 +14,9 @@ function ItemCard1({ data, navigation }) {
     const renderLabel = ({ item }) => (
         <Label2 data={{ text: item.text }} />
     );
+    const renderPrice = ({ item }) => (
+        <Text style={[styles.price_usd]}>{item} {data.price[item]}</Text>
+    );
     const renderCharacteristics = ({ item }) => (
         <View>
             <Label1 data={{ text: item.text, src: item.src }} />
@@ -33,10 +36,15 @@ function ItemCard1({ data, navigation }) {
                         </View>
                         <View style={[styles.wrap_info]}>
                             <Text style={[styles.title]}>{data.title}</Text>
-                            <View style={[styles.prices_list]}>
-                                <Text style={[styles.price_usd]}>{data.price.usd}$</Text>
-                                <Text style={[styles.price]}>{data.price.uah}грн</Text>
-                            </View>
+                            {data.price ? <View style={[styles.prices_list]}>
+                                <FlatList
+                                    data={Object.keys(data.price)}
+                                    numColumns={5}
+                                    renderItem={renderPrice}
+                                    listKey={uuid.v4()}
+                                    keyExtractor={(item) => item.id}
+                                />
+                            </View> : null}
 
                             <FlatList
                                 style={[styles.labels]}
