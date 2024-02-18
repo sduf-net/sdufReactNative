@@ -5,6 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
 import { handleEventAction } from '../event_handler';
+import { PAGINATION } from '../socket/actionName';
 
 const excludeWidgets = ["FixedTop", "FixedBottom"];
 
@@ -23,7 +24,7 @@ function WidgetList({onRefresh, refreshing}) {
         item.changed.forEach(element => {
             if (element.item.name === 'PaginationWidget') {
                 handleEventAction({
-                    type: "getPagination",
+                    type: PAGINATION,
                     url: element.item.data.callbackUrl,
                     id: element.item.id
                 }, navigation);

@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text } from 'react-native'
 
 export default function Label3({ data }) {
     return (
-        <View>
+        <View style={[styles.wrap]}>
             {data ?
                 <>
                     <Text style={[styles.label]}>{data.text}</Text>
@@ -24,5 +24,8 @@ const styles = StyleSheet.create({
         paddingRight: 7,
         paddingLeft: 7,
         marginRight: 10
+    },
+    wrap: {
+        paddingBottom: 5
     }
 });

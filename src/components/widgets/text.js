@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default function TextWidget({data}) {
+export default function TextWidget({ data }) {
+    const widgetStyles = data.styles ?? {};
+
     return (
         <View>
-            {data ? <Text>{data.text}</Text> : null}
+            {data ? <Text style={[styles.text, widgetStyles]}>{data.text}</Text> : null}
         </View>
     );
 }
 
-
+const styles = StyleSheet.create({
+    text: {
+        paddingBottom: 5
+    }
+});

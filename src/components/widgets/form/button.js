@@ -1,27 +1,30 @@
 import React from 'react'
 import { View, StyleSheet, Button } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import { handleEventAction } from '../../../event_handler';
 import { resetForm, setForm } from '../../../redux/form';
+import { useRoute } from '@react-navigation/native';
 
 export default function ButtonWidget({ data, navigation }) {
-    const currentForm = useSelector(state => state.form);
     const dispatch = useDispatch();
+    const route = useRoute();
+    const store = useStore();
 
     const onPressLearnMore = () => {
         dispatch(setForm({ [data.name]: data.value }));
         sendCurrentForm();
+        dispatch(resetForm());
     }
 
-    const sendCurrentForm = async () => {
+    const sendCurrentForm = () => {
+        const updatedForm = store.getState().form;
         handleEventAction({
             type: "submit_form",
-            form: currentForm,
+            form: updatedForm,
             params: data
-        }, navigation);
+        }, navigation, route);
     }
-    // TODO add click handled
-    // and send form to backend
+
     return (
         <View>
             {data ? <Button

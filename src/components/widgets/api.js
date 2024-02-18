@@ -1,11 +1,9 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { useSelector } from 'react-redux';
 import { handleEventAction } from '../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 function ApiWidget({ data, id }) {
-    const userId = useSelector(state => state.user.id);
     const navigation = useNavigation();
     const route = useRoute();
 
@@ -16,7 +14,7 @@ function ApiWidget({ data, id }) {
             callbackUrl: data.callbackUrl,
             params: data
         }, navigation, route);
-    }, [])
+    })
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

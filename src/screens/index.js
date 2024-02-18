@@ -12,6 +12,7 @@ import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 
 export default function IndexScreen({ route }) {
+    console.log("SCREEEEEN INDEX")
     const navigation = useNavigation();
     const userId = useSelector(state => state.user.id, shallowEqual);
     const userChannel = getUserChannel();

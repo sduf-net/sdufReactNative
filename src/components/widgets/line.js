@@ -1,10 +1,10 @@
 import React from 'react'
-import {StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 
 export default function LineWidget({ data }) {
     return (
         <View>
-           <Text>---------------------------------------------</Text>
+            <Text style={{ paddingBottom: 10, paddingTop: 10 }}>---------------------------------------------</Text>
         </View>
     );
 }

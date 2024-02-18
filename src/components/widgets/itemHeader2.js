@@ -35,16 +35,19 @@ export default memo(ItemHeader2);
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 20
+        fontSize: 20,
+        paddingBottom: 5
     },
     sub_title: {
         fontSize: 16,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingBottom: 5
     },
     prices_list: {
         flex: 1,
         flexDirection: 'row',
-        fontSize: 16
+        fontSize: 16,
+        paddingBottom: 5
     },
     price_usd: {
         color: 'green',

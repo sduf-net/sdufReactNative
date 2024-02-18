@@ -25,6 +25,7 @@ import FormWidget from './widgets/form/form'
 import MapWidget from './widgets/mapLibre'
 import WebViewWidget from './widgets/webView'
 import ItemList from './widgets/list'
+import Wrap from './layouts/wrap'
 
 
 const keysToComponentMap = {
@@ -57,7 +58,8 @@ const keysToComponentMap = {
     ApiWidget: ApiWidget,
     ChatMessageWidget: ChatMessage,
     WebViewWidget: WebViewWidget,
-    ListWidget: ItemList
+    ListWidget: ItemList,
+    SimpleWrap: Wrap
 }
 
 
