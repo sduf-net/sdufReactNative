@@ -56,7 +56,19 @@ export const currentScreen = createSlice({
       }
     },
     remove: (state, value) => {
-      state.nestedComponents = state.nestedComponents.filter((widget => widget.id != value.payload.parent_id));
+      state.nestedComponents = state.nestedComponents.filter(widget => {
+        if (widget.id === value.payload.parent_id) {
+          // Remove the widget itself if it matches the parent_id
+          return false;
+        }
+
+        // Also, check if any nested component has the same parent_id
+        if (widget.nestedComponents) {
+          widget.nestedComponents = widget.nestedComponents.filter(nestedWidget => nestedWidget.id !== value.payload.parent_id);
+        }
+
+        return true;
+      });
     },
     append: (state, value) => {
       value.payload.widget.forEach((item) => {
