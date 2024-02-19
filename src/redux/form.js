@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import _ from "lodash";
 
 const initialState = {
-  form: {},
+  data: {},
   action: null,
-  method: null
+  method: null,
+  original_data: null
 }
 
 export const currentForm = createSlice({
@@ -12,14 +12,15 @@ export const currentForm = createSlice({
   initialState,
   reducers: {
     setForm: (state, value) => {
-      state.form = {...state.form, ...value.payload};
+      state.data = { ...state.data, ...value.payload };
     },
     resetForm: (state) => {
-      state.form = {};
+      state.data = {};
     },
     setUpForm: (state, value) => {
       state.action = value.payload.action;
       state.method = value.payload.method;
+      state.original_data = value.payload.original_data;
     }
   }
 })

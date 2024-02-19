@@ -13,7 +13,7 @@ export default function FormWidget(config) {
     );
 
     useLayoutEffect(() => {
-        dispatch(setUpForm({action: config.data.action, method: config.data.method}));
+        dispatch(setUpForm({action: config.data.action, method: config.data.method, original_data: config.data}));
     });
 
     return (
