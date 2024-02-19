@@ -6,14 +6,15 @@ import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
 import { INDEX_SCREEN } from '../utils/constants';
 import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 
-export default function IndexScreen({ route }) {
-    console.log("SCREEEEEN INDEX")
+export default function IndexScreen() {
+    const isFocused = useIsFocused();
     const navigation = useNavigation();
+    const route = useRoute();
     const userId = useSelector(state => state.user.id, shallowEqual);
     const userChannel = getUserChannel();
 
@@ -70,11 +71,18 @@ export default function IndexScreen({ route }) {
         }, 2000);
     }, [])
 
+    if (!isFocused) return;
+
     return (
         <View style={styles.container}>
-            <FixedTop />
-            <WidgetList onRefresh={onRefresh} refreshing={refreshing} />
-            <FixedBottom />
+            <FixedTop navigation={navigation} route={route} />
+            <WidgetList
+                onRefresh={onRefresh}
+                refreshing={refreshing}
+                navigation={navigation}
+                route={route}
+            />
+            <FixedBottom navigation={navigation} route={route} />
             <FloatingCard />
         </View>
     );

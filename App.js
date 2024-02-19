@@ -9,7 +9,7 @@
 import MainStack from './src/navigation/navigate'
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { generateOrRestoreUserToState } from './src/auth/auth';
 import { initSocketConnection } from './src/socket/userConn';
@@ -43,7 +43,7 @@ export default function App() {
     joinToUserChannel(userId);
   }
 
-if(loading) return null;
+  if (loading) return null;
 
   return (
     <Provider store={store}>

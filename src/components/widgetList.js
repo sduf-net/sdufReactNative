@@ -1,5 +1,5 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { memo, useCallback } from 'react';
+import React, { useNavigation, useRoute, useIsFocused } from '@react-navigation/native';
+import { memo, useCallback, useMemo } from 'react';
 import { View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
@@ -9,9 +9,8 @@ import { PAGINATION } from '../socket/actionName';
 
 const excludeWidgets = ["FixedTop", "FixedBottom"];
 
-function WidgetList({onRefresh, refreshing}) {
-    const navigation = useNavigation();
-    const route = useRoute();
+function WidgetList({ onRefresh, refreshing, navigation, route }) {
+    const isFocused = useIsFocused();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
 
     const renderWidget = useCallback(({ item }) => {
@@ -32,6 +31,8 @@ function WidgetList({onRefresh, refreshing}) {
         });
     }
 
+    if (!isFocused) return;
+
     return (
         <View>
             {nestedComponents ? <VirtualizedList
@@ -49,5 +50,5 @@ function WidgetList({onRefresh, refreshing}) {
     );
 
 }
-
+WidgetList.whyDidYouRender = true
 export default memo(WidgetList);
