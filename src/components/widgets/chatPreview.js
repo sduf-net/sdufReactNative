@@ -1,16 +1,10 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { handleEventAction } from '../../event_handler';
+import { Image, StyleSheet, View, Text } from 'react-native'
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function ChatPreview({ data, navigation }) {
-    const onPress = (actions) => {
-        if (actions.click) {
-            handleEventAction(actions.click, navigation);
-        }
-    }
-
+function ChatPreview({ data }) {
     return (
-        <TouchableOpacity onPress={() => onPress(data.actions)}>
+        <CustomTouchableOpacity data={data}>
             <View style={[styles.container, { backgroundColor: data?.style?.background }]}>
                 {data ?
                     <>
@@ -27,7 +21,7 @@ function ChatPreview({ data, navigation }) {
                     </>
                     : null}
             </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
     );
 }
 

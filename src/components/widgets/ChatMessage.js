@@ -1,16 +1,10 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { handleEventAction } from '../../event_handler';
+import { StyleSheet, View, Text } from 'react-native'
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function ChatMessage({ data, navigation }) {
-    const onPress = (actions) => {
-        if (actions.click) {
-            handleEventAction(actions.click, navigation);
-        }
-    }
-
+function ChatMessage({ data }) {
     return (
-        <TouchableOpacity onPress={() => onPress(data.actions)}>
+        <CustomTouchableOpacity data={data}>
             {/* TODO if isOwner do 'flex-end' */}
             <View style={[styles.align, data?.is_owner ? { alignItems: 'flex-end' } : '']}>
                 <View style={[styles.container]}>
@@ -26,7 +20,7 @@ function ChatMessage({ data, navigation }) {
                         : null}
                 </View>
             </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
     );
 }
 

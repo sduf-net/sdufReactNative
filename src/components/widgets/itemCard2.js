@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
 import Label3 from './label3';
 import _ from 'lodash';

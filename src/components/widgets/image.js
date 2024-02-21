@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Image, StyleSheet, View } from 'react-native'
 import _ from 'lodash';
 import CustomTouchableOpacity from '../helpers/touchableOpacity';
 

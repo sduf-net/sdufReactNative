@@ -1,20 +1,15 @@
-import _ from 'lodash';
 import React, { memo } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
-import { onLongPress, onPress } from '../../event_handler';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function ItemHeader2({ data, navigation, route }) {
+function ItemHeader2({ data }) {
     const renderPrice = ({ item }) => (
         <Text style={[styles.price_usd]}>{item} {data.price[item]}</Text>
     );
 
     return (
-        <TouchableOpacity
-            activeOpacity={_.isEmpty(data.actions) ? 1 : 0.5}
-            onPress={() => onPress(data.actions, navigation, route)}
-            onLongPress={() => onLongPress(data.actions, navigation, route)}
-        >
+        <CustomTouchableOpacity data={data} >
             <View>
                 {data ?
                     <>
@@ -33,7 +28,7 @@ function ItemHeader2({ data, navigation, route }) {
                     </>
                     : null}
             </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
     );
 }
 
