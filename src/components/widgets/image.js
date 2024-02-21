@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
 import { Image, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import { handleEventAction } from '../../event_handler';
+import _ from 'lodash';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-export default function ImageWidget({ data, navigation, route }) {
-    const onPress = (actions) => {
-        if (actions.click) {
-            handleEventAction(actions.click, navigation, route);
-        }
-    }
-
+export default function ImageWidget({ data }) {
     return (
-        <TouchableOpacity onPress={() => onPress(data.actions)}>
+        <CustomTouchableOpacity data={data} >
             <View>
                 {data ? <Image
                     resizeMode={'cover'}
@@ -18,7 +13,7 @@ export default function ImageWidget({ data, navigation, route }) {
                     source={{ uri: data.src }}
                 /> : null}
             </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
 
     );
 }

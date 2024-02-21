@@ -1,42 +1,24 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-// import { pushEventToUserChannel } from '../../socket/socketAction';
-import { handleEventAction } from '../../event_handler';
+import { Image, StyleSheet, Text, View } from 'react-native'
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function Header({ data, navigation }) {
-    const onPress = (actions) => {
-        if (actions.click) {
-            handleEventAction(actions.click, navigation);
-        }
-    }
-    const onLongPress = (actions) => {
-        if (actions.long_press) {
-            handleEventAction(actions.long_press, navigation);
-        }
-    }
-
+function Header({ data }) {
     return (
         <View>
             {data ?
                 <View style={[styles.container, { backgroundColor: data?.style?.background }]}>
-                    <TouchableOpacity
-                        onLongPress={() => onLongPress(data.images[0].actions)}
-                        onPress={() => onPress(data.images[0].actions)}>
+                    <CustomTouchableOpacity data={data.images[0]}>
                         {data.images[0].src ? <Image source={{ uri: data.images[0].src }} style={[styles.img]} /> : null}
-                    </TouchableOpacity>
+                    </CustomTouchableOpacity>
                     <Text style={[styles.title]}>{data.title}</Text>
                     <View style={[styles.subContainer]}>
-                        <TouchableOpacity
-                            onLongPress={() => onLongPress(data.images[1].actions)}
-                            onPress={() => onPress(data.images[1].actions)}>
+                        <CustomTouchableOpacity data={data.images[1]}>
                             {data.images[1].src ? <Image source={{ uri: data.images[1].src }} style={[styles.img]} /> : null}
-                        </TouchableOpacity>
+                        </CustomTouchableOpacity>
 
-                        <TouchableOpacity
-                            onLongPress={() => onLongPress(data.images[2].actions)}
-                            onPress={() => onPress(data.images[2].actions)}>
+                        <CustomTouchableOpacity data={data.images[2]}>
                             {data.images[2].src ? <Image source={{ uri: data.images[2].src }} style={[styles.img]} /> : null}
-                        </TouchableOpacity>
+                        </CustomTouchableOpacity>
                     </View>
                 </View>
                 : null

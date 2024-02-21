@@ -1,14 +1,20 @@
+import _ from 'lodash';
 import React, { memo } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
+import { onLongPress, onPress } from '../../event_handler';
 
-function ItemHeader2({ data, navigation }) {
+function ItemHeader2({ data, navigation, route }) {
     const renderPrice = ({ item }) => (
         <Text style={[styles.price_usd]}>{item} {data.price[item]}</Text>
     );
 
     return (
-        <TouchableOpacity onPress={() => onPress(data.actions)}>
+        <TouchableOpacity
+            activeOpacity={_.isEmpty(data.actions) ? 1 : 0.5}
+            onPress={() => onPress(data.actions, navigation, route)}
+            onLongPress={() => onLongPress(data.actions, navigation, route)}
+        >
             <View>
                 {data ?
                     <>

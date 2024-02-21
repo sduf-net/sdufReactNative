@@ -1,16 +1,11 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { Image, StyleSheet, View, Text, FlatList } from 'react-native'
 import uuid from 'react-native-uuid';
-import { handleEventAction } from '../../event_handler';
 import Label1 from './label1';
 import Label2 from './label2';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function ItemCard1({ data, navigation }) {
-    const onPress = (actions) => {
-        if (actions?.click) {
-            handleEventAction(actions.click, navigation);
-        }
-    }
+function ItemCard1({ data, navigation, route }) {
     const renderLabel = ({ item }) => (
         <Label2 data={{ text: item.text }} />
     );
@@ -26,7 +21,7 @@ function ItemCard1({ data, navigation }) {
         <View>
             {data ?
                 <>
-                    <TouchableOpacity onPress={() => onPress(data.actions)}>
+                    <CustomTouchableOpacity data={data}>
                         <View style={[styles.wrap_img]}>
                             <Image
                                 resizeMode={'cover'}
@@ -64,7 +59,7 @@ function ItemCard1({ data, navigation }) {
                                 keyExtractor={(item) => uuid.v4()}
                             />
                         </View>
-                    </TouchableOpacity>
+                    </CustomTouchableOpacity>
                 </>
                 : null}
         </View>

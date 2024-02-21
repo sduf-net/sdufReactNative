@@ -1,19 +1,14 @@
 import React, { memo } from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View, VirtualizedList } from 'react-native'
+import { Image, StyleSheet,  View, VirtualizedList } from 'react-native'
 import uuid from 'react-native-uuid';
-import { handleEventAction } from '../../event_handler';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function Footer({ data, navigation }) {
-    const onPress = (actions) => {
-        if (actions.click) {
-            handleEventAction(actions.click, navigation);
-        }
-    }
+function Footer({ data }) {
 
     const renderWidget = ({ item }) => (
-        <TouchableOpacity onPress={() => onPress(item.actions)}>
+        <CustomTouchableOpacity data={item}>
             <Image source={{ uri: item.src }} style={[styles.img]} />
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
     );
     const getItemCount = (item) => item.length || 0;
     const getItem = (data, index) => {

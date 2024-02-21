@@ -75,14 +75,12 @@ export default function IndexScreen() {
 
     return (
         <View style={styles.container}>
-            <FixedTop navigation={navigation} route={route} />
+            <FixedTop />
             <WidgetList
                 onRefresh={onRefresh}
                 refreshing={refreshing}
-                navigation={navigation}
-                route={route}
             />
-            <FixedBottom navigation={navigation} route={route} />
+            <FixedBottom />
             <FloatingCard />
         </View>
     );

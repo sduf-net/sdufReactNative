@@ -74,8 +74,6 @@ function ComponentFactory(config) {
             factory: ComponentFactory,
             data: config.props.data,
             id: config.props.id,
-            navigation: config.navigation,
-            route: config.route,
             nestedComponents: config.props.nestedComponents ? config.props.nestedComponents : null
         }
     );
