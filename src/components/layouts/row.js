@@ -4,7 +4,7 @@ import { getItem, getItemCount } from '../../utils';
 
 export default function Row(config) {
     const renderWidget = ({ item }) => (
-        <config.factory props={item} navigation={config.navigation} route={config.route}/>
+        <config.factory props={item}/>
     );
 
     return (

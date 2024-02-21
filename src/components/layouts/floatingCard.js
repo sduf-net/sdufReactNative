@@ -7,13 +7,11 @@ import ComponentFactory from './../factory';
 import { hideFloatCard } from '../../redux/floatCard';
 
 const FloatingCard = () => {
-    const navigation = useNavigation();
-    const route = useRoute();
     const dispatch = useDispatch();
     const floatCard = useSelector(state => state.floatCard);
 
     const renderWidget = ({ item }) => (
-        <ComponentFactory props={item} navigation={navigation} route={route} />
+        <ComponentFactory props={item} />
     );
 
     const handleBackButton = () => {

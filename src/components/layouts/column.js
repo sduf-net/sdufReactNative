@@ -4,7 +4,7 @@ import { Dimensions, FlatList, StyleSheet, View } from 'react-native'
 export default function Column(config) {
     const renderWidget = ({ item }) => (
         <View style={[styles.container]}>
-            <config.factory props={item} navigation={config.navigation} route={config.route}/>
+            <config.factory props={item}/>
         </View>
     );
 

@@ -4,7 +4,7 @@ import { getItem, getItemCount } from '../../utils';
 
 export default function Wrap(config) {
     const renderWidget = ({ item }) => (
-        <config.factory props={item} navigation={config.navigation} route={config.route} />
+        <config.factory props={item} />
     );
     const widgetStyles = config.styles ?? {};
 
