@@ -3,19 +3,22 @@ import { View, TextInput, StyleSheet } from 'react-native'
 import { setForm } from '../../../redux/form';
 import { useDispatch } from 'react-redux';
 
-export default function InputWidget({ data }) {
+export default function TextAreaWidget({ data }) {
     const [text, onChangeText] = useState('');
     const dispatch = useDispatch();
 
     const handleChanges = (text) => {
         onChangeText(text);
-        dispatch(setForm({[data.name]: text }));
+        dispatch(setForm({ [data.name]: text }));
     };
 
-
+console.log(data)
     return (
         <View>
             {data ? <TextInput
+                editable
+                multiline
+                numberOfLines={4}
                 style={[styles.input]}
                 onChangeText={handleChanges}
                 value={text}

@@ -26,6 +26,7 @@ import MapWidget from './widgets/mapLibre'
 import WebViewWidget from './widgets/webView'
 import ItemList from './widgets/list'
 import Wrap from './layouts/wrap'
+import TextAreaWidget from './widgets/form/textarea'
 
 
 const keysToComponentMap = {
@@ -50,7 +51,7 @@ const keysToComponentMap = {
     Label3Widget: Label3,
     ImageCarouselWidget: MyCarousel,
     InputWidget: InputWidget,
-    TextAreaWidget: InputWidget,
+    TextAreaWidget: TextAreaWidget,
     SelectWidget: SelectWidget,
     ButtonWidget: ButtonWidget,
     FormWidget: FormWidget,
