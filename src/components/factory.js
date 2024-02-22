@@ -25,6 +25,7 @@ import FormWidget from './widgets/form/form'
 import MapWidget from './widgets/mapLibre'
 import WebViewWidget from './widgets/webView'
 import ItemList from './widgets/list'
+import PaginationWidget from './widgets/pagination'
 import Wrap from './layouts/wrap'
 import TextAreaWidget from './widgets/form/textarea'
 
@@ -60,7 +61,8 @@ const keysToComponentMap = {
     ChatMessageWidget: ChatMessage,
     WebViewWidget: WebViewWidget,
     ListWidget: ItemList,
-    SimpleWrap: Wrap
+    SimpleWrap: Wrap,
+    PaginationWidget: PaginationWidget
 }
 
 
