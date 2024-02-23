@@ -15,8 +15,6 @@ function WidgetList({ onRefresh, refreshing, navigation, route }) {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     });
 
-    // when PaginationWidget is visible call pagination api
-    // TODO add load state
     const onViewableItemsChanged = (item) => {
         item.changed.forEach(element => {
             DeviceEventEmitter.emit('onViewableItemsChanged', element);
