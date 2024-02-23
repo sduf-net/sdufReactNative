@@ -26,10 +26,24 @@ export const currentScreen = createSlice({
     insertBefore: (state, value) => {
       let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
-      if (value.payload.widget && index !== -1) {
+      // if parent widget is not found or payload is empty
+      if (!value.payload.widget || index === -1) {
+        return;
+      }
+
+      if (Array.isArray(value.payload.widget)) {
         value.payload.widget.reverse().forEach(item => {
           state.nestedComponents.splice(index, 0, item);
         });
+      } else {
+        let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
+
+        // if widget is already in place
+        if (index !== -1) {
+          return;
+        }
+
+        state.nestedComponents.splice(index, 0, value.payload.widget);
       }
     },
     insertAfter: (state, value) => {

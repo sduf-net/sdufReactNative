@@ -1,6 +1,6 @@
-import React, { useNavigation, useRoute, useIsFocused } from '@react-navigation/native';
-import { memo, useCallback, useMemo } from 'react';
-import { View, VirtualizedList } from 'react-native';
+import React, { useIsFocused } from '@react-navigation/native';
+import { memo, useCallback } from 'react';
+import { DeviceEventEmitter, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
@@ -21,13 +21,7 @@ function WidgetList({ onRefresh, refreshing, navigation, route }) {
     // TODO add load state
     const onViewableItemsChanged = (item) => {
         item.changed.forEach(element => {
-            if (element.item.name === 'PaginationWidget') {
-                handleEventAction({
-                    type: PAGINATION,
-                    url: element.item.data.callbackUrl,
-                    id: element.item.id
-                }, navigation);
-            }
+            DeviceEventEmitter.emit('onViewableItemsChanged', element);
         });
     }
 
