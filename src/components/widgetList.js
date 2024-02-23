@@ -4,8 +4,6 @@ import { DeviceEventEmitter, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
-import { handleEventAction } from '../event_handler';
-import { PAGINATION } from '../socket/actionName';
 
 const excludeWidgets = ["FixedTop", "FixedBottom"];
 
