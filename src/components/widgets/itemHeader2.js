@@ -10,24 +10,24 @@ function ItemHeader2({ data }) {
 
     return (
         <CustomTouchableOpacity data={data} >
-            <View>
-                {data ?
-                    <>
-                        <Text style={[styles.title]}>{data.title}</Text>
-                        <Text style={[styles.sub_title]}>{data.sub_title}</Text>
 
-                        {data.price ? <View style={[styles.prices_list]}>
-                            <FlatList
-                                data={Object.keys(data.price)}
-                                numColumns={5}
-                                renderItem={renderPrice}
-                                listKey={uuid.v4()}
-                                keyExtractor={(item) => item.id}
-                            />
-                        </View> : null}
-                    </>
-                    : null}
-            </View>
+            {data ?
+                <View styles={[styles.container]}>
+                    <Text style={[styles.title]}>{data.title}</Text>
+                    <Text style={[styles.sub_title]}>{data.sub_title}</Text>
+
+                    {data.price ? <View style={[styles.prices_list]}>
+                        <FlatList
+                            data={Object.keys(data.price)}
+                            numColumns={5}
+                            renderItem={renderPrice}
+                            listKey={uuid.v4()}
+                            keyExtractor={(item) => item.id}
+                        />
+                    </View> : null}
+                </View>
+                : null}
+
         </CustomTouchableOpacity>
     );
 }
@@ -35,6 +35,10 @@ function ItemHeader2({ data }) {
 export default memo(ItemHeader2);
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: '100%'
+    },
     title: {
         fontSize: 20,
         paddingBottom: 5

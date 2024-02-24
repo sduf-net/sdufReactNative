@@ -5,7 +5,7 @@ import Label1 from './label1';
 import Label2 from './label2';
 import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-function ItemCard1({ data, navigation, route }) {
+function ItemCard1({ data }) {
     const renderLabel = ({ item }) => (
         <Label2 data={{ text: item.text }} />
     );

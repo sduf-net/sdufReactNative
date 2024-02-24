@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Button } from 'react-native'
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import { handleEventAction } from '../../../event_handler';
 import { resetForm, setForm } from '../../../redux/form';
 import { useRoute } from '@react-navigation/native';
@@ -9,6 +9,7 @@ export default function ButtonWidget({ data, navigation }) {
     const dispatch = useDispatch();
     const route = useRoute();
     const store = useStore();
+    const widgetStyles = data.styles ?? {};
 
     const onPressLearnMore = () => {
         dispatch(setForm({ [data.name]: data.value }));
@@ -29,7 +30,7 @@ export default function ButtonWidget({ data, navigation }) {
         <View>
             {data ? <Button
                 onPress={onPressLearnMore}
-                style={[styles.input]}
+                style={[styles.input, widgetStyles]}
                 title={data.text}
                 name={data?.name}
                 disabled={data?.disabled}
