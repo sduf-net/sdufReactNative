@@ -33,6 +33,12 @@ export const logInCallback = (data) => {
 };
 export const logOutCallback = (data) => {
     store.dispatch(logOut());
+    //todo review
+    rootNavigation.navigate('Index', {
+        screenName: 'login',
+        query: '',
+        event: {}
+    });
 };
 export const screenReceivedCallback = (data) => {
     store.dispatch(setCurrentScreen({
