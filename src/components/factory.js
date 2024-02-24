@@ -28,6 +28,7 @@ import ItemList from './widgets/list'
 import PaginationWidget from './widgets/pagination'
 import Wrap from './layouts/wrap'
 import TextAreaWidget from './widgets/form/textarea'
+import Center from './layouts/center'
 
 
 const keysToComponentMap = {
@@ -62,7 +63,8 @@ const keysToComponentMap = {
     WebViewWidget: WebViewWidget,
     ListWidget: ItemList,
     SimpleWrap: Wrap,
-    PaginationWidget: PaginationWidget
+    PaginationWidget: PaginationWidget,
+    FixedCenter: Center
 }
 
 
