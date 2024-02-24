@@ -13,7 +13,8 @@ import {
   removeCallback,
   replaceCallback,
   screenReceivedCallback,
-  updateMapMarkersCallback
+  updateMapMarkersCallback,
+  navigateToScreenCallback
 } from "./actionCallbacks";
 
 
@@ -82,6 +83,7 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
   addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
   addListener(channel, { event_name: "update_map_markers", callback: updateMapMarkersCallback });
+  addListener(channel, { event_name: "navigate_to_screen", callback: navigateToScreenCallback });
 }
 
 const removeListeners = (channel) => {
@@ -99,4 +101,5 @@ const removeListeners = (channel) => {
   removeListener(channel, { event_name: "screen_received" });
   removeListener(channel, { event_name: "show_float_card" });
   removeListener(channel, { event_name: "update_map_markers" });
+  removeListener(channel, { event_name: "navigate_to_screen" });
 }

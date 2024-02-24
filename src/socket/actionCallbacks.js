@@ -3,6 +3,9 @@ import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
 import { logOut, setCurrentUser } from "../redux/users";
 import { setMarkers } from "../redux/map";
 import store from "../redux/store";
+import * as  rootNavigation from "../navigation/rootNavigation";
+import { joinToUserChannel } from "./userChannel";
+
 
 export const insertBeforeCallback = (data) => {
     store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }))
@@ -25,14 +28,13 @@ export const appendCallback = (data) => {
     store.dispatch(append({ widget: data.widget }));
 };
 export const logInCallback = (data) => {
-    console.log("LOG IN", data)
+    joinToUserChannel(data.id);
     store.dispatch(setCurrentUser({ id: data.id, token: data.token }));
 };
 export const logOutCallback = (data) => {
     store.dispatch(logOut());
 };
 export const screenReceivedCallback = (data) => {
-    console.log('screenReceivedCallback', data)
     store.dispatch(setCurrentScreen({
         id: data.id,
         name: data.name,
@@ -60,4 +62,12 @@ export const openScreenCallback = (data) => {
 export const updateMapMarkersCallback = (data) => {
     console.log("updateMapMarkersCallback", data);
     store.dispatch(setMarkers(data.markers));
+};
+
+export const navigateToScreenCallback = (data) => {
+    rootNavigation.navigate('Index', {
+        screenName: data.screen_name,
+        query: data.queryString,
+        event: data
+    });
 };
