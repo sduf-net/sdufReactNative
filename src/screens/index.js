@@ -7,9 +7,10 @@ import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
-import { INDEX_SCREEN } from '../utils/constants';
 import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
+
+const INDEX_SCREEN = 'index';
 
 export default function IndexScreen() {
     const isFocused = useIsFocused();
