@@ -1,5 +1,6 @@
 import { append, insertAfter, insertBefore, remove, setCurrentScreen } from "../redux/screens";
-import { setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
+import { hideFloatCard, setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
+import { hideModalWindow, setModalWindowWidgets, showModalWindow } from "../redux/modalWindow";
 import { logOut, setCurrentUser } from "../redux/users";
 import { setMarkers } from "../redux/map";
 import store from "../redux/store";
@@ -48,19 +49,21 @@ export const screenReceivedCallback = (data) => {
     }))
 };
 export const openPopupCallback = (data) => {
-    console.log("openPopupCallback", data);
+    store.dispatch(showModalWindow());
+    store.dispatch(setModalWindowWidgets({ nestedComponents: data.widget }))
 };
 export const closePopupCallback = (data) => {
     console.log("closePopupCallback", data);
+    store.dispatch(hideModalWindow());
 };
 export const showFloatCardCallback = (data) => {
+    console.log("showFloatCallback", data);
     store.dispatch(showFloatCard());
     store.dispatch(setFloatCardWidgets({ nestedComponents: data.widget }))
-
-    console.log("showFloatCallback", data);
 };
 export const hideFloatCardCallback = (data) => {
     console.log("hideFloatCallback", data);
+    store.dispatch(hideFloatCard());
 };
 export const openScreenCallback = (data) => {
     console.log("openScreenCallback", data);

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, VirtualizedList, BackHandler } from 'react-native';
 import { getItem, getItemCount } from '../../utils';
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/core';
+import { useFocusEffect } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from './../factory';
 import { hideFloatCard } from '../../redux/floatCard';

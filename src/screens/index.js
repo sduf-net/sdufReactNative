@@ -6,6 +6,7 @@ import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
+import CustomModal from '../components/layouts/modalWindow';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
 import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
@@ -83,6 +84,7 @@ export default function IndexScreen() {
             />
             <FixedBottom />
             <FloatingCard />
+            <CustomModal />
         </View>
     );
 }

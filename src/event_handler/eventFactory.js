@@ -11,6 +11,7 @@ import store from "../redux/store";
 import { hideFloatCard } from "../redux/floatCard";
 import { getUserChannel } from "../socket/userChannel";
 import { pushEventToChannel } from "../socket/socketAction";
+import { hideModalWindow } from "../redux/modalWindow";
 
 const userId = store.getState().user.id;
 const userChannel = getUserChannel();
@@ -18,6 +19,7 @@ const userChannel = getUserChannel();
 // Private funcs
 const onRouteSideActions = () => {
     store.dispatch(hideFloatCard());
+    store.dispatch(hideModalWindow());
 }
 
 const routeToLocalFormCallback = (event, navigation, route) => {

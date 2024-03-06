@@ -77,8 +77,8 @@ const addListeners = (channel) => {
   addListener(channel, { event_name: "append", callback: appendCallback });
   addListener(channel, { event_name: "login", callback: logInCallback });
   addListener(channel, { event_name: "logout", callback: logOutCallback });
-  addListener(channel, { event_name: "openPopup", callback: openPopupCallback });
-  addListener(channel, { event_name: "closePopup", callback: closePopupCallback });
+  addListener(channel, { event_name: "open_popup", callback: openPopupCallback });
+  addListener(channel, { event_name: "close_popup", callback: closePopupCallback });
   addListener(channel, { event_name: "openScreen", callback: openScreenCallback });
   addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
   addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
@@ -95,8 +95,8 @@ const removeListeners = (channel) => {
   removeListener(channel, { event_name: "append" });
   removeListener(channel, { event_name: "login" });
   removeListener(channel, { event_name: "logout" });
-  removeListener(channel, { event_name: "openPopup" });
-  removeListener(channel, { event_name: "closePopup" });
+  removeListener(channel, { event_name: "open_popup" });
+  removeListener(channel, { event_name: "close_popup" });
   removeListener(channel, { event_name: "openScreen" });
   removeListener(channel, { event_name: "screen_received" });
   removeListener(channel, { event_name: "show_float_card" });

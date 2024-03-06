@@ -4,6 +4,7 @@ import currentUserReducer from './users'
 import currentFormReducer from './form'
 import floatCardReducer from './floatCard'
 import currentMapReducer from './map'
+import modalWindowReducer from './modalWindow'
 
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         floatCard: floatCardReducer,
         user: currentUserReducer,
         form: currentFormReducer,
-        map: currentMapReducer
+        map: currentMapReducer,
+        modalWindow: modalWindowReducer
     }
 })
