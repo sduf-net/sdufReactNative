@@ -10,6 +10,7 @@ import CustomModal from '../components/layouts/modalWindow';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
 import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
+import useErrors from '../hooks/useErrors';
 
 const INDEX_SCREEN = 'index';
 
@@ -19,6 +20,8 @@ export default function IndexScreen() {
     const route = useRoute();
     const userId = useSelector(state => state.user.id, shallowEqual);
     const userChannel = getUserChannel();
+    // const { newError } = useErrors()
+
 
     const [refreshing, setRefreshing] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -56,6 +59,8 @@ export default function IndexScreen() {
     );
 
     const getScreen = useCallback(() => {
+        // newError("SSLSLSLSLSLSLSLSLS");
+
         const queryString = route?.params || null;
         const screenName = route?.params?.screenName || INDEX_SCREEN;
 

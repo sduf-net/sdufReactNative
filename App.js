@@ -14,6 +14,7 @@ import { getFCMToken, notificationListener } from './src/push_notfication';
 import { generateOrRestoreUserToState } from './src/auth/auth';
 import { initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
+import ErrorComponent from './src/components/widgets/errorMessage';
 
 
 export default function App() {
@@ -47,7 +48,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <MainStack />
+      <ErrorComponent>
+        <MainStack />
+      </ErrorComponent>
     </Provider>
   );
 }
