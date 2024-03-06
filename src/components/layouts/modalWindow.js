@@ -5,14 +5,18 @@ import { getItem, getItemCount } from '../../utils';
 import ComponentFactory from '../factory';
 import { useDispatch, useSelector } from 'react-redux';
 import { hideModalWindow } from '../../redux/modalWindow';
+import { useIsFocused } from '@react-navigation/native';
 
 function CustomModal() {
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const modalWindow = useSelector(state => state.modalWindow);
 
   const renderWidget = useCallback(({ item }) => {
     return <ComponentFactory props={item} />
   });
+
+  if (!isFocused) return;
 
   return (
     <View style={styles.page}>

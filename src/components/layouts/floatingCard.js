@@ -5,8 +5,10 @@ import { useFocusEffect } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from './../factory';
 import { hideFloatCard } from '../../redux/floatCard';
+import { useIsFocused } from '@react-navigation/native';
 
 const FloatingCard = () => {
+    const isFocused = useIsFocused();
     const dispatch = useDispatch();
     const floatCard = useSelector(state => state.floatCard);
 
@@ -34,6 +36,8 @@ const FloatingCard = () => {
             backHandler.remove();
         };
     });
+
+    if (!isFocused) return;
 
     return (
         <View style={styles.container}>
