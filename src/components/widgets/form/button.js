@@ -1,17 +1,19 @@
 import React from 'react'
 import { View, StyleSheet, Button } from 'react-native'
 import { useDispatch, useStore } from 'react-redux';
-import { handleEventAction } from '../../../event_handler';
+import { handleEventAction, onPress } from '../../../event_handler';
 import { resetForm, setForm } from '../../../redux/form';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function ButtonWidget({ data, navigation }) {
+export default function ButtonWidget({ data }) {
     const dispatch = useDispatch();
     const route = useRoute();
+    const navigation = useNavigation();
     const store = useStore();
     const widgetStyles = data.styles ?? {};
 
     const onPressLearnMore = () => {
+        onPress(data.actions, navigation, route);
         dispatch(setForm({ [data.name]: data.value }));
         sendCurrentForm();
         dispatch(resetForm());

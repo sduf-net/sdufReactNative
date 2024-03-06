@@ -1,14 +1,19 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Picker } from '@react-native-picker/picker';
 import { setForm } from "../../../redux/form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { onChange } from "../../../event_handler";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function SelectWidget({ data }) {
     const [selectedValue, setSelectedValue] = useState();
     const dispatch = useDispatch();
+    const route = useRoute();
+    const navigation = useNavigation();
 
     const handleChanges = (value) => {
+        onChange(data.actions, value, navigation, route);
         setSelectedValue(value);
         dispatch(setForm({[data.name]: value }));
     };

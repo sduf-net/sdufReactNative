@@ -11,6 +11,13 @@ export const onPress = (actions, navigation, route) => {
     }
 }
 
+export const onChange = (actions, newValue, navigation, route) => {
+    if (actions?.change) {
+        actions.change['value'] = newValue;
+        handleEventAction(actions.change, navigation, route);
+    }
+}
+
 export const onLongPress = (actions, navigation, route) => {
     if (actions?.long_press) {
         handleEventAction(actions.long_press, navigation, route);

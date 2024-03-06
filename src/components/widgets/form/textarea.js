@@ -1,13 +1,18 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import { setForm } from '../../../redux/form';
 import { useDispatch } from 'react-redux';
+import { onChange } from '../../../event_handler';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function TextAreaWidget({ data }) {
     const [text, onChangeText] = useState('');
     const dispatch = useDispatch();
+    const route = useRoute();
+    const navigation = useNavigation();
 
     const handleChanges = (text) => {
+        onChange(data.actions, text, navigation, route);
         onChangeText(text);
         dispatch(setForm({ [data.name]: text }));
     };
