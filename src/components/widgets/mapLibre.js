@@ -105,7 +105,7 @@ export default function MapWidget(config) {
                                     coordinate={[marker.position.lng, marker.position.lat]}
                                     onSelected={() => onMarkerSelected(marker)}
                                 >
-                                    {marker.type === 'text' ? <Text>{marker.text}</Text> : null}
+                                    {marker.type === 'text' ? <Text style={styles.textMarker}>{marker.text}</Text> : null}
                                 </MapLibreGL.PointAnnotation>
                             ))
                             : null}
@@ -115,3 +115,11 @@ export default function MapWidget(config) {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    textMarker: {
+        padding: 5,
+        backgroundColor: 'white',
+        borderRadius: 5
+    }
+});
