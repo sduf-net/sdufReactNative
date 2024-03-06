@@ -13,8 +13,8 @@ export const onPress = (actions, navigation, route) => {
 
 export const onChange = (actions, newValue, navigation, route) => {
     if (actions?.change) {
-        actions.change['value'] = newValue;
-        handleEventAction(actions.change, navigation, route);
+        let payload = {...actions.change, value: newValue};
+        handleEventAction(payload, navigation, route);
     }
 }
 
