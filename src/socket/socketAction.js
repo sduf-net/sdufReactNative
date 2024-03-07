@@ -68,38 +68,32 @@ const removeListener = (channel, params) => {
   channel.off(params.event_name)
 }
 
+const callbacks = [
+  { event_name: "insert_before", callback: insertBeforeCallback },
+  { event_name: "insert_after", callback: insertAfterCallback },
+  { event_name: "remove", callback: removeCallback },
+  { event_name: "change", callback: changeCallback },
+  { event_name: "replace", callback: replaceCallback },
+  { event_name: "append", callback: appendCallback },
+  { event_name: "login", callback: logInCallback },
+  { event_name: "logout", callback: logOutCallback },
+  { event_name: "open_popup", callback: openPopupCallback },
+  { event_name: "close_popup", callback: closePopupCallback },
+  { event_name: "openScreen", callback: openScreenCallback },
+  { event_name: "screen_received", callback: screenReceivedCallback },
+  { event_name: "show_float_card", callback: showFloatCardCallback },
+  { event_name: "update_map_markers", callback: updateMapMarkersCallback },
+  { event_name: "navigate_to_screen", callback: navigateToScreenCallback },
+];
+
 const addListeners = (channel) => {
-  addListener(channel, { event_name: "insert_before", callback: insertBeforeCallback });
-  addListener(channel, { event_name: "insert_after", callback: insertAfterCallback });
-  addListener(channel, { event_name: "remove", callback: removeCallback });
-  addListener(channel, { event_name: "change", callback: changeCallback });
-  addListener(channel, { event_name: "replace", callback: replaceCallback });
-  addListener(channel, { event_name: "append", callback: appendCallback });
-  addListener(channel, { event_name: "login", callback: logInCallback });
-  addListener(channel, { event_name: "logout", callback: logOutCallback });
-  addListener(channel, { event_name: "open_popup", callback: openPopupCallback });
-  addListener(channel, { event_name: "close_popup", callback: closePopupCallback });
-  addListener(channel, { event_name: "openScreen", callback: openScreenCallback });
-  addListener(channel, { event_name: "screen_received", callback: screenReceivedCallback });
-  addListener(channel, { event_name: "show_float_card", callback: showFloatCardCallback });
-  addListener(channel, { event_name: "update_map_markers", callback: updateMapMarkersCallback });
-  addListener(channel, { event_name: "navigate_to_screen", callback: navigateToScreenCallback });
+  callbacks.forEach(x => {
+    addListener(channel, { event_name: x.event_name, callback: x.callback })
+  })
 }
 
 const removeListeners = (channel) => {
-  removeListener(channel, { event_name: "insert_before" });
-  removeListener(channel, { event_name: "insert_after" });
-  removeListener(channel, { event_name: "remove" });
-  removeListener(channel, { event_name: "change" });
-  removeListener(channel, { event_name: "replace" });
-  removeListener(channel, { event_name: "append" });
-  removeListener(channel, { event_name: "login" });
-  removeListener(channel, { event_name: "logout" });
-  removeListener(channel, { event_name: "open_popup" });
-  removeListener(channel, { event_name: "close_popup" });
-  removeListener(channel, { event_name: "openScreen" });
-  removeListener(channel, { event_name: "screen_received" });
-  removeListener(channel, { event_name: "show_float_card" });
-  removeListener(channel, { event_name: "update_map_markers" });
-  removeListener(channel, { event_name: "navigate_to_screen" });
+  callbacks.forEach(x => {
+    removeListener(channel, { event_name: x.event_name })
+  })
 }
