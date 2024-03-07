@@ -16,7 +16,6 @@ import Hr from './widgets/hr'
 import MyCarousel from './widgets/carousel'
 import InputWidget from './widgets/form/input'
 import ItemHeader2 from './widgets/itemHeader2'
-import CustomModal from './layouts/modalWindow'
 import chatPreview from './widgets/chatPreview'
 import ChatMessage from './widgets/ChatMessage'
 import SelectWidget from './widgets/form/select'
@@ -29,7 +28,7 @@ import PaginationWidget from './widgets/pagination'
 import Wrap from './layouts/wrap'
 import TextAreaWidget from './widgets/form/textarea'
 import Center from './layouts/center'
-
+import TinderCardWidget from './widgets/tinderCard'
 
 const keysToComponentMap = {
     // layouts
@@ -41,7 +40,6 @@ const keysToComponentMap = {
     // widgets
     ChatPreviewWidget: chatPreview,
     Item2Header: ItemHeader2,
-    PopupWidget: CustomModal,
     HeaderWidget: Header,
     FooterWidget: Footer,
     ImageWidget: ImageWidget,
@@ -64,7 +62,8 @@ const keysToComponentMap = {
     ListWidget: ItemList,
     SimpleWrap: Wrap,
     PaginationWidget: PaginationWidget,
-    FixedCenter: Center
+    FixedCenter: Center,
+    TinderCardWidget: TinderCardWidget
 }
 
 

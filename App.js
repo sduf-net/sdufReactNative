@@ -15,7 +15,7 @@ import { generateOrRestoreUserToState } from './src/auth/auth';
 import { initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/widgets/errorMessage';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export default function App() {
   const userId = store.getState().user.id;
@@ -49,7 +49,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <ErrorComponent>
-        <MainStack />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <MainStack />
+        </GestureHandlerRootView>
       </ErrorComponent>
     </Provider>
   );
