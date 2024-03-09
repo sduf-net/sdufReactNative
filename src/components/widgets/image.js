@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
 import _ from 'lodash';
 import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import Lightbox from 'react-native-lightbox-v2';
 
 export default function ImageWidget({ data }) {
     return (
         <CustomTouchableOpacity data={data} >
             <View>
-                {data ? <Image
-                    resizeMode={'cover'}
-                    style={[styles.image]}
-                    source={{ uri: data.src }}
-                /> : null}
+                {data &&
+                    <Lightbox style={[styles.image]}>
+                        <Image
+                            resizeMode={'cover'}
+                            style={[styles.image]}
+                            source={{ uri: data.src }}
+                        />
+                    </Lightbox>
+                }
             </View>
-        </CustomTouchableOpacity>
 
+        </CustomTouchableOpacity>
     );
 }
 

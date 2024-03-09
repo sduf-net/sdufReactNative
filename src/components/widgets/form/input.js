@@ -10,6 +10,7 @@ export default function InputWidget({ data }) {
     const dispatch = useDispatch();
     const route = useRoute();
     const navigation = useNavigation();
+    const widgetStyles = data.styles ?? {};
 
     const handleChanges = (text) => {
         onChange(data.actions, text, navigation, route);
@@ -21,7 +22,7 @@ export default function InputWidget({ data }) {
     return (
         <View>
             {data ? <TextInput
-                style={[styles.input]}
+                style={[styles.input, widgetStyles]}
                 onChangeText={handleChanges}
                 value={text}
                 placeholder={data?.placeholder}

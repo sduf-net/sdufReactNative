@@ -11,6 +11,7 @@ export default function SelectWidget({ data }) {
     const dispatch = useDispatch();
     const route = useRoute();
     const navigation = useNavigation();
+    const widgetStyles = data.styles ?? {};
 
     const handleChanges = (value) => {
         onChange(data.actions, value, navigation, route);
@@ -19,10 +20,10 @@ export default function SelectWidget({ data }) {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, widgetStyles]}>
             <Picker
                 selectedValue={selectedValue}
-                style={{ height: 50, width: 150 }}
+                style={{ height: 50 }}
                 onValueChange={(itemValue, itemIndex) => handleChanges(itemValue)}
             >
                 {data.options.map((option) => {
