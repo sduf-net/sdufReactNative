@@ -10,7 +10,6 @@ export default function ButtonWidget({ data }) {
     const route = useRoute();
     const navigation = useNavigation();
     const store = useStore();
-    const widgetStyles = data.styles ?? {};
 
     const onPressLearnMore = () => {
         onPress(data.actions, navigation, route);
@@ -32,7 +31,7 @@ export default function ButtonWidget({ data }) {
         <View>
             {data ? <Button
                 onPress={onPressLearnMore}
-                style={[styles.input, widgetStyles]}
+                color={data.color}
                 title={data.text}
                 name={data?.name}
                 disabled={data?.disabled}

@@ -1,24 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export default function LineWidget({ data }) {
     return (
-        <View>
-            <Text style={{ paddingBottom: 10, paddingTop: 10 }}>---------------------------------------------</Text>
-        </View>
+        <View style={styles.separator} />
     );
 }
 
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    image: {
-        width: 100,
-        height: 100,
-    }
+    separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+      },
 });
