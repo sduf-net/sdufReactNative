@@ -23,16 +23,16 @@ export default function Center(config) {
     );
 }
 
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: windowHeight * 0.9,
     },
     settingOption: {
-        padding: 16,
-        borderRadius: 8,
-        marginBottom: 16,
-        width: '80%'
-    },
+        width: '90%'
+    }
 });

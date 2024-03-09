@@ -40,5 +40,4 @@ function WidgetList({ onRefresh, refreshing, navigation, route }) {
     );
 
 }
-WidgetList.whyDidYouRender = true
 export default memo(WidgetList);
