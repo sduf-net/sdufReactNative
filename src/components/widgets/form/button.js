@@ -20,6 +20,12 @@ export default function ButtonWidget({ data }) {
 
     const sendCurrentForm = () => {
         const updatedForm = store.getState().form;
+
+        if (
+            updatedForm['action'] === null ||
+            updatedForm['method'] === null
+        ) return;
+
         handleEventAction({
             type: "submit_form",
             form: updatedForm,

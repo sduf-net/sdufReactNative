@@ -1,7 +1,6 @@
 import { Text, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
-import { useNavigation } from '@react-navigation/native';
 import React, { memo } from 'react';
 import { getItem, getItemCount } from '../utils';
 

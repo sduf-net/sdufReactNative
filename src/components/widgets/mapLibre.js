@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native'; // Import Button
+import { StyleSheet, Text, View, Button, Dimensions } from 'react-native'; // Import Button
 import MapLibreGL, { UserLocation } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { styleURL } from "@env";
@@ -9,7 +9,9 @@ import { setMarkers } from '../../redux/map';
 MapLibreGL.setAccessToken(null);
 
 export default function MapWidget(config) {
+    const { height: windowHeight } = Dimensions.get("window");
     const { data, navigation } = config;
+    const widgetStyles = data.styles ?? {};
 
     const mapRef = useRef(null);
     const dispatch = useDispatch();
@@ -72,7 +74,7 @@ export default function MapWidget(config) {
     }, []);
 
     return (
-        <View style={{ flex: 1, width: '100%', height: 600 }}>
+        <View style={[{ flex: 1, width: '100%', height: windowHeight }, widgetStyles]}>
             {data ? (
                 <View style={{ flex: 1 }}>
                     <MapLibreGL.MapView
