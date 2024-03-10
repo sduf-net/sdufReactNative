@@ -1,6 +1,8 @@
 import {
     ASYNC_GET,
     ASYNC_POST,
+    SYNC_GET,
+    SYNC_POST,
     PAGINATION,
     REQUEST_WIDGET,
     ROUTE_BACK,
@@ -51,6 +53,18 @@ const asyncRequestCallback = (event, navigation, route) => {
     })
 }
 
+const syncRequestCallback = async (event, navigation, route) => {
+    return await pushEventToChannel(userChannel, {
+        userId: userId,
+        actionName: event.type,
+        payload: {
+            parent_id: "id",
+            callback_url: event.url,
+            params: event,
+        }
+    });
+}
+
 const paginationCallback = (event, navigation, route) => {
     pushEventToChannel(userChannel, {
         userId: userId,
@@ -86,6 +100,8 @@ const defaultCallback = (event, navigation, route) => {
 const map = {
     [ASYNC_GET]: asyncRequestCallback,
     [ASYNC_POST]: asyncRequestCallback,
+    [SYNC_GET]: syncRequestCallback,
+    [SYNC_POST]: syncRequestCallback,
     [PAGINATION]: paginationCallback,
     [REQUEST_WIDGET]: requestWidgetCallback,
     [SUBMIT_FORM]: submitFormCallback,

@@ -1,8 +1,8 @@
 import { eventFactory } from "./eventFactory";
 
-export const handleEventAction = (event, navigation, route) => {
+export const handleEventAction = async (event, navigation, route) => {
     const processFn = eventFactory(event);
-    processFn(event, navigation, route);
+    return await processFn(event, navigation, route);
 }
 
 export const onPress = (actions, navigation, route) => {
@@ -13,7 +13,7 @@ export const onPress = (actions, navigation, route) => {
 
 export const onChange = (actions, newValue, navigation, route) => {
     if (actions?.change) {
-        let payload = {...actions.change, value: newValue};
+        let payload = { ...actions.change, value: newValue };
         handleEventAction(payload, navigation, route);
     }
 }
@@ -39,5 +39,11 @@ export const onSwipedTop = (actions, navigation, route) => {
 export const onSwipedLeft = (actions, navigation, route) => {
     if (actions?.swiped_left) {
         handleEventAction(actions.swiped_left, navigation, route);
+    }
+}
+
+export const onSwipedBottom = (actions, navigation, route) => {
+    if (actions?.swiped_bottom) {
+        handleEventAction(actions.swiped_bottom, navigation, route);
     }
 }

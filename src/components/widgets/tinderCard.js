@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TinderCard } from 'rn-tinder-card';
-import { onSwipedRight, onSwipedLeft, onSwipedTop } from '../../event_handler';
+import { onSwipedRight, onSwipedLeft, onSwipedTop, onSwipedBottom, handleEventAction } from '../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 
@@ -51,13 +51,24 @@ export default function TinderWidget({ data }) {
       </View>
     );
   };
-
-  console.log(data.cards)
+  const OverlayBottom = () => {
+    return (
+      <View
+        style={[
+          styles.overlayLabelContainer,
+          {
+            backgroundColor: 'blue',
+          },
+        ]}
+      >
+        <Text style={styles.overlayLabelText}>Super DisLike</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.wrapper}>
       {data.cards.map((item, index) => {
-        console.log('item', item)
         return (
           <View
             style={styles.cardContainer}
@@ -70,8 +81,10 @@ export default function TinderWidget({ data }) {
               OverlayLabelRight={OverlayRight}
               OverlayLabelLeft={OverlayLeft}
               OverlayLabelTop={OverlayTop}
+              OverlayLabelBottom={OverlayBottom}
               cardStyle={styles.card}
-              onSwipedRight={() => {
+              onSwipedRight={async () => {
+                let dd = await handleEventAction({ type: "sync_post", url: "https://80f8-38-49-174-212.ngrok-free.app/api/demo/tinder" });
                 onSwipedRight(data.actions, navigation, route);
               }}
               onSwipedTop={() => {
@@ -79,6 +92,9 @@ export default function TinderWidget({ data }) {
               }}
               onSwipedLeft={() => {
                 onSwipedLeft(data.actions, navigation, route);
+              }}
+              onSwipedBottom={() => {
+                onSwipedBottom(data.actions, navigation, route);
               }}
             >
               <Image source={{ uri: item.src }} style={styles.image} />

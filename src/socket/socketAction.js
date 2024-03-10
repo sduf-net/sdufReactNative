@@ -36,12 +36,26 @@ export const pushEventToChannel = async (channel, params) => {
   }
 
   if (channel) {
-    pushEvent(channel, "action_performed", opts);
+    return await pushEvent(channel, "action_performed", opts);
   }
 }
 
 const pushEvent = (channel, action, params) => {
-  channel.push(action, params);
+  return new Promise((resolve, reject) => {
+    channel.push(action, params)
+      .receive("ok", payload => {
+        console.log("phoenix replied:", payload);
+        resolve(payload);
+      })
+      .receive("error", err => {
+        console.log("phoenix errored", err);
+        reject(err);
+      })
+      .receive("timeout", () => {
+        console.log("timed out pushing");
+        reject("Timed out pushing");
+      });
+  });
 }
 
 export const listenUserChannelEvents = (channel) => {
