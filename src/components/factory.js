@@ -28,7 +28,7 @@ import PaginationWidget from './widgets/pagination'
 import Wrap from './layouts/wrap'
 import TextAreaWidget from './widgets/form/textarea'
 import Center from './layouts/center'
-import TinderCardWidget from './widgets/tinderCard'
+import TinderWidget from './widgets/tinderCard'
 
 const keysToComponentMap = {
     // layouts
@@ -63,7 +63,7 @@ const keysToComponentMap = {
     SimpleWrap: Wrap,
     PaginationWidget: PaginationWidget,
     FixedCenter: Center,
-    TinderCardWidget: TinderCardWidget
+    TinderWidget: TinderWidget
 }
 
 

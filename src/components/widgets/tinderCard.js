@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Alert, Image, StyleSheet, Text, View } from 'react-native';
+import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TinderCard } from 'rn-tinder-card';
+import { onSwipedRight, onSwipedLeft, onSwipedTop } from '../../event_handler';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const data = [
-  'https://images.unsplash.com/photo-1681896616404-6568bf13b022?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80',
-  'https://images.unsplash.com/photo-1681871197336-0250ed2fe23d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
-  'https://images.unsplash.com/photo-1681238091934-10fbb34b497a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1282&q=80',
-];
 
-export default function TinderCardWidget() {
+export default function TinderWidget({ data }) {
+  const navigation = useNavigation();
+  const route = useRoute();
+
   const OverlayRight = () => {
     return (
       <View
@@ -52,9 +52,12 @@ export default function TinderCardWidget() {
     );
   };
 
+  console.log(data.cards)
+
   return (
     <View style={styles.wrapper}>
-      {data.map((item, index) => {
+      {data.cards.map((item, index) => {
+        console.log('item', item)
         return (
           <View
             style={styles.cardContainer}
@@ -69,16 +72,17 @@ export default function TinderCardWidget() {
               OverlayLabelTop={OverlayTop}
               cardStyle={styles.card}
               onSwipedRight={() => {
-                Alert.alert('Swiped right');
+                onSwipedRight(data.actions, navigation, route);
               }}
               onSwipedTop={() => {
-                Alert.alert('Swiped Top');
+                onSwipedTop(data.actions, navigation, route);
               }}
               onSwipedLeft={() => {
-                Alert.alert('Swiped left');
+                onSwipedLeft(data.actions, navigation, route);
               }}
             >
-              <Image source={{ uri: item }} style={styles.image} />
+              <Image source={{ uri: item.src }} style={styles.image} />
+              <Text style={styles.title}>{item.title}</Text>
             </TinderCard>
           </View>
         );
@@ -86,10 +90,13 @@ export default function TinderCardWidget() {
     </View>
   );
 }
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    width: windowWidth,
+    height: windowHeight
   },
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
@@ -112,4 +119,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlayLabelText: { color: 'white', fontSize: 32, fontWeight: 'bold' },
+  title: {
+    position: 'absolute',
+    bottom: '5%',
+    left: '10%',
+    width: '80%',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 24
+  }
 });
