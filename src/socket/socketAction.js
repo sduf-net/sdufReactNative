@@ -44,7 +44,6 @@ const pushEvent = (channel, action, params) => {
   return new Promise((resolve, reject) => {
     channel.push(action, params)
       .receive("ok", payload => {
-        console.log("phoenix replied:", payload);
         resolve(payload);
       })
       .receive("error", err => {

@@ -18,7 +18,6 @@ export default function TextAreaWidget({ data }) {
         dispatch(setForm({ [data.name]: text }));
     };
 
-console.log(data)
     return (
         <View>
             {data ? <TextInput

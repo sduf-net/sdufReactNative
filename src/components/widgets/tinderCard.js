@@ -1,13 +1,46 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TinderCard } from 'rn-tinder-card';
 import { onSwipedRight, onSwipedLeft, onSwipedTop, onSwipedBottom, handleEventAction } from '../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-
 export default function TinderWidget({ data }) {
   const navigation = useNavigation();
   const route = useRoute();
+  const [cards, setCards] = useState(data.cards ?? []);
+  const [loadingMoreCards, setLoadingMoreCards] = useState(false);
+
+  const onSwipe = async (index) => {
+    let editableCards = [...cards];
+    editableCards.splice(index, 1)
+    setCards([...editableCards]);
+
+    if (index !== 0) return;
+
+    try {
+      setLoadingMoreCards(true);
+
+      // data.actions.load_more = {
+      //   type: "sync_post",
+      //   url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
+      // }
+      const newCards = await handleEventAction(
+        {
+          type: "sync_post",
+          url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
+        },
+        navigation,
+        route
+      );
+      setCards([...newCards]);
+
+      // setCardsCount(newCards.length);
+    } catch (error) {
+      console.error("Error fetching new cards:", error);
+    } finally {
+      setLoadingMoreCards(false);
+    }
+  };
 
   const OverlayRight = () => {
     return (
@@ -68,7 +101,7 @@ export default function TinderWidget({ data }) {
 
   return (
     <View style={styles.wrapper}>
-      {data.cards.map((item, index) => {
+      {!loadingMoreCards ? cards.map((item, index) => {
         return (
           <View
             style={styles.cardContainer}
@@ -84,16 +117,19 @@ export default function TinderWidget({ data }) {
               OverlayLabelBottom={OverlayBottom}
               cardStyle={styles.card}
               onSwipedRight={async () => {
-                let dd = await handleEventAction({ type: "sync_post", url: "https://80f8-38-49-174-212.ngrok-free.app/api/demo/tinder" });
+                onSwipe(index);
                 onSwipedRight(data.actions, navigation, route);
               }}
               onSwipedTop={() => {
+                onSwipe(index);
                 onSwipedTop(data.actions, navigation, route);
               }}
               onSwipedLeft={() => {
+                onSwipe(index);
                 onSwipedLeft(data.actions, navigation, route);
               }}
               onSwipedBottom={() => {
+                onSwipe(index);
                 onSwipedBottom(data.actions, navigation, route);
               }}
             >
@@ -102,7 +138,7 @@ export default function TinderWidget({ data }) {
             </TinderCard>
           </View>
         );
-      })}
+      }) : <Text>Loading...</Text>}
     </View>
   );
 }
