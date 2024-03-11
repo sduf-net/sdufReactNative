@@ -25,10 +25,11 @@ export default function TinderWidget({ data }) {
       //   url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
       // }
       const newCards = await handleEventAction(
-        {
-          type: "sync_post",
-          url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
-        },
+        data.actions.load_more,
+        // {
+        //   type: "sync_post",
+        //   url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
+        // },
         navigation,
         route
       );
