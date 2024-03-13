@@ -47,26 +47,28 @@ export const currentScreen = createSlice({
       }
     },
     insertAfter: (state, value) => {
-      let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
+      const parentIndex = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
-      // if parent widget is not found or payload is empty
-      if (!value.payload.widget || index === -1) {
+      // Перевіряємо, чи знайдено батьківський віджет або чи не є payload порожнім
+      if (parentIndex === -1 || !value.payload.widget) {
         return;
       }
 
       if (Array.isArray(value.payload.widget)) {
+        // Якщо віджет - масив
         value.payload.widget.forEach(item => {
-          state.nestedComponents.push(item);
+          state.nestedComponents.splice(parentIndex + 1, 0, item);
         });
       } else {
-        let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
+        // Якщо віджет - не масив
+        const existingWidgetIndex = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
 
-        // if widget is already in place
-        if (index !== -1) {
+        // Перевіряємо, чи віджет вже є на місці
+        if (existingWidgetIndex !== -1) {
           return;
         }
 
-        state.nestedComponents.push(value.payload.widget);
+        state.nestedComponents.splice(parentIndex + 1, 0, value.payload.widget);
       }
     },
     remove: (state, value) => {

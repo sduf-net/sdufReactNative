@@ -17,7 +17,7 @@ function CarouselReanimated({ data, navigation }) {
             <FlatList
                 data={data.images}
                 style={{ flex: 1 }}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     return <Pressable onPress={() => { setIsVisible(true) }}>
                         <Image source={{ uri: item.src }} style={{ width: windowWidth, height: 300 }} />
                     </Pressable>;
