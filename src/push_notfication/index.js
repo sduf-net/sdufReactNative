@@ -4,6 +4,7 @@ import PushNotification from "react-native-push-notification";
 import store from "../redux/store";
 import { PermissionsAndroid, Platform } from "react-native";
 import { URL } from "@env";
+const LOCAL_CHANNEL_ID = 'defaultLocalPushesChannelName';
 
 export const checkApplicationPermission = async () => {
     if (Platform.OS === 'android') {
@@ -62,6 +63,16 @@ const updateToken = async (token) => {
 export const notificationListener = () => {
     return messaging().onMessage(async remoteMessage => {
         console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+
+        const newNotification = {
+            id: 1,
+            messageId: remoteMessage.messageId,
+            title: remoteMessage.notification.title,
+            message: remoteMessage.notification.body,
+            channelId: LOCAL_CHANNEL_ID
+        };
+
+        PushNotification.localNotification(newNotification);
     });
 }
 
@@ -70,6 +81,20 @@ export const setBackgroundMessageHandler = () => {
         console.log('Message handled in the background!', remoteMessage);
     });
 }
+
+export const createNotificationChannels = () => {
+    PushNotification.createChannel(
+        {
+            channelId: LOCAL_CHANNEL_ID,
+            channelName: LOCAL_CHANNEL_ID,
+            channelDescription: "Channel for local pushes",
+            playSound: true,
+            soundName: "default",
+            vibrate: true,
+        },
+        (created) => (created)
+    );
+};
 
 export const configurePushNotification = () => {
     PushNotification.configure({
