@@ -22,7 +22,7 @@ export const changeCallback = (data) => {
     console.log("changeCallback", data);
 };
 export const replaceCallback = (data) => {
-    store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget }));
+    store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }));
     store.dispatch(remove({ parent_id: data.parent_id }));
 };
 export const appendCallback = (data) => {
