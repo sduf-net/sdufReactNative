@@ -56,7 +56,7 @@ export const currentScreen = createSlice({
 
       if (Array.isArray(value.payload.widget)) {
         // Якщо віджет - масив
-        value.payload.widget.forEach(item => {
+        value.payload.widget.reverse().forEach(item => {
           state.nestedComponents.splice(parentIndex + 1, 0, item);
         });
       } else {
