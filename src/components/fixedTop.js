@@ -6,14 +6,14 @@ import { getItem, getItemCount } from '../utils';
 
 function FixedTop({ navigation, route }) {
     const fixedTop = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedTop"), shallowEqual);
-    const isAbsolute = fixedTop.isAbsolute ?? false;
+    const isAbsolute = fixedTop?.isAbsolute ?? false;
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     };
 
     return (
-        <View style={[isAbsolute ? styles.container : null]}>
+        <View style={[isAbsolute ? styles.container : null, fixedTop?.styles ?? null]}>
             {fixedTop ? <VirtualizedList
                 data={fixedTop.nestedComponents}
                 renderItem={renderWidget}

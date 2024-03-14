@@ -1,11 +1,12 @@
 import { listenUserChannelEvents } from './socketAction';
 import { getSocket } from './userConn';
 
-const socket = getSocket();
 let userChannel = null;
 let currentUserId = null;
 
 export const joinToUserChannel = (userId) => {
+    const socket = getSocket();
+
     if (!socket) {
         console.error("joinToUserChannel socket is null")
         return;

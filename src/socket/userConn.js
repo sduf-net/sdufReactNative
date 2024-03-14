@@ -4,16 +4,21 @@ import { SOCKET_URL } from "@env";
 let socket = null;
 
 export const initSocketConnection = () => {
-    if (socket) return;
+    if (socket && socket.isConnected()) {
+        return;
+    }
 
-    socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000})
+
+    socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000 })
     socket.connect();
     socket.onError(data => {
-        if (!data?.message.includes('403')) {
+        console.log("ERROR", data)
+        if (!data || !data.message) return;
+        if (data.message.includes('403')) {
             console.error("Socket is empty")
             return false;
         }
-        if (!data?.message.includes('401')) {
+        if (data.message.includes('401')) {
             console.error("Log out")
             return false;
         }

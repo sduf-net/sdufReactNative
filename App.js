@@ -38,7 +38,7 @@ export default function App() {
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (nextAppState === 'active') {
-        connectToUserChannel();
+        // connectToUserChannel();
       }
     });
 
