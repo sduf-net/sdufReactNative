@@ -1,22 +1,30 @@
 import React, { useState } from 'react'
-import { Image, StyleSheet, View } from 'react-native'
-import _ from 'lodash';
+import { Pressable, Image, StyleSheet, View } from 'react-native'
+import ImageView from "react-native-image-viewing";
 import CustomTouchableOpacity from '../helpers/touchableOpacity';
-import Lightbox from 'react-native-lightbox-v2';
 
 export default function ImageWidget({ data }) {
+    const [visible, setIsVisible] = useState(false);
+
     return (
         <CustomTouchableOpacity data={data} >
             <View>
                 {data &&
-                    <Lightbox style={[styles.image]}>
+                    <Pressable onPress={() => { setIsVisible(true) }}>
                         <Image
                             resizeMode={'cover'}
                             style={[styles.image]}
                             source={{ uri: data.src }}
                         />
-                    </Lightbox>
+                    </Pressable>
                 }
+                <ImageView
+                    images={[{ id: 1, uri: data.src }]}
+                    imageIndex={0}
+                    visible={visible}
+                    keyExtractor={(item) => item.id}
+                    onRequestClose={() => setIsVisible(false)}
+                />
             </View>
 
         </CustomTouchableOpacity>
