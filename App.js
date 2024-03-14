@@ -16,6 +16,7 @@ import { initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/widgets/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { AppState } from 'react-native';
 
 export default function App() {
   const userId = store.getState().user.id;
@@ -32,6 +33,19 @@ export default function App() {
   useEffect(() => {
     connectToUserChannel();
   }, [userId]);
+
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (nextAppState === 'active') {
+        connectToUserChannel();
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   const loadDataBeforeStart = async () => {
     await generateOrRestoreUserToState();
