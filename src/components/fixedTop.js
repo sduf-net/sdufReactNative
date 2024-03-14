@@ -1,4 +1,4 @@
-import { Text, View, VirtualizedList } from 'react-native';
+import { StyleSheet, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import React, { memo } from 'react';
@@ -6,13 +6,14 @@ import { getItem, getItemCount } from '../utils';
 
 function FixedTop({ navigation, route }) {
     const fixedTop = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedTop"), shallowEqual);
+    const isAbsolute = fixedTop.isAbsolute ?? false;
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     };
 
     return (
-        <View>
+        <View style={[isAbsolute ? styles.container : null]}>
             {fixedTop ? <VirtualizedList
                 data={fixedTop.nestedComponents}
                 renderItem={renderWidget}
@@ -23,5 +24,15 @@ function FixedTop({ navigation, route }) {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        zIndex: 100
+    },
+});
 
 export default memo(FixedTop)
