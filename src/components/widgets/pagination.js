@@ -26,7 +26,7 @@ function PaginationWidget({ data, id }) {
 
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 4000);
     }, [loading])
 
     useEffect(() => {
