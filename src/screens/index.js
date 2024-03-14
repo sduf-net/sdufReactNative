@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, View, Text } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, DeviceEventEmitter } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
@@ -23,17 +23,11 @@ export default function IndexScreen() {
     // const { newError } = useErrors()
 
 
-    const [refreshing, setRefreshing] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
+        DeviceEventEmitter.emit('onRefresh', true);
         setLoading(true);
-
-        setTimeout(() => {
-            setRefreshing(false);
-        }, 2000);
     }, []);
 
     useEffect(() => {
@@ -83,10 +77,7 @@ export default function IndexScreen() {
     return (
         <View style={styles.container}>
             <FixedTop />
-            <WidgetList
-                onRefresh={onRefresh}
-                refreshing={refreshing}
-            />
+            <WidgetList onRefresh={onRefresh} />
             <FixedBottom />
             <FloatingCard />
             <CustomModal />

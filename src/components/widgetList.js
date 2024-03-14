@@ -7,7 +7,7 @@ import { getItem, getItemCount } from '../utils';
 
 const excludeWidgets = ["FixedTop", "FixedBottom"];
 
-function WidgetList({ onRefresh, refreshing, navigation, route }) {
+function WidgetList({ onRefresh, navigation, route }) {
     const isFocused = useIsFocused();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
 
@@ -34,7 +34,7 @@ function WidgetList({ onRefresh, refreshing, navigation, route }) {
                 getItem={getItem}
                 onViewableItemsChanged={onViewableItemsChanged}
                 onRefresh={onRefresh}
-                refreshing={refreshing}
+                refreshing={false}
             /> : nestedComponents}
         </View>
     );
