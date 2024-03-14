@@ -14,6 +14,10 @@ function ApiWidget({ data, id }) {
         }
     }
 
+    const onRefresh = () => {
+        setLoading(true);
+    }
+
     useEffect(() => {
         if (!loading) return;
 
@@ -30,6 +34,7 @@ function ApiWidget({ data, id }) {
     }, [loading])
 
     useEffect(() => {
+        DeviceEventEmitter.addListener('onRefresh', onRefresh);
         DeviceEventEmitter.addListener('onViewableItemsChanged', onViewableItemsChanged);
     }, [])
 
