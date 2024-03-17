@@ -5,7 +5,7 @@ let socket = null;
 
 export const initSocketConnection = () => {
     if (socket && socket.isConnected()) {
-        return;
+        return true;
     }
 
 
