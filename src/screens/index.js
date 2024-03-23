@@ -19,9 +19,7 @@ export default function IndexScreen() {
     const navigation = useNavigation();
     const route = useRoute();
     const userId = useSelector(state => state.user.id, shallowEqual);
-    const userChannel = getUserChannel();
     // const { newError } = useErrors()
-
 
     const [loading, setLoading] = useState(false);
 
@@ -40,7 +38,6 @@ export default function IndexScreen() {
         getScreen();
     }, [loading])
 
-
     // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
     useFocusEffect(
         React.useCallback(() => {
@@ -58,7 +55,7 @@ export default function IndexScreen() {
         const queryString = route?.params || null;
         const screenName = route?.params?.screenName || INDEX_SCREEN;
 
-        pushEventToChannel(userChannel, {
+        pushEventToChannel(getUserChannel(), {
             userId: userId,
             actionName: GET_SCREEN_BY_NAME,
             payload: {

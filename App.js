@@ -19,13 +19,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppState } from 'react-native';
 
 export default function App() {
-  const userId = store.getState().user.id;
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = notificationListener();
 
-    loadDataBeforeStart().then(() => setLoading(false));
+    loadDataBeforeStart().then(() => {
+      setUserId(store.getState().user.id);
+      setLoading(false);
+    });
 
     return unsubscribe;
   }, []);
@@ -50,10 +53,10 @@ export default function App() {
   const loadDataBeforeStart = async () => {
     await generateOrRestoreUserToState();
     await getFCMToken();
-    connectToUserChannel();
   }
 
   const connectToUserChannel = () => {
+    if (!userId) return;
     initSocketConnection();
     joinToUserChannel(userId);
   }

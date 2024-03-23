@@ -8,7 +8,6 @@ export const initSocketConnection = () => {
         return true;
     }
 
-
     socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000 })
     socket.connect();
     socket.onError(data => {
