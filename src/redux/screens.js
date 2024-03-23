@@ -36,13 +36,6 @@ export const currentScreen = createSlice({
           state.nestedComponents.splice(index, 0, item);
         });
       } else {
-        let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
-
-        // if widget is already in place
-        if (index !== -1) {
-          return;
-        }
-
         state.nestedComponents.splice(index, 0, value.payload.widget);
       }
     },
