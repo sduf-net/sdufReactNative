@@ -20,22 +20,13 @@ export default function TinderWidget({ data }) {
     try {
       setLoadingMoreCards(true);
 
-      // data.actions.load_more = {
-      //   type: "sync_post",
-      //   url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
-      // }
       const newCards = await handleEventAction(
         data.actions.load_more,
-        // {
-        //   type: "sync_post",
-        //   url: "https://5640-38-49-174-212.ngrok-free.app/api/demo/tinder_load_more"
-        // },
         navigation,
         route
       );
       setCards([...newCards]);
 
-      // setCardsCount(newCards.length);
     } catch (error) {
       console.error("Error fetching new cards:", error);
     } finally {

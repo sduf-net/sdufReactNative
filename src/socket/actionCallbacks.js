@@ -6,6 +6,7 @@ import { setMarkers } from "../redux/map";
 import store from "../redux/store";
 import * as  rootNavigation from "../navigation/rootNavigation";
 import { joinToUserChannel } from "./userChannel";
+import Geolocation from '@react-native-community/geolocation';
 
 
 export const insertBeforeCallback = (data) => {
@@ -79,4 +80,18 @@ export const navigateToScreenCallback = (data) => {
         query: data.queryString,
         event: data
     });
+};
+
+export const requestCurrentPositionCallback = () => {
+    Geolocation.getCurrentPosition(
+        (position) => {
+            const userLocationData = {
+                longitude: position.coords.longitude,
+                latitude: position.coords.latitude,
+            };
+            console.log(userLocationData)
+        },
+        (error) => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
 };
