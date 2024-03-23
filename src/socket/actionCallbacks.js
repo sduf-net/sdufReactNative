@@ -82,6 +82,10 @@ export const navigateToScreenCallback = (data) => {
     });
 };
 
+export const showErrorMessageCallback = (data) => {
+    store.dispatch(addError(data.error_message));
+};
+
 export const requestCurrentPositionCallback = () => {
     Geolocation.getCurrentPosition(
         (position) => {
