@@ -1,5 +1,6 @@
 import { Socket } from 'phoenix'
-import { SOCKET_URL } from "@env";
+import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from "@env";
+// import store from "../redux/store";
 
 let socket = null;
 
@@ -8,7 +9,7 @@ export const initSocketConnection = () => {
         return true;
     }
 
-    socket = new Socket(`${SOCKET_URL}`, { timeout: 45 * 1000 })
+    socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 })
     socket.connect();
     socket.onError(data => {
         console.log("ERROR", data)
@@ -18,7 +19,8 @@ export const initSocketConnection = () => {
             return false;
         }
         if (data.message.includes('401')) {
-            console.error("Log out")
+            console.error("Log out");
+            // store.dispatch();
             return false;
         }
     });
