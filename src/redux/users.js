@@ -21,7 +21,9 @@ export const currentUser = createSlice({
       saveUser(state);
     },
     logOut: (state) => {
-      state = initialState;
+      state.id = APP_ENV + ":anonym:" + uuid.v4()
+      state.token = null
+      state.loggedIn = false
 
       removeUser();
     }
