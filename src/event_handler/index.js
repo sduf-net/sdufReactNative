@@ -18,6 +18,13 @@ export const onChange = (actions, newValue, navigation, route) => {
     }
 }
 
+export const onSubmit = (actions, newValue, navigation, route) => {
+    if (actions?.submit) {
+        let payload = { ...actions.change, value: newValue };
+        handleEventAction(payload, navigation, route);
+    }
+}
+
 export const onLongPress = (actions, navigation, route) => {
     if (actions?.long_press) {
         handleEventAction(actions.long_press, navigation, route);

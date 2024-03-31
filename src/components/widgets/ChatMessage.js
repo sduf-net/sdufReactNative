@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     align: {
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        padding: 8,
     }
 });

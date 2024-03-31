@@ -18,7 +18,6 @@ export default function InputWidget({ data }) {
         dispatch(setForm({[data.name]: text }));
     };
 
-
     return (
         <View>
             {data ? <TextInput
