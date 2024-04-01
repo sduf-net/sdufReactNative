@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, View, Text, DeviceEventEmitter } from 'react-native';
+import { Dimensions, StyleSheet, View, DeviceEventEmitter } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';

@@ -1,6 +1,6 @@
 import React, { useIsFocused } from '@react-navigation/native';
 import { memo, useCallback } from 'react';
-import { DeviceEventEmitter, View, VirtualizedList } from 'react-native';
+import { DeviceEventEmitter, KeyboardAvoidingView, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
@@ -24,7 +24,7 @@ function WidgetList({ onRefresh, navigation, route }) {
     if (!isFocused) return;
 
     return (
-        <View>
+        <KeyboardAvoidingView enabled={true} behavior={'padding'} style={{ flex: 1 }}>
             {nestedComponents ? <VirtualizedList
                 data={nestedComponents}
                 initialNumToRender={2}
@@ -36,7 +36,7 @@ function WidgetList({ onRefresh, navigation, route }) {
                 onRefresh={onRefresh}
                 refreshing={false}
             /> : nestedComponents}
-        </View>
+        </KeyboardAvoidingView>
     );
 
 }
