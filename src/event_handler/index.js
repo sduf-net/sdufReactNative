@@ -20,7 +20,7 @@ export const onChange = (actions, newValue, navigation, route) => {
 
 export const onSubmit = (actions, newValue, navigation, route) => {
     if (actions?.submit) {
-        let payload = { ...actions.change, value: newValue };
+        let payload = { ...actions.submit, value: newValue };
         handleEventAction(payload, navigation, route);
     }
 }
