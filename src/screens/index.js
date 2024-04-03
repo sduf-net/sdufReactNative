@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, View, DeviceEventEmitter } from 'react-native';
+import { Dimensions, StyleSheet, View, DeviceEventEmitter, Text } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
@@ -69,13 +69,18 @@ export default function IndexScreen() {
         }, 2000);
     }, [])
 
+    const onFooterLayout = (event) => {
+        const { height } = event.nativeEvent.layout;
+        DeviceEventEmitter.emit('footerHeight', height);
+    };
+
     if (!isFocused) return;
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
             <FixedTop />
             <WidgetList onRefresh={onRefresh} />
-            <FixedBottom />
+            <FixedBottom onLayout={onFooterLayout} />
             <FloatingCard />
             <CustomModal />
         </View>

@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
 
-function FixedBottom({ navigation, route }) {
+function FixedBottom({ navigation, route, onLayout }) {
     const fixedBottom = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedBottom"), shallowEqual);
 
     const renderWidget = ({ item }) => {
@@ -13,13 +13,14 @@ function FixedBottom({ navigation, route }) {
     };
 
     return (
-        <View style={[styles.container]}>
+        <View style={[styles.container]} onLayout={onLayout}>
             {fixedBottom ? <VirtualizedList
                 data={fixedBottom.nestedComponents}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
+                keyboardShouldPersistTaps="always"
             /> : null}
         </View>
     );
