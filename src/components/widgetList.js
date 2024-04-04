@@ -1,5 +1,5 @@
 import React, { useIsFocused } from '@react-navigation/native';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { DeviceEventEmitter, KeyboardAvoidingView, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
@@ -9,6 +9,7 @@ const excludeWidgets = ["FixedTop", "FixedBottom"];
 
 function WidgetList({ onRefresh, navigation, route }) {
     const [height, setHeight] = useState(null);
+    const scrollViewRef = useRef();
 
     const isFocused = useIsFocused();
     const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
@@ -16,6 +17,11 @@ function WidgetList({ onRefresh, navigation, route }) {
     const renderWidget = useCallback(({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />
     });
+
+    const scrollToBottom = () => {
+        if (!scrollViewRef.current) return;
+        scrollViewRef.current.scrollToEnd({ animated: true });
+    };
 
     const onViewableItemsChanged = (item) => {
         item.changed.forEach(element => {
@@ -25,6 +31,7 @@ function WidgetList({ onRefresh, navigation, route }) {
 
     useEffect(() => {
         DeviceEventEmitter.addListener('footerHeight', (height) => setHeight(height));
+        DeviceEventEmitter.addListener('scrollToBottom', scrollToBottom);
     }, [])
 
     if (!isFocused) return;
@@ -32,6 +39,7 @@ function WidgetList({ onRefresh, navigation, route }) {
     return (
         <KeyboardAvoidingView enabled={true} behavior={'padding'} style={[{ flex: 1, marginBottom: height }]}>
             {nestedComponents ? <VirtualizedList
+                ref={scrollViewRef}
                 data={nestedComponents}
                 initialNumToRender={2}
                 renderItem={renderWidget}

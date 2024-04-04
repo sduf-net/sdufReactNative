@@ -14,9 +14,12 @@ const InputWithButton = ({ data }) => {
         onChangeText(text);
     };
 
-    const handleSend = () => {
-        if (text.trim() !== '') {
-            onSubmit(data.actions, text, navigation, route);
+    const handleSend = async () => {
+        if (text && text.trim() !== '') {
+            const result = await onSubmit(data.actions, text, navigation, route);
+            if (result) {
+                onChangeText('');
+            }
         }
     };
 

@@ -7,6 +7,7 @@ import store from "../redux/store";
 import * as  rootNavigation from "../navigation/rootNavigation";
 import { joinToUserChannel } from "./userChannel";
 import Geolocation from '@react-native-community/geolocation';
+import { DeviceEventEmitter } from "react-native";
 
 
 export const insertBeforeCallback = (data) => {
@@ -28,6 +29,11 @@ export const replaceCallback = (data) => {
 };
 export const appendCallback = (data) => {
     store.dispatch(append({ widget: data.widget }));
+    //review
+    DeviceEventEmitter.emit('scrollToBottom');
+};
+export const scrollToBottomCallback = () => {
+    DeviceEventEmitter.emit('scrollToBottom');
 };
 export const logInCallback = (data) => {
     joinToUserChannel(data.id);
