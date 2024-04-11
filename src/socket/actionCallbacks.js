@@ -60,23 +60,19 @@ export const openPopupCallback = (data) => {
     store.dispatch(setModalWindowWidgets({ nestedComponents: data.widget }))
 };
 export const closePopupCallback = (data) => {
-    console.log("closePopupCallback", data);
     store.dispatch(hideModalWindow());
 };
 export const showFloatCardCallback = (data) => {
-    console.log("showFloatCallback", data);
     store.dispatch(showFloatCard());
     store.dispatch(setFloatCardWidgets({ nestedComponents: data.widget }))
 };
 export const hideFloatCardCallback = (data) => {
-    console.log("hideFloatCallback", data);
     store.dispatch(hideFloatCard());
 };
 export const openScreenCallback = (data) => {
     console.log("openScreenCallback", data);
 };
 export const updateMapMarkersCallback = (data) => {
-    console.log("updateMapMarkersCallback", data);
     store.dispatch(setMarkers(data.markers));
 };
 
