@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TinderCard } from 'rn-tinder-card';
 import { onSwipedRight, onSwipedLeft, onSwipedTop, onSwipedBottom, handleEventAction } from '../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -44,7 +44,7 @@ export default function TinderWidget({ data }) {
           },
         ]}
       >
-        <Text style={styles.overlayLabelText}>Like</Text>
+        <Text style={styles.overlayLabelText}>{data.overlay_right_text}</Text>
       </View>
     );
   };
@@ -58,7 +58,7 @@ export default function TinderWidget({ data }) {
           },
         ]}
       >
-        <Text style={styles.overlayLabelText}>Nope</Text>
+        <Text style={styles.overlayLabelText}>{data.overlay_left_text}</Text>
       </View>
     );
   };
@@ -72,7 +72,7 @@ export default function TinderWidget({ data }) {
           },
         ]}
       >
-        <Text style={styles.overlayLabelText}>Super Like</Text>
+        <Text style={styles.overlayLabelText}>{data.overlay_top_text}</Text>
       </View>
     );
   };
@@ -82,11 +82,11 @@ export default function TinderWidget({ data }) {
         style={[
           styles.overlayLabelContainer,
           {
-            backgroundColor: 'blue',
+            backgroundColor: 'yellow',
           },
         ]}
       >
-        <Text style={styles.overlayLabelText}>Super DisLike</Text>
+        <Text style={styles.overlayLabelText}>{data.overlay_bottom_text}</Text>
       </View>
     );
   };
@@ -130,7 +130,7 @@ export default function TinderWidget({ data }) {
             </TinderCard>
           </View>
         );
-      }) : <Text>Loading...</Text>}
+      }) : <ActivityIndicator style={styles.loading} size="large" color="#007AFF" />}
     </View>
   );
 }
@@ -171,5 +171,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 24
-  }
+  },
+  loading: {
+    position: 'absolute',
+    bottom: '50%',
+    left: '50%',
+  },
 });

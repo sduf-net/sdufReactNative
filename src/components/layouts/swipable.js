@@ -73,11 +73,8 @@ const styles = StyleSheet.create({
         marginBottom: 16
     },
     rightActionButton: {
-        marginLeft: 5,
-        marginRight: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
         width: 60,
         height: '100%'
     },
