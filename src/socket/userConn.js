@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix'
 import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from "@env";
-// import store from "../redux/store";
+import * as  rootNavigation from "../navigation/rootNavigation";
 
 let socket = null;
 
@@ -12,7 +12,8 @@ export const initSocketConnection = () => {
     socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 })
     socket.connect();
     socket.onError(data => {
-        console.log("ERROR", data)
+        rootNavigation.navigate('YouAreOfflineScreen', {});
+
         if (!data || !data.message) return;
         if (data.message.includes('403')) {
             console.error("Socket is empty")
