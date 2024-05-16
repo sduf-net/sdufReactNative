@@ -46,7 +46,6 @@ const asyncRequestCallback = (event, navigation, route) => {
         userId: userId,
         actionName: event.type,
         payload: {
-            parent_id: "id",
             callback_url: event.url,
             params: event,
         }
@@ -58,7 +57,6 @@ const syncRequestCallback = async (event, navigation, route) => {
         userId: userId,
         actionName: event.type,
         payload: {
-            parent_id: "id",
             callback_url: event.url,
             params: event,
         }
