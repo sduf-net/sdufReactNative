@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import _ from "lodash";
+import { isEmpty } from '../components/helpers/utils';
 
 const FixedTop = "FixedTop";
 const FixedBottom = "FixedBottom";
@@ -20,6 +21,9 @@ export const screens = createSlice({
     },
     endLoading: (state, value) => {
       state.loading = false;
+    },
+    setCurrentScreenId: (state, value) => {
+      state.currentScreenId = value.payload;
     },
     setCurrentScreen: (state, value) => {
       state.currentScreenId = value.payload.id;
@@ -104,6 +108,7 @@ export const screens = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setCurrentScreenId,
   setCurrentScreen,
   resetCurrentScreen,
   insertAfter,
@@ -126,10 +131,13 @@ export const selectCurrentFixedBottom = state => {
 }
 export const selectCurrentScreenMainBody = state => {
   if (state.screens.currentScreenId === null) return [];
-  console.log("=-=-=-=-=-=-=-=-", state.screens)
   return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(widget => !excludeWidgets.includes(widget.name))
 }
 export const selectCurrentScreen = state => {
   if (state.screens.currentScreenId === null) return [];
   return state.screens.screens[state.screens.currentScreenId].nestedComponents
+}
+export const selectCurrentScreenByName = (state, name) => {
+  if (state.screens.currentScreenId === null || isEmpty(state.screens)) return [];
+  return Object.values(state.screens).filter(item => item.name === name);
 }
