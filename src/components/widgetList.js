@@ -4,15 +4,14 @@ import { DeviceEventEmitter, KeyboardAvoidingView, VirtualizedList } from 'react
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
-
-const excludeWidgets = ["FixedTop", "FixedBottom"];
+import { selectCurrentScreenMainBody } from '../redux/screens';
 
 function WidgetList({ onRefresh, navigation, route }) {
     const [height, setHeight] = useState(null);
     const scrollViewRef = useRef();
 
     const isFocused = useIsFocused();
-    const nestedComponents = useSelector(state => state.screen.nestedComponents.filter(widget => !excludeWidgets.includes(widget.name)), shallowEqual);
+    const nestedComponents = useSelector(state => selectCurrentScreenMainBody(state), shallowEqual);
 
     const renderWidget = useCallback(({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />

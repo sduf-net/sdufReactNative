@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { memo } from 'react';
 import { StyleSheet, View, VirtualizedList } from 'react-native';
 import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import { getItem, getItemCount } from '../utils';
+import { selectCurrentFixedBottom } from '../redux/screens';
 
 function FixedBottom({ navigation, route, onLayout }) {
-    const fixedBottom = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedBottom"), shallowEqual);
+    const fixedBottom = useSelector(state => selectCurrentFixedBottom(state), shallowEqual);
 
     const renderWidget = ({ item }) => {
         return <ComponentFactory props={item} navigation={navigation} route={route} />

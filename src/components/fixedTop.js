@@ -3,9 +3,10 @@ import { shallowEqual, useSelector } from 'react-redux';
 import ComponentFactory from './factory';
 import React, { memo } from 'react';
 import { getItem, getItemCount } from '../utils';
+import { selectCurrentFixedTop } from '../redux/screens';
 
 function FixedTop({ navigation, route }) {
-    const fixedTop = useSelector(state => state.screen.nestedComponents.find(widget => widget.name == "FixedTop"), shallowEqual);
+    const fixedTop = useSelector(state => selectCurrentFixedTop(state), shallowEqual);
     const isAbsolute = fixedTop?.isAbsolute ?? false;
 
     const renderWidget = ({ item }) => {

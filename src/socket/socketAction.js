@@ -20,14 +20,14 @@ import {
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {
-  console.log("pushEventToChannel", params)
 
   const user = store.getState().user;
+  const currentScreenId = store.getState().screens.currentScreenId;
 
   const opts = {
     user_id: user.id,
     user_token: user.token,
-    screen_id: "params.screenName",
+    screen_id: currentScreenId,
     action: params.actionName,
     payload: params.payload,
     metadata: {
@@ -35,6 +35,8 @@ export const pushEventToChannel = async (channel, params) => {
       ...params.metadata ?? {},
     }
   }
+
+  console.log("pushEventToChannel", opts)
 
   if (channel) {
     return await pushEvent(channel, "action_performed", opts);

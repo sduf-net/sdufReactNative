@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import _ from "lodash";
 
+const FixedTop = "FixedTop";
+const FixedBottom = "FixedBottom";
+const excludeWidgets = [FixedTop, FixedBottom];
+
 const initialState = {
-  id: null,
-  name: null,
-  nestedComponents: []
+  loading: false,
+  screens: {},
+  currentScreenId: null
 }
 
-export const currentScreen = createSlice({
-  name: 'counter',
+export const screens = createSlice({
+  name: 'screens',
   initialState,
   reducers: {
     startLoading: (state, value) => {
@@ -18,13 +22,13 @@ export const currentScreen = createSlice({
       state.loading = false;
     },
     setCurrentScreen: (state, value) => {
-      state.nestedComponents = value.payload.nestedComponents;
-      state.id = value.payload.id;
-      state.name = value.payload.name;
+      state.currentScreenId = value.payload.id;
+      state.screens = { ...state.screens, [value.payload.id]: value.payload };
       state.loading = false;
     },
     insertBefore: (state, value) => {
-      let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
+      const screen = state.screens[value.payload.screen_id];
+      let index = screen.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
       // if parent widget is not found or payload is empty
       if (!value.payload.widget || index === -1) {
@@ -33,14 +37,17 @@ export const currentScreen = createSlice({
 
       if (Array.isArray(value.payload.widget)) {
         value.payload.widget.reverse().forEach(item => {
-          state.nestedComponents.splice(index, 0, item);
+          screen.nestedComponents.splice(index, 0, item);
         });
       } else {
-        state.nestedComponents.splice(index, 0, value.payload.widget);
+        screen.nestedComponents.splice(index, 0, value.payload.widget);
       }
+
+      state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
     insertAfter: (state, value) => {
-      const parentIndex = state.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
+      const screen = state.screens[value.payload.screen_id];
+      const parentIndex = screen.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
 
       // Перевіряємо, чи знайдено батьківський віджет або чи не є payload порожнім
       if (parentIndex === -1 || !value.payload.widget) {
@@ -50,22 +57,24 @@ export const currentScreen = createSlice({
       if (Array.isArray(value.payload.widget)) {
         // Якщо віджет - масив
         value.payload.widget.reverse().forEach(item => {
-          state.nestedComponents.splice(parentIndex + 1, 0, item);
+          screen.nestedComponents.splice(parentIndex + 1, 0, item);
         });
       } else {
         // Якщо віджет - не масив
-        const existingWidgetIndex = state.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
+        const existingWidgetIndex = screen.nestedComponents.findIndex(widget => widget.id === value.payload.widget.id);
 
         // Перевіряємо, чи віджет вже є на місці
         if (existingWidgetIndex !== -1) {
           return;
         }
 
-        state.nestedComponents.splice(parentIndex + 1, 0, value.payload.widget);
+        screen.nestedComponents.splice(parentIndex + 1, 0, value.payload.widget);
       }
+      state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
     remove: (state, value) => {
-      state.nestedComponents = state.nestedComponents.filter(widget => {
+      const screen = state.screens[value.payload.screen_id];
+      const updatedNestedComponents = screen.nestedComponents.filter(widget => {
         if (widget.id === value.payload.parent_id) {
           // Remove the widget itself if it matches the parent_id
           return false;
@@ -78,14 +87,17 @@ export const currentScreen = createSlice({
 
         return true;
       });
+      state.screens = { ...state.screens, [value.payload.screen_id]: { ...screen, nestedComponents: updatedNestedComponents } };
     },
     append: (state, value) => {
+      const screen = state.screens[value.payload.screen_id];
       value.payload.widget.forEach((item) => {
-        let index = state.nestedComponents.findIndex(element => element.id === item.id);
+        let index = screen.nestedComponents.findIndex(element => element.id === item.id);
         if (index === -1) {
-          state.nestedComponents.splice(index, 0, item);
+          screen.nestedComponents.splice(index, 0, item);
         }
       });
+      state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     }
   },
 })
@@ -93,12 +105,31 @@ export const currentScreen = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setCurrentScreen,
+  resetCurrentScreen,
   insertAfter,
   insertBefore,
   remove,
   append,
   replace,
-  resetCurrentScreen
-} = currentScreen.actions
+} = screens.actions
 
-export default currentScreen.reducer
+export default screens.reducer
+
+// Export a reusable selector here
+export const selectCurrentFixedTop = state => {
+  if (state.screens.currentScreenId === null) return [];
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(widget => widget.name == FixedTop)
+}
+export const selectCurrentFixedBottom = state => {
+  if (state.screens.currentScreenId === null) return [];
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(widget => widget.name == FixedBottom)
+}
+export const selectCurrentScreenMainBody = state => {
+  if (state.screens.currentScreenId === null) return [];
+  console.log("=-=-=-=-=-=-=-=-", state.screens)
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(widget => !excludeWidgets.includes(widget.name))
+}
+export const selectCurrentScreen = state => {
+  if (state.screens.currentScreenId === null) return [];
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents
+}
