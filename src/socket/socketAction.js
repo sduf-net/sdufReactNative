@@ -27,6 +27,7 @@ export const pushEventToChannel = async (channel, params) => {
   const opts = {
     user_id: user.id,
     user_token: user.token,
+    screen_id: "params.screenName",
     action: params.actionName,
     payload: params.payload,
     metadata: {
