@@ -50,8 +50,6 @@ export default function IndexScreen() {
     );
 
     const getScreen = useCallback(() => {
-        // newError("SSLSLSLSLSLSLSLSLS");
-
         const queryString = route?.params || null;
         const screenName = route?.params?.screenName || INDEX_SCREEN;
 
