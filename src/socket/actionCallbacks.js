@@ -11,24 +11,24 @@ import { DeviceEventEmitter } from "react-native";
 
 
 export const insertBeforeCallback = (data) => {
-    store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }))
+    store.dispatch(insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget }))
 };
 export const insertAfterCallback = (data) => {
-    store.dispatch(insertAfter({ parent_id: data.parent_id, widget: data.widget }))
+    store.dispatch(insertAfter({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget }))
 };
 export const removeCallback = (data) => {
-    store.dispatch(remove({ parent_id: data.parent_id }))
+    store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id, }))
 };
 export const changeCallback = (data) => {
     //update current screen
     console.log("changeCallback", data);
 };
 export const replaceCallback = (data) => {
-    store.dispatch(insertBefore({ parent_id: data.parent_id, widget: data.widget }));
-    store.dispatch(remove({ parent_id: data.parent_id }));
+    store.dispatch(insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget }));
+    store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id }));
 };
 export const appendCallback = (data) => {
-    store.dispatch(append({ widget: data.widget }));
+    store.dispatch(append({ screen_id: data.screen_id, widget: data.widget }));
     //review
     DeviceEventEmitter.emit('scrollToBottom');
 };

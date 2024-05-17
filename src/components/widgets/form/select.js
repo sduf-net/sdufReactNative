@@ -14,9 +14,11 @@ export default function SelectWidget({ data }) {
     const widgetStyles = data.styles ?? {};
 
     const handleChanges = (value) => {
-        onChange(data.actions, value, navigation, route);
-        setSelectedValue(value);
-        dispatch(setForm({[data.name]: value }));
+        if (data.form_id) {
+            onChange(data.actions, value, navigation, route);
+            setSelectedValue(value);
+            dispatch(setForm({ form_id: data.form_id, [data.name]: value }));
+        }
     };
 
     return (
