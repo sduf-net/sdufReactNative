@@ -123,7 +123,7 @@ export default screens.reducer
 // Export a reusable selector here
 export const selectCurrentFixedTop = state => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(widget => widget.name == FixedTop)
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(widget => widget.name == FixedTop)
 }
 export const selectCurrentFixedBottom = state => {
   if (state.screens.currentScreenId === null) return [];
