@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  data: {},
-  action: null,
-  method: null,
-  original_data: null
+  data: [],
+  forms: []
 }
 
 export const currentForm = createSlice({
@@ -12,15 +10,26 @@ export const currentForm = createSlice({
   initialState,
   reducers: {
     setForm: (state, value) => {
-      state.data = { ...state.data, ...value.payload };
+      const form_id = value.payload.form_id;
+      delete value.payload.form_id;
+
+      state.data = {
+        ...state.data,
+        [form_id]: { ...state.data[form_id], ...value.payload }
+      };
     },
     resetForm: (state) => {
       state.data = {};
     },
     setUpForm: (state, value) => {
-      state.action = value.payload.action;
-      state.method = value.payload.method;
-      state.original_data = value.payload.original_data;
+      state.forms = {
+        ...state.forms,
+        [value.payload.form_id]: {
+          action: value.payload.action,
+          method: value.payload.method,
+          original_data: value.payload.original_data
+        }
+      }
     }
   }
 })

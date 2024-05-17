@@ -11,24 +11,25 @@ export default function ButtonWidget({ data }) {
     const navigation = useNavigation();
     const store = useStore();
 
-    const onPressLearnMore = () => {
+    const onPressHandle = () => {
         onPress(data.actions, navigation, route);
-        dispatch(setForm({ [data.name]: data.value }));
-        sendCurrentForm();
-        dispatch(resetForm());
+
+        if (data.form_id) {
+            dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
+            sendCurrentForm();
+            dispatch(resetForm());
+        }
     }
 
     const sendCurrentForm = () => {
         const updatedForm = store.getState().form;
 
-        if (
-            updatedForm['action'] === null ||
-            updatedForm['method'] === null
-        ) return;
+        const formData = updatedForm.data[data.form_id];
+        const formOriginalData = updatedForm.forms[data.form_id];
 
         handleEventAction({
             type: "submit_form",
-            form: updatedForm,
+            form: { ...formOriginalData, data: formData },
             params: data
         }, navigation, route);
     }
@@ -36,7 +37,7 @@ export default function ButtonWidget({ data }) {
     return (
         <View>
             {data ? <Button
-                onPress={onPressLearnMore}
+                onPress={onPressHandle}
                 color={data.color}
                 title={data.text}
                 name={data?.name}

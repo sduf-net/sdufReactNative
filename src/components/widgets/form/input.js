@@ -13,9 +13,11 @@ export default function InputWidget({ data }) {
     const widgetStyles = data.styles ?? {};
 
     const handleChanges = (text) => {
-        onChange(data.actions, text, navigation, route);
-        onChangeText(text);
-        dispatch(setForm({[data.name]: text }));
+        if (data.form_id) {
+            onChange(data.actions, text, navigation, route);
+            onChangeText(text);
+            dispatch(setForm({ form_id: data.form_id, [data.name]: text }));
+        }
     };
 
     return (
