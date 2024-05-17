@@ -27,7 +27,7 @@ export default function MapWidget(config) {
             setVisibleRegion(region);
 
             if (data?.actions?.track_position) {
-                handleEventAction({ ...data.actions.track_position, params: { region } }, navigation);
+                handleEventAction({ ...data.actions.track_position, region: region  }, navigation);
             }
         }
     };
