@@ -31,6 +31,7 @@ import Center from './layouts/center'
 import TinderWidget from './widgets/tinderCard'
 import SwipeableLayout from './layouts/swipable'
 import InputWithButton from './widgets/form/inputWithBtn'
+import DateTimePickerWidget from './widgets/datepicker'
 
 const keysToComponentMap = {
     // layouts
@@ -67,7 +68,8 @@ const keysToComponentMap = {
     FixedCenter: Center,
     TinderWidget: TinderWidget,
     SwipeableLayout: SwipeableLayout,
-    InputWithButtonWidget: InputWithButton
+    InputWithButtonWidget: InputWithButton,
+    DateTimePickerWidget: DateTimePickerWidget
 }
 
 
