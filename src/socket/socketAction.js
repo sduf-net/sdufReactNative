@@ -14,7 +14,8 @@ import {
   replaceCallback,
   screenReceivedCallback,
   updateMapMarkersCallback,
-  navigateToScreenCallback
+  navigateToScreenCallback,
+  requestCurrentPositionCallback
 } from "./actionCallbacks";
 
 
@@ -100,6 +101,7 @@ const callbacks = [
   { event_name: "show_float_card", callback: showFloatCardCallback },
   { event_name: "update_map_markers", callback: updateMapMarkersCallback },
   { event_name: "navigate_to_screen", callback: navigateToScreenCallback },
+  { event_name: "get_user_geo", callback: requestCurrentPositionCallback },
 ];
 
 const addListeners = (channel) => {
