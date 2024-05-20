@@ -2,23 +2,31 @@ import React, { useState } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from 'react-native';
+import { onChange } from '../../event_handler';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function DateTimePickerWidget({ data }) {
+    const route = useRoute();
+    const navigation = useNavigation();
+
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [datePickerMode, setDatePickerMode] = useState('date');
     const [showPicker, setShowPicker] = useState(false);
 
     const handleDateChange = (event, selectedDate) => {
         if (event.type === 'dismissed') {
             setShowPicker(false);
-            setDatePickerMode('date');
             return;
         }
 
-        setSelectedDate(selectedDate);
+        handleChanges(selectedDate)
         setShowPicker(false);
         return;
     }
+
+    const handleChanges = (selectedDate) => {
+        setSelectedDate(selectedDate);
+        onChange(data.actions, selectedDate, navigation, route);
+    };
 
     return (
         <View>
