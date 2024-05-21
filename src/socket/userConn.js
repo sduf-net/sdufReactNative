@@ -1,37 +1,57 @@
 import { Socket } from 'phoenix'
 import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from "@env";
 import * as  rootNavigation from "../navigation/rootNavigation";
+import { leaveUserChannel } from './userChannel';
 
 let socket = null;
 
-export const initSocketConnection = () => {
+export const initSocketConnection = async () => {
     if (socket && socket.isConnected()) {
         return true;
     }
 
-    socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 })
-    socket.connect();
-    socket.onError(data => {
-        rootNavigation.navigate('YouAreOfflineScreen', {});
+    socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 });
 
-        if (!data || !data.message) return;
-        if (data.message.includes('403')) {
-            console.error("Socket is empty")
-            return false;
-        }
-        if (data.message.includes('401')) {
-            console.error("Log out");
-            // store.dispatch();
-            return false;
-        }
+    return new Promise((resolve, reject) => {
+        socket.connect();
+        console.log("Socket connect");
+
+        socket.onOpen(() => {
+            console.info("The socket was opened");
+            resolve(true);
+        });
+
+        socket.onError(data => {
+            rootNavigation.navigate('YouAreOfflineScreen', {});
+
+            if (!data || !data.message) {
+                reject(false);
+                return;
+            }
+
+            if (data.message.includes('403')) {
+                console.error("Socket is empty");
+                reject(false);
+                return;
+            }
+
+            if (data.message.includes('401')) {
+                console.error("Log out");
+                // store.dispatch();
+                reject(false);
+                return;
+            }
+
+            reject(false);
+        });
     });
-
-    return true;
 }
+
 
 export const closeConnection = () => {
     if (!socket) return;
 
+    leaveUserChannel();
     socket.disconnect();
     socket = null;
     return true;
