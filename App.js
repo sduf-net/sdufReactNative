@@ -33,12 +33,16 @@ export default function App() {
 
 
   useEffect(() => {
+    const reconnectAsync = async () => {
+      await reconnect();
+    }
+
     const subscription = AppState.addEventListener('change', nextAppState => {
-      // if (nextAppState === 'active') {
-      //   reconnect();
-      // } else if (nextAppState === 'background') {
-      //   closeConnection();
-      // }
+      if (nextAppState === 'active') {
+        reconnectAsync();
+      } else if (nextAppState === 'background') {
+        closeConnection();
+      }
     });
 
     return () => {
