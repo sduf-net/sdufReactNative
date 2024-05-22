@@ -12,7 +12,7 @@ import store from './src/redux/store';
 import React, { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { generateOrRestoreUserToState } from './src/auth/auth';
-import { initSocketConnection } from './src/socket/userConn';
+import { closeConnection, initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/widgets/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -20,29 +20,25 @@ import { AppState } from 'react-native';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = notificationListener();
 
     loadDataBeforeStart().then(() => {
-      setUserId(store.getState().user.id);
       setLoading(false);
     });
 
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    connectToUserChannel();
-  }, [userId]);
-
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
-      if (nextAppState === 'active') {
-        connectToUserChannel();
-      }
+      // if (nextAppState === 'active') {
+      //   reconnect();
+      // } else if (nextAppState === 'background') {
+      //   closeConnection();
+      // }
     });
 
     return () => {
@@ -53,12 +49,12 @@ export default function App() {
   const loadDataBeforeStart = async () => {
     await generateOrRestoreUserToState();
     await getFCMToken();
+    await reconnect();
   }
 
-  const connectToUserChannel = () => {
-    if (!userId) return;
-    initSocketConnection();
-    joinToUserChannel(userId);
+  const reconnect = async () => {
+    await initSocketConnection();
+    await joinToUserChannel(store.getState().user.id);
   }
 
   if (loading) return null;
