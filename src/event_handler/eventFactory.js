@@ -16,7 +16,6 @@ import { pushEventToChannel } from "../socket/socketAction";
 import { hideModalWindow } from "../redux/modalWindow";
 
 const userId = store.getState().user.id;
-const userChannel = getUserChannel();
 
 // Private funcs
 const onRouteSideActions = () => {
@@ -42,7 +41,7 @@ const routeBackFormCallback = (event, navigation, route) => {
 }
 
 const asyncRequestCallback = (event, navigation, route) => {
-    pushEventToChannel(userChannel, {
+    pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: event.type,
         payload: {
@@ -53,7 +52,7 @@ const asyncRequestCallback = (event, navigation, route) => {
 }
 
 const syncRequestCallback = async (event, navigation, route) => {
-    return await pushEventToChannel(userChannel, {
+    return await pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: event.type,
         payload: {
@@ -64,7 +63,7 @@ const syncRequestCallback = async (event, navigation, route) => {
 }
 
 const paginationCallback = (event, navigation, route) => {
-    pushEventToChannel(userChannel, {
+    pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: PAGINATION,
         payload: { parent_id: event.id, callback_url: event.url }
@@ -73,7 +72,7 @@ const paginationCallback = (event, navigation, route) => {
 const requestWidgetCallback = (event, navigation, route) => {
     const queryString = route.params ? route.params : null;
 
-    pushEventToChannel(userChannel, {
+    pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: REQUEST_WIDGET,
         payload: {
@@ -85,7 +84,7 @@ const requestWidgetCallback = (event, navigation, route) => {
     })
 }
 const submitFormCallback = (event, navigation, route) => {
-    pushEventToChannel(userChannel, {
+    pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: SUBMIT_FORM,
         payload: event.form
