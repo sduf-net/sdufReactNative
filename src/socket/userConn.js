@@ -6,19 +6,19 @@ import { leaveUserChannel } from './userChannel';
 let socket = null;
 
 export const initSocketConnection = async () => {
-    if (socket && socket.isConnected()) {
-        return true;
-    }
-
-    socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 });
-
     return new Promise((resolve, reject) => {
+        if (socket && socket.isConnected()) {
+            resolve(socket);
+        }
+
+        socket = new Socket(`${SOCKET_URL}`, { params: { token: SOCKET_PROJECT_TOKEN }, timeout: 45 * 1000 });
+
         socket.connect();
         console.log("Socket connect");
 
         socket.onOpen(() => {
             console.info("The socket was opened");
-            resolve(true);
+            resolve(socket);
         });
 
         socket.onError(data => {
@@ -26,20 +26,16 @@ export const initSocketConnection = async () => {
 
             if (!data || !data.message) {
                 reject(false);
-                return;
             }
 
             if (data.message.includes('403')) {
                 console.error("Socket is empty");
                 reject(false);
-                return;
             }
 
             if (data.message.includes('401')) {
                 console.error("Log out");
-                // store.dispatch();
                 reject(false);
-                return;
             }
 
             reject(false);
@@ -51,7 +47,8 @@ export const initSocketConnection = async () => {
 export const closeConnection = () => {
     if (!socket) return;
 
-    leaveUserChannel();
+    socket.channels.forEach(channel => channel.leave())
+
     socket.disconnect();
     socket = null;
     return true;

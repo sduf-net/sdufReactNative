@@ -5,25 +5,25 @@ let userChannel = null;
 let currentUserId = null;
 
 export const joinToUserChannel = async (userId) => {
-    const socket = getSocket();
-
-    if (!socket) {
-        console.error("joinToUserChannel socket is null");
-        return null;
-    }
-    if (userChannel && userId === currentUserId) {
-        console.log("RETURN SAME userChannel");
-        return userChannel;
-    }
-
-    userChannel = socket.channel(`user:${userId}`);
-    currentUserId = userId;
-
     return new Promise((resolve, reject) => {
+        const socket = getSocket();
+
+        if (!socket) {
+            console.error("joinToUserChannel socket is null");
+            resolve(null);
+        }
+
+        if (userChannel && userChannel.state === 'joined' && userId === currentUserId) {
+            console.log("RETURN SAME userChannel");
+            resolve(userChannel);
+        }
+
+        userChannel = socket.channel(`user:${userId}`);
+        currentUserId = userId;
+
         userChannel
             .join()
             .receive('ok', () => {
-                console.log('Channel connection successful');
                 listenUserChannelEvents(userChannel);
                 resolve(userChannel);
             })
