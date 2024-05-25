@@ -25,10 +25,12 @@ export default function IndexScreen() {
     // const { newError } = useErrors()
 
     const [loading, setLoading] = useState(false);
+    const [forceLoading, setForceLoading] = useState(false);
 
     const onRefresh = useCallback(() => {
         DeviceEventEmitter.emit('onRefresh', true);
         setLoading(true);
+        setForceLoading(true);
     }, []);
 
     useEffect(() => {
@@ -39,7 +41,7 @@ export default function IndexScreen() {
         if (!loading) return;
 
         getScreen();
-    }, [loading])
+    }, [loading, forceLoading])
 
     // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
     useFocusEffect(
@@ -56,11 +58,8 @@ export default function IndexScreen() {
         const queryString = route?.params || null;
         const screenName = route?.params?.screenName || INDEX_SCREEN;
 
-        // TODO refactor
-        // onreload
         const screen = selectCurrentScreenByName(screensState, screenName);
-        if (screen.length) {
-            console.log("jkjkjkjkjkj",screen[0].id)
+        if (screen.length && !forceLoading) {
             dispatch(setCurrentScreenId(screen[0].id));
         } else {
             pushEventToChannel(getUserChannel(), {
@@ -75,6 +74,7 @@ export default function IndexScreen() {
 
         setTimeout(() => {
             setLoading(false);
+            setForceLoading(false);
         }, 2000);
     }, [])
 
