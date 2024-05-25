@@ -1,7 +1,6 @@
 import { Socket } from 'phoenix'
 import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from "@env";
 import * as  rootNavigation from "../navigation/rootNavigation";
-import { leaveUserChannel } from './userChannel';
 
 let socket = null;
 
@@ -24,7 +23,9 @@ export const initSocketConnection = async () => {
         socket.onError(data => {
             rootNavigation.navigate('YouAreOfflineScreen', {});
 
-            if (!data || !data.message) {
+            //TODO refactor this
+            if (!data || !data.message || data.message === null) {
+                isConnecting = false;
                 reject(false);
             }
 
