@@ -40,7 +40,7 @@ export default function IndexScreen() {
     useEffect(() => {
         if (!loading) return;
 
-        getScreen();
+        getScreen(forceLoading);
     }, [loading, forceLoading])
 
     // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
@@ -54,12 +54,12 @@ export default function IndexScreen() {
         }, [navigation])
     );
 
-    const getScreen = useCallback(() => {
+    const getScreen = useCallback((isReload) => {
         const queryString = route?.params || null;
         const screenName = route?.params?.screenName || INDEX_SCREEN;
 
         const screen = selectCurrentScreenByName(screensState, screenName);
-        if (screen.length && !forceLoading) {
+        if (screen.length && !isReload) {
             dispatch(setCurrentScreenId(screen[0].id));
         } else {
             pushEventToChannel(getUserChannel(), {
