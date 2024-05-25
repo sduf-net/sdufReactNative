@@ -70,9 +70,9 @@ export const notificationListener = () => {
             title: remoteMessage.notification.title,
             message: remoteMessage.notification.body,
             channelId: LOCAL_CHANNEL_ID,
-            picture: remoteMessage.notification.picture,
-            largeIconUrl: remoteMessage.notification.large_icon_url,
-            bigLargeIconUrl: remoteMessage.notification.big_large_icon_url,
+            picture: remoteMessage.data.picture,
+            largeIconUrl: remoteMessage.data.large_icon_url,
+            bigLargeIconUrl: remoteMessage.data.big_large_icon_url,
         };
 
         PushNotification.localNotification(newNotification);
