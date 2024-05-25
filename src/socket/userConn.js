@@ -23,18 +23,12 @@ export const initSocketConnection = async () => {
         socket.onError(data => {
             rootNavigation.navigate('YouAreOfflineScreen', {});
 
-            //TODO refactor this
-            if (!data || !data.message || data.message === null) {
-                isConnecting = false;
-                reject(false);
-            }
-
-            if (data.message.includes('403')) {
+            if (data?.message?.includes('403')) {
                 console.error("Socket is empty");
                 reject(false);
             }
 
-            if (data.message.includes('401')) {
+            if (data?.message?.includes('401')) {
                 console.error("Log out");
                 reject(false);
             }
