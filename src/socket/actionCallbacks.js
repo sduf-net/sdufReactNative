@@ -1,4 +1,4 @@
-import { append, insertAfter, insertBefore, remove, setScreen, setCurrentScreenId } from "../redux/screens";
+import { append, insertAfter, insertBefore, remove, setScreen, setCurrentScreen } from "../redux/screens";
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from "../redux/floatCard";
 import { hideModalWindow, setModalWindowWidgets, showModalWindow } from "../redux/modalWindow";
 import { logOut, setCurrentUser } from "../redux/users";
@@ -50,12 +50,11 @@ export const logOutCallback = (data) => {
     });
 };
 export const screenReceivedCallback = (data) => {
-    store.dispatch(setScreen({
+    store.dispatch(setCurrentScreen({
         id: data.id,
         name: data.name,
         nestedComponents: data.nestedComponents
     }))
-    store.dispatch(setCurrentScreenId(data.id))
 };
 export const screenSilentUpdateCallback = (data) => {
     store.dispatch(setScreen({

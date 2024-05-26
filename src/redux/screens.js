@@ -29,6 +29,11 @@ export const screens = createSlice({
       state.screens = { ...state.screens, [value.payload.id]: value.payload };
       state.loading = false;
     },
+    setCurrentScreen: (state, value) => {
+      state.currentScreenId = value.payload.id;
+      state.screens = { ...state.screens, [value.payload.id]: value.payload };
+      state.loading = false;
+    },
     insertBefore: (state, value) => {
       const screen = state.screens[value.payload.screen_id];
       let index = screen.nestedComponents.findIndex(widget => widget.id === value.payload.parent_id);
@@ -109,6 +114,7 @@ export const screens = createSlice({
 export const {
   setCurrentScreenId,
   setScreen,
+  setCurrentScreen,
   resetCurrentScreen,
   insertAfter,
   insertBefore,
