@@ -8,7 +8,7 @@ import * as  rootNavigation from "../navigation/rootNavigation";
 import { joinToUserChannel } from "./userChannel";
 import Geolocation from '@react-native-community/geolocation';
 import { DeviceEventEmitter } from "react-native";
-import { addError } from "../redux/errors";
+import { newError } from "../hooks/useErrors";
 
 
 export const insertBeforeCallback = (data) => {
@@ -86,7 +86,7 @@ export const navigateToScreenCallback = (data) => {
 };
 
 export const showErrorMessageCallback = (data) => {
-    store.dispatch(addError(data.error_message));
+    newError(data.error_message);
 };
 
 export const requestCurrentPositionCallback = () => {
