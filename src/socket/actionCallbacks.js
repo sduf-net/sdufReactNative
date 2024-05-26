@@ -8,6 +8,7 @@ import * as  rootNavigation from "../navigation/rootNavigation";
 import { joinToUserChannel } from "./userChannel";
 import Geolocation from '@react-native-community/geolocation';
 import { DeviceEventEmitter } from "react-native";
+import { addError } from "../redux/errors";
 
 
 export const insertBeforeCallback = (data) => {
