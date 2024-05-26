@@ -17,6 +17,7 @@ import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/widgets/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { AppState } from 'react-native';
+import { joinToAllScreenChannels } from './src/socket/screenChannel';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -58,6 +59,7 @@ export default function App() {
   const reconnect = async () => {
     await initSocketConnection();
     await joinToUserChannel(store.getState().user.id);
+    await joinToAllScreenChannels(store.getState());
   }
 
   if (loading) return null;

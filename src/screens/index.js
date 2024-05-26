@@ -12,6 +12,7 @@ import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 import useErrors from '../hooks/useErrors';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
+import { joinToScreenChannel } from '../socket/screenChannel';
 
 const INDEX_SCREEN = 'index';
 
@@ -69,7 +70,8 @@ export default function IndexScreen() {
                     query: queryString,
                     screen_name: screenName
                 }
-            })
+            });
+            tryConnectToScreenChannel(screenName);
         }
 
         setTimeout(() => {
@@ -78,6 +80,12 @@ export default function IndexScreen() {
         }, 2000);
     }, [])
 
+    const tryConnectToScreenChannel = (screenName) => {
+        joinToScreenChannel(screenName);
+    };
+
+    // Fire event after footer is mounted
+    // to adjust screen height and prevent overlapping other components
     const onFooterLayout = (event) => {
         const { height } = event.nativeEvent.layout;
         DeviceEventEmitter.emit('footerHeight', height);

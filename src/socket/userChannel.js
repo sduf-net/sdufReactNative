@@ -16,6 +16,7 @@ export const joinToUserChannel = async (userId) => {
         if (userChannel && userChannel.state === 'joined' && userId === currentUserId) {
             console.log("RETURN SAME userChannel");
             resolve(userChannel);
+            return;
         }
 
         userChannel = socket.channel(`user:${userId}`);
@@ -42,11 +43,4 @@ export const getUserChannel = () => {
     if (userChannel) return userChannel;
     console.warn("userChannel is empty");
     return joinToUserChannel();
-}
-
-export const leaveUserChannel = () => {
-    if (!userChannel) return;
-
-    userChannel.leave().receive("ok", () => console.log("left leaveUserChannel"));
-    userChannel = null;
 }
