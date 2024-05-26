@@ -8,7 +8,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 export default function InputWidget({ data }) {
     const formId = data.form_id ?? null;
     const fieldName = data.name ?? null;
-    const value = useSelector(state => state.form.data[formId][fieldName] || '', shallowEqual);
+    const value = useSelector(state => {
+        const form = state.form.data;
+        if (form && form[formId] && form[formId][fieldName] !== undefined) {
+            return form[formId][fieldName];
+        }
+        return '';
+    }, shallowEqual);
 
     const [text, onChangeText] = useState('');
     const dispatch = useDispatch();
