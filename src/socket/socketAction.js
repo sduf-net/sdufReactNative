@@ -16,7 +16,8 @@ import {
   updateMapMarkersCallback,
   navigateToScreenCallback,
   requestCurrentPositionCallback,
-  showErrorMessageCallback
+  showErrorMessageCallback,
+  screenSilentUpdateCallback
 } from "./actionCallbacks";
 
 
@@ -99,6 +100,7 @@ const callbacks = [
   { event_name: "close_popup", callback: closePopupCallback },
   { event_name: "openScreen", callback: openScreenCallback },
   { event_name: "screen_received", callback: screenReceivedCallback },
+  { event_name: "screen_silent_update", callback: screenSilentUpdateCallback },
   { event_name: "show_float_card", callback: showFloatCardCallback },
   { event_name: "update_map_markers", callback: updateMapMarkersCallback },
   { event_name: "navigate_to_screen", callback: navigateToScreenCallback },

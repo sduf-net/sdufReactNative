@@ -25,8 +25,7 @@ export const screens = createSlice({
     setCurrentScreenId: (state, value) => {
       state.currentScreenId = value.payload;
     },
-    setCurrentScreen: (state, value) => {
-      state.currentScreenId = value.payload.id;
+    setScreen: (state, value) => {
       state.screens = { ...state.screens, [value.payload.id]: value.payload };
       state.loading = false;
     },
@@ -109,7 +108,7 @@ export const screens = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setCurrentScreenId,
-  setCurrentScreen,
+  setScreen,
   resetCurrentScreen,
   insertAfter,
   insertBefore,
