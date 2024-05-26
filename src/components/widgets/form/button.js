@@ -17,21 +17,24 @@ export default function ButtonWidget({ data }) {
         if (data.form_id) {
             dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
             sendCurrentForm();
-            dispatch(resetForm());
         }
     }
 
-    const sendCurrentForm = () => {
+    const sendCurrentForm = async () => {
         const updatedForm = store.getState().form;
 
         const formData = updatedForm.data[data.form_id];
         const formOriginalData = updatedForm.forms[data.form_id];
 
-        handleEventAction({
+        const result = await handleEventAction({
             type: "submit_form",
             form: { ...formOriginalData, data: formData },
             params: data
         }, navigation, route);
+
+        if (result) {
+            dispatch(resetForm({ form_id: data.form_id }));
+        }
     }
 
     return (

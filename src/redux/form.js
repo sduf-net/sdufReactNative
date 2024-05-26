@@ -18,8 +18,14 @@ export const currentForm = createSlice({
         [form_id]: { ...state.data[form_id], ...value.payload }
       };
     },
-    resetForm: (state) => {
-      state.data = {};
+    resetForm: (state, value) => {
+      const form_id = value.payload.form_id;
+      delete value.payload.form_id;
+
+      state.data = {
+        ...state.data,
+        [form_id]: {}
+      };
     },
     setUpForm: (state, value) => {
       state.forms = {

@@ -83,8 +83,8 @@ const requestWidgetCallback = (event, navigation, route) => {
         }
     })
 }
-const submitFormCallback = (event, navigation, route) => {
-    pushEventToChannel(getUserChannel(), {
+const submitFormCallback = async (event, navigation, route) => {
+    return await pushEventToChannel(getUserChannel(), {
         userId: userId,
         actionName: SUBMIT_FORM,
         payload: event.form
