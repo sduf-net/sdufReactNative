@@ -1,23 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import { setForm } from '../../../redux/form';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { onChange } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function TextAreaWidget({ data }) {
+    const formId = data.form_id ?? null;
+    const fieldName = data.name ?? null;
+    const value = useSelector(state => state.form.data[formId][fieldName] || '', shallowEqual);
+
     const [text, onChangeText] = useState('');
     const dispatch = useDispatch();
     const route = useRoute();
     const navigation = useNavigation();
     const widgetStyles = data.styles ?? {};
 
+    useEffect(() => {
+        if (value == text) return;
+        onChangeText(value);
+    }, [value])
+
     const handleChanges = (text) => {
         onChangeText(text);
 
-        if (data.form_id) {
+        if (formId) {
             onChange(data.actions, text, navigation, route);
-            dispatch(setForm({ form_id: data.form_id, [data.name]: text }));
+            dispatch(setForm({ form_id: formId, [data.name]: text }));
         }
     };
 
