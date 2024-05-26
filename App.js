@@ -54,6 +54,7 @@ export default function App() {
   const loadDataBeforeStart = async () => {
     await generateOrRestoreUserToState();
     await getFCMToken();
+    await reconnect();
   }
 
   const reconnect = async () => {

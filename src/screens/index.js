@@ -25,7 +25,7 @@ export default function IndexScreen() {
     const screensState = useSelector(state => state.screens, shallowEqual);
     // const { newError } = useErrors()
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [forceLoading, setForceLoading] = useState(false);
 
     const onRefresh = useCallback(() => {
@@ -33,10 +33,6 @@ export default function IndexScreen() {
         setLoading(true);
         setForceLoading(true);
     }, []);
-
-    useEffect(() => {
-        setLoading(true);
-    }, [userId])
 
     useEffect(() => {
         if (!loading) return;
