@@ -1,5 +1,6 @@
 import { listenScreenChannelEvents } from './socketAction';
 import { getSocket } from './userConn';
+import { SOCKET_PROJECT_ID } from "@env";
 
 let screenChannelList = [];
 
@@ -25,7 +26,7 @@ export const joinToScreenChannel = async (screenName) => {
             return;
         }
 
-        const screenChannel = socket.channel(`screen:${screenName}`);
+        const screenChannel = socket.channel(`screen:${SOCKET_PROJECT_ID}:${screenName}`);
 
 
         screenChannel

@@ -1,5 +1,7 @@
 import { listenUserChannelEvents } from './socketAction';
 import { getSocket } from './userConn';
+import { SOCKET_PROJECT_ID } from "@env";
+
 
 let userChannel = null;
 let currentUserId = null;
@@ -19,7 +21,7 @@ export const joinToUserChannel = async (userId) => {
             return;
         }
 
-        userChannel = socket.channel(`user:${userId}`);
+        userChannel = socket.channel(`user:${SOCKET_PROJECT_ID}:${userId}`);
         currentUserId = userId;
 
         userChannel
