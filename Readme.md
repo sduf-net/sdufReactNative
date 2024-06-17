@@ -29,7 +29,7 @@ This repository contains the SDUF React Native application. Follow the instructi
 
 4. Inside the project, you can create a screen. **Note:** An 'index' screen is mandatory.
 
-5. To create more screens, use the drag and drop feature available on the platform.
+5. Open a screen and use the drag and drop feature available on the platform to set up one.
 
 ## Running the Application
 
@@ -44,4 +44,3 @@ npx react-native run-android
 - This is the initial version of the application.
 
 Enjoy!
-EOT;
