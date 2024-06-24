@@ -46,6 +46,7 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-uuid": "^2.0.1",
     "react-native-webview": "^13.8.1",
+    "react-native-wormhole": "^0.2.0",
     "react-redux": "^8.0.5",
     "rn-tinder-card": "^1.7.0"
   },

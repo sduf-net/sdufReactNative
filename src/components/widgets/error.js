@@ -7,5 +7,3 @@ export default function Error() {
         <View><Text>Widget not found</Text></View>
     );
 }
-
-

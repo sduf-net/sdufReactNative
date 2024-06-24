@@ -32,6 +32,7 @@ import TinderWidget from './widgets/tinderCard'
 import SwipeableLayout from './layouts/swipable'
 import InputWithButton from './widgets/form/inputWithBtn'
 import DateTimePickerWidget from './widgets/datepicker'
+import WormholeWidget from './widgets/Wormhole'
 
 const keysToComponentMap = {
     // layouts
@@ -69,7 +70,8 @@ const keysToComponentMap = {
     TinderWidget: TinderWidget,
     SwipeableLayout: SwipeableLayout,
     InputWithButtonWidget: InputWithButton,
-    DateTimePickerWidget: DateTimePickerWidget
+    DateTimePickerWidget: DateTimePickerWidget,
+    CustomWidget: WormholeWidget,
 }
 
 
