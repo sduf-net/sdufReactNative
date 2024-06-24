@@ -7,7 +7,7 @@ import { ActivityIndicator } from 'react-native';
 const { Provider, Wormhole } = createWormhole({
     verify: async ({ headers, data }) => {
         // const signature = headers['x-csrf-token'];
-        console.log(data)
+        // console.log(data)
         return true;
     },
 });
