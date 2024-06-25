@@ -10,6 +10,7 @@ import Geolocation from '@react-native-community/geolocation';
 import { DeviceEventEmitter } from "react-native";
 import { newError } from "../hooks/useErrors";
 import { handleEventAction } from "../event_handler";
+import { ASYNC_POST } from "./actionName";
 
 
 export const insertBeforeCallback = (data) => {
