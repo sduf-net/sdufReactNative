@@ -14,7 +14,24 @@ const ImagePickerWidget = () => {
             },
         };
 
-        launchCamera(options, (response) => {
+        // launchCamera(options, (response) => {
+        //     if (response.didCancel) {
+        //         console.log('User cancelled image picker');
+        //     } else if (response.error) {
+        //         console.log('ImagePicker Error: ', response.error);
+        //     } else if (response.customButton) {
+        //         console.log('User tapped custom button: ', response.customButton);
+        //     } else {
+        //         console.log(response)
+        //         // You can also display the image using:
+        //         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+        //         const source = { uri: response.assets[0].uri };
+        //         setSelectedImage(source);
+        //     }
+        // });
+
+
+        launchImageLibrary(options, (response) => {
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
@@ -22,10 +39,10 @@ const ImagePickerWidget = () => {
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
-                // You can also display the image using:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
                 const source = { uri: response.uri };
-                setSelectedImage(source);
+                this.setState({
+                    avatarSource: source,
+                });
             }
         });
     };
