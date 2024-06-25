@@ -9,6 +9,7 @@ import { joinToUserChannel } from "./userChannel";
 import Geolocation from '@react-native-community/geolocation';
 import { DeviceEventEmitter } from "react-native";
 import { newError } from "../hooks/useErrors";
+import { handleEventAction } from "../event_handler";
 
 
 export const insertBeforeCallback = (data) => {
@@ -96,14 +97,19 @@ export const showErrorMessageCallback = (data) => {
     newError(data.error_message);
 };
 
-export const requestCurrentPositionCallback = () => {
+export const requestCurrentPositionCallback = (data) => {
     Geolocation.getCurrentPosition(
         (position) => {
             const userLocationData = {
                 longitude: position.coords.longitude,
                 latitude: position.coords.latitude,
             };
-            console.log(userLocationData)
+            const event = {
+                type: ASYNC_POST,
+                url: data.url,
+                params: userLocationData,
+            }
+            handleEventAction(event, null, null)
         },
         (error) => alert(error.message),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
