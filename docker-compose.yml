@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  reactnative:
+    image: reactnativecommunity/react-native-android
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: >
+      /bin/sh -c " 
+      npx envinfo &&
+      yarn install &&
+      cd android &&
+      chmod +x gradlew &&
+      ./gradlew assembleRelease"
