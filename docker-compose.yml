@@ -1,23 +1,15 @@
-version: '3.8'
-
 services:
   reactnative:
-    image: reactnativecommunity/react-native-android
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_ENV: ${APP_ENV}
+      SOCKET_PROJECT_TOKEN: ${SOCKET_PROJECT_TOKEN}
+      SOCKET_PROJECT_ID: ${SOCKET_PROJECT_ID}
+      styleURL: ${styleURL}
+      APP_NAME: ${APP_NAME}
+      APP_PACKAGE_NAME: ${APP_PACKAGE_NAME}
     volumes:
-      - .:/app
+      - ./shared:/shared
     working_dir: /app
-    entrypoint: >
-      /bin/sh -c " 
-      echo 'APP_ENV=${APP_ENV}' > .env &&
-      echo 'URL=https://demo-sduf.gigalixirapp.com' >> .env &&
-      echo 'SOCKET_URL=https://demo-sduf.gigalixirapp.com/socket' >> .env &&
-      echo 'SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}' >> .env &&
-      echo 'SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}' >> .env &&
-      echo 'styleURL=${styleURL}' >> .env &&
-      find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i 's/com.sdufnative/com.travelwithme/g' {} + &&
-      find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i 's/sdufNative/${APP_NAME}/g' {} + &&
-      npx envinfo &&
-      yarn install &&
-      cd android &&
-      chmod +x gradlew &&
-      ./gradlew assembleRelease"
