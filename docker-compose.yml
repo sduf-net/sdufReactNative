@@ -1,5 +1,6 @@
 services:
   reactnative:
+    container_name: ${SOCKET_PROJECT_ID}
     build:
       context: .
       dockerfile: Dockerfile
