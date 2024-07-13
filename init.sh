@@ -22,11 +22,11 @@ echo "Environment variables set."
 # Replace strings in all project files, avoiding the .git and other directories
 echo "Replacing package names in the project..."
 # Replace strings in all project files, avoiding the .git and other directories
-find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i 's/com.sdufnative/${APP_PACKAGE_NAME}/g' {} +
+find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
 
 echo "Configuring app.json..."
 # Replace string specifically in app.json
-find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i 's/sdufNative/${APP_NAME}/g' {} +
+find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
 # Run other necessary commands
 echo "Gathering environment info..."
@@ -43,7 +43,15 @@ chmod +x gradlew
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
-cp -r ./app/build/outputs/apk/release/*.apk /shared/
+# Loop through each APK file found in the release directory
+for apk in ./app/build/outputs/apk/release/*.apk; do
+    # Construct the new file name with SOCKET_PROJECT_ID
+    new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
+    
+    # Copy the APK file to the shared directory with the new name
+    cp "$apk" "/shared/${new_filename}"
+done
+echo "Files moved successfully."
 
 echo "Setup complete. Executing command..."
 # Execute the command specified to `docker run` or docker-compose
