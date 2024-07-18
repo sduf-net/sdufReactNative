@@ -17,6 +17,10 @@ if [ -z "$APP_ENV" ] || [ -z "$SOCKET_PROJECT_TOKEN" ]; then
     exit 1
 fi
 
+# Display the contents of the .env file
+echo "Displaying the contents of the .env file:"
+cat .env
+
 echo "Environment variables set."
 
 # Replace strings in all project files, avoiding the .git and other directories
@@ -41,12 +45,12 @@ yarn install
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --max-workers=1 --no-daemon
+./gradlew assembleDebug --max-workers=1 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
 # Loop through each APK file found in the release directory
-for apk in ./app/build/outputs/apk/release/*.apk; do
+for apk in ./app/build/outputs/apk/debug/*.apk; do
     # Construct the new file name with SOCKET_PROJECT_ID
     new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
     
