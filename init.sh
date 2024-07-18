@@ -36,13 +36,13 @@ echo "Installing dependencies..."
 yarn install
 
 echo "export GRADLE_OPTS "
-export GRADLE_OPTS="-Xmx512m -XX:MaxMetaspaceSize=512m"
+export GRADLE_OPTS="-Xmx4096m -XX:MaxMetaspaceSize=4096m"
 
 # Navigate to android directory and prepare for build
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --no-daemon
+./gradlew assembleRelease --no-daemon --info
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
