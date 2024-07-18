@@ -5,8 +5,8 @@ set -e
 # Create a .env file with environment variables
 echo "Creating environment variables..."
 echo "APP_ENV=${APP_ENV}" > .env
-echo "URL=https://demo-sduf.gigalixirapp.com" >> .env
-echo "SOCKET_URL=https://demo-sduf.gigalixirapp.com/socket" >> .env
+echo "URL=${URL}" >> .env
+echo "SOCKET_URL=${URL}/socket" >> .env
 echo "SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}" >> .env
 echo "SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}" >> .env
 echo "styleURL=${styleURL}" >> .env
