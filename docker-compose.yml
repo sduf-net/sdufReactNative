@@ -1,6 +1,7 @@
 services:
   reactnative:
     container_name: ${SOCKET_PROJECT_ID}
+    oom_kill_disable: true
     build:
       context: .
       dockerfile: Dockerfile
