@@ -17,4 +17,5 @@ services:
       - ./shared:/shared
     working_dir: /app
     cpus: '3.0'
+    mem_limit: 4G
     memswap_limit: 6G
