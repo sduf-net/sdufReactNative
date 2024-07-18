@@ -42,7 +42,7 @@ export GRADLE_OPTS="-Xmx4096m -XX:MaxMetaspaceSize=4096m"
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --no-daemon --info
+./gradlew assembleRelease --no-daemon --debug
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
