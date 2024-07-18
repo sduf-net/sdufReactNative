@@ -27,6 +27,7 @@ find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed 
 echo "Configuring app.json..."
 # Replace string specifically in app.json
 find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
 # Run other necessary commands
 echo "Gathering environment info..."
