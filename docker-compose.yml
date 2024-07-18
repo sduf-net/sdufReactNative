@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     environment:
       APP_ENV: ${APP_ENV}
+      URL: ${URL}
       SOCKET_PROJECT_TOKEN: ${SOCKET_PROJECT_TOKEN}
       SOCKET_PROJECT_ID: ${SOCKET_PROJECT_ID}
       styleURL: ${styleURL}
