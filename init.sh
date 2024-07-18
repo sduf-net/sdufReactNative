@@ -36,7 +36,6 @@ echo "Installing dependencies..."
 yarn install
 
 echo "export GRADLE_OPTS "
-export GRADLE_OPTS="-Xmx2048m -Dorg.gradle.jvmargs='-Xmx512m -XX:MaxPermSize=512m'"
 
 # Navigate to android directory and prepare for build
 echo "Preparing Android build..."
