@@ -40,7 +40,7 @@ yarn install
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --max-workers=1 --no-daemon --debug
+./gradlew assembleRelease --max-workers=1 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
