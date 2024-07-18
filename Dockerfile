@@ -13,5 +13,6 @@ COPY . /app
 COPY init.sh /usr/local/bin/init.sh
 RUN chmod +x /usr/local/bin/init.sh
 
+ENV GRADLE_OPTS="-Xmx2048m -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
 # Set the initialization script as the entry point
 ENTRYPOINT ["/usr/local/bin/init.sh"]
