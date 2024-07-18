@@ -36,7 +36,7 @@ echo "Installing dependencies..."
 yarn install
 
 echo "export GRADLE_OPTS "
-export GRADLE_OPTS="-Xmx2048m -XX:MaxMetaspaceSize=2048m"
+export GRADLE_OPTS="-Xmx4g -XX:MaxMetaspaceSize=4g"
 
 # Navigate to android directory and prepare for build
 echo "Preparing Android build..."
