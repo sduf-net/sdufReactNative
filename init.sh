@@ -2,20 +2,22 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-# Create a .env file with environment variables
-echo "Creating environment variables..."
-echo "APP_ENV=${APP_ENV}" > .env
-echo "URL=${URL}" >> .env
-echo "SOCKET_URL=${URL}/socket" >> .env
-echo "SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}" >> .env
-echo "SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}" >> .env
-echo "styleURL=${styleURL}" >> .env
-
-# Check if essential environment variables are set
-if [ -z "$APP_ENV" ] || [ -z "$SOCKET_PROJECT_TOKEN" ]; then
+# Check if essential environment variables are set before creating .env file
+if [ -z "$APP_ENV" ] || [ -z "$URL" ] || [ -z "$SOCKET_PROJECT_TOKEN" ] || [ -z "$SOCKET_PROJECT_ID" ] || [ -z "$styleURL" ]; then
     echo "Critical environment variables are missing."
     exit 1
 fi
+
+# Create a .env file with environment variables
+echo "Creating environment variables..."
+{
+    echo "APP_ENV=${APP_ENV}"
+    echo "URL=${URL}"
+    echo "SOCKET_URL=${URL}/socket"
+    echo "SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}"
+    echo "SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}"
+    echo "styleURL=${styleURL}"
+} > .env
 
 # Display the contents of the .env file
 echo "Displaying the contents of the .env file:"
@@ -40,7 +42,6 @@ npx envinfo
 echo "Installing dependencies..."
 yarn install
 
-
 export APP_ENV=${APP_ENV}
 export URL=${URL}
 export SOCKET_URL="${URL}/socket"
@@ -52,7 +53,7 @@ export styleURL=${styleURL}
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --max-workers=1 --no-daemon
+./gradlew assembleRelease --max-workers=3 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
