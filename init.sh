@@ -41,6 +41,13 @@ echo "Installing dependencies..."
 yarn install
 
 
+export APP_ENV=${APP_ENV}
+export URL=${URL}
+export SOCKET_URL="${URL}/socket"
+export SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}
+export SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}
+export styleURL=${styleURL}
+
 # Navigate to android directory and prepare for build
 echo "Preparing Android build..."
 cd android
