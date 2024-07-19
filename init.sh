@@ -45,12 +45,12 @@ yarn install
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleDebug --max-workers=1 --no-daemon
+./gradlew assembleRelease --max-workers=1 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
 # Loop through each APK file found in the release directory
-for apk in ./app/build/outputs/apk/debug/*.apk; do
+for apk in ./app/build/outputs/apk/release/*.apk; do
     # Construct the new file name with SOCKET_PROJECT_ID
     new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
     
