@@ -13,6 +13,7 @@ import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 import useErrors from '../hooks/useErrors';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
+import { SOCKET_URL, APP_ENV, URL, SOCKET_PROJECT_TOKEN } from "@env";
 
 const INDEX_SCREEN = 'index';
 
@@ -91,6 +92,10 @@ export default function IndexScreen() {
 
     return (
         <View style={[styles.container]}>
+            <Text>SOCKET_URL = {SOCKET_URL}</Text>
+            <Text>URL = {URL}</Text>
+            <Text>SOCKET_PROJECT_TOKEN = {SOCKET_PROJECT_TOKEN}</Text>
+            <Text>APP_ENV = {APP_ENV}</Text>
             <FixedTop />
             <WidgetList onRefresh={onRefresh} />
             <FixedBottom onLayout={onFooterLayout} />
