@@ -28,12 +28,12 @@ echo "Environment variables set."
 # Replace strings in all project files, avoiding the .git and other directories
 echo "Replacing package names in the project..."
 # Replace strings in all project files, avoiding the .git and other directories
-# find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
+find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
 
 echo "Configuring app.json..."
 # Replace string specifically in app.json
-# find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
-# find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
 # Run other necessary commands
 echo "Gathering environment info..."
@@ -53,14 +53,14 @@ export styleURL=${styleURL}
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --max-workers=3 --no-daemon
+./gradlew assembleDebug --max-workers=3 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
 # Loop through each APK file found in the release directory
-for apk in ./app/build/outputs/apk/release/*.apk; do
+for apk in ./app/build/outputs/apk/debug/*.apk; do
     # Construct the new file name with SOCKET_PROJECT_ID
-    new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
+    new_filename="${SOCKET_PROJECT_ID}_app-release.apk"
     
     # Copy the APK file to the shared directory with the new name
     cp "$apk" "/shared/${new_filename}"
