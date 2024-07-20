@@ -53,14 +53,14 @@ export styleURL=${styleURL}
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleDebug --max-workers=3 --no-daemon
+./gradlew assembleRelease --max-workers=3 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
 # Loop through each APK file found in the release directory
-for apk in ./app/build/outputs/apk/debug/*.apk; do
+for apk in ./app/build/outputs/apk/release/*.apk; do
     # Construct the new file name with SOCKET_PROJECT_ID
-    new_filename="${SOCKET_PROJECT_ID}_app-release.apk"
+    new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
     
     # Copy the APK file to the shared directory with the new name
     cp "$apk" "/shared/${new_filename}"
