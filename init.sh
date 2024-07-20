@@ -19,10 +19,6 @@ echo "Creating environment variables..."
     echo "styleURL=${styleURL}"
 } > .env
 
-# Display the contents of the .env file
-echo "Displaying the contents of the .env file:"
-cat .env
-
 echo "Environment variables set."
 
 # Replace strings in all project files, avoiding the .git and other directories
