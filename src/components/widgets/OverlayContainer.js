@@ -1,9 +1,8 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
-// Show something on top of other
-export default OverlayContainer = (props) => {
-    const { behind, front, under } = props
+const OverlayContainer = (props) => {
+    const { behind, front } = props;
 
     return (
         <View style={styles.container}>
@@ -11,33 +10,38 @@ export default OverlayContainer = (props) => {
                 <View style={styles.behind}>
                     {behind}
                 </View>
-                {front}
+                <View style={styles.front}>
+                    {front}
+                </View>
             </View>
-            {under}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        height: 100,
         justifyContent: 'center',
     },
     center: {
         width: '100%',
-        height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
     },
     behind: {
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'absolute',
-        left: 0,
-        top: 0,
         width: '100%',
-        height: '100%'
+    },
+    front: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
     }
-})
+});
+
+export default OverlayContainer;
