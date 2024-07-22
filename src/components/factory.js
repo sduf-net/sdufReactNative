@@ -33,6 +33,8 @@ import SwipeableLayout from './layouts/swipable'
 import InputWithButton from './widgets/form/inputWithBtn'
 import DateTimePickerWidget from './widgets/datepicker'
 import WormholeWidget from './widgets/Wormhole'
+import CameraWidget from './widgets/Camera'
+import ImageLibraryWidget from './widgets/ImageLibrary'
 
 const keysToComponentMap = {
     // layouts
@@ -72,6 +74,8 @@ const keysToComponentMap = {
     InputWithButtonWidget: InputWithButton,
     DateTimePickerWidget: DateTimePickerWidget,
     CustomWidget: WormholeWidget,
+    CameraWidget: CameraWidget,
+    ImageLibraryWidget: ImageLibraryWidget
 }
 
 
