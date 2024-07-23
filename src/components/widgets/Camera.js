@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, VirtualizedList, Pressable, Text } from 'react-native';
+import { View, StyleSheet, VirtualizedList, Pressable, Text, Image } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
 import { getItem, getItemCount } from '../../utils';
@@ -7,9 +7,10 @@ import OverlayContainer from './OverlayContainer';
 
 const CameraWidget = (config) => {
     const renderWidget = ({ item }) => (
-        <OverlayContainer front={(
-            <Pressable onPress={selectImageHandler} style={styles.pressable}></Pressable>
-        )}
+        <OverlayContainer
+            front={(
+                <Pressable onPress={selectImageHandler} style={styles.pressable}></Pressable>
+            )}
             behind={<config.factory props={item} />}
         />
     );
@@ -18,7 +19,6 @@ const CameraWidget = (config) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const selectImageHandler = () => {
-        console.log("DLDLDLDLDLDLDLDLDLDLDLDLD")
         const options = {
             title: 'Select Image',
             storageOptions: {
@@ -55,10 +55,9 @@ const CameraWidget = (config) => {
                 getItemCount={getItemCount}
                 getItem={getItem}
             />
-            {/* <Button title="Select Image" onPress={selectImageHandler} />
             {selectedImage && (
                 <Image source={selectedImage} style={styles.image} resizeMode="cover" />
-            )} */}
+            )}
         </View>
     );
 };
@@ -72,53 +71,15 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        marginTop: 20,
     },
     settingOption: {
         width: '90%'
     },
-    itemContainer: {
-        height: 100, // Adjust as needed
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ddd', // Background color for visibility
-        zIndex: 0,
-    },
-    itemWrapper: {
-        position: 'relative',
-        marginVertical: 8,
-    },
     pressable: {
-        zIndex: 999,
-        width: '100%',
+        width: '20%',
         height: '100%',
-        backgroundColor: 'red', // Semi-transparent overlay
-    },
-    itemContainer: {
-        height: 100, // Adjust as needed
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red', // Background color for visibility,
-        zIndex: 999,
-    },
-    overlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'red', // Semi-transparent overlay
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 999,
-    },
-    overlayText: {
-        color: '#fff',
-        fontSize: 16,
-    },
-    content: {
-        paddingVertical: 10,
-    },
+        // backgroundColor: 'red', // Semi-transparent overlay
+    }
 });
 
 export default CameraWidget;
