@@ -3,7 +3,8 @@ import messaging from '@react-native-firebase/messaging';
 import PushNotification from "react-native-push-notification";
 import store from "../redux/store";
 import { PermissionsAndroid, Platform } from "react-native";
-import { URL } from "@env";
+import { URL, SOCKET_PROJECT_TOKEN } from "@env";
+
 const LOCAL_CHANNEL_ID = 'defaultLocalPushesChannelName';
 
 export const checkApplicationPermission = async () => {
@@ -44,7 +45,7 @@ const updateToken = async (token) => {
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-project-token': SOCKET_PROJECT_TOKEN },
         body: JSON.stringify({ token, user_id })
     };
 
