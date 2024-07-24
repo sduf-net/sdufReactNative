@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, VirtualizedList, Pressable, Text, Image } from 'react-native';
+import { View, StyleSheet, VirtualizedList, Pressable, Text, Image, Button } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
 import { getItem, getItemCount } from '../../utils';
