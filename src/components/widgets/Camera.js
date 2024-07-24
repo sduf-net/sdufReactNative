@@ -42,6 +42,9 @@ const CameraWidget = (config) => {
         });
     };
 
+    const uploadFile = async () => {
+    };
+
     console.log(config)
 
     return (
@@ -56,7 +59,10 @@ const CameraWidget = (config) => {
                 getItem={getItem}
             />
             {selectedImage && (
-                <Image source={selectedImage} style={styles.image} resizeMode="cover" />
+                <>
+                    <Image source={selectedImage} style={styles.image} resizeMode="cover" />
+                    <Button title="Upload File" onPress={uploadFile} />
+                </>
             )}
         </View>
     );

@@ -1,9 +1,24 @@
 import React, { useState } from 'react';
-import { Button, Image, View, StyleSheet } from 'react-native';
-import { launchImageLibrary} from 'react-native-image-picker';
+import { View, StyleSheet, VirtualizedList, Pressable, Text, Image, Button } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
+import { getItem, getItemCount } from '../../utils';
+import OverlayContainer from './OverlayContainer';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-const ImageLibraryWidget = () => {
+const ImageLibraryWidget = (config) => {
+    const navigation = useNavigation();
+    const route = useRoute();
+
+    const renderWidget = ({ item }) => (
+        <OverlayContainer
+            front={(
+                <Pressable onPress={selectImageHandler} style={styles.pressable}></Pressable>
+            )}
+            behind={<config.factory props={item} />}
+        />
+    );
+
     const { newError } = useErrors();
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -28,11 +43,25 @@ const ImageLibraryWidget = () => {
         });
     };
 
+    const uploadFile = async () => {
+    };
+
     return (
         <View style={styles.container}>
-            <Button title="Select Image" onPress={selectImageHandler} />
+            <VirtualizedList
+                style={styles.settingOption}
+                data={config.nestedComponents}
+                contentContainerStyle={[styles.content]}
+                renderItem={renderWidget}
+                keyExtractor={item => item.id}
+                getItemCount={getItemCount}
+                getItem={getItem}
+            />
             {selectedImage && (
-                <Image source={selectedImage} style={styles.image} resizeMode="cover" />
+                <>
+                    <Image source={selectedImage} style={styles.image} resizeMode="cover" />
+                    <Button title="Upload File" onPress={uploadFile} />
+                </>
             )}
         </View>
     );
@@ -47,8 +76,15 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        marginTop: 20,
     },
+    settingOption: {
+        width: '90%'
+    },
+    pressable: {
+        width: '20%',
+        height: '100%',
+        // backgroundColor: 'red', // Semi-transparent overlay
+    }
 });
 
 export default ImageLibraryWidget;
