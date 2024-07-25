@@ -90,9 +90,10 @@ export default function MapWidget(config) {
 
     const toggleDrawing = () => {
         setDrawing(!drawing);
-        if (drawing) {
+        if (!drawing) {
             setPolygonCoordinates([]);
         }
+        console.log('polygonCoordinates', polygonCoordinates)
     };
 
     const removeCoordinate = (index) => {
