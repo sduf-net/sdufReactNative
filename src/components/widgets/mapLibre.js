@@ -36,23 +36,23 @@ export default function MapWidget(config) {
     };
 
     const centerOnUserLocation = () => {
-            Geolocation.getCurrentPosition(
-                (position) => {
-                    const userLocationData = {
-                        longitude: position.coords.longitude,
-                        latitude: position.coords.latitude,
-                    };
-                    setCenterCoordinate([userLocationData.longitude, userLocationData.latitude]);
-                    setUserLocation(userLocationData);
-                    cameraRef.current.setCamera({
-                        centerCoordinate: [userLocationData.longitude, userLocationData.latitude],
-                        zoomLevel: 12,
-                        duration: 1000,
-                    });
-                },
-                (error) => alert(error.message),
-                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-            );
+        Geolocation.getCurrentPosition(
+            (position) => {
+                const userLocationData = {
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude,
+                };
+                setCenterCoordinate([userLocationData.longitude, userLocationData.latitude]);
+                setUserLocation(userLocationData);
+                cameraRef.current.setCamera({
+                    centerCoordinate: [userLocationData.longitude, userLocationData.latitude],
+                    zoomLevel: 12,
+                    duration: 1000,
+                });
+            },
+            (error) => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
     };
 
     const currentLocation = () => {
@@ -93,7 +93,6 @@ export default function MapWidget(config) {
         if (!drawing) {
             setPolygonCoordinates([]);
         }
-        console.log('polygonCoordinates', polygonCoordinates)
     };
 
     const removeCoordinate = (index) => {
