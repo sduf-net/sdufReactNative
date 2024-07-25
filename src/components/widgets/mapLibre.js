@@ -9,11 +9,12 @@ import { setMarkers } from '../../redux/map';
 MapLibreGL.setAccessToken(null);
 
 export default function MapWidget(config) {
-    const { height: windowHeight } = Dimensions.get("window");
+    const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
     const { data, navigation } = config;
     const widgetStyles = data.styles ?? {};
 
     const mapRef = useRef(null);
+    const cameraRef = useRef(null);
     const dispatch = useDispatch();
 
     const [visibleRegion, setVisibleRegion] = useState(null);
@@ -29,16 +30,29 @@ export default function MapWidget(config) {
             setVisibleRegion(region);
 
             if (data?.actions?.track_position) {
-                handleEventAction({ ...data.actions.track_position, region: region  }, navigation);
+                handleEventAction({ ...data.actions.track_position, region: region }, navigation);
             }
         }
     };
 
     const centerOnUserLocation = () => {
-        if (userLocation) {
-            setCenterCoordinate([userLocation.longitude, userLocation.latitude]);
-            mapRef.current.flyTo([userLocation.longitude, userLocation.latitude], 12);
-        }
+            Geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocationData = {
+                        longitude: position.coords.longitude,
+                        latitude: position.coords.latitude,
+                    };
+                    setCenterCoordinate([userLocationData.longitude, userLocationData.latitude]);
+                    setUserLocation(userLocationData);
+                    cameraRef.current.setCamera({
+                        centerCoordinate: [userLocationData.longitude, userLocationData.latitude],
+                        zoomLevel: 12,
+                        duration: 1000,
+                    });
+                },
+                (error) => alert(error.message),
+                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+            );
     };
 
     const currentLocation = () => {
@@ -107,6 +121,7 @@ export default function MapWidget(config) {
                     >
                         {centerCoordinate ? (
                             <MapLibreGL.Camera
+                                ref={cameraRef}
                                 zoomLevel={12}
                                 centerCoordinate={centerCoordinate}
                             />
@@ -166,15 +181,18 @@ export default function MapWidget(config) {
                             </>
                         ) : null}
                     </MapLibreGL.MapView>
-                    {userLocation ? (
+                    {userLocation && userLocation.latitude && userLocation.longitude ? (
                         <View style={styles.locationContainer}>
                             <Text style={styles.locationText}>
                                 Latitude: {userLocation.latitude.toFixed(6)}, Longitude: {userLocation.longitude.toFixed(6)}
                             </Text>
                         </View>
                     ) : null}
-                    <TouchableOpacity style={styles.button} onPress={toggleDrawing}>
+                    <TouchableOpacity style={[styles.button, { left: windowWidth / 2 - 50 }]} onPress={toggleDrawing}>
                         <Text style={styles.buttonText}>{drawing ? 'Stop Drawing' : 'Start Drawing'}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.locationButton} onPress={centerOnUserLocation}>
+                        <Text style={styles.buttonText}>My Location</Text>
                     </TouchableOpacity>
                 </View>
             ) : null}
@@ -205,15 +223,25 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute',
-        bottom: 50,
-        left: '50%',
+        bottom: 20,
+        width: 100,
         backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+    },
+    locationButton: {
+        position: 'absolute',
+        bottom: 80,
+        right: 20,
+        width: 100,
+        backgroundColor: 'green',
         padding: 10,
         borderRadius: 5,
     },
     buttonText: {
         color: 'white',
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     pointAnnotation: {
         width: 10,
