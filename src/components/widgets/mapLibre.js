@@ -188,11 +188,11 @@ export default function MapWidget(config) {
                             </Text>
                         </View>
                     ) : null}
-                    <TouchableOpacity style={[styles.button, { left: windowWidth / 2 - 50 }]} onPress={toggleDrawing}>
-                        <Text style={styles.buttonText}>{drawing ? 'Stop Drawing' : 'Start Drawing'}</Text>
+                    <TouchableOpacity style={styles.drawingButton} onPress={toggleDrawing}>
+                        <Text style={styles.drawingButtonText}>{drawing ? 'Stop' : 'Draw'}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.locationButton} onPress={centerOnUserLocation}>
-                        <Text style={styles.buttonText}>My Location</Text>
+                        <Text style={styles.buttonText}>📍</Text>
                     </TouchableOpacity>
                 </View>
             ) : null}
@@ -221,22 +221,40 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    button: {
+    drawingButton: {
         position: 'absolute',
-        bottom: 20,
-        width: 100,
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
+        bottom: 150,
+        right: 20,
+        width: 50,
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5, // Android shadow
+        shadowColor: '#000', // iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+    drawingButtonText: {
+        fontSize: 18, // Larger font size for better readability
     },
     locationButton: {
         position: 'absolute',
         bottom: 80,
         right: 20,
-        width: 100,
-        backgroundColor: 'green',
-        padding: 10,
-        borderRadius: 5,
+        width: 50,
+        height: 50,
+        backgroundColor: 'white',
+        borderRadius: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5, // Android shadow
+        shadowColor: '#000', // iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
     },
     buttonText: {
         color: 'white',
