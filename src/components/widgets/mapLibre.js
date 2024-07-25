@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View, Button, Dimensions } from 'react-native'; // Import Button
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import MapLibreGL, { UserLocation } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { styleURL } from "@env";
@@ -18,6 +18,8 @@ export default function MapWidget(config) {
 
     const [visibleRegion, setVisibleRegion] = useState(null);
     const [centerCoordinate, setCenterCoordinate] = useState([0, 0]);
+    const [polygonCoordinates, setPolygonCoordinates] = useState([]);
+    const [drawing, setDrawing] = useState(false);
     const markers = useSelector(state => state.map.markers, shallowEqual);
     const [userLocation, setUserLocation] = useState(null);
 
@@ -65,6 +67,24 @@ export default function MapWidget(config) {
         }
     };
 
+    const handleMapPress = (event) => {
+        if (drawing) {
+            const { geometry } = event;
+            setPolygonCoordinates([...polygonCoordinates, geometry.coordinates]);
+        }
+    };
+
+    const toggleDrawing = () => {
+        setDrawing(!drawing);
+        if (drawing) {
+            setPolygonCoordinates([]);
+        }
+    };
+
+    const removeCoordinate = (index) => {
+        setPolygonCoordinates(polygonCoordinates.filter((_, i) => i !== index));
+    };
+
     useEffect(() => {
         currentLocation();
 
@@ -82,6 +102,7 @@ export default function MapWidget(config) {
                         logoEnabled={false}
                         styleURL={styleURL}
                         onRegionDidChange={onRegionDidChange}
+                        onPress={handleMapPress}
                         ref={mapRef}
                     >
                         {centerCoordinate ? (
@@ -111,7 +132,50 @@ export default function MapWidget(config) {
                                 </MapLibreGL.PointAnnotation>
                             ))
                             : null}
+
+                        {polygonCoordinates.length > 0 ? (
+                            <>
+                                {polygonCoordinates.map((coordinate, index) => (
+                                    <MapLibreGL.PointAnnotation
+                                        id={`point-${index}`}
+                                        key={`point-${index}`}
+                                        coordinate={coordinate}
+                                        onSelected={() => removeCoordinate(index)}
+                                    >
+                                        <View style={styles.pointAnnotation} />
+                                    </MapLibreGL.PointAnnotation>
+                                ))}
+                                {polygonCoordinates.length > 2 ? (
+                                    <MapLibreGL.ShapeSource id="polygonSource" shape={{
+                                        type: 'Feature',
+                                        geometry: {
+                                            type: 'Polygon',
+                                            coordinates: [[...polygonCoordinates, polygonCoordinates[0]]],
+                                        },
+                                    }}>
+                                        <MapLibreGL.FillLayer
+                                            id="polygonFill"
+                                            style={{ fillColor: 'rgba(255, 0, 0, 0.5)' }}
+                                        />
+                                        <MapLibreGL.LineLayer
+                                            id="polygonLine"
+                                            style={{ lineColor: 'red', lineWidth: 2 }}
+                                        />
+                                    </MapLibreGL.ShapeSource>
+                                ) : null}
+                            </>
+                        ) : null}
                     </MapLibreGL.MapView>
+                    {userLocation ? (
+                        <View style={styles.locationContainer}>
+                            <Text style={styles.locationText}>
+                                Latitude: {userLocation.latitude.toFixed(6)}, Longitude: {userLocation.longitude.toFixed(6)}
+                            </Text>
+                        </View>
+                    ) : null}
+                    <TouchableOpacity style={styles.button} onPress={toggleDrawing}>
+                        <Text style={styles.buttonText}>{drawing ? 'Stop Drawing' : 'Start Drawing'}</Text>
+                    </TouchableOpacity>
                 </View>
             ) : null}
         </View>
@@ -123,5 +187,40 @@ const styles = StyleSheet.create({
         padding: 5,
         backgroundColor: 'white',
         borderRadius: 5
+    },
+    locationContainer: {
+        position: 'absolute',
+        bottom: 80, // Adjusted to avoid overlap with the button
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+        padding: 10,
+        borderRadius: 10,
+        marginHorizontal: 20,
+    },
+    locationText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    button: {
+        position: 'absolute',
+        bottom: 50,
+        left: '50%',
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+    pointAnnotation: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: 'blue',
+        borderColor: 'white',
+        borderWidth: 2,
     }
 });
