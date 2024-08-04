@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, VirtualizedList, Pressable, Text, Image, Button } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import React from 'react';
+import { Buffer } from 'buffer';
+import RNFS from 'react-native-fs';
+import { Platform } from 'react-native';
 import useErrors from '../../hooks/useErrors';
-import { getItem, getItemCount } from '../../utils';
 import OverlayContainer from './overlayContainer';
+import { getItem, getItemCount } from '../../utils';
+import { onSelectImage } from '../../event_handler';
+import { launchImageLibrary } from 'react-native-image-picker';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import { View, StyleSheet, VirtualizedList } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ImageLibraryWidget = (config) => {
+    const { data, nestedComponents } = config;
+
     const navigation = useNavigation();
     const route = useRoute();
-
-    const renderWidget = ({ item }) => (
-        <OverlayContainer
-            front={(
-                <Pressable onPress={selectImageHandler} style={styles.pressable}></Pressable>
-            )}
-            behind={<config.factory props={item} />}
-        />
-    );
-
     const { newError } = useErrors();
-    const [selectedImage, setSelectedImage] = useState(null);
 
     const selectImageHandler = () => {
         const options = {
             title: 'Select Image',
+            selectionLimit: 0, // Set to 0 to allow multiple selections
             storageOptions: {
                 skipBackup: true,
                 path: 'images',
@@ -37,32 +34,70 @@ const ImageLibraryWidget = (config) => {
             } else if (response.error) {
                 newError("Oops...Something went wrong");
             } else {
-                const source = { uri: response.assets[0].uri };
-                setSelectedImage(source);
+                uploadFile(response)
             }
         });
     };
 
-    const uploadFile = async () => {
+    const uploadFile = async (response) => {
+        try {
+            const messages = [];
+            for (const element of response.assets) {
+                console.log("elementelementelementelementelementelementelement", element)
+                const source = {
+                    uri: element.uri,
+                    fileName: element.fileName,
+                    type: element.type,
+                    fileSize: element.fileSize
+                };
+
+                // Read the file as base64
+                const filePath = Platform.OS === 'android' ? source.uri : source.uri.replace('file://', '');
+                const base64data = await RNFS.readFile(filePath, 'base64');
+                const fileData = Buffer.from(base64data, 'base64');
+
+                // Construct a message object with file data and metadata
+                const message = {
+                    type: 'file_upload',
+                    fileName: source.fileName,
+                    fileType: source.type,
+                    fileSize: source.fileSize,
+                    data: fileData.toString('base64'), // Ensure data is in base64 format
+                };
+
+                messages.push(message)
+            };
+
+            onSelectImage(data.actions, messages, navigation, route);
+        } catch (error) {
+            console.error('Error reading file:', error);
+        }
     };
+
+    const renderWidget = ({ item }) => (
+        <OverlayContainer
+            front={(
+                <CustomTouchableOpacity
+                    style={styles.pressable}
+                    data={data}
+                    onPress={selectImageHandler}>
+                </CustomTouchableOpacity >
+            )}
+            behind={<config.factory props={item} />}
+        />
+    );
 
     return (
         <View style={styles.container}>
             <VirtualizedList
                 style={styles.settingOption}
-                data={config.nestedComponents}
+                data={nestedComponents}
                 contentContainerStyle={[styles.content]}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
             />
-            {selectedImage && (
-                <>
-                    <Image source={selectedImage} style={styles.image} resizeMode="cover" />
-                    <Button title="Upload File" onPress={uploadFile} />
-                </>
-            )}
         </View>
     );
 };
