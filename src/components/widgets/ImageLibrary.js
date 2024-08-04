@@ -43,7 +43,6 @@ const ImageLibraryWidget = (config) => {
         try {
             const messages = [];
             for (const element of response.assets) {
-                console.log("elementelementelementelementelementelementelement", element)
                 const source = {
                     uri: element.uri,
                     fileName: element.fileName,
