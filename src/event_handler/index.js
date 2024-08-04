@@ -18,6 +18,13 @@ export const onChange = (actions, newValue, navigation, route) => {
     }
 }
 
+export const onSelectImage = (actions, data, navigation, route) => {
+    if (actions?.selectImage) {
+        let payload = { ...actions.selectImage, value: data };
+        return handleEventAction(payload, navigation, route);
+    }
+}
+
 export const onSubmit = (actions, newValue, navigation, route) => {
     if (actions?.submit) {
         let payload = { ...actions.submit, value: newValue };
