@@ -51,7 +51,7 @@ export default function MapWidget(config) {
                 });
             },
             (error) => alert(error.message),
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+            { enableHighAccuracy: true, maximumAge: 1000 }
         );
     };
 
@@ -70,7 +70,7 @@ export default function MapWidget(config) {
                     centerOnUserLocation();
                 },
                 (error) => alert(error.message),
-                { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+                { enableHighAccuracy: true, maximumAge: 1000 }
             );
         }
     };
