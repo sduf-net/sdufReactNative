@@ -7,19 +7,16 @@ import OverlayContainer from './OverlayContainer';
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 import { Buffer } from 'buffer';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import { onSelectImage } from '../../event_handler';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const CameraWidget = (config) => {
-    const renderWidget = ({ item }) => (
-        <OverlayContainer
-            front={(
-                <Pressable onPress={selectImageHandler} style={styles.pressable}></Pressable>
-            )}
-            behind={<config.factory props={item} />}
-        />
-    );
+    const { data, nestedComponents } = config;
 
+    const navigation = useNavigation();
+    const route = useRoute();
     const { newError } = useErrors();
-    const [selectedImage, setSelectedImage] = useState(null);
 
     const selectImageHandler = () => {
         const options = {
@@ -36,26 +33,18 @@ const CameraWidget = (config) => {
             } else if (response.error) {
                 newError("Oops...Something went wrong");
             } else {
-                console.log(response.assets[0])
-                // You can also display the image using:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
                 const source = {
                     uri: response.assets[0].uri,
                     fileName: response.assets[0].fileName,
                     type: response.assets[0].type,
                     fileSize: response.assets[0].fileSize
                 };
-
-                console.log(source)
-                setSelectedImage(source);
+                uploadFile(source)
             }
         });
     };
 
-
-
-    // Function to upload the file
-    const uploadFile = async () => {
+    const uploadFile = async (selectedImage) => {
         try {
             // Read the file as base64
             const filePath = Platform.OS === 'android' ? selectedImage.uri : selectedImage.uri.replace('file://', '');
@@ -71,30 +60,36 @@ const CameraWidget = (config) => {
                 data: fileData.toString('base64'), // Ensure data is in base64 format
             };
 
-            // Send the message as a string
-            console.log(JSON.stringify(message));
+            onSelectImage(data.actions, message, navigation, route);
         } catch (error) {
             console.error('Error reading file:', error);
         }
     };
 
+    const renderWidget = ({ item }) => (
+        <OverlayContainer
+            front={(
+                <CustomTouchableOpacity
+                    style={styles.pressable}
+                    data={data}
+                    onPress={selectImageHandler}>
+                </CustomTouchableOpacity >
+            )}
+            behind={<config.factory props={item} />}
+        />
+    );
+
     return (
         <View style={styles.container}>
             <VirtualizedList
                 style={styles.settingOption}
-                data={config.nestedComponents}
+                data={nestedComponents}
                 contentContainerStyle={[styles.content]}
                 renderItem={renderWidget}
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
             />
-            {selectedImage && (
-                <>
-                    <Image source={selectedImage} style={styles.image} resizeMode="cover" />
-                    <Button title="Upload File" onPress={uploadFile} />
-                </>
-            )}
         </View>
     );
 };
