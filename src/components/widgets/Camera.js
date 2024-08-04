@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, VirtualizedList, Pressable, Text, Image, Button } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, VirtualizedList } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
 import { getItem, getItemCount } from '../../utils';
-import OverlayContainer from './OverlayContainer';
+import OverlayContainer from './overlayContainer';
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 import { Buffer } from 'buffer';

@@ -3,7 +3,7 @@ import { View, StyleSheet, VirtualizedList, Pressable, Text, Image, Button } fro
 import { launchImageLibrary } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
 import { getItem, getItemCount } from '../../utils';
-import OverlayContainer from './OverlayContainer';
+import OverlayContainer from './overlayContainer';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ImageLibraryWidget = (config) => {
