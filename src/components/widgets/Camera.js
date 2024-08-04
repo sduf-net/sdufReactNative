@@ -4,6 +4,9 @@ import { launchCamera } from 'react-native-image-picker';
 import useErrors from '../../hooks/useErrors';
 import { getItem, getItemCount } from '../../utils';
 import OverlayContainer from './OverlayContainer';
+import { Platform } from 'react-native';
+import RNFS from 'react-native-fs';
+import { Buffer } from 'buffer';
 
 const CameraWidget = (config) => {
     const renderWidget = ({ item }) => (
@@ -33,19 +36,47 @@ const CameraWidget = (config) => {
             } else if (response.error) {
                 newError("Oops...Something went wrong");
             } else {
-                console.log(response)
+                console.log(response.assets[0])
                 // You can also display the image using:
                 // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-                const source = { uri: response.assets[0].uri };
+                const source = {
+                    uri: response.assets[0].uri,
+                    fileName: response.assets[0].fileName,
+                    type: response.assets[0].type,
+                    fileSize: response.assets[0].fileSize
+                };
+
+                console.log(source)
                 setSelectedImage(source);
             }
         });
     };
 
-    const uploadFile = async () => {
-    };
 
-    console.log(config)
+
+    // Function to upload the file
+    const uploadFile = async () => {
+        try {
+            // Read the file as base64
+            const filePath = Platform.OS === 'android' ? selectedImage.uri : selectedImage.uri.replace('file://', '');
+            const base64data = await RNFS.readFile(filePath, 'base64');
+            const fileData = Buffer.from(base64data, 'base64');
+
+            // Construct a message object with file data and metadata
+            const message = {
+                type: 'file_upload',
+                fileName: selectedImage.fileName,
+                fileType: selectedImage.type,
+                fileSize: selectedImage.fileSize,
+                data: fileData.toString('base64'), // Ensure data is in base64 format
+            };
+
+            // Send the message as a string
+            console.log(JSON.stringify(message));
+        } catch (error) {
+            console.error('Error reading file:', error);
+        }
+    };
 
     return (
         <View style={styles.container}>
