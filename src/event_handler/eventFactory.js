@@ -77,7 +77,7 @@ const requestWidgetCallback = (event, navigation, route) => {
         actionName: REQUEST_WIDGET,
         payload: {
             parent_id: event.id,
-            callback_url: event.callbackUrl,
+            callback_url: event.url,
             params: queryString?.event,
             method: event.method ?? "POST"
         }
