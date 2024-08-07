@@ -24,7 +24,7 @@ function ApiWidget({ data, id }) {
         handleEventAction({
             id,
             type: "request_widget",
-            callbackUrl: data.callbackUrl,
+            url: data.callbackUrl,
             params: data
         }, navigation, route);
 
