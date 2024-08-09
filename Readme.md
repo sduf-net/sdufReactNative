@@ -5,11 +5,13 @@ This repository contains the SDUF React Native application. Follow the instructi
 ## Installation
 
 1. Clone the repository:
+
    ```sh
    git clone git@github.com:Dimakoua/sdufReactNative.git
    ```
 
 2. Navigate to the project directory:
+
    ```sh
    cd sdufReactNative
    ```
@@ -34,9 +36,20 @@ This repository contains the SDUF React Native application. Follow the instructi
 ## Running the Application
 
 To run the application on an Android device or emulator, execute the following command:
+
 ```sh
 npx react-native run-android
 ```
+
+## Prettier
+
+format all files with Prettier:
+
+```sh
+npm run prettierFixAll
+```
+
+More details [here](https://prettier.io/docs/en/install)
 
 ## Notes
 

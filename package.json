@@ -9,7 +9,8 @@
     "gradle_build": "cd android && ./gradlew --stacktrace --info assembleRelease -x bundleArReleaseJsAndAssets",
     "gradle_install": "cd android && ./gradlew installArDebug --stacktrace --info",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettierFixAll": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
     "@maplibre/maplibre-react-native": "^10.0.0-alpha.2",
