@@ -5,70 +5,66 @@ import { onChange, onSubmit } from '../../../event_handler';
 import useDebounced from '../../../hooks/useDebounced';
 
 const InputWithButton = ({ data }) => {
-    const [text, onChangeText] = useState(null);
-    const route = useRoute();
-    const navigation = useNavigation();
-    const debouncedText = useDebounced(text, data.debounce ?? 500);
+  const [text, onChangeText] = useState(null);
+  const route = useRoute();
+  const navigation = useNavigation();
+  const debouncedText = useDebounced(text, data.debounce ?? 500);
 
-    const handleChanges = (text) => {
-        onChangeText(text);
-    };
+  const handleChanges = (text) => {
+    onChangeText(text);
+  };
 
-    const handleSend = async () => {
-        if (text && text.trim() !== '') {
-            const result = await onSubmit(data.actions, text, navigation, route);
-            if (result) {
-                onChangeText('');
-            }
-        }
-    };
+  const handleSend = async () => {
+    if (text && text.trim() !== '') {
+      const result = await onSubmit(data.actions, text, navigation, route);
+      if (result) {
+        onChangeText('');
+      }
+    }
+  };
 
-    useEffect(() => {
-        if (debouncedText === null) return;
-        onChange(data.actions, debouncedText, navigation, route);
-    }, [debouncedText])
+  useEffect(() => {
+    if (debouncedText === null) return;
+    onChange(data.actions, debouncedText, navigation, route);
+  }, [debouncedText]);
 
-    return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder={data?.placeholder}
-                value={text}
-                onChangeText={handleChanges}
-                onSubmitEditing={handleSend}
-            />
-            <TouchableOpacity onPress={handleSend}>
-                <Image
-                    resizeMode={'cover'}
-                    style={[styles.image]}
-                    source={{ uri: data?.icon_src }}
-                />
-            </TouchableOpacity>
-        </View >
-    );
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder={data?.placeholder}
+        value={text}
+        onChangeText={handleChanges}
+        onSubmitEditing={handleSend}
+      />
+      <TouchableOpacity onPress={handleSend}>
+        <Image resizeMode={'cover'} style={[styles.image]} source={{ uri: data?.icon_src }} />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        borderTopWidth: 1,
-        borderTopColor: '#ccc',
-    },
-    input: {
-        flex: 1,
-        height: 40,
-        borderColor: '#ccc',
-        borderRadius: 20,
-        paddingHorizontal: 10,
-    },
-    image: {
-        height: 40,
-        width: 40,
-    }
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderTopWidth: 1,
+    borderTopColor: '#ccc',
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    borderColor: '#ccc',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+  },
+  image: {
+    height: 40,
+    width: 40,
+  },
 });
 
 export default InputWithButton;

@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
-import _ from "lodash";
+import { createSlice } from '@reduxjs/toolkit';
+import _ from 'lodash';
 
 const initialState = {
   nestedComponents: [],
-  showFloatCard: false
-}
+  showFloatCard: false,
+};
 
 export const floatCard = createSlice({
   name: 'floatCard',
@@ -20,7 +20,9 @@ export const floatCard = createSlice({
       if (Array.isArray(value.payload.nestedComponents)) {
         state.nestedComponents = value.payload.nestedComponents;
       } else {
-        let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.nestedComponents.id);
+        let index = state.nestedComponents.findIndex(
+          (widget) => widget.id === value.payload.nestedComponents.id
+        );
 
         // if widget is already in place
         if (index !== -1) {
@@ -29,15 +31,11 @@ export const floatCard = createSlice({
 
         state.nestedComponents.push(value.payload.nestedComponents);
       }
-    }
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const {
-  showFloatCard,
-  hideFloatCard,
-  setFloatCardWidgets
-} = floatCard.actions
+export const { showFloatCard, hideFloatCard, setFloatCardWidgets } = floatCard.actions;
 
-export default floatCard.reducer
+export default floatCard.reducer;

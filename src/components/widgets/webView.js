@@ -3,14 +3,11 @@ import { View, StyleSheet } from 'react-native';
 import WebView from 'react-native-webview';
 
 const WebViewWidget = ({ data }) => {
-
   return (
     <View style={styles.container}>
-      {data ? <WebView
-        source={{ uri: data.url }}
-        originWhitelist={['*']}
-        style={styles.map}
-      /> : null}
+      {data ? (
+        <WebView source={{ uri: data.url }} originWhitelist={['*']} style={styles.map} />
+      ) : null}
     </View>
   );
 };

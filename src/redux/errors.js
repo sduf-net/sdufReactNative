@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  errors: []
-}
+  errors: [],
+};
 
 export const errors = createSlice({
   name: 'errors',
@@ -21,15 +21,10 @@ export const errors = createSlice({
     },
     dismissErrors: (state) => {
       state.errors = [];
-    }
-  }
-})
+    },
+  },
+});
 
-export const {
-  addError,
-  removeError,
-  dismissErrors,
-  removeByIndex,
-} = errors.actions
+export const { addError, removeError, dismissErrors, removeByIndex } = errors.actions;
 
-export default errors.reducer
+export default errors.reducer;

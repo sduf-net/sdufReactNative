@@ -3,28 +3,27 @@ import { addError, removeByIndex, removeError } from '../redux/errors';
 import store from '../redux/store';
 
 export default function useErrors() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const newError = (error) => {
+  const newError = (error) => {
+    dispatch(addError(error));
 
-        dispatch(addError(error));
+    setTimeout(() => {
+      dispatch(removeError());
+    }, 2000);
+  };
 
-        setTimeout(() => {
-            dispatch(removeError());
-        }, 2000);
-    }
+  const removeErrorByIndex = (index) => {
+    dispatch(removeByIndex(index));
+  };
 
-    const removeErrorByIndex = (index) => {
-        dispatch(removeByIndex(index));
-    }
-
-    return { newError, removeErrorByIndex };
+  return { newError, removeErrorByIndex };
 }
 
 export function newError(error) {
-    store.dispatch(addError(error));
+  store.dispatch(addError(error));
 
-    setTimeout(() => {
-        store.dispatch(removeError());
-    }, 2000);
+  setTimeout(() => {
+    store.dispatch(removeError());
+  }, 2000);
 }

@@ -42,11 +42,7 @@ const MapLibreWeb = () => {
 
   return (
     <View style={styles.container}>
-      <WebView
-        source={{ html: htmlContent }}
-        originWhitelist={['*']}
-        style={styles.map}
-      />
+      <WebView source={{ html: htmlContent }} originWhitelist={['*']} style={styles.map} />
     </View>
   );
 };

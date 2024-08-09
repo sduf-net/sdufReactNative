@@ -17,93 +17,93 @@ import { joinToScreenChannel } from '../socket/screenChannel';
 const INDEX_SCREEN = 'index';
 
 export default function IndexScreen() {
-    const isFocused = useIsFocused();
-    const dispatch = useDispatch();
-    const navigation = useNavigation();
-    const route = useRoute();
-    const userId = useSelector(state => state.user.id, shallowEqual);
-    const screensState = useSelector(state => state.screens, shallowEqual);
-    // const { newError } = useErrors()
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const route = useRoute();
+  const userId = useSelector((state) => state.user.id, shallowEqual);
+  const screensState = useSelector((state) => state.screens, shallowEqual);
+  // const { newError } = useErrors()
 
-    const [loading, setLoading] = useState(true);
-    const [forceLoading, setForceLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [forceLoading, setForceLoading] = useState(false);
 
-    const onRefresh = useCallback(() => {
-        DeviceEventEmitter.emit('onRefresh', true);
+  const onRefresh = useCallback(() => {
+    DeviceEventEmitter.emit('onRefresh', true);
+    setLoading(true);
+    setForceLoading(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+
+    getScreen(forceLoading);
+  }, [loading, forceLoading]);
+
+  // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = navigation.addListener('state', (event) => {
         setLoading(true);
-        setForceLoading(true);
-    }, []);
+      });
 
-    useEffect(() => {
-        if (!loading) return;
+      return unsubscribe;
+    }, [navigation])
+  );
 
-        getScreen(forceLoading);
-    }, [loading, forceLoading])
+  const getScreen = useCallback((isReload) => {
+    const queryString = route?.params || null;
+    const screenName = route?.params?.screenName || INDEX_SCREEN;
 
-    // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
-    useFocusEffect(
-        React.useCallback(() => {
-            const unsubscribe = navigation.addListener('state', (event) => {
-                setLoading(true);
-            });
+    const screen = selectCurrentScreenByName(screensState, screenName);
+    if (screen.length && !isReload) {
+      dispatch(setCurrentScreenId(screen[0].id));
+    } else {
+      pushEventToChannel(getUserChannel(), {
+        userId: userId,
+        actionName: GET_SCREEN_BY_NAME,
+        payload: {
+          query: queryString,
+          screen_name: screenName,
+        },
+      });
+      tryConnectToScreenChannel(screenName);
+    }
 
-            return unsubscribe;
-        }, [navigation])
-    );
+    setTimeout(() => {
+      setLoading(false);
+      setForceLoading(false);
+    }, 2000);
+  }, []);
 
-    const getScreen = useCallback((isReload) => {
-        const queryString = route?.params || null;
-        const screenName = route?.params?.screenName || INDEX_SCREEN;
+  const tryConnectToScreenChannel = (screenName) => {
+    joinToScreenChannel(screenName);
+  };
 
-        const screen = selectCurrentScreenByName(screensState, screenName);
-        if (screen.length && !isReload) {
-            dispatch(setCurrentScreenId(screen[0].id));
-        } else {
-            pushEventToChannel(getUserChannel(), {
-                userId: userId,
-                actionName: GET_SCREEN_BY_NAME,
-                payload: {
-                    query: queryString,
-                    screen_name: screenName
-                }
-            });
-            tryConnectToScreenChannel(screenName);
-        }
+  // Fire event after footer is mounted
+  // to adjust screen height and prevent overlapping other components
+  const onFooterLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    DeviceEventEmitter.emit('footerHeight', height);
+  };
 
-        setTimeout(() => {
-            setLoading(false);
-            setForceLoading(false);
-        }, 2000);
-    }, [])
+  if (!isFocused) return;
 
-    const tryConnectToScreenChannel = (screenName) => {
-        joinToScreenChannel(screenName);
-    };
-
-    // Fire event after footer is mounted
-    // to adjust screen height and prevent overlapping other components
-    const onFooterLayout = (event) => {
-        const { height } = event.nativeEvent.layout;
-        DeviceEventEmitter.emit('footerHeight', height);
-    };
-
-    if (!isFocused) return;
-
-    return (
-        <View style={[styles.container]}>
-            <FixedTop />
-            <WidgetList onRefresh={onRefresh} />
-            <FixedBottom onLayout={onFooterLayout} />
-            <FloatingCard />
-            <CustomModal />
-        </View>
-    );
+  return (
+    <View style={[styles.container]}>
+      <FixedTop />
+      <WidgetList onRefresh={onRefresh} />
+      <FixedBottom onLayout={onFooterLayout} />
+      <FloatingCard />
+      <CustomModal />
+    </View>
+  );
 }
 
 const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        width: windowWidth
-    },
+  container: {
+    flex: 1,
+    width: windowWidth,
+  },
 });

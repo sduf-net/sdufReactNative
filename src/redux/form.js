@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   data: [],
-  forms: []
-}
+  forms: [],
+};
 
 export const currentForm = createSlice({
   name: 'form',
@@ -15,7 +15,7 @@ export const currentForm = createSlice({
 
       state.data = {
         ...state.data,
-        [form_id]: { ...state.data[form_id], ...value.payload }
+        [form_id]: { ...state.data[form_id], ...value.payload },
       };
     },
     resetForm: (state, value) => {
@@ -24,7 +24,7 @@ export const currentForm = createSlice({
 
       state.data = {
         ...state.data,
-        [form_id]: {}
+        [form_id]: {},
       };
     },
     setUpForm: (state, value) => {
@@ -33,14 +33,14 @@ export const currentForm = createSlice({
         [value.payload.form_id]: {
           action: value.payload.action,
           method: value.payload.method,
-          original_data: value.payload.original_data
-        }
-      }
-    }
-  }
-})
+          original_data: value.payload.original_data,
+        },
+      };
+    },
+  },
+});
 
 // Action creators are generated for each case reducer function
-export const { setForm, setUpForm, resetForm } = currentForm.actions
+export const { setForm, setUpForm, resetForm } = currentForm.actions;
 
-export default currentForm.reducer
+export default currentForm.reducer;

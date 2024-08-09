@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   nestedComponents: [],
-  showModalWindow: false
-}
+  showModalWindow: false,
+};
 
 export const modalWindow = createSlice({
   name: 'modalWindow',
@@ -19,7 +19,9 @@ export const modalWindow = createSlice({
       if (Array.isArray(value.payload.nestedComponents)) {
         state.nestedComponents = value.payload.nestedComponents;
       } else {
-        let index = state.nestedComponents.findIndex(widget => widget.id === value.payload.nestedComponents.id);
+        let index = state.nestedComponents.findIndex(
+          (widget) => widget.id === value.payload.nestedComponents.id
+        );
 
         // if widget is already in place
         if (index !== -1) {
@@ -28,15 +30,11 @@ export const modalWindow = createSlice({
 
         state.nestedComponents.push(value.payload.nestedComponents);
       }
-    }
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const {
-  showModalWindow,
-  hideModalWindow,
-  setModalWindowWidgets
-} = modalWindow.actions
+export const { showModalWindow, hideModalWindow, setModalWindowWidgets } = modalWindow.actions;
 
-export default modalWindow.reducer
+export default modalWindow.reducer;

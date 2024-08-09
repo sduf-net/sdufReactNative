@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { TinderCard } from 'rn-tinder-card';
-import { onSwipedRight, onSwipedLeft, onSwipedTop, onSwipedBottom, handleEventAction } from '../../event_handler';
+import {
+  onSwipedRight,
+  onSwipedLeft,
+  onSwipedTop,
+  onSwipedBottom,
+  handleEventAction,
+} from '../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function TinderWidget({ data }) {
@@ -12,7 +18,7 @@ export default function TinderWidget({ data }) {
 
   const onSwipe = async (index) => {
     let editableCards = [...cards];
-    editableCards.splice(index, 1)
+    editableCards.splice(index, 1);
     setCards([...editableCards]);
 
     if (index !== 0) return;
@@ -20,15 +26,10 @@ export default function TinderWidget({ data }) {
     try {
       setLoadingMoreCards(true);
 
-      const newCards = await handleEventAction(
-        data.actions.load_more,
-        navigation,
-        route
-      );
+      const newCards = await handleEventAction(data.actions.load_more, navigation, route);
       setCards([...newCards]);
-
     } catch (error) {
-      console.error("Error fetching new cards:", error);
+      console.error('Error fetching new cards:', error);
     } finally {
       setLoadingMoreCards(false);
     }
@@ -93,54 +94,54 @@ export default function TinderWidget({ data }) {
 
   return (
     <View style={styles.wrapper}>
-      {!loadingMoreCards ? cards.map((item, index) => {
-        return (
-          <View
-            style={styles.cardContainer}
-            pointerEvents="box-none"
-            key={index}
-          >
-            <TinderCard
-              cardWidth={380}
-              cardHeight={730}
-              OverlayLabelRight={OverlayRight}
-              OverlayLabelLeft={OverlayLeft}
-              OverlayLabelTop={OverlayTop}
-              OverlayLabelBottom={OverlayBottom}
-              cardStyle={styles.card}
-              onSwipedRight={async () => {
-                onSwipe(index);
-                onSwipedRight(data.actions, navigation, route);
-              }}
-              onSwipedTop={() => {
-                onSwipe(index);
-                onSwipedTop(data.actions, navigation, route);
-              }}
-              onSwipedLeft={() => {
-                onSwipe(index);
-                onSwipedLeft(data.actions, navigation, route);
-              }}
-              onSwipedBottom={() => {
-                onSwipe(index);
-                onSwipedBottom(data.actions, navigation, route);
-              }}
-            >
-              <Image source={{ uri: item.src }} style={styles.image} />
-              <Text style={styles.title}>{item.title}</Text>
-            </TinderCard>
-          </View>
-        );
-      }) : <ActivityIndicator style={styles.loading} size="large" color="#007AFF" />}
+      {!loadingMoreCards ? (
+        cards.map((item, index) => {
+          return (
+            <View style={styles.cardContainer} pointerEvents="box-none" key={index}>
+              <TinderCard
+                cardWidth={380}
+                cardHeight={730}
+                OverlayLabelRight={OverlayRight}
+                OverlayLabelLeft={OverlayLeft}
+                OverlayLabelTop={OverlayTop}
+                OverlayLabelBottom={OverlayBottom}
+                cardStyle={styles.card}
+                onSwipedRight={async () => {
+                  onSwipe(index);
+                  onSwipedRight(data.actions, navigation, route);
+                }}
+                onSwipedTop={() => {
+                  onSwipe(index);
+                  onSwipedTop(data.actions, navigation, route);
+                }}
+                onSwipedLeft={() => {
+                  onSwipe(index);
+                  onSwipedLeft(data.actions, navigation, route);
+                }}
+                onSwipedBottom={() => {
+                  onSwipe(index);
+                  onSwipedBottom(data.actions, navigation, route);
+                }}
+              >
+                <Image source={{ uri: item.src }} style={styles.image} />
+                <Text style={styles.title}>{item.title}</Text>
+              </TinderCard>
+            </View>
+          );
+        })
+      ) : (
+        <ActivityIndicator style={styles.loading} size="large" color="#007AFF" />
+      )}
     </View>
   );
 }
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     width: windowWidth,
-    height: windowHeight
+    height: windowHeight,
   },
   cardContainer: {
     ...StyleSheet.absoluteFillObject,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     width: '80%',
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 24
+    fontSize: 24,
   },
   loading: {
     position: 'absolute',
