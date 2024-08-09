@@ -4,26 +4,30 @@ This repository contains the SDUF React Native application. Follow the instructi
 
 ## Installation
 
-1. Clone the repository:
+1. Set Up Your Environment
+
+[Doc here](https://reactnative.dev/docs/next/set-up-your-environment)
+
+2. Clone the repository:
 
    ```sh
    git clone git@github.com:Dimakoua/sdufReactNative.git
    ```
 
-2. Navigate to the project directory:
+3. Navigate to the project directory:
 
    ```sh
    cd sdufReactNative
    ```
 
-3. Install the dependencies:
+4. Install the dependencies:
    ```sh
    npm install
    ```
 
 ## Configuration
 
-1. Register an account [here](https://demo-sduf.gigalixirapp.com).
+1. Register an account [here](http://144.126.138.185).
 
 2. Create a new project on the registration platform.
 
