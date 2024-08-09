@@ -33,9 +33,11 @@ This repository contains the SDUF React Native application. Follow the instructi
 
 3. Edit the \`.env\` file in the project directory with the project ID and token you received after creating the project.
 
-4. Inside the project, you can create a screen. **Note:** An 'index' screen is mandatory.
+4. In order to use maps, register and get an API key from [Maptiler](https://www.maptiler.com/)
 
-5. Open a screen and use the drag and drop feature available on the platform to set up one.
+5. Inside the project, you can create a screen. **Note:** An 'index' screen is mandatory.
+
+6. Open a screen and use the drag and drop feature available on the platform to set up one.
 
 ## Running the Application
 
