@@ -39,12 +39,25 @@ This repository contains the SDUF React Native application. Follow the instructi
 
 6. Open a screen and use the drag and drop feature available on the platform to set up one.
 
-## Running the Application
+## Running the Application Android
 
 To run the application on an Android device or emulator, execute the following command:
 
 ```sh
 npx react-native run-android
+```
+
+## Running the Application IOS (WIP)
+
+To run the application on an Android device or emulator, execute the following command:
+
+```sh
+cd ios && NO_FLIPPER=1 pod install
+```
+
+From root dir
+```sh
+npm run ios 
 ```
 
 ## Prettier
