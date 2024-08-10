@@ -4,8 +4,27 @@ import PushNotification from 'react-native-push-notification';
 import store from '../redux/store';
 import { PermissionsAndroid, Platform } from 'react-native';
 import { URL, SOCKET_PROJECT_TOKEN } from '@env';
+// import firebase from '@react-native-firebase/app';
 
 const LOCAL_CHANNEL_ID = 'defaultLocalPushesChannelName';
+
+// export const initFirebase = async () => {
+//   const firebaseConfig = {
+//     apiKey: "YOUR_API_KEY",
+//     authDomain: "YOUR_AUTH_DOMAIN",
+//     projectId: "YOUR_PROJECT_ID",
+//     storageBucket: "YOUR_STORAGE_BUCKET",
+//     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+//     appId: "YOUR_APP_ID",
+//     measurementId: "YOUR_MEASUREMENT_ID"
+//   };
+
+//   if (!firebase.apps.length) {
+//     await firebase.initializeApp(firebaseConfig);
+//   } else {
+//     firebase.app(); // if already initialized, use that one
+//   }
+// };
 
 export const checkApplicationPermission = async () => {
   if (Platform.OS === 'android') {
