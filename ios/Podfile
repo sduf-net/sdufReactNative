@@ -25,6 +25,8 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+use_modular_headers!
+
 target 'sdufNative' do
   config = use_native_modules!
 
@@ -45,6 +47,7 @@ target 'sdufNative' do
   end
 
   post_install do |installer|
+    $RCTMLN.post_install(installer)
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
