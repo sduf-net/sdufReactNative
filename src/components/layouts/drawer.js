@@ -1,42 +1,45 @@
 import React, { memo, useEffect, useRef } from 'react';
 import { DrawerLayoutAndroid, StyleSheet, Text, View, VirtualizedList } from 'react-native';
 import { getItem, getItemCount } from '../../utils';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
+import ComponentFactory from '../factory';
+import { selectDrawer } from '../../redux/screens';
 
-function CustomDrawer(config) {
-  const { data, children, nestedComponents } = config;
-
+function CustomDrawer({ children }) {
   const drawer = useRef(null);
+  const drawerData = useSelector((state) => selectDrawer(state), shallowEqual);
   const showDrawer = useSelector((state) => state.drawer.showDrawer);
 
-  const drawerPosition = data?.drawer_position || 'left';
+  const drawerPosition = drawerData?.drawer_position || 'left';
+  const drawerWidth = drawerData?.drawer_width || 300;
+  const drawerLockMode = drawerData?.drawer_lock_mode || 'unlocked';
 
-  const renderWidget = ({ item }) => <config.factory props={item} />;
+  const renderWidget = ({ item }) => <ComponentFactory props={item} />;
 
   useEffect(() => {
-    if(showDrawer === true) drawer.current.openDrawer();
-    if(showDrawer === false) drawer.current.closeDrawer();
+    if (showDrawer === true) drawer.current.openDrawer();
+    if (showDrawer === false) drawer.current.closeDrawer();
   }, [showDrawer])
 
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>
-      <VirtualizedList
+      {drawerData ? (<VirtualizedList
         style={styles.settingOption}
-        data={nestedComponents}
+        data={drawerData.nestedComponents}
         contentContainerStyle={[styles.content]}
         renderItem={renderWidget}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
         getItem={getItem}
-      />
+      />) : null}
     </View>
   );
 
   return (
     <DrawerLayoutAndroid
       ref={drawer}
-      drawerWidth={300}
-      drawerLockMode="unlocked"
+      drawerWidth={drawerWidth}
+      drawerLockMode={drawerLockMode}
       drawerPosition={drawerPosition}
       renderNavigationView={navigationView}>
       {children}

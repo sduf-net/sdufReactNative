@@ -4,7 +4,8 @@ import { isEmpty } from '../components/helpers/utils';
 
 const FixedTop = 'FixedTop';
 const FixedBottom = 'FixedBottom';
-const excludeWidgets = [FixedTop, FixedBottom];
+const Drawer = 'Drawer';
+const excludeWidgets = [FixedTop, FixedBottom, Drawer];
 
 const initialState = {
   loading: false,
@@ -34,6 +35,23 @@ export const screens = createSlice({
       state.screens = { ...state.screens, [value.payload.id]: value.payload };
       state.loading = false;
     },
+    // function findComponentIndex(components, parentId) {
+    //   for (let i = 0; i < components.length; i++) {
+    //     if (components[i].id === parentId) {
+    //       return { index: i, parentComponents: components };
+    //     }
+    
+    //     // Recursively search in nested components
+    //     if (components[i].nestedComponents && components[i].nestedComponents.length > 0) {
+    //       const result = findComponentIndex(components[i].nestedComponents, parentId);
+    //       if (result) {
+    //         return result;
+    //       }
+    //     }
+    //   }
+    
+    //   return null;
+    // }
     insertBefore: (state, value) => {
       const screen = state.screens[value.payload.screen_id];
       let index = screen.nestedComponents.findIndex(
@@ -162,4 +180,10 @@ export const selectCurrentScreen = (state) => {
 export const selectCurrentScreenByName = (state, name) => {
   if (state.screens.currentScreenId === null || isEmpty(state.screens)) return [];
   return Object.values(state.screens).filter((item) => item.name === name);
+};
+export const selectDrawer = (state) => {
+  if (state.screens.currentScreenId === null) return [];
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+    (widget) => widget.name == Drawer
+  );
 };

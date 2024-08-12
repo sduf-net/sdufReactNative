@@ -18,6 +18,8 @@ import {
   requestCurrentPositionCallback,
   showErrorMessageCallback,
   screenSilentUpdateCallback,
+  openDrawerCallback,
+  closeDrawerCallback,
 } from './actionCallbacks';
 
 // FIXME push event must have same format for all event
@@ -97,6 +99,8 @@ const callbacks = [
   { event_name: 'logout', callback: logOutCallback },
   { event_name: 'open_popup', callback: openPopupCallback },
   { event_name: 'close_popup', callback: closePopupCallback },
+  { event_name: 'open_drawer', callback: openDrawerCallback },
+  { event_name: 'close_drawer', callback: closeDrawerCallback },
   { event_name: 'openScreen', callback: openScreenCallback },
   { event_name: 'screen_received', callback: screenReceivedCallback },
   { event_name: 'screen_silent_update', callback: screenSilentUpdateCallback },
