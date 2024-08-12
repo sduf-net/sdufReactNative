@@ -1,11 +1,13 @@
 import React, { memo, useEffect, useRef } from 'react';
 import { DrawerLayoutAndroid, StyleSheet, Text, View, VirtualizedList } from 'react-native';
 import { getItem, getItemCount } from '../../utils';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from '../factory';
 import { selectDrawer } from '../../redux/screens';
+import { hideDrawer } from '../../redux/drawer';
 
 function CustomDrawer({ children }) {
+  const dispatch = useDispatch();
   const drawer = useRef(null);
   const drawerData = useSelector((state) => selectDrawer(state), shallowEqual);
   const showDrawer = useSelector((state) => state.drawer.showDrawer);
@@ -41,6 +43,7 @@ function CustomDrawer({ children }) {
       drawerWidth={drawerWidth}
       drawerLockMode={drawerLockMode}
       drawerPosition={drawerPosition}
+      onDrawerClose={() => dispatch(hideDrawer())}
       renderNavigationView={navigationView}>
       {children}
     </DrawerLayoutAndroid>
