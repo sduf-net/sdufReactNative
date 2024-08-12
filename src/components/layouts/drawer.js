@@ -4,7 +4,7 @@ import { getItem, getItemCount } from '../../utils';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from '../factory';
 import { selectDrawer } from '../../redux/screens';
-import { hideDrawer } from '../../redux/drawer';
+import { hideDrawer, showDrawer as openDrawer } from '../../redux/drawer';
 
 function CustomDrawer({ children }) {
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ function CustomDrawer({ children }) {
       drawerLockMode={drawerLockMode}
       drawerPosition={drawerPosition}
       onDrawerClose={() => dispatch(hideDrawer())}
+      onDrawerOpen={() => dispatch(openDrawer())}
       renderNavigationView={navigationView}>
       {children}
     </DrawerLayoutAndroid>
