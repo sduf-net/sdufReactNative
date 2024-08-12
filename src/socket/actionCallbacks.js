@@ -8,6 +8,7 @@ import {
 } from '../redux/screens';
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
 import { hideModalWindow, setModalWindowWidgets, showModalWindow } from '../redux/modalWindow';
+import { hideDrawer, setDrawerWidgets, showDrawer } from '../redux/drawer';
 import { logOut, setCurrentUser } from '../redux/users';
 import { setMarkers } from '../redux/map';
 import store from '../redux/store';
@@ -54,7 +55,7 @@ export const logInCallback = (data) => {
   joinToUserChannel(data.id);
   store.dispatch(setCurrentUser({ id: data.id, token: data.token }));
 };
-export const logOutCallback = (data) => {
+export const logOutCallback = (_) => {
   store.dispatch(logOut());
   //todo review
   rootNavigation.navigate('Index', {
@@ -85,14 +86,21 @@ export const openPopupCallback = (data) => {
   store.dispatch(showModalWindow());
   store.dispatch(setModalWindowWidgets({ nestedComponents: data.widget }));
 };
-export const closePopupCallback = (data) => {
+export const closePopupCallback = (_) => {
   store.dispatch(hideModalWindow());
+};
+export const openDrawerCallback = (data) => {
+  store.dispatch(showDrawer());
+  store.dispatch(setDrawerWidgets({ nestedComponents: data.widget }));
+};
+export const closeDrawerCallback = (_) => {
+  store.dispatch(hideDrawer());
 };
 export const showFloatCardCallback = (data) => {
   store.dispatch(showFloatCard());
   store.dispatch(setFloatCardWidgets({ nestedComponents: data.widget }));
 };
-export const hideFloatCardCallback = (data) => {
+export const hideFloatCardCallback = (_) => {
   store.dispatch(hideFloatCard());
 };
 export const openScreenCallback = (data) => {

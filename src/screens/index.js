@@ -1,7 +1,8 @@
-import { Dimensions, StyleSheet, View, DeviceEventEmitter, Text } from 'react-native';
+import { Dimensions, StyleSheet, View, DeviceEventEmitter } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
+import CustomDrawer from '../components/layouts/drawer';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,6 @@ import CustomModal from '../components/layouts/modalWindow';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
 import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
-import useErrors from '../hooks/useErrors';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 
@@ -23,7 +23,6 @@ export default function IndexScreen() {
   const route = useRoute();
   const userId = useSelector((state) => state.user.id, shallowEqual);
   const screensState = useSelector((state) => state.screens, shallowEqual);
-  // const { newError } = useErrors()
 
   const [loading, setLoading] = useState(true);
   const [forceLoading, setForceLoading] = useState(false);
@@ -91,11 +90,13 @@ export default function IndexScreen() {
 
   return (
     <View style={[styles.container]}>
-      <FixedTop />
-      <WidgetList onRefresh={onRefresh} />
-      <FixedBottom onLayout={onFooterLayout} />
-      <FloatingCard />
-      <CustomModal />
+      <CustomDrawer>
+        <FixedTop />
+        <WidgetList onRefresh={onRefresh} />
+        <FixedBottom onLayout={onFooterLayout} />
+        <FloatingCard />
+        <CustomModal />
+      </CustomDrawer>
     </View>
   );
 }

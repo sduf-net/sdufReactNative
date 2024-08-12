@@ -6,6 +6,7 @@ import floatCardReducer from './floatCard';
 import currentMapReducer from './map';
 import modalWindowReducer from './modalWindow';
 import ErrorsReducer from './errors';
+import drawerReducer from './drawer';
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     map: currentMapReducer,
     modalWindow: modalWindowReducer,
     errors: ErrorsReducer,
+    drawer: drawerReducer
   },
 });
