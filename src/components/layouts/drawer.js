@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useRef } from 'react';
-import { DrawerLayoutAndroid, StyleSheet, Text, View, VirtualizedList } from 'react-native';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { DrawerLayoutAndroid, StyleSheet, View, VirtualizedList } from 'react-native';
 import { getItem, getItemCount } from '../../utils';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from '../factory';
@@ -9,12 +9,23 @@ import { hideDrawer, showDrawer as openDrawer } from '../../redux/drawer';
 function CustomDrawer({ children }) {
   const dispatch = useDispatch();
   const drawer = useRef(null);
-  const drawerData = useSelector((state) => selectDrawer(state), shallowEqual);
+  const drawerDataFromScreen = useSelector((state) => selectDrawer(state), shallowEqual);
+  const drawerDataFromApi = useSelector((state) => state.drawer, shallowEqual);
   const showDrawer = useSelector((state) => state.drawer.showDrawer);
+  const [nestedComponents, setnestedComponents] = useState([]);
 
-  const drawerPosition = drawerData?.drawer_position || 'left';
-  const drawerWidth = drawerData?.drawer_width || 300;
-  const drawerLockMode = drawerData?.drawer_lock_mode || 'unlocked';
+  const drawerPosition = drawerDataFromScreen?.drawer_position || 'left';
+  const drawerWidth = drawerDataFromScreen?.drawer_width || 300;
+  const drawerLockMode = drawerDataFromScreen?.drawer_lock_mode || 'unlocked';
+
+  useEffect(() => {
+    if(drawerDataFromApi.nestedComponents.length){
+      setnestedComponents(drawerDataFromApi.nestedComponents);
+    } else {
+      if(!drawerDataFromScreen?.nestedComponents) return;
+      setnestedComponents(drawerDataFromScreen.nestedComponents);
+    }
+  }, [drawerDataFromScreen, drawerDataFromApi])
 
   const renderWidget = ({ item }) => <ComponentFactory props={item} />;
 
@@ -25,9 +36,9 @@ function CustomDrawer({ children }) {
 
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>
-      {drawerData ? (<VirtualizedList
+      {nestedComponents ? (<VirtualizedList
         style={styles.settingOption}
-        data={drawerData.nestedComponents}
+        data={nestedComponents}
         contentContainerStyle={[styles.content]}
         renderItem={renderWidget}
         keyExtractor={(item) => item.id}
