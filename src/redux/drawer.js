@@ -31,10 +31,13 @@ export const drawer = createSlice({
         state.nestedComponents.push(value.payload.nestedComponents);
       }
     },
+    resetDrawerWidgets: (state, value) => {
+      state.nestedComponents = [];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { showDrawer, hideDrawer, setDrawerWidgets } = drawer.actions;
+export const { showDrawer, hideDrawer, setDrawerWidgets, resetDrawerWidgets } = drawer.actions;
 
 export default drawer.reducer;

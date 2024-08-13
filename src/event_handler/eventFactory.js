@@ -7,13 +7,17 @@ import {
   REQUEST_WIDGET,
   ROUTE_BACK,
   ROUTE_TO_LOCAL,
+  NAVIGATE_TO,
   SUBMIT_FORM,
+  OPEN_DRAWER,
+  CLOSE_DRAWER
 } from '../socket/actionName';
 import store from '../redux/store';
 import { hideFloatCard } from '../redux/floatCard';
 import { getUserChannel } from '../socket/userChannel';
 import { pushEventToChannel } from '../socket/socketAction';
 import { hideModalWindow } from '../redux/modalWindow';
+import { hideDrawer, resetDrawerWidgets, showDrawer } from '../redux/drawer';
 
 const userId = store.getState().user.id;
 
@@ -21,6 +25,7 @@ const userId = store.getState().user.id;
 const onRouteSideActions = () => {
   store.dispatch(hideFloatCard());
   store.dispatch(hideModalWindow());
+  store.dispatch(hideDrawer());
 };
 
 const routeToLocalFormCallback = (event, navigation, route) => {
@@ -90,6 +95,13 @@ const submitFormCallback = async (event, navigation, route) => {
     payload: event.form,
   });
 };
+const openDrawerCallback = async (event, navigation, route) => {
+  store.dispatch(showDrawer());
+  store.dispatch(resetDrawerWidgets([]));
+};
+const closeDrawerCallback = async (event, navigation, route) => {
+  store.dispatch(hideDrawer());
+};
 const defaultCallback = (event, navigation, route) => {
   console.log('defaultCallback', event);
 };
@@ -102,8 +114,11 @@ const map = {
   [PAGINATION]: paginationCallback,
   [REQUEST_WIDGET]: requestWidgetCallback,
   [SUBMIT_FORM]: submitFormCallback,
+  [NAVIGATE_TO]: routeToLocalFormCallback,
   [ROUTE_TO_LOCAL]: routeToLocalFormCallback,
   [ROUTE_BACK]: routeBackFormCallback,
+  [OPEN_DRAWER]: openDrawerCallback,
+  [CLOSE_DRAWER]: closeDrawerCallback,
 };
 
 // PUBLIC
