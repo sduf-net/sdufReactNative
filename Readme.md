@@ -1,5 +1,17 @@
 # SDUF React Native Application
 
+Mobile Server-Driven UI Application This project is a mobile application that leverages server-driven UI principles, allowing users to configure and display screens dynamically through a web panel. By decoupling the user interface from the application logic, the app provides flexibility and adaptability
+
+<p align="center">
+   <img src="./readme_assets/getting_started.png" width="550">
+   <img src="./readme_assets/project_list.png" width="550">
+   <img src="./readme_assets/config.png" width="550">
+   <img src="./readme_assets/generate_build.png" width="550">
+   <img src="./readme_assets/logs.png" width="550">
+   <img src="./readme_assets/constructor.png" width="550">
+   <img src="./readme_assets/mobile.jpg" height="450">
+</p>
+
 This repository contains the SDUF React Native application. Follow the instructions below to set up and run the project.
 
 ## Installation
