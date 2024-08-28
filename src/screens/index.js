@@ -1,5 +1,5 @@
-import { Dimensions, StyleSheet, View, DeviceEventEmitter } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import { Dimensions, StyleSheet, View, BackHandler, DeviceEventEmitter } from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
 import CustomDrawer from '../components/layouts/drawer';
@@ -27,6 +27,18 @@ export default function IndexScreen() {
   const [loading, setLoading] = useState(true);
   const [forceLoading, setForceLoading] = useState(false);
 
+  const lastPressTime = useRef(0);
+  const debounceTime = 500; // milliseconds
+
+  const handleBackPress = () => {
+    const currentTime = new Date().getTime();
+    if (lastPressTime.current && currentTime - lastPressTime.current > debounceTime) {
+      navigation.goBack();
+    }
+    lastPressTime.current = currentTime;
+    return true;
+  };
+
   const onRefresh = useCallback(() => {
     DeviceEventEmitter.emit('onRefresh', true);
     setLoading(true);
@@ -38,6 +50,12 @@ export default function IndexScreen() {
 
     getScreen(forceLoading);
   }, [loading, forceLoading]);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => backHandler.remove();
+  }, []);
 
   // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
   useFocusEffect(
