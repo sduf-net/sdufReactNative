@@ -27,15 +27,14 @@ export default function IndexScreen() {
   const [loading, setLoading] = useState(true);
   const [forceLoading, setForceLoading] = useState(false);
 
-  const lastPressTime = useRef(0);
+  const lastPressTime = useRef(new Date().getTime());
   const debounceTime = 500; // milliseconds
 
   const handleBackPress = () => {
     const currentTime = new Date().getTime();
-    if (lastPressTime.current && currentTime - lastPressTime.current > debounceTime) {
+    if (currentTime - lastPressTime.current > debounceTime) {
       navigation.goBack();
     }
-    lastPressTime.current = currentTime;
     return true;
   };
 
