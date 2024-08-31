@@ -17,6 +17,6 @@ export default configureStore({
     map: currentMapReducer,
     modalWindow: modalWindowReducer,
     errors: ErrorsReducer,
-    drawer: drawerReducer
+    drawer: drawerReducer,
   },
 });

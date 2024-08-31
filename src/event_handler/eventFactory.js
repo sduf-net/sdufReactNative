@@ -10,7 +10,7 @@ import {
   NAVIGATE_TO,
   SUBMIT_FORM,
   OPEN_DRAWER,
-  CLOSE_DRAWER
+  CLOSE_DRAWER,
 } from '../socket/actionName';
 import store from '../redux/store';
 import { hideFloatCard } from '../redux/floatCard';

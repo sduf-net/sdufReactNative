@@ -40,7 +40,7 @@ export const screens = createSlice({
     //     if (components[i].id === parentId) {
     //       return { index: i, parentComponents: components };
     //     }
-    
+
     //     // Recursively search in nested components
     //     if (components[i].nestedComponents && components[i].nestedComponents.length > 0) {
     //       const result = findComponentIndex(components[i].nestedComponents, parentId);
@@ -49,7 +49,7 @@ export const screens = createSlice({
     //       }
     //     }
     //   }
-    
+
     //   return null;
     // }
     insertBefore: (state, value) => {

@@ -19,32 +19,34 @@ function CustomDrawer({ children }) {
   const drawerLockMode = drawerDataFromScreen?.drawer_lock_mode || 'unlocked';
 
   useEffect(() => {
-    if(drawerDataFromApi.nestedComponents.length){
+    if (drawerDataFromApi.nestedComponents.length) {
       setnestedComponents(drawerDataFromApi.nestedComponents);
     } else {
-      if(!drawerDataFromScreen?.nestedComponents) return;
+      if (!drawerDataFromScreen?.nestedComponents) return;
       setnestedComponents(drawerDataFromScreen.nestedComponents);
     }
-  }, [drawerDataFromScreen, drawerDataFromApi])
+  }, [drawerDataFromScreen, drawerDataFromApi]);
 
   const renderWidget = ({ item }) => <ComponentFactory props={item} />;
 
   useEffect(() => {
     if (showDrawer === true) drawer.current.openDrawer();
     if (showDrawer === false) drawer.current.closeDrawer();
-  }, [showDrawer])
+  }, [showDrawer]);
 
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>
-      {nestedComponents ? (<VirtualizedList
-        style={styles.settingOption}
-        data={nestedComponents}
-        contentContainerStyle={[styles.content]}
-        renderItem={renderWidget}
-        keyExtractor={(item) => item.id}
-        getItemCount={getItemCount}
-        getItem={getItem}
-      />) : null}
+      {nestedComponents ? (
+        <VirtualizedList
+          style={styles.settingOption}
+          data={nestedComponents}
+          contentContainerStyle={[styles.content]}
+          renderItem={renderWidget}
+          keyExtractor={(item) => item.id}
+          getItemCount={getItemCount}
+          getItem={getItem}
+        />
+      ) : null}
     </View>
   );
 
@@ -56,7 +58,8 @@ function CustomDrawer({ children }) {
       drawerPosition={drawerPosition}
       onDrawerClose={() => dispatch(hideDrawer())}
       onDrawerOpen={() => dispatch(openDrawer())}
-      renderNavigationView={navigationView}>
+      renderNavigationView={navigationView}
+    >
       {children}
     </DrawerLayoutAndroid>
   );
