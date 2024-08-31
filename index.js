@@ -10,6 +10,10 @@ import {
     setBackgroundMessageHandler
 } from './src/push_notfication';
 
+if (__DEV__) {
+    require("./ReactotronConfig");
+}
+
 createNotificationChannels();
 // Register background handler
 setBackgroundMessageHandler();

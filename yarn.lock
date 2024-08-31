@@ -6347,6 +6347,11 @@ minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
+mitt@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.1.tgz#ea36cf0cc30403601ae074c8f77b7092cdab36d1"
+  integrity sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==
+
 mixin-object@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
@@ -7069,6 +7074,11 @@ react-native-dotenv@^3.4.10:
   dependencies:
     dotenv "^16.4.5"
 
+react-native-flipper@^0.164.0:
+  version "0.164.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.164.0.tgz#64f6269a86a13a72e30f53ba9f5281d2073a7697"
+  integrity sha512-iJhIe3rqx6okuzBp4AJsTa2b8VRAOGzoLRFx/4HGbaGvu8AurZjz8TTQkhJsRma8dsHN2b6KKZPvGGW3wdWzvA==
+
 react-native-fs@^2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.20.0.tgz#05a9362b473bfc0910772c0acbb73a78dbc810f6"
@@ -7304,6 +7314,28 @@ react@18.2.0:
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
+
+reactotron-core-client@2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/reactotron-core-client/-/reactotron-core-client-2.9.4.tgz#eabc520ca8b270ee264e20172279f921778b0a4b"
+  integrity sha512-0MVo8R2YVC0t6uEkFJbdelC0lOzJun/+qIOlEpIYh08VKiNVR7GYXevhZvJfSmMAUSVFoGVpeQyTbeW3brgSDQ==
+  dependencies:
+    reactotron-core-contract "0.2.4"
+
+reactotron-core-contract@0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/reactotron-core-contract/-/reactotron-core-contract-0.2.4.tgz#c7038ce6bac5b8674b462895d7fe5e30661b24e8"
+  integrity sha512-CmNYahBdk9uES4vimlRsoM1gAQA6T5gXTuJzDvduOjKd0IZufZjkxzBAvhpkX5OIkPl4Xlsv+1AHXLWSJSwFLA==
+
+reactotron-react-native@^5.1.8:
+  version "5.1.8"
+  resolved "https://registry.yarnpkg.com/reactotron-react-native/-/reactotron-react-native-5.1.8.tgz#4b32642c57904888fd832e2f946a60915a6e198c"
+  integrity sha512-f3UYe/SHafHv1jDz/+rvIdfC3dk2xhVKrXqIFc3r3o+Vs0FtV5WsUBrUUhbx0oFho2hyHT5LFzUA78o4q4TGpg==
+  dependencies:
+    mitt "^3.0.1"
+    reactotron-core-client "2.9.4"
+  optionalDependencies:
+    react-native-flipper "^0.164.0"
 
 readable-stream@^3.4.0:
   version "3.6.2"
