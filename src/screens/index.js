@@ -13,6 +13,7 @@ import { getUserChannel } from '../socket/userChannel';
 import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
+import useBackPress from '../hooks/useBackPress';
 
 const INDEX_SCREEN = 'index';
 
@@ -27,38 +28,20 @@ export default function IndexScreen() {
   const [loading, setLoading] = useState(true);
   const [forceLoading, setForceLoading] = useState(false);
 
-  const lastPressTime = useRef(new Date().getTime());
-  const debounceTime = 500; // milliseconds
-
-  const handleBackPress = () => {
-    const currentTime = new Date().getTime();
-    if (currentTime - lastPressTime.current > debounceTime) {
-      if (navigation.canGoBack()) {
-        navigation.goBack();
-      } else {
-        BackHandler.exitApp();
-      }
+  // Use the custom back press hook with a custom callback
+  useBackPress(() => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      BackHandler.exitApp();
     }
-    return true;
-  };
-
-  const onRefresh = useCallback(() => {
-    DeviceEventEmitter.emit('onRefresh', true);
-    setLoading(true);
-    setForceLoading(true);
-  }, []);
+  });
 
   useEffect(() => {
     if (!loading) return;
 
     getScreen(forceLoading);
   }, [loading, forceLoading]);
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
-
-    return () => backHandler.remove();
-  }, []);
 
   // Використовуємо useFocusEffect для додавання слухача при фокусуванні на екрані
   useFocusEffect(
@@ -71,11 +54,18 @@ export default function IndexScreen() {
     }, [navigation])
   );
 
+  const onRefresh = useCallback(() => {
+    DeviceEventEmitter.emit('onRefresh', true);
+    setLoading(true);
+    setForceLoading(true);
+  }, []);
+
   const getScreen = useCallback((isReload) => {
     const queryString = route?.params || null;
     const screenName = route?.params?.screenName || INDEX_SCREEN;
 
     const screen = selectCurrentScreenByName(screensState, screenName);
+    console.log('screen', screen)
     if (screen.length && !isReload) {
       dispatch(setCurrentScreenId(screen[0].id));
     } else {

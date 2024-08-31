@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { BackHandler } from 'react-native';
 
 const useBackPress = (onBackPress, debounceTime = 500) => {
-  const lastPressTime = useRef(0);
+  const lastPressTime = useRef(new Date().getTime());
 
   useEffect(() => {
     const handleBackPress = () => {
