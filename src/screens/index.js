@@ -33,7 +33,11 @@ export default function IndexScreen() {
   const handleBackPress = () => {
     const currentTime = new Date().getTime();
     if (currentTime - lastPressTime.current > debounceTime) {
-      navigation.goBack();
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        BackHandler.exitApp();
+      }
     }
     return true;
   };
