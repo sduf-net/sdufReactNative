@@ -70,6 +70,8 @@ export const screenReceivedCallback = (data) => {
       id: data.id,
       name: data.name,
       nestedComponents: data.nestedComponents,
+      config: data.config,
+      insertedAt: new Date().getTime(),
     })
   );
 };
@@ -79,6 +81,8 @@ export const screenSilentUpdateCallback = (data) => {
       id: data.id,
       name: data.name,
       nestedComponents: data.nestedComponents,
+      config: data.config,
+      insertedAt: new Date().getTime(),
     })
   );
 };
