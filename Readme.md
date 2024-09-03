@@ -37,6 +37,16 @@ This repository contains the SDUF React Native application. Follow the instructi
    npm install
    ```
 
+## Yanr
+To dowload yarn release remove
+   ```sh
+  "packageManager": "yarn@3.6.4"
+   ```
+ from package.json and run
+   ```sh
+   yarn set version 3.6.4
+   ```
+
 ## Configuration
 
 1. Register an account [here](http://144.126.138.185).
