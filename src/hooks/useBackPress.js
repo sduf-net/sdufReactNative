@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { BackHandler } from 'react-native';
 
-const useBackPress = (onBackPress, debounceTime = 500) => {
+const useBackPress = (onBackPress, debounceTime = 1000) => {
   const lastPressTime = useRef(new Date().getTime());
 
   useEffect(() => {

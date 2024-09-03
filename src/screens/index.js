@@ -14,6 +14,7 @@ import { GET_SCREEN_BY_NAME } from '../socket/actionName';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
+import { isLoadFromCache } from '../utils/cache';
 
 const INDEX_SCREEN = 'index';
 
@@ -65,8 +66,7 @@ export default function IndexScreen() {
     const screenName = route?.params?.screenName || INDEX_SCREEN;
 
     const screen = selectCurrentScreenByName(screensState, screenName);
-    console.log('screen', screen)
-    if (screen.length && !isReload) {
+    if (screen.length && !isReload && isLoadFromCache(screen[0])) {
       dispatch(setCurrentScreenId(screen[0].id));
     } else {
       pushEventToChannel(getUserChannel(), {
