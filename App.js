@@ -7,17 +7,17 @@
  */
 
 import MainStack from './src/navigation/navigate';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './src/redux/store';
-import React, {useEffect, useState} from 'react';
-import {getFCMToken, notificationListener} from './src/push_notfication';
-import {generateOrRestoreUserToState} from './src/auth/auth';
-import {closeConnection, initSocketConnection} from './src/socket/userConn';
-import {joinToUserChannel} from './src/socket/userChannel';
+import React, { useEffect, useState } from 'react';
+import { getFCMToken, notificationListener } from './src/push_notfication';
+import { closeConnection, initSocketConnection } from './src/socket/userConn';
+import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/widgets/errorMessage';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {AppState} from 'react-native';
-import {joinToAllScreenChannels} from './src/socket/screenChannel';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AppState } from 'react-native';
+import { joinToAllScreenChannels } from './src/socket/screenChannel';
+import { Persistor } from './src/redux/persistor';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,7 @@ export default function App() {
   }, []);
 
   const loadDataBeforeStart = async () => {
-    await generateOrRestoreUserToState();
+    await Persistor.restoreStore();
     await getFCMToken();
     await reconnect();
   };
@@ -67,7 +67,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <ErrorComponent>
-        <GestureHandlerRootView style={{flex: 1}}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <MainStack />
         </GestureHandlerRootView>
       </ErrorComponent>

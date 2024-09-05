@@ -7,8 +7,10 @@ import currentMapReducer from './map';
 import modalWindowReducer from './modalWindow';
 import ErrorsReducer from './errors';
 import drawerReducer from './drawer';
+import { Persistor } from './persistor';
+import { isEmpty } from '../components/helpers/utils';
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     screens: screensReducer,
     floatCard: floatCardReducer,
@@ -18,5 +20,15 @@ export default configureStore({
     modalWindow: modalWindowReducer,
     errors: ErrorsReducer,
     drawer: drawerReducer,
-  },
+  }
 });
+
+
+store.subscribe(() => {
+  Persistor.persist(Persistor.USER, store.getState().user);
+
+  if (isEmpty(store.getState().screens.screens)) return;
+  Persistor.persist(Persistor.SCREENS, store.getState().screens.screens);
+});
+
+export default store;
