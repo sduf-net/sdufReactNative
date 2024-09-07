@@ -7,7 +7,7 @@ function Footer({ data }) {
   const renderWidget = ({ item }) => (
     <CustomTouchableOpacity data={item} style={[styles.tile]}>
       <Image source={{ uri: item.src }} style={[styles.img]} />
-      <Text>{item.label}</Text>
+      {item.label && <Text>{item.label}</Text>}
     </CustomTouchableOpacity>
   );
   const getItemCount = (item) => item.length || 0;
