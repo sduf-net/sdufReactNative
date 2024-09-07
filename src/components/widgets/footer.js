@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
-import { Image, StyleSheet, View, VirtualizedList } from 'react-native';
+import { Image, StyleSheet, View, VirtualizedList, Text } from 'react-native';
 import uuid from 'react-native-uuid';
 import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
 function Footer({ data }) {
   const renderWidget = ({ item }) => (
-    <CustomTouchableOpacity data={item}>
+    <CustomTouchableOpacity data={item} style={[styles.tile]}>
       <Image source={{ uri: item.src }} style={[styles.img]} />
+      <Text>{item.label}</Text>
     </CustomTouchableOpacity>
   );
   const getItemCount = (item) => item.length || 0;
@@ -19,11 +20,7 @@ function Footer({ data }) {
       {data ? (
         <VirtualizedList
           data={data.images}
-          contentContainerStyle={[
-            styles.content_container,
-            styles.bgColor,
-            { backgroundColor: data?.style?.background },
-          ]}
+          contentContainerStyle={[{ backgroundColor: data?.style?.background }]}
           renderItem={renderWidget}
           keyExtractor={(item) => uuid.v4()}
           getItemCount={getItemCount}
@@ -38,19 +35,16 @@ function Footer({ data }) {
 export default memo(Footer);
 
 const styles = StyleSheet.create({
-  content_container: {
+  tile: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
-    paddingLeft: 10,
-    paddingRight: 10,
+    width: 100,
+    height: 60,
   },
   img: {
-    width: 30,
-    height: 30,
-  },
-  bgColor: {
-    backgroundColor: 'white',
+    width: 27,
+    height: 27,
+    marginBottom: 3,
   },
 });
