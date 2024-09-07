@@ -12,6 +12,7 @@ export default function Navigate() {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Screen
+          // options={{ headerShown: false, presentation: 'modal', animationTypeForReplace: 'push', animation: 'slide_from_left' }}
           options={{ headerShown: false, animation: 'none' }}
           name="Index"
           children={IndexScreen}
