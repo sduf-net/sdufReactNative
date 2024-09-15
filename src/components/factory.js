@@ -35,6 +35,7 @@ import TextAreaWidget from './widgets/form/textarea';
 import ImageLibraryWidget from './widgets/imageLibrary';
 import DateTimePickerWidget from './widgets/datepicker';
 import InputWithButton from './widgets/form/inputWithBtn';
+import ShareWidget from './widgets/share';
 
 const keysToComponentMap = {
   // layouts
@@ -76,6 +77,7 @@ const keysToComponentMap = {
   CustomWidget: WormholeWidget,
   CameraWidget: CameraWidget,
   ImageLibraryWidget: ImageLibraryWidget,
+  ShareWidget: ShareWidget,
 };
 
 function ComponentFactory(config) {
