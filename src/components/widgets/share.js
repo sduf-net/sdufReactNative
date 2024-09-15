@@ -1,10 +1,14 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Share, View, VirtualizedList } from 'react-native';
+import { Share, StyleSheet, View, VirtualizedList } from 'react-native';
 import { onShare } from '../../event_handler';
 import { getItem, getItemCount } from '../../utils';
+import OverlayContainer from './overlayContainer';
+import CustomTouchableOpacity from '../helpers/touchableOpacity';
 
-const ShareWidget = ({ data, nestedComponents }) => {
+const ShareWidget = (config) => {
+    const { data, nestedComponents } = config;
+
     const route = useRoute();
     const navigation = useNavigation();
 
@@ -25,6 +29,7 @@ const ShareWidget = ({ data, nestedComponents }) => {
             front={
                 <CustomTouchableOpacity
                     data={data}
+                    style={styles.pressable}
                     onPress={onShareHandler}
                 ></CustomTouchableOpacity>
             }
@@ -44,5 +49,13 @@ const ShareWidget = ({ data, nestedComponents }) => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    pressable: {
+      width: '100%',
+      height: '100%',
+    //   backgroundColor: 'red', // Semi-transparent overlay
+    },
+  });
 
 export default ShareWidget;
