@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
-import { DrawerLayoutAndroid, StyleSheet, View, VirtualizedList } from 'react-native';
+import { DrawerLayoutAndroid, StyleSheet, Text, View, VirtualizedList } from 'react-native';
 import { getItem, getItemCount } from '../../utils';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ComponentFactory from '../factory';
@@ -7,6 +7,8 @@ import { selectDrawer } from '../../redux/screens';
 import { hideDrawer, showDrawer as openDrawer } from '../../redux/drawer';
 
 function CustomDrawer({ children }) {
+  if(Platform.OS === 'ios') return <>{children}</>;
+
   const dispatch = useDispatch();
   const drawer = useRef(null);
   const drawerDataFromScreen = useSelector((state) => selectDrawer(state), shallowEqual);

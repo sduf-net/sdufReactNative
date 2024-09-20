@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "806458484305",
-    "project_id": "sduf-7d504",
-    "storage_bucket": "sduf-7d504.appspot.com"
+    "project_number": "222136333452",
+    "project_id": "sduf-messages",
+    "storage_bucket": "sduf-messages.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:806458484305:android:fd59e35395db50379f7a70",
+        "mobilesdk_app_id": "1:222136333452:android:0c8c9b63986e454d9ff7a9",
         "android_client_info": {
-          "package_name": "com.sduf.sduf"
+          "package_name": "com.sdufnative"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBVlqlFS14PSck_lZaVTUleWiuAjLhdkpM"
+          "current_key": "AIzaSyDmtu6EtHwESHAIfJ2MDQtwUWpB966PHI8"
         }
       ],
       "services": {

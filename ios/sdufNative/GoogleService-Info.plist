@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBH8B6A1L-8Rubzsb2cZB3tWEmqT-6xddY</string>
+	<string>AIzaSyAQGru8i9SeX5iT2xETv5551rFPIqmCa08</string>
 	<key>GCM_SENDER_ID</key>
-	<string>806458484305</string>
+	<string>222136333452</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sduf.sduf</string>
+	<string>com.sdufnative</string>
 	<key>PROJECT_ID</key>
-	<string>sduf-7d504</string>
+	<string>sduf-messages</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sduf-7d504.appspot.com</string>
+	<string>sduf-messages.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:806458484305:ios:9d171c317de64eb49f7a70</string>
+	<string>1:222136333452:ios:b34bbb02fbdad9a09ff7a9</string>
 </dict>
 </plist>
