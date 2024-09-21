@@ -18,6 +18,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppState } from 'react-native';
 import { joinToAllScreenChannels } from './src/socket/screenChannel';
 import { Persistor } from './src/redux/persistor';
+import { ThemeProvider } from 'react-native-magnus';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -65,12 +66,14 @@ export default function App() {
   if (loading) return null;
 
   return (
-    <Provider store={store}>
-      <ErrorComponent>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <MainStack />
-        </GestureHandlerRootView>
-      </ErrorComponent>
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <ErrorComponent>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <MainStack />
+          </GestureHandlerRootView>
+        </ErrorComponent>
+      </Provider>
+    </ThemeProvider>
   );
 }
