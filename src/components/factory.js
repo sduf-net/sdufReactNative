@@ -79,7 +79,7 @@ const keysToComponentMap = {
   CustomWidget: WormholeWidget,
   CameraWidget: CameraWidget,
   ImageLibraryWidget: ImageLibraryWidget,
-  ShareWidget: ShareWidget
+  ShareWidget: ShareWidget,
 };
 
 function ComponentFactory(config) {

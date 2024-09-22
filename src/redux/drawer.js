@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   nestedComponents: [],
-  showDrawer: false,
+  showDrawer: 0,
 };
 
 export const drawer = createSlice({
@@ -10,10 +10,10 @@ export const drawer = createSlice({
   initialState,
   reducers: {
     showDrawer: (state, _) => {
-      state.showDrawer = true;
+      state.showDrawer = state.showDrawer + 1;
     },
     hideDrawer: (state, _) => {
-      state.showDrawer = false;
+      state.showDrawer = 0;
     },
     setDrawerWidgets: (state, value) => {
       if (Array.isArray(value.payload.nestedComponents)) {

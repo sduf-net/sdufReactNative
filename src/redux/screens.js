@@ -182,11 +182,9 @@ export const selectCurrentScreenByName = (state, name) => {
   return Object.values(state.screens).filter((item) => item.name === name);
 };
 export const selectDrawer = (state) => {
-  console.log("selectDrawer")
   if (state.screens.currentScreenId === null) return [];
   const dd = state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
     (widget) => widget.name == Drawer
   );
-  console.log("DLDLDLLDLD", dd)
   return dd ?? [];
 };

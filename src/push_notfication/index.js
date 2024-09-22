@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import messaging from '@react-native-firebase/messaging';
+import messaging, { firebase } from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 import store from '../redux/store';
 import { PermissionsAndroid, Platform } from 'react-native';
@@ -8,23 +8,23 @@ import { URL, SOCKET_PROJECT_TOKEN } from '@env';
 
 const LOCAL_CHANNEL_ID = 'defaultLocalPushesChannelName';
 
-// export const initFirebase = async () => {
-//   const firebaseConfig = {
-//     apiKey: "YOUR_API_KEY",
-//     authDomain: "YOUR_AUTH_DOMAIN",
-//     projectId: "YOUR_PROJECT_ID",
-//     storageBucket: "YOUR_STORAGE_BUCKET",
-//     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-//     appId: "YOUR_APP_ID",
-//     measurementId: "YOUR_MEASUREMENT_ID"
-//   };
-
-//   if (!firebase.apps.length) {
-//     await firebase.initializeApp(firebaseConfig);
-//   } else {
-//     firebase.app(); // if already initialized, use that one
-//   }
-// };
+export const initFirebase = async () => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQGru8i9SeX5iT2xETv5551rFPIqmCa08",
+    authDomain: "sduf-messages.firebaseapp.com",
+    databaseURL: 'https://sduf-messages.firebaseio.com', // Add this line
+    projectId: "sduf-messages",
+    storageBucket: "sduf-messages.appspot.com",
+    messagingSenderId: "222136333452",
+    appId: "1:222136333452:ios:b34bbb02fbdad9a09ff7a9",
+    measurementId: ""
+  };
+  if (!firebase.apps.length) {
+    await firebase.initializeApp(firebaseConfig);
+  } else {
+    firebase.app(); // if already initialized, use that one
+  }
+};
 
 export const checkApplicationPermission = async () => {
   if (Platform.OS === 'android') {
