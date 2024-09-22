@@ -1,8 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { View, StyleSheet, VirtualizedList } from 'react-native';
-import { getItem, getItemCount } from '../../../utils';
+import { getItem, getItemCount } from '../../../../utils';
 import { useDispatch } from 'react-redux';
-import { setUpForm } from '../../../redux/form';
+import { setUpForm } from '../../../../redux/form';
 
 export default function FormWidget(config) {
   const dispatch = useDispatch();

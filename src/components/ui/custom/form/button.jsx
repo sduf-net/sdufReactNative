@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import { useDispatch, useStore } from 'react-redux';
-import { handleEventAction, onPress } from '../../../event_handler';
-import { resetForm, setForm } from '../../../redux/form';
+import { handleEventAction, onPress } from '../../../../event_handler';
+import { resetForm, setForm } from '../../../../redux/form';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function ButtonWidget({ data }) {

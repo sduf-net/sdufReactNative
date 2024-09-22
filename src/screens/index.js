@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet, View, BackHandler, DeviceEventEmitter } from 'r
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { pushEventToChannel } from '../socket/socketAction';
 import WidgetList from '../components/widgetList';
-import CustomDrawer from '../components/layouts/drawer';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -101,13 +100,11 @@ export default function IndexScreen() {
 
   return (
     <View style={[styles.container]}>
-      <CustomDrawer>
-        <FixedTop />
-        <WidgetList onRefresh={onRefresh} />
-        <FixedBottom onLayout={onFooterLayout} />
-        <FloatingCard />
-        <CustomModal />
-      </CustomDrawer>
+      <FixedTop />
+      <WidgetList onRefresh={onRefresh} />
+      <FixedBottom onLayout={onFooterLayout} />
+      <FloatingCard />
+      <CustomModal />
     </View>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TouchableOpacity } from 'react-native';
-import { onChange } from '../../event_handler';
+import { onChange } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function DateTimePickerWidget({ data }) {

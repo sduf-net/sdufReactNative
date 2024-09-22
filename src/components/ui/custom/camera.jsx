@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, VirtualizedList } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
-import useErrors from '../../hooks/useErrors';
-import { getItem, getItemCount } from '../../utils';
+import useErrors from '../../../hooks/useErrors';
+import { getItem, getItemCount } from '../../../utils';
 import OverlayContainer from './overlayContainer';
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 import { Buffer } from 'buffer';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
-import { onSelectImage } from '../../event_handler';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
+import { onSelectImage } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const CameraWidget = (config) => {

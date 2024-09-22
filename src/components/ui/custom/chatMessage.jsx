@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 function ChatMessage({ data }) {
   return (

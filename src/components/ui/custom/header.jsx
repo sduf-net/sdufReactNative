@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 function Header({ data }) {
   return (

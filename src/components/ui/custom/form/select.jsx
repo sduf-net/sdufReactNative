@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { setForm } from '../../../redux/form';
+import { setForm } from '../../../../redux/form';
 import { useDispatch } from 'react-redux';
-import { onChange } from '../../../event_handler';
+import { onChange } from '../../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function SelectWidget({ data }) {

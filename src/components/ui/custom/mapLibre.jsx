@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-nati
 import MapLibreGL, { UserLocation } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { styleURL } from '@env';
-import { handleEventAction } from '../../event_handler';
+import { handleEventAction } from '../../../event_handler';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { setMarkers } from '../../redux/map';
+import { setMarkers } from '../../../redux/map';
 MapLibreGL.setAccessToken(null);
 
 export default function MapWidget(config) {

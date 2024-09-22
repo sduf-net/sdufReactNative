@@ -4,7 +4,7 @@ import { isEmpty } from '../components/helpers/utils';
 
 const FixedTop = 'FixedTop';
 const FixedBottom = 'FixedBottom';
-const Drawer = 'Drawer';
+const Drawer = 'DrawerWidget';
 const excludeWidgets = [FixedTop, FixedBottom, Drawer];
 
 const initialState = {
@@ -182,8 +182,11 @@ export const selectCurrentScreenByName = (state, name) => {
   return Object.values(state.screens).filter((item) => item.name === name);
 };
 export const selectDrawer = (state) => {
+  console.log("selectDrawer")
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+  const dd = state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
     (widget) => widget.name == Drawer
   );
+  console.log("DLDLDLLDLD", dd)
+  return dd ?? [];
 };

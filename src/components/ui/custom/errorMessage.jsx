@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
-import useErrors from '../../hooks/useErrors';
+import useErrors from '../../../hooks/useErrors';
 
 const ErrorComponent = ({ children }) => {
   const { removeErrorByIndex } = useErrors();

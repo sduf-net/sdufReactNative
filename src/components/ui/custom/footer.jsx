@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Image, StyleSheet, View, VirtualizedList } from 'react-native';
 import uuid from 'react-native-uuid';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 function Footer({ data }) {
   const renderWidget = ({ item }) => (

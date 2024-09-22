@@ -7,7 +7,7 @@ import {
   onSwipedTop,
   onSwipedBottom,
   handleEventAction,
-} from '../../event_handler';
+} from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function TinderWidget({ data }) {

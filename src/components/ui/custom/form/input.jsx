@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { setForm } from '../../../redux/form';
+import { setForm } from '../../../../redux/form';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { onChange } from '../../../event_handler';
+import { onChange } from '../../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function InputWidget({ data }) {

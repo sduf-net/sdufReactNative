@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, FlatList } from 'react-native';
 import uuid from 'react-native-uuid';
 import Label1 from './label1';
 import Label2 from './label2';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 function ItemCard1({ data }) {
   const renderLabel = ({ item }) => <Label2 data={{ text: item.text }} />;

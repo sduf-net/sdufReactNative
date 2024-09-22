@@ -9,7 +9,6 @@ export default function Row(config) {
     <View style={[styles.container, { flexDirection: 'row' }]}>
       <VirtualizedList
         data={config.nestedComponents}
-        contentContainerStyle={[styles.justifyContent]}
         renderItem={renderWidget}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}

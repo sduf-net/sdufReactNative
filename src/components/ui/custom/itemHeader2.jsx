@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import uuid from 'react-native-uuid';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 function ItemHeader2({ data }) {
   const renderPrice = ({ item }) => (

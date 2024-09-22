@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, Image, StyleSheet, View } from 'react-native';
 import ImageView from 'react-native-image-viewing';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 
 export default function ImageWidget({ data }) {
   const [visible, setIsVisible] = useState(false);

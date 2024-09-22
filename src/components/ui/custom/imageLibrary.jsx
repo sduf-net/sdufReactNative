@@ -2,12 +2,12 @@ import React from 'react';
 import { Buffer } from 'buffer';
 import RNFS from 'react-native-fs';
 import { Platform } from 'react-native';
-import useErrors from '../../hooks/useErrors';
+import useErrors from '../../../hooks/useErrors';
 import OverlayContainer from './overlayContainer';
-import { getItem, getItemCount } from '../../utils';
-import { onSelectImage } from '../../event_handler';
+import { getItem, getItemCount } from '../../../utils';
+import { onSelectImage } from '../../../event_handler';
 import { launchImageLibrary } from 'react-native-image-picker';
-import CustomTouchableOpacity from '../helpers/touchableOpacity';
+import CustomTouchableOpacity from '../../helpers/touchableOpacity';
 import { View, StyleSheet, VirtualizedList } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 

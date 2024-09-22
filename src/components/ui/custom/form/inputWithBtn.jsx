@@ -1,8 +1,8 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { onChange, onSubmit } from '../../../event_handler';
-import useDebounced from '../../../hooks/useDebounced';
+import { onChange, onSubmit } from '../../../../event_handler';
+import useDebounced from '../../../../hooks/useDebounced';
 
 const InputWithButton = ({ data }) => {
   const [text, onChangeText] = useState(null);

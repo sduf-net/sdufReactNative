@@ -1,40 +1,42 @@
 import { createElement, memo, useCallback } from 'react';
-import Hr from './widgets/hr';
+import Hr from './ui/custom/hr';
 import Row from './layouts/row';
+import CustomDrawer from './layouts/drawer';
 import Wrap from './layouts/wrap';
-import Error from './widgets/error';
+import Error from './ui/custom/error';
 import Column from './layouts/column';
-import ApiWidget from './widgets/api';
-import Header from './widgets/header';
+import ApiWidget from './ui/custom/api';
+import Header from './ui/custom/header';
 import Center from './layouts/center';
-import Label1 from './widgets/label1';
-import Label2 from './widgets/label2';
-import Label3 from './widgets/label3';
-import ItemList from './widgets/list';
-import Footer from './widgets/footer';
-import TextWidget from './widgets/text';
-import ImageWidget from './widgets/image';
-import MapWidget from './widgets/mapLibre';
-import ItemCard1 from './widgets/itemCard1';
-import ItemCard2 from './widgets/itemCard2';
-import CameraWidget from './widgets/camera';
-import MyCarousel from './widgets/carousel';
-import FormWidget from './widgets/form/form';
-import WebViewWidget from './widgets/webView';
-import InputWidget from './widgets/form/input';
-import ItemHeader2 from './widgets/itemHeader2';
-import chatPreview from './widgets/chatPreview';
-import ChatMessage from './widgets/chatMessage';
-import WormholeWidget from './widgets/wormhole';
-import TinderWidget from './widgets/tinderCard';
-import SelectWidget from './widgets/form/select';
+import Label1 from './ui/custom/label1';
+import Label2 from './ui/custom/label2';
+import Label3 from './ui/custom/label3';
+import ItemList from './ui/custom/list';
+import Footer from './ui/custom/footer';
+import TextWidget from './ui/custom/text';
+import ImageWidget from './ui/custom/image';
+import MapWidget from './ui/custom/mapLibre';
+import ItemCard1 from './ui/custom/itemCard1';
+import ItemCard2 from './ui/custom/itemCard2';
+import CameraWidget from './ui/custom/camera';
+import MyCarousel from './ui/custom/carousel';
+import FormWidget from './ui/custom/form/form';
+import WebViewWidget from './ui/custom/webView';
+import InputWidget from './ui/custom/form/input';
+import ItemHeader2 from './ui/custom/itemHeader2';
+import chatPreview from './ui/custom/chatPreview';
+import ChatMessage from './ui/custom/chatMessage';
+import WormholeWidget from './ui/custom/wormhole';
+import TinderWidget from './ui/custom/tinderCard';
+import SelectWidget from './ui/custom/form/select';
 import SwipeableLayout from './layouts/swipable';
-import ButtonWidget from './widgets/form/button';
-import PaginationWidget from './widgets/pagination';
-import TextAreaWidget from './widgets/form/textarea';
-import ImageLibraryWidget from './widgets/imageLibrary';
-import DateTimePickerWidget from './widgets/datepicker';
-import InputWithButton from './widgets/form/inputWithBtn';
+import ButtonWidget from './ui/custom/form/button';
+import PaginationWidget from './ui/custom/pagination';
+import TextAreaWidget from './ui/custom/form/textarea';
+import ImageLibraryWidget from './ui/custom/imageLibrary';
+import DateTimePickerWidget from './ui/custom/datepicker';
+import InputWithButton from './ui/custom/form/inputWithBtn';
+import ShareWidget from './ui/custom/share';
 
 const keysToComponentMap = {
   // layouts
@@ -43,6 +45,7 @@ const keysToComponentMap = {
   Row: Row,
   SimpleRow: Row,
   LineWidget: Hr,
+  DrawerWidget: CustomDrawer,
   // widgets
   ChatPreviewWidget: chatPreview,
   Item2Header: ItemHeader2,
@@ -76,6 +79,7 @@ const keysToComponentMap = {
   CustomWidget: WormholeWidget,
   CameraWidget: CameraWidget,
   ImageLibraryWidget: ImageLibraryWidget,
+  ShareWidget: ShareWidget
 };
 
 function ComponentFactory(config) {

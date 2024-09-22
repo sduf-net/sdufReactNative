@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { View, ActivityIndicator, DeviceEventEmitter } from 'react-native';
-import { handleEventAction } from '../../event_handler';
+import { handleEventAction } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 function ApiWidget({ data, id }) {
