@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { VirtualizedList } from "react-native";
-import { Fab } from "react-native-magnus";
+import { Div, Fab } from "react-native-magnus";
 import { getItem, getItemCount } from "../../../utils";
 
 const FabWidget = (config) => {
