@@ -1,10 +1,13 @@
 
 import * as React from "react";
 import { Icon } from "react-native-magnus";
+import CustomTouchableOpacity from "../../helpers/touchableOpacity";
 
 const IconWidget = ({ data }) => {
     return (
-        <Icon {...data.props} />
+        <CustomTouchableOpacity data={data}>
+            <Icon {...data.props} />
+        </CustomTouchableOpacity>
     );
 };
 

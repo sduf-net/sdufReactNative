@@ -1,12 +1,15 @@
 
 import * as React from "react";
 import { Text } from "react-native-magnus";
+import CustomTouchableOpacity from "../../helpers/touchableOpacity";
 
 const TextWidget = ({ data }) => {
     return (
-        <Text {...data.props}>
-            {data.text}
-        </Text>
+        <CustomTouchableOpacity data={data}>
+            <Text {...data.props}>
+                {data.text}
+            </Text>
+        </CustomTouchableOpacity>
     );
 };
 

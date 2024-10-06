@@ -8,6 +8,7 @@ import FabWidget from "./fab";
 import HeaderWidget from "./header";
 import IconWidget from "./icon";
 import ImageWidget from "./image";
+import InputWidget from "./input";
 import TextWidget from "./text";
 import ToggleWidget from "./toggle";
 
@@ -25,4 +26,5 @@ export const mangusToComponentMap = {
   MangusBadgeWidget: BadgeWidget,
   MangusCollapseWidget: CollapseWidget,
   MangusDrawerWidget: DrawerWidget,
+  MangusInputWidget: InputWidget,
 };

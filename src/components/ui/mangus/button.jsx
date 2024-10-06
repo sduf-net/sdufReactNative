@@ -3,22 +3,53 @@ import * as React from "react";
 import { VirtualizedList } from "react-native";
 import { Button, Icon } from "react-native-magnus";
 import { getItem, getItemCount } from "../../../utils";
-import { onLongPress, onPress } from "../../../event_handler";
+import { handleEventAction, onLongPress, onPress } from "../../../event_handler";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { useDispatch, useStore } from "react-redux";
 
 const ButtonWidget = (config) => {
     const { data } = config;
+    const dispatch = useDispatch();
     const route = useRoute();
     const navigation = useNavigation();
-    const renderWidget = ({ item }) => <config.factory props={item} />;
+    const store = useStore();
 
     const onPressHandle = () => {
         onPress(data.actions, navigation, route);
+
+        if (data.form_id) {
+            dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
+            sendCurrentForm();
+        }
     };
 
     const onLongPressHandle = () => {
         onLongPress(data.actions, navigation, route);
     };
+
+    const sendCurrentForm = async () => {
+        const updatedForm = store.getState().form;
+
+        const formData = updatedForm.data[data.form_id];
+        const formOriginalData = updatedForm.forms[data.form_id];
+
+        const result = await handleEventAction(
+            {
+                type: 'submit_form',
+                form: { ...formOriginalData, data: formData },
+                params: data,
+            },
+            navigation,
+            route
+        );
+
+        if (result) {
+            dispatch(resetForm({ form_id: data.form_id }));
+        }
+    };
+
+    const renderWidget = ({ item }) => <config.factory props={item} />;
+
 
     return (
         <>
