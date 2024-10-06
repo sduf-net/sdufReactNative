@@ -17,7 +17,7 @@ import { hideFloatCard } from '../redux/floatCard';
 import { getUserChannel } from '../socket/userChannel';
 import { pushEventToChannel } from '../socket/socketAction';
 import { hideModalWindow } from '../redux/modalWindow';
-import { hideDrawer, resetDrawerWidgets, showDrawer } from '../redux/drawer';
+import { hideDrawerById, showDrawerById } from '../redux/drawer';
 
 const userId = store.getState().user.id;
 
@@ -25,7 +25,6 @@ const userId = store.getState().user.id;
 const onRouteSideActions = () => {
   store.dispatch(hideFloatCard());
   store.dispatch(hideModalWindow());
-  store.dispatch(hideDrawer());
 };
 
 const routeToLocalFormCallback = (event, navigation, route) => {
@@ -96,11 +95,10 @@ const submitFormCallback = async (event, navigation, route) => {
   });
 };
 const openDrawerCallback = async (event, navigation, route) => {
-  store.dispatch(showDrawer());
-  store.dispatch(resetDrawerWidgets([]));
+  store.dispatch(showDrawerById(event.drawer_id));
 };
 const closeDrawerCallback = async (event, navigation, route) => {
-  store.dispatch(hideDrawer());
+  store.dispatch(hideDrawerById(event.drawer_id));
 };
 const defaultCallback = (event, navigation, route) => {
   console.log('defaultCallback', event);
