@@ -2,6 +2,7 @@ import { createElement, memo, useCallback } from 'react';
 import { mangusToComponentMap } from './ui/mangus/factory';
 import { layoutsToComponentMap } from './layouts/factory';
 import { customToComponentMap } from './ui/custom/factory';
+import Error from './ui/custom/error';
 
 const keysToComponentMap = {...customToComponentMap, ...layoutsToComponentMap, ...mangusToComponentMap};
 
