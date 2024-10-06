@@ -1,14 +1,14 @@
 
 import * as React from "react";
-import { StyleSheet, VirtualizedList } from "react-native";
-import { Div } from "react-native-magnus";
+import { VirtualizedList } from "react-native";
+import { Fab } from "react-native-magnus";
 import { getItem, getItemCount } from "../../../utils";
 
-const DivWidget = (config) => {
+const FabWidget = (config) => {
     const renderWidget = ({ item }) => <config.factory props={item} />;
 
     return (
-        <Div {...config.data.props}>
+        <Fab {...config.data.props}>
             <VirtualizedList
                 data={config.nestedComponents}
                 renderItem={renderWidget}
@@ -16,8 +16,8 @@ const DivWidget = (config) => {
                 getItemCount={getItemCount}
                 getItem={getItem}
             />
-        </Div>
+        </Fab>
     );
 };
 
-export default DivWidget;
+export default FabWidget;

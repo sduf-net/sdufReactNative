@@ -1,23 +1,23 @@
 
 import * as React from "react";
-import { StyleSheet, VirtualizedList } from "react-native";
-import { Div } from "react-native-magnus";
+import { VirtualizedList } from "react-native";
+import { Badge } from "react-native-magnus";
 import { getItem, getItemCount } from "../../../utils";
 
-const DivWidget = (config) => {
+const BadgeWidget = (config) => {
     const renderWidget = ({ item }) => <config.factory props={item} />;
 
     return (
-        <Div {...config.data.props}>
-            <VirtualizedList
+        <Badge {...config.data.props}>
+            {config?.nestedComponents?.length > 0 ? <VirtualizedList
                 data={config.nestedComponents}
                 renderItem={renderWidget}
                 keyExtractor={(item) => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
-            />
-        </Div>
+            /> : config.data.text.value ? config.data.text.value : null}
+        </Badge>
     );
 };
 
-export default DivWidget;
+export default BadgeWidget;

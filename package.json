@@ -13,7 +13,7 @@
     "prettierFixAll": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
-    "@maplibre/maplibre-react-native": "^10.0.0-alpha.2",
+    "@maplibre/maplibre-react-native": "^10.0.0-alpha.15",
     "@react-native-async-storage/async-storage": "^1.19.0",
     "@react-native-community/datetimepicker": "^8.0.1",
     "@react-native-community/geolocation": "^3.0.6",
@@ -30,7 +30,7 @@
     "react": "18.3.1",
     "react-devtools": "^4.26.1",
     "react-intersection-observer": "^9.4.3",
-    "react-native": "0.75.2",
+    "react-native": "latest",
     "react-native-animatable": "^1.4.0",
     "react-native-dotenv": "^3.4.10",
     "react-native-fs": "^2.20.0",
