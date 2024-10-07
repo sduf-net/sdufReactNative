@@ -4,7 +4,6 @@ import ButtonWidget from "./button";
 import CollapseWidget from "./collapse";
 import DivWidget from "./div";
 import DrawerWidget from "./drawer";
-import FabWidget from "./fab";
 import HeaderWidget from "./header";
 import IconWidget from "./icon";
 import ImageWidget from "./image";
