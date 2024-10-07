@@ -5,6 +5,7 @@ import { isEmpty } from '../components/helpers/utils';
 const FixedTop = 'FixedTop';
 const FixedBottom = 'FixedBottom';
 const Drawer = 'DrawerWidget';
+const Fab = 'MangusFabWidget';
 const excludeWidgets = [FixedTop, FixedBottom, Drawer];
 
 const initialState = {
@@ -188,3 +189,10 @@ export const selectDrawer = (state) => {
   );
   return dd ?? [];
 };
+export const selectFab = (state, name) => {
+  if (state.screens.currentScreenId === null) return {};
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+    (widget) => widget.name == Fab
+  );
+};
+

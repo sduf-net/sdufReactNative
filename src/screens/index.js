@@ -14,6 +14,7 @@ import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens'
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
+import FabWidget from '../components/ui/mangus/fab';
 
 const INDEX_SCREEN = 'index';
 
@@ -103,6 +104,7 @@ export default function IndexScreen() {
       <FixedTop />
       <WidgetList onRefresh={onRefresh} />
       <FixedBottom onLayout={onFooterLayout} />
+      <FabWidget />
       <FloatingCard />
       <CustomModal />
     </View>

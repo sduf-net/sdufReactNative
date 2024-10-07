@@ -20,7 +20,6 @@ export const mangusToComponentMap = {
   MangusDivWidget: DivWidget,
   MangusToggleWidget: ToggleWidget,
   MangusTextWidget: TextWidget,
-  MangusFabWidget: FabWidget,
   MangusHeaderWidget: HeaderWidget,
   MangusAvatarWidget: AvatarWidget,
   MangusBadgeWidget: BadgeWidget,
