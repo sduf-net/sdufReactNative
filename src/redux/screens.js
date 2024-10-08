@@ -165,13 +165,6 @@ export const selectCurrentScreenByName = (state, name) => {
   if (state.screens.currentScreenId === null || isEmpty(state.screens)) return [];
   return Object.values(state.screens).filter((item) => item.name === name)[0] ?? null;
 };
-export const selectDrawer = (state) => {
-  if (state.screens.currentScreenId === null) return [];
-  const dd = state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
-    (widget) => widget.name == Drawer
-  );
-  return dd ?? [];
-};
 export const selectFab = (state, name) => {
   if (state.screens.currentScreenId === null) return {};
   return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
