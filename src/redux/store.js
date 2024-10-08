@@ -20,9 +20,8 @@ const store = configureStore({
     modalWindow: modalWindowReducer,
     errors: ErrorsReducer,
     drawer: drawerReducer,
-  }
+  },
 });
-
 
 store.subscribe(() => {
   Persistor.persist(Persistor.USER, store.getState().user);

@@ -45,8 +45,6 @@ export const replaceCallback = (data) => {
 };
 export const appendCallback = (data) => {
   store.dispatch(append({ screen_id: data.screen_id, widget: data.widget }));
-  //review
-  DeviceEventEmitter.emit('scrollToBottom');
 };
 export const scrollToBottomCallback = () => {
   DeviceEventEmitter.emit('scrollToBottom');

@@ -4,7 +4,11 @@ import { layoutsToComponentMap } from './layouts/factory';
 import { customToComponentMap } from './ui/custom/factory';
 import Error from './ui/custom/error';
 
-const keysToComponentMap = {...customToComponentMap, ...layoutsToComponentMap, ...mangusToComponentMap};
+const keysToComponentMap = {
+  ...customToComponentMap,
+  ...layoutsToComponentMap,
+  ...mangusToComponentMap,
+};
 
 function ComponentFactory(config) {
   const getComponentName = useCallback(

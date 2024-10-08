@@ -8,6 +8,8 @@ function ApiWidget({ data, id }) {
   const route = useRoute();
   const [loading, setLoading] = useState(false);
 
+  // Do not request and render component until it visible
+  // note: we can add event handler here
   const onViewableItemsChanged = ({ item }) => {
     if (item.id === id) {
       setLoading(true);

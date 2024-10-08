@@ -21,7 +21,7 @@ export const drawer = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { registerDrawerById, showDrawerById, hideDrawerById  } = drawer.actions;
+export const { registerDrawerById, showDrawerById, hideDrawerById } = drawer.actions;
 export default drawer.reducer;
 
 // Export a reusable selector here

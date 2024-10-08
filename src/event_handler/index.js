@@ -69,3 +69,14 @@ export const onShare = (actions, result, navigation, route) => {
   }
 };
 
+export const onMount = (actions, navigation, route) => {
+  if (actions?.mount) {
+    return handleEventAction(actions.mount, navigation, route);
+  }
+};
+
+export const onInit = (actions, navigation, route) => {
+  if (actions?.init) {
+    return handleEventAction(actions.init, navigation, route);
+  }
+};

@@ -11,6 +11,7 @@ import {
   SUBMIT_FORM,
   OPEN_DRAWER,
   CLOSE_DRAWER,
+  GET_SCREEN_BY_NAME,
 } from '../socket/actionName';
 import store from '../redux/store';
 import { hideFloatCard } from '../redux/floatCard';
@@ -73,6 +74,7 @@ const paginationCallback = (event, navigation, route) => {
     payload: { parent_id: event.id, callback_url: event.url },
   });
 };
+
 const requestWidgetCallback = (event, navigation, route) => {
   const queryString = route.params ? route.params : null;
 
@@ -87,6 +89,7 @@ const requestWidgetCallback = (event, navigation, route) => {
     },
   });
 };
+
 const submitFormCallback = async (event, navigation, route) => {
   return await pushEventToChannel(getUserChannel(), {
     userId: userId,
@@ -94,12 +97,26 @@ const submitFormCallback = async (event, navigation, route) => {
     payload: event.form,
   });
 };
+
 const openDrawerCallback = async (event, navigation, route) => {
   store.dispatch(showDrawerById(event.drawer_id));
 };
+
 const closeDrawerCallback = async (event, navigation, route) => {
   store.dispatch(hideDrawerById(event.drawer_id));
 };
+
+const requestScreenCallback = (event, navigation, route) => {
+  pushEventToChannel(getUserChannel(), {
+    userId: userId,
+    actionName: GET_SCREEN_BY_NAME,
+    payload: {
+      query: event.queryString,
+      screen_name: event.screenName,
+    },
+  });
+};
+
 const defaultCallback = (event, navigation, route) => {
   console.log('defaultCallback', event);
 };
@@ -111,6 +128,7 @@ const map = {
   [SYNC_POST]: syncRequestCallback,
   [PAGINATION]: paginationCallback,
   [REQUEST_WIDGET]: requestWidgetCallback,
+  [GET_SCREEN_BY_NAME]: requestScreenCallback,
   [SUBMIT_FORM]: submitFormCallback,
   [NAVIGATE_TO]: routeToLocalFormCallback,
   [ROUTE_TO_LOCAL]: routeToLocalFormCallback,
