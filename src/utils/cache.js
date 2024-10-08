@@ -7,7 +7,7 @@ export const NONE = 'none';
 export const isPermanent = (screen) => {
   if (screen?.config?.cache_strategy === PERMANENT) return true;
   return false;
-}
+};
 
 export const isLoadFromCache = (screen) => {
   if (!screen?.config?.cache_strategy) return false;

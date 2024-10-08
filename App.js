@@ -13,7 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { closeConnection, initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
-import ErrorComponent from './src/components/widgets/errorMessage';
+import ErrorComponent from './src/components/ui/custom/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppState } from 'react-native';
 import { joinToAllScreenChannels } from './src/socket/screenChannel';
