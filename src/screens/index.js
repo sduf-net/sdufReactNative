@@ -22,7 +22,6 @@ export default function IndexScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const userId = useSelector((state) => state.user.id, shallowEqual);
   const screensState = useSelector((state) => state.screens, shallowEqual);
 
   const [loading, setLoading] = useState(true);
