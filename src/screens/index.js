@@ -1,20 +1,19 @@
 import { Dimensions, StyleSheet, View, BackHandler, DeviceEventEmitter } from 'react-native';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { pushEventToChannel } from '../socket/socketAction';
+import React, { useCallback, useEffect, useState } from 'react';
 import WidgetList from '../components/widgetList';
-import CustomDrawer from '../components/layouts/drawer';
 import FixedTop from '../components/fixedTop';
 import FixedBottom from '../components/fixedBottom';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import FloatingCard from '../components/layouts/floatingCard';
 import CustomModal from '../components/layouts/modalWindow';
+import FabWidget from '../components/ui/mangus/fab';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
-import { getUserChannel } from '../socket/userChannel';
-import { GET_SCREEN_BY_NAME } from '../socket/actionName';
+import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../socket/actionName';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
+import { onInit, onMount } from '../event_handler';
 
 const INDEX_SCREEN = 'index';
 
@@ -23,7 +22,6 @@ export default function IndexScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
-  const userId = useSelector((state) => state.user.id, shallowEqual);
   const screensState = useSelector((state) => state.screens, shallowEqual);
 
   const [loading, setLoading] = useState(true);
@@ -66,17 +64,26 @@ export default function IndexScreen() {
     const screenName = route?.params?.screenName || INDEX_SCREEN;
 
     const screen = selectCurrentScreenByName(screensState, screenName);
-    if (screen.length && !isReload && isLoadFromCache(screen[0])) {
-      dispatch(setCurrentScreenId(screen[0].id));
-    } else {
-      pushEventToChannel(getUserChannel(), {
-        userId: userId,
-        actionName: GET_SCREEN_BY_NAME,
-        payload: {
-          query: queryString,
+    if (screen && !isReload && isLoadFromCache(screen)) {
+      dispatch(setCurrentScreenId(screen.id));
+      // triger callback if screen was loaded from state
+      if (screen?.config?.on_mount_url) {
+        const event = {
+          type: ASYNC_POST,
+          url: screen.config.on_mount_url,
+          action: 'on_load',
           screen_name: screenName,
-        },
-      });
+          query_string: queryString,
+        };
+        onMount({ mount: event }, navigation, route);
+      }
+    } else {
+      const event = {
+        type: GET_SCREEN_BY_NAME,
+        queryString,
+        screenName,
+      };
+      onInit({ init: event }, navigation, route);
       tryConnectToScreenChannel(screenName);
     }
 
@@ -101,13 +108,12 @@ export default function IndexScreen() {
 
   return (
     <View style={[styles.container]}>
-      <CustomDrawer>
-        <FixedTop />
-        <WidgetList onRefresh={onRefresh} />
-        <FixedBottom onLayout={onFooterLayout} />
-        <FloatingCard />
-        <CustomModal />
-      </CustomDrawer>
+      <FixedTop />
+      <WidgetList onRefresh={onRefresh} />
+      <FixedBottom onLayout={onFooterLayout} />
+      <FabWidget />
+      <FloatingCard />
+      <CustomModal />
     </View>
   );
 }

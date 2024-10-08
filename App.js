@@ -13,11 +13,12 @@ import React, { useEffect, useState } from 'react';
 import { getFCMToken, notificationListener } from './src/push_notfication';
 import { closeConnection, initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
-import ErrorComponent from './src/components/widgets/errorMessage';
+import ErrorComponent from './src/components/ui/custom/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppState } from 'react-native';
 import { joinToAllScreenChannels } from './src/socket/screenChannel';
 import { Persistor } from './src/redux/persistor';
+import { ThemeProvider } from 'react-native-magnus';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -65,12 +66,14 @@ export default function App() {
   if (loading) return null;
 
   return (
-    <Provider store={store}>
-      <ErrorComponent>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <MainStack />
-        </GestureHandlerRootView>
-      </ErrorComponent>
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <ErrorComponent>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <MainStack />
+          </GestureHandlerRootView>
+        </ErrorComponent>
+      </Provider>
+    </ThemeProvider>
   );
 }

@@ -61,3 +61,22 @@ export const onSwipedBottom = (actions, navigation, route) => {
     return handleEventAction(actions.swiped_bottom, navigation, route);
   }
 };
+
+export const onShare = (actions, result, navigation, route) => {
+  if (actions?.share) {
+    let payload = { ...actions.share, result: result };
+    return handleEventAction(payload, navigation, route);
+  }
+};
+
+export const onMount = (actions, navigation, route) => {
+  if (actions?.mount) {
+    return handleEventAction(actions.mount, navigation, route);
+  }
+};
+
+export const onInit = (actions, navigation, route) => {
+  if (actions?.init) {
+    return handleEventAction(actions.init, navigation, route);
+  }
+};
