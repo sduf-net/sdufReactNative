@@ -17,8 +17,6 @@ const DrawerWidget = () => {
   useEffect(() => {
     if (!drawer || !drawerRef || !drawerRef.current) return;
 
-    console.log(drawerRef)
-
     if (showDarwer === -1) {
       drawerRef.current.close();
     } else if(showDarwer > 0) {
