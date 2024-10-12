@@ -12,13 +12,17 @@ import {
   OPEN_DRAWER,
   CLOSE_DRAWER,
   GET_SCREEN_BY_NAME,
+  OPEN_MODAL,
+  CLOSE_MODAL,
+  OPEN_FLOAT_CARD,
+  CLOSE_FLOAT_CARD,
 } from '../socket/actionName';
 import store from '../redux/store';
-import { hideFloatCard } from '../redux/floatCard';
+import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
 import { getUserChannel } from '../socket/userChannel';
 import { pushEventToChannel } from '../socket/socketAction';
-import { hideModalWindow } from '../redux/modalWindow';
-import { hideDrawerById, showDrawerById } from '../redux/drawer';
+import { hideModalWindow, setModalWindowWidgets, showModalWindow } from '../redux/modal';
+import { hideDrawer, setDrawerWidgets, showDrawer } from '../redux/drawer';
 
 const userId = store.getState().user.id;
 
@@ -40,12 +44,12 @@ const routeToLocalFormCallback = (event, navigation, route) => {
   });
 };
 
-const routeBackFormCallback = (event, navigation, route) => {
+const routeBackFormCallback = (_event, navigation, _route) => {
   onRouteSideActions();
   navigation.goBack();
 };
 
-const asyncRequestCallback = (event, navigation, route) => {
+const asyncRequestCallback = (event, _navigation, _route) => {
   pushEventToChannel(getUserChannel(), {
     userId: userId,
     actionName: event.type,
@@ -56,7 +60,7 @@ const asyncRequestCallback = (event, navigation, route) => {
   });
 };
 
-const syncRequestCallback = async (event, navigation, route) => {
+const syncRequestCallback = async (event, _navigation, _route) => {
   return await pushEventToChannel(getUserChannel(), {
     userId: userId,
     actionName: event.type,
@@ -67,7 +71,7 @@ const syncRequestCallback = async (event, navigation, route) => {
   });
 };
 
-const paginationCallback = (event, navigation, route) => {
+const paginationCallback = (event, _navigation, _route) => {
   pushEventToChannel(getUserChannel(), {
     userId: userId,
     actionName: PAGINATION,
@@ -75,7 +79,7 @@ const paginationCallback = (event, navigation, route) => {
   });
 };
 
-const requestWidgetCallback = (event, navigation, route) => {
+const requestWidgetCallback = (event, _navigation, route) => {
   const queryString = route.params ? route.params : null;
 
   pushEventToChannel(getUserChannel(), {
@@ -90,7 +94,7 @@ const requestWidgetCallback = (event, navigation, route) => {
   });
 };
 
-const submitFormCallback = async (event, navigation, route) => {
+const submitFormCallback = async (event, _navigation, _route) => {
   return await pushEventToChannel(getUserChannel(), {
     userId: userId,
     actionName: SUBMIT_FORM,
@@ -98,15 +102,34 @@ const submitFormCallback = async (event, navigation, route) => {
   });
 };
 
-const openDrawerCallback = async (event, navigation, route) => {
-  store.dispatch(showDrawerById(event.drawer_id));
+const openDrawerCallback = async (event, _navigation, _route) => {
+  store.dispatch(setDrawerWidgets({ nestedComponents: event.nestedComponents }));
+  store.dispatch(showDrawer());
 };
 
-const closeDrawerCallback = async (event, navigation, route) => {
-  store.dispatch(hideDrawerById(event.drawer_id));
+const closeDrawerCallback = async (_event, _navigation, _route) => {
+  store.dispatch(hideDrawer());
 };
 
-const requestScreenCallback = (event, navigation, route) => {
+const openModalCallback = async (event, _navigation, _route) => {
+  store.dispatch(setModalWindowWidgets({ nestedComponents: event.nestedComponents }));
+  store.dispatch(showModalWindow());
+};
+
+const closeModalCallback = async (_event, _navigation, _route) => {
+  store.dispatch(hideModalWindow());
+};
+
+const openFloatCardCallback = async (event, _navigation, _route) => {
+  store.dispatch(setFloatCardWidgets({ nestedComponents: event.nestedComponents }));
+  store.dispatch(showFloatCard());
+};
+
+const closeFloatCardCallback = async (_event, _navigation, _route) => {
+  store.dispatch(hideFloatCard());
+};
+
+const requestScreenCallback = (event, _navigation, _route) => {
   pushEventToChannel(getUserChannel(), {
     userId: userId,
     actionName: GET_SCREEN_BY_NAME,
@@ -117,7 +140,7 @@ const requestScreenCallback = (event, navigation, route) => {
   });
 };
 
-const defaultCallback = (event, navigation, route) => {
+const defaultCallback = (event, _navigation, _route) => {
   console.log('defaultCallback', event);
 };
 
@@ -130,11 +153,22 @@ const map = {
   [REQUEST_WIDGET]: requestWidgetCallback,
   [GET_SCREEN_BY_NAME]: requestScreenCallback,
   [SUBMIT_FORM]: submitFormCallback,
+
+  //////////////////
+  // local actions
+  //////////////////
+  [OPEN_DRAWER]: openDrawerCallback,
+  [CLOSE_DRAWER]: closeDrawerCallback,
+
+  [OPEN_MODAL]: openModalCallback,
+  [CLOSE_MODAL]: closeModalCallback,
+
+  [OPEN_FLOAT_CARD]: openFloatCardCallback,
+  [CLOSE_FLOAT_CARD]: closeFloatCardCallback,
+
   [NAVIGATE_TO]: routeToLocalFormCallback,
   [ROUTE_TO_LOCAL]: routeToLocalFormCallback,
   [ROUTE_BACK]: routeBackFormCallback,
-  [OPEN_DRAWER]: openDrawerCallback,
-  [CLOSE_DRAWER]: closeDrawerCallback,
 };
 
 // PUBLIC

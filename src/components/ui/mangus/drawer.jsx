@@ -1,35 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createRef, memo } from 'react';
 import { VirtualizedList } from 'react-native';
 import { Drawer } from 'react-native-magnus';
 import { getItem, getItemCount } from '../../../utils';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { registerDrawerById, selectDrawerById } from '../../../redux/drawer';
+import { shallowEqual, useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
+import ComponentFactory from '../../factory';
 
-const DrawerWidget = (config) => {
-  const drawer = useSelector((state) => selectDrawerById(state, config.id), shallowEqual);
-  const renderWidget = ({ item }) => <config.factory props={item} />;
-  const dispatch = useDispatch();
-  const drawerRef = React.createRef();
+const DrawerWidget = () => {
+  const isFocused = useIsFocused();
+  const drawerRef = createRef();
+  const drawer = useSelector((state) => state.drawer, shallowEqual);
+  const showDarwer = useSelector((state) => state.drawer.showDarwer);
 
-  useEffect(() => {
-    if (!drawerRef || !config.id) return;
-    dispatch(registerDrawerById(config.id));
-  }, []);
+  const renderWidget = ({ item }) => <ComponentFactory props={item} />;
 
   useEffect(() => {
-    if (!drawer || !drawerRef || !config.id) return;
+    if (!drawer || !drawerRef || !drawerRef.current) return;
 
-    if (drawer === -1) {
+    console.log(drawerRef)
+
+    if (showDarwer === -1) {
       drawerRef.current.close();
-    } else {
+    } else if(showDarwer > 0) {
       drawerRef.current.open();
     }
-  }, [drawer]);
+  }, [showDarwer]);
+
+  if (!isFocused) return;
 
   return (
     <Drawer ref={drawerRef}>
       <VirtualizedList
-        data={config.nestedComponents}
+        data={drawer.nestedComponents}
         renderItem={renderWidget}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
@@ -39,4 +41,4 @@ const DrawerWidget = (config) => {
   );
 };
 
-export default DrawerWidget;
+export default memo(DrawerWidget);

@@ -7,7 +7,7 @@ import {
   setCurrentScreen,
 } from '../redux/screens';
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
-import { hideModalWindow, setModalWindowWidgets, showModalWindow } from '../redux/modalWindow';
+import { hideModalWindow, setModalWindowWidgets, showModalWindow } from '../redux/modal';
 import { hideDrawer, setDrawerWidgets, showDrawer } from '../redux/drawer';
 import { logOut, setCurrentUser } from '../redux/users';
 import { setMarkers } from '../redux/map';

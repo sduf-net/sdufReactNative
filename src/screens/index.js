@@ -14,6 +14,7 @@ import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
 import { onInit, onMount } from '../event_handler';
+import DrawerWidget from '../components/ui/mangus/drawer';
 
 const INDEX_SCREEN = 'index';
 
@@ -114,6 +115,7 @@ export default function IndexScreen() {
       <FabWidget />
       <FloatingCard />
       <CustomModal />
+      <DrawerWidget />
     </View>
   );
 }

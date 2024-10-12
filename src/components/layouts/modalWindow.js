@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { getItem, getItemCount } from '../../utils';
 import ComponentFactory from '../factory';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideModalWindow } from '../../redux/modalWindow';
+import { hideModalWindow } from '../../redux/modal';
 import { useIsFocused } from '@react-navigation/native';
 
 function CustomModal() {
