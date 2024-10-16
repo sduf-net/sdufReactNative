@@ -2,6 +2,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Input, Icon } from 'react-native-magnus';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { onChange } from '../../../event_handler';
+import { setForm } from '../../../redux/form';
 
 const InputWidget = ({ data }) => {
   const formId = data.form_id ?? null;

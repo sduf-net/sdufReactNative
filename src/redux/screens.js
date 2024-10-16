@@ -141,19 +141,20 @@ export default screens.reducer;
 // Export a reusable selector here
 export const selectCurrentFixedTop = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == FixedTop
   );
 };
 export const selectCurrentFixedBottom = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == FixedBottom
   );
 };
 export const selectCurrentScreenMainBody = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.filter(
     (widget) => !excludeWidgets.includes(widget.name)
   );
 };
@@ -167,7 +168,7 @@ export const selectCurrentScreenByName = (state, name) => {
 };
 export const selectFab = (state, name) => {
   if (state.screens.currentScreenId === null) return {};
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == Fab
   );
 };

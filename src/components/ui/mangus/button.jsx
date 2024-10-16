@@ -5,6 +5,7 @@ import { getItem, getItemCount } from '../../../utils';
 import { handleEventAction, onLongPress, onPress } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useStore } from 'react-redux';
+import { resetForm, setForm } from '../../../redux/form';
 
 const ButtonWidget = (config) => {
   const { data } = config;
