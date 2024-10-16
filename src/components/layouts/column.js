@@ -22,10 +22,9 @@ export default function Column(config) {
   );
 }
 
-const width = new Dimensions.get('window').width - 40;
+const width = new Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
-    width: width / 2 - 10,
-    padding: 8,
+    width: width / 2 - 2,
   },
 });
