@@ -8,7 +8,7 @@ import CustomModal from '../components/layouts/modalWindow';
 import FabWidget from '../components/ui/mangus/fab';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
-import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../socket/actionName';
+import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../constants/actionName';
 import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';

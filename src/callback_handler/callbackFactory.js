@@ -20,7 +20,7 @@ import {
   REQUEST_USER_GEO,
   SHOW_ERROR_MESSAGE,
   HIDE_FLOAT_CARD,
-} from './eventName';
+} from '../constants/eventName';
 import {
   append,
   insertAfter,
@@ -36,39 +36,34 @@ import { logOut, setCurrentUser } from '../redux/users';
 import { setMarkers } from '../redux/map';
 import store from '../redux/store';
 import * as rootNavigation from '../navigation/rootNavigation';
-import { joinToUserChannel } from './userChannel';
 import Geolocation from '@react-native-community/geolocation';
 import { DeviceEventEmitter } from 'react-native';
 import { newError } from '../hooks/useErrors';
 import { handleEventAction } from '../event_handler';
-import { ASYNC_POST } from './actionName';
+import { ASYNC_POST } from '../constants/actionName';
+import { joinToUserChannel } from '../socket/userChannel';
 
-// PUBLIC
-export const handleCallbackAction = (event) => {
-  const processFn = callbackFactory(event);
-  return processFn(event);
-};
-
-// PRIVATE
-const callbackFactory = (event) => {
+export const callbackFactory = (event) => {
   return map[event.action] ?? defaultCallback;
 };
 
+// PRIVATE
 const insertBeforeCallback = (event) => {
   const data = event.payload;
   store.dispatch(
-    insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
+    insertBefore({ parent_id: data.parent_id, screen_id: event.screen_id, widget: data.widget })
   );
 };
 const insertAfterCallback = (event) => {
+  console.log('insertAfterCallback', event)
   const data = event.payload;
   store.dispatch(
-    insertAfter({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
+    insertAfter({ parent_id: data.parent_id, screen_id: event.screen_id, widget: data.widget })
   );
 };
 const removeCallback = (event) => {
   const data = event.payload;
-  store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id }));
+  store.dispatch(remove({ parent_id: data.parent_id, screen_id: event.screen_id }));
 };
 const changeCallback = (data) => {
   //update current screen
@@ -77,13 +72,13 @@ const changeCallback = (data) => {
 const replaceCallback = (event) => {
   const data = event.payload;
   store.dispatch(
-    insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
+    insertBefore({ parent_id: data.parent_id, screen_id: event.screen_id, widget: data.widget })
   );
-  store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id }));
+  store.dispatch(remove({ parent_id: data.parent_id, screen_id: event.screen_id }));
 };
 const appendCallback = (event) => {
   const data = event.payload;
-  store.dispatch(append({ screen_id: data.screen_id, widget: data.widget }));
+  store.dispatch(append({ screen_id: event.screen_id, widget: data.widget }));
 };
 const scrollToBottomCallback = () => {
   DeviceEventEmitter.emit('scrollToBottom');
@@ -103,8 +98,8 @@ const logOutCallback = (_) => {
   });
 };
 const screenReceivedCallback = (event) => {
-  console.log('screenReceivedCallbackscreenReceivedCallback')
   const data = event.payload;
+  console.log('screenReceivedCallbackscreenReceivedCallback', event)
   store.dispatch(
     setCurrentScreen({
       id: data.id,
@@ -215,7 +210,7 @@ const map = {
   [SCREEN_RECEIVED]: screenReceivedCallback,
   [SCREEN_SILENT_UPDATE]: screenSilentUpdateCallback,
   [SHOW_FLOAT_CARD]: showFloatCardCallback,
-  [HIDE_FLOAT_CARD]: showFloatCardCallback,
+  [HIDE_FLOAT_CARD]: hideFloatCardCallback,
   [UPDATE_MAP_MARKERS]: updateMapMarkersCallback,
   [NAVIGATE_TO_SCREEN]: navigateToScreenCallback,
   [REQUEST_USER_GEO]: requestCurrentPositionCallback,

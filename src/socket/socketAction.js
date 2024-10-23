@@ -1,6 +1,6 @@
 import store from '../redux/store';
-import { handleCallbackAction } from './actionCallbacks';
-import { getAllEvents } from './eventName';
+import { getAllEvents } from '../constants/eventName';
+import { handleCallbackAction } from '../callback_handler';
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {

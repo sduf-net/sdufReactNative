@@ -16,7 +16,7 @@ import {
   CLOSE_MODAL,
   OPEN_FLOAT_CARD,
   CLOSE_FLOAT_CARD,
-} from '../socket/actionName';
+} from '../constants/actionName';
 import store from '../redux/store';
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
 import { getUserChannel } from '../socket/userChannel';
