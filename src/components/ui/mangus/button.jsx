@@ -37,7 +37,7 @@ const ButtonWidget = (config) => {
     const formData = updatedForm.data[data.form_id];
     const formOriginalData = updatedForm.forms[data.form_id];
 
-    const result = await handleEventAction(
+    await handleEventAction(
       {
         type: 'submit_form',
         form: { ...formOriginalData, data: formData },
@@ -46,10 +46,6 @@ const ButtonWidget = (config) => {
       navigation,
       route
     );
-
-    if (result) {
-      dispatch(resetForm({ form_id: data.form_id }));
-    }
   };
 
   const renderWidget = ({ item }) => <config.factory props={item} />;
