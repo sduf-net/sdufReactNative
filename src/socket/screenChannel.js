@@ -7,11 +7,11 @@ let screenChannelList = [];
 export const joinToAllScreenChannels = async (store) => {
   Object.values(store.screens.screens).forEach((element) => {
     // console.log("inside", element)
-    joinToScreenChannel(element.name);
+    joinToScreenChannel(element.id);
   });
 };
 
-export const joinToScreenChannel = async (screenName) => {
+export const joinToScreenChannel = async (screenID) => {
   return new Promise((resolve, reject) => {
     const socket = getSocket();
 
@@ -20,20 +20,20 @@ export const joinToScreenChannel = async (screenName) => {
       resolve(null);
     }
 
-    if (screenChannelList[screenName] && screenChannelList[screenName].state === 'joined') {
-      console.log('RETURN SAME screenChannel', screenName);
-      resolve(screenChannelList[screenName]);
+    if (screenChannelList[screenID] && screenChannelList[screenID].state === 'joined') {
+      console.log('RETURN SAME screenChannel', screenID);
+      resolve(screenChannelList[screenID]);
       return;
     }
 
-    const screenChannel = socket.channel(`screen:${SOCKET_PROJECT_ID}:${screenName}`);
+    const screenChannel = socket.channel(`screen:${SOCKET_PROJECT_ID}:${screenID}`);
 
     screenChannel
       .join()
       .receive('ok', () => {
-        console.log('Channel screen connection ok', screenName);
+        console.log('Channel screen connection ok', screenID);
         listenScreenChannelEvents(screenChannel);
-        screenChannelList[screenName] = screenChannel;
+        screenChannelList[screenID] = screenChannel;
         resolve(screenChannel);
       })
       .receive('error', (err) => {
@@ -45,10 +45,4 @@ export const joinToScreenChannel = async (screenName) => {
         reject(null);
       });
   });
-};
-
-export const getScreenChannelByName = (screenName) => {
-  if (screenChannelList[screenName]) return screenChannelList[screenName];
-  console.warn('userChannel is empty');
-  return joinToScreenChannel(screenName);
 };

@@ -1,4 +1,27 @@
 import {
+  INSERT_BEFORE,
+  INSERT_AFTER,
+  REMOVE,
+  CHANGE,
+  REPLACE,
+  APPEND,
+  LOGIN,
+  LOGOUT,
+  OPEN_POPUP,
+  CLOSE_POPUP,
+  OPEN_DRAWER,
+  CLOSE_DRAWER,
+  OPEN_SCREEN,
+  SCREEN_RECEIVED,
+  SCREEN_SILENT_UPDATE,
+  SHOW_FLOAT_CARD,
+  UPDATE_MAP_MARKERS,
+  NAVIGATE_TO_SCREEN,
+  REQUEST_USER_GEO,
+  SHOW_ERROR_MESSAGE,
+  HIDE_FLOAT_CARD,
+} from './eventName';
+import {
   append,
   insertAfter,
   insertBefore,
@@ -20,40 +43,57 @@ import { newError } from '../hooks/useErrors';
 import { handleEventAction } from '../event_handler';
 import { ASYNC_POST } from './actionName';
 
-export const insertBeforeCallback = (data) => {
+// PUBLIC
+export const handleCallbackAction = (event) => {
+  const processFn = callbackFactory(event);
+  return processFn(event);
+};
+
+// PRIVATE
+const callbackFactory = (event) => {
+  return map[event.action] ?? defaultCallback;
+};
+
+const insertBeforeCallback = (event) => {
+  const data = event.payload;
   store.dispatch(
     insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
   );
 };
-export const insertAfterCallback = (data) => {
+const insertAfterCallback = (event) => {
+  const data = event.payload;
   store.dispatch(
     insertAfter({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
   );
 };
-export const removeCallback = (data) => {
+const removeCallback = (event) => {
+  const data = event.payload;
   store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id }));
 };
-export const changeCallback = (data) => {
+const changeCallback = (data) => {
   //update current screen
   console.log('changeCallback', data);
 };
-export const replaceCallback = (data) => {
+const replaceCallback = (event) => {
+  const data = event.payload;
   store.dispatch(
     insertBefore({ parent_id: data.parent_id, screen_id: data.screen_id, widget: data.widget })
   );
   store.dispatch(remove({ parent_id: data.parent_id, screen_id: data.screen_id }));
 };
-export const appendCallback = (data) => {
+const appendCallback = (event) => {
+  const data = event.payload;
   store.dispatch(append({ screen_id: data.screen_id, widget: data.widget }));
 };
-export const scrollToBottomCallback = () => {
+const scrollToBottomCallback = () => {
   DeviceEventEmitter.emit('scrollToBottom');
 };
-export const logInCallback = (data) => {
+const logInCallback = (event) => {
+  const data = event.payload;
   joinToUserChannel(data.id);
   store.dispatch(setCurrentUser({ id: data.id, token: data.token }));
 };
-export const logOutCallback = (_) => {
+const logOutCallback = (_) => {
   store.dispatch(logOut());
   //todo review
   rootNavigation.navigate('Index', {
@@ -62,7 +102,9 @@ export const logOutCallback = (_) => {
     event: {},
   });
 };
-export const screenReceivedCallback = (data) => {
+const screenReceivedCallback = (event) => {
+  console.log('screenReceivedCallbackscreenReceivedCallback')
+  const data = event.payload;
   store.dispatch(
     setCurrentScreen({
       id: data.id,
@@ -73,7 +115,8 @@ export const screenReceivedCallback = (data) => {
     })
   );
 };
-export const screenSilentUpdateCallback = (data) => {
+const screenSilentUpdateCallback = (event) => {
+  const data = event.payload;
   store.dispatch(
     setScreen({
       id: data.id,
@@ -84,35 +127,41 @@ export const screenSilentUpdateCallback = (data) => {
     })
   );
 };
-export const openPopupCallback = (data) => {
+const openPopupCallback = (event) => {
+  const data = event.payload;
   store.dispatch(showModalWindow());
   store.dispatch(setModalWindowWidgets({ nestedComponents: data.widget }));
 };
-export const closePopupCallback = (_) => {
+const closePopupCallback = (_) => {
   store.dispatch(hideModalWindow());
 };
-export const openDrawerCallback = (data) => {
+const openDrawerCallback = (event) => {
+  const data = event.payload;
   store.dispatch(showDrawer());
   store.dispatch(setDrawerWidgets({ nestedComponents: data.widget }));
 };
-export const closeDrawerCallback = (_) => {
+const closeDrawerCallback = (_) => {
   store.dispatch(hideDrawer());
 };
-export const showFloatCardCallback = (data) => {
+const showFloatCardCallback = (event) => {
+  const data = event.payload;
   store.dispatch(showFloatCard());
   store.dispatch(setFloatCardWidgets({ nestedComponents: data.widget }));
 };
-export const hideFloatCardCallback = (_) => {
+const hideFloatCardCallback = (_) => {
   store.dispatch(hideFloatCard());
 };
-export const openScreenCallback = (data) => {
+const openScreenCallback = (event) => {
+  const data = event.payload;
   console.log('openScreenCallback', data);
 };
-export const updateMapMarkersCallback = (data) => {
+const updateMapMarkersCallback = (event) => {
+  const data = event.payload;
   store.dispatch(setMarkers(data.markers));
 };
 
-export const navigateToScreenCallback = (data) => {
+const navigateToScreenCallback = (event) => {
+  const data = event.payload;
   rootNavigation.navigate('Index', {
     screenName: data.screen_name,
     query: data.queryString,
@@ -120,11 +169,13 @@ export const navigateToScreenCallback = (data) => {
   });
 };
 
-export const showErrorMessageCallback = (data) => {
+const showErrorMessageCallback = (event) => {
+  const data = event.payload;
   newError(data.error_message);
 };
 
-export const requestCurrentPositionCallback = (data) => {
+const requestCurrentPositionCallback = (event) => {
+  const data = event.payload;
   Geolocation.getCurrentPosition(
     (position) => {
       const userLocationData = {
@@ -141,4 +192,32 @@ export const requestCurrentPositionCallback = (data) => {
     (error) => alert(error.message),
     { enableHighAccuracy: true, maximumAge: 1000 }
   );
+};
+
+const defaultCallback = (event) => {
+  console.log('defaultCallback', event);
+};
+
+const map = {
+  [INSERT_BEFORE]: insertBeforeCallback,
+  [INSERT_AFTER]: insertAfterCallback,
+  [REMOVE]: removeCallback,
+  [CHANGE]: changeCallback,
+  [REPLACE]: replaceCallback,
+  [APPEND]: appendCallback,
+  [LOGIN]: logInCallback,
+  [LOGOUT]: logOutCallback,
+  [OPEN_POPUP]: openPopupCallback,
+  [CLOSE_POPUP]: closePopupCallback,
+  [OPEN_DRAWER]: openDrawerCallback,
+  [CLOSE_DRAWER]: closeDrawerCallback,
+  [OPEN_SCREEN]: openScreenCallback,
+  [SCREEN_RECEIVED]: screenReceivedCallback,
+  [SCREEN_SILENT_UPDATE]: screenSilentUpdateCallback,
+  [SHOW_FLOAT_CARD]: showFloatCardCallback,
+  [HIDE_FLOAT_CARD]: showFloatCardCallback,
+  [UPDATE_MAP_MARKERS]: updateMapMarkersCallback,
+  [NAVIGATE_TO_SCREEN]: navigateToScreenCallback,
+  [REQUEST_USER_GEO]: requestCurrentPositionCallback,
+  [SHOW_ERROR_MESSAGE]: showErrorMessageCallback,
 };

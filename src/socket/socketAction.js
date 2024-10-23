@@ -1,26 +1,6 @@
 import store from '../redux/store';
-import {
-  appendCallback,
-  changeCallback,
-  closePopupCallback,
-  insertAfterCallback,
-  insertBeforeCallback,
-  logInCallback,
-  logOutCallback,
-  showFloatCardCallback,
-  openPopupCallback,
-  openScreenCallback,
-  removeCallback,
-  replaceCallback,
-  screenReceivedCallback,
-  updateMapMarkersCallback,
-  navigateToScreenCallback,
-  requestCurrentPositionCallback,
-  showErrorMessageCallback,
-  screenSilentUpdateCallback,
-  openDrawerCallback,
-  closeDrawerCallback,
-} from './actionCallbacks';
+import { handleCallbackAction } from './actionCallbacks';
+import { getAllEvents } from './eventName';
 
 // FIXME push event must have same format for all event
 export const pushEventToChannel = async (channel, params) => {
@@ -88,37 +68,14 @@ const removeListener = (channel, params) => {
   channel.off(params.event_name);
 };
 
-const callbacks = [
-  { event_name: 'insert_before', callback: insertBeforeCallback },
-  { event_name: 'insert_after', callback: insertAfterCallback },
-  { event_name: 'remove', callback: removeCallback },
-  { event_name: 'change', callback: changeCallback },
-  { event_name: 'replace', callback: replaceCallback },
-  { event_name: 'append', callback: appendCallback },
-  { event_name: 'login', callback: logInCallback },
-  { event_name: 'logout', callback: logOutCallback },
-  { event_name: 'open_popup', callback: openPopupCallback },
-  { event_name: 'close_popup', callback: closePopupCallback },
-  { event_name: 'open_drawer', callback: openDrawerCallback },
-  { event_name: 'close_drawer', callback: closeDrawerCallback },
-  { event_name: 'openScreen', callback: openScreenCallback },
-  { event_name: 'screen_received', callback: screenReceivedCallback },
-  { event_name: 'screen_silent_update', callback: screenSilentUpdateCallback },
-  { event_name: 'show_float_card', callback: showFloatCardCallback },
-  { event_name: 'update_map_markers', callback: updateMapMarkersCallback },
-  { event_name: 'navigate_to_screen', callback: navigateToScreenCallback },
-  { event_name: 'request_user_geo', callback: requestCurrentPositionCallback },
-  { event_name: 'show_error_message', callback: showErrorMessageCallback },
-];
-
 const addListeners = (channel) => {
-  callbacks.forEach((x) => {
-    addListener(channel, { event_name: x.event_name, callback: x.callback });
+  getAllEvents().forEach((event_name) => {
+    addListener(channel, { event_name: event_name, callback: handleCallbackAction });
   });
 };
 
 const removeListeners = (channel) => {
-  callbacks.forEach((x) => {
-    removeListener(channel, { event_name: x.event_name });
+  getAllEvents().forEach((event_name) => {
+    removeListener(channel, { event_name: event_name });
   });
 };
