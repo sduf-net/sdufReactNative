@@ -16,6 +16,7 @@ import {
   CLOSE_MODAL,
   OPEN_FLOAT_CARD,
   CLOSE_FLOAT_CARD,
+  SET_STATE
 } from '../constants/actionName';
 import store from '../redux/store';
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
@@ -129,6 +130,21 @@ const closeFloatCardCallback = async (_event, _navigation, _route) => {
   store.dispatch(hideFloatCard());
 };
 
+const setStateCallback = async (event, _navigation, _route, state) => {
+  if(event?.loading){
+    state.setLoading(event.loading);
+  }
+  if(event?.disabled){
+    state.setDisabled(event.disabled);
+  }
+  if(event?.reset_timer){
+    setTimeout(() => {
+      state.setLoading(!event.loading);
+      state.setDisabled(!event.disabled);
+    }, event.reset_timer);
+  }
+};
+
 const requestScreenCallback = (event, _navigation, _route) => {
   pushEventToChannel(getUserChannel(), {
     userId: userId,
@@ -169,6 +185,8 @@ const map = {
   [NAVIGATE_TO]: routeToLocalFormCallback,
   [ROUTE_TO_LOCAL]: routeToLocalFormCallback,
   [ROUTE_BACK]: routeBackFormCallback,
+
+  [SET_STATE]: setStateCallback,
 };
 
 // PUBLIC

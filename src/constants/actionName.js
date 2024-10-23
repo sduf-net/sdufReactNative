@@ -20,3 +20,5 @@ export const CLOSE_MODAL = 'close_modal';
 
 export const OPEN_FLOAT_CARD = 'open_float_card';
 export const CLOSE_FLOAT_CARD = 'close_float_card';
+
+export const SET_STATE = 'set_state';

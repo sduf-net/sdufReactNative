@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { VirtualizedList } from 'react-native';
 import { Button, Icon } from 'react-native-magnus';
 import { getItem, getItemCount } from '../../../utils';
@@ -14,8 +14,12 @@ const ButtonWidget = (config) => {
   const navigation = useNavigation();
   const store = useStore();
 
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const onPressHandle = () => {
-    onPress(data.actions, navigation, route);
+    const options = {'setLoading': setLoading, 'setDisabled': setDisabled};
+    onPress(data.actions, navigation, route, options);
 
     if (data.form_id) {
       dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
@@ -59,6 +63,9 @@ const ButtonWidget = (config) => {
           onLongPress={onLongPressHandle}
           prefix={data.prefix ? <Icon {...data.prefix.props} /> : null}
           suffix={data.suffix ? <Icon {...data.suffix.props} /> : null}
+          loading={loading}
+          disabled={disabled}
+          loaderColor={data.props?.color}
         >
           {config?.nestedComponents?.length > 0 ? (
             <VirtualizedList

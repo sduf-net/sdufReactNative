@@ -12,7 +12,8 @@ export default function ButtonWidget({ data }) {
   const store = useStore();
 
   const onPressHandle = () => {
-    onPress(data.actions, navigation, route);
+    const options = { 'setLoading': setLoading, 'setDisabled': setDisabled };
+    onPress(data.actions, navigation, route, options);
 
     if (data.form_id) {
       dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
