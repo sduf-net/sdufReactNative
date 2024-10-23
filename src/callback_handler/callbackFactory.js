@@ -114,7 +114,7 @@ const screenSilentUpdateCallback = (event) => {
   const data = event.payload;
   store.dispatch(
     setScreen({
-      id: data.id,
+      id: event.screen_id,
       name: data.name,
       nestedComponents: data.nestedComponents,
       config: data.config,
