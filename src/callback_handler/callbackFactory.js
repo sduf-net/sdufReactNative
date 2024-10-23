@@ -20,6 +20,7 @@ import {
   REQUEST_USER_GEO,
   SHOW_ERROR_MESSAGE,
   HIDE_FLOAT_CARD,
+  RESET_FORM,
 } from '../constants/eventName';
 import {
   append,
@@ -42,6 +43,7 @@ import { newError } from '../hooks/useErrors';
 import { handleEventAction } from '../event_handler';
 import { ASYNC_POST } from '../constants/actionName';
 import { joinToUserChannel } from '../socket/userChannel';
+import { resetForm } from '../redux/form';
 
 export const callbackFactory = (event) => {
   return map[event.action] ?? defaultCallback;
@@ -164,6 +166,11 @@ const showErrorMessageCallback = (event) => {
   const data = event.payload;
   newError(data.error_message);
 };
+const resetFormCallback = (event) => {
+  const data = event.payload;
+  store.dispatch(resetForm({ form_id: data.form_id }))
+};
+
 const requestCurrentPositionCallback = (event) => {
   const data = event.payload;
   Geolocation.getCurrentPosition(
@@ -201,6 +208,7 @@ const map = {
   [OPEN_DRAWER]: openDrawerCallback,
   [CLOSE_DRAWER]: closeDrawerCallback,
   [OPEN_SCREEN]: openScreenCallback,
+  [RESET_FORM]: resetFormCallback,
   [SCREEN_RECEIVED]: screenReceivedCallback,
   [SCREEN_SILENT_UPDATE]: screenSilentUpdateCallback,
   [SHOW_FLOAT_CARD]: showFloatCardCallback,

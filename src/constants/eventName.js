@@ -21,6 +21,7 @@ const eventNames = {
   NAVIGATE_TO_SCREEN: 'navigate_to_screen',
   REQUEST_USER_GEO: 'request_user_geo',
   SHOW_ERROR_MESSAGE: 'show_error_message',
+  RESET_FORM: 'reset_form',
 };
 
 // Destructure and export each constant
@@ -46,6 +47,7 @@ export const {
   NAVIGATE_TO_SCREEN,
   REQUEST_USER_GEO,
   SHOW_ERROR_MESSAGE,
+  RESET_FORM,
 } = eventNames;
 
 // Function to get all event names
