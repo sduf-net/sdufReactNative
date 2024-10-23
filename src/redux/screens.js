@@ -11,7 +11,7 @@ const excludeWidgets = [FixedTop, FixedBottom, Drawer];
 const initialState = {
   loading: false,
   screens: {},
-  setLastEventIDByScreens: {},
+  lastEventIDByScreens: {},
   currentScreenId: null,
 };
 
@@ -122,7 +122,7 @@ export const screens = createSlice({
       state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
     setLastEventID: (state, value) => {
-      state.setLastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
+      state.lastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
     }
   },
 });
@@ -172,7 +172,7 @@ export const selectCurrentScreenByName = (state, name) => {
   return Object.values(state.screens).filter((item) => item.name === name)[0] ?? null;
 };
 export const selectLastEventIDByScreenId = (state, screenId) => {
-  return state.screens.setLastEventIDByScreens[screenId] ?? null;
+  return state.lastEventIDByScreens[screenId] ?? null;
 };
 export const selectFab = (state, name) => {
   if (state.screens.currentScreenId === null) return {};
