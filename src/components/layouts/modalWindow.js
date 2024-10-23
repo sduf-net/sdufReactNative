@@ -45,7 +45,6 @@ function CustomModal() {
             </ErrorComponent>
           ) : null}
         </Modal>
-
       )}
     </View>
   );

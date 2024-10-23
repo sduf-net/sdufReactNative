@@ -9,7 +9,11 @@ import FabWidget from '../components/ui/mangus/fab';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
 import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../constants/actionName';
-import { selectCurrentScreenByName, selectLastEventIDByScreenId, setCurrentScreenId } from '../redux/screens';
+import {
+  selectCurrentScreenByName,
+  selectLastEventIDByScreenId,
+  setCurrentScreenId,
+} from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
@@ -75,7 +79,7 @@ export default function IndexScreen() {
           action: 'on_mount',
           screen_name: screenName,
           query_string: queryString,
-          last_event_id: selectLastEventIDByScreenId(screensState, screen.id)
+          last_event_id: selectLastEventIDByScreenId(screensState, screen.id),
         };
         onMount({ mount: event }, navigation, route);
       }

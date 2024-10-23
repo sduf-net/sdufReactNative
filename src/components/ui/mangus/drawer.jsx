@@ -19,7 +19,7 @@ const DrawerWidget = () => {
 
     if (showDarwer === -1) {
       drawerRef.current.close();
-    } else if(showDarwer > 0) {
+    } else if (showDarwer > 0) {
       drawerRef.current.open();
     }
   }, [showDarwer]);

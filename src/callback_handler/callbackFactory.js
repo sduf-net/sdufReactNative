@@ -55,7 +55,6 @@ const insertBeforeCallback = (event) => {
   );
 };
 const insertAfterCallback = (event) => {
-  console.log('insertAfterCallback', event)
   const data = event.payload;
   store.dispatch(
     insertAfter({ parent_id: data.parent_id, screen_id: event.screen_id, widget: data.widget })
@@ -99,7 +98,6 @@ const logOutCallback = (_) => {
 };
 const screenReceivedCallback = (event) => {
   const data = event.payload;
-  console.log('screenReceivedCallbackscreenReceivedCallback', event)
   store.dispatch(
     setCurrentScreen({
       id: data.id,
@@ -154,7 +152,6 @@ const updateMapMarkersCallback = (event) => {
   const data = event.payload;
   store.dispatch(setMarkers(data.markers));
 };
-
 const navigateToScreenCallback = (event) => {
   const data = event.payload;
   rootNavigation.navigate('Index', {
@@ -163,12 +160,10 @@ const navigateToScreenCallback = (event) => {
     event: data,
   });
 };
-
 const showErrorMessageCallback = (event) => {
   const data = event.payload;
   newError(data.error_message);
 };
-
 const requestCurrentPositionCallback = (event) => {
   const data = event.payload;
   Geolocation.getCurrentPosition(
@@ -188,7 +183,6 @@ const requestCurrentPositionCallback = (event) => {
     { enableHighAccuracy: true, maximumAge: 1000 }
   );
 };
-
 const defaultCallback = (event) => {
   console.log('defaultCallback', event);
 };

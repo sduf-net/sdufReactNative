@@ -123,7 +123,7 @@ export const screens = createSlice({
     },
     setLastEventID: (state, value) => {
       state.lastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
-    }
+    },
   },
 });
 
