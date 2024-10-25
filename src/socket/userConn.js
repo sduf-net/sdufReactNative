@@ -1,6 +1,6 @@
 import { Socket } from 'phoenix';
 import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from '@env';
-import * as rootNavigation from '../navigation/rootNavigation';
+import { newError } from '../hooks/useErrors';
 
 let socket = null;
 
@@ -24,7 +24,7 @@ export const initSocketConnection = async () => {
     });
 
     socket.onError((data) => {
-      rootNavigation.navigate('YouAreOfflineScreen', {});
+      newError("You are offline");
 
       if (data?.message?.includes('403')) {
         console.error('Socket is empty');
