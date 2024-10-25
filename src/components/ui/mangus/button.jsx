@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { VirtualizedList } from 'react-native';
 import { Button, Icon } from 'react-native-magnus';
 import { getItem, getItemCount } from '../../../utils';
 import { handleEventAction, onLongPress, onPress } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch, useStore } from 'react-redux';
+import { resetForm, setForm } from '../../../redux/form';
 
 const ButtonWidget = (config) => {
   const { data } = config;
@@ -13,8 +14,12 @@ const ButtonWidget = (config) => {
   const navigation = useNavigation();
   const store = useStore();
 
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const onPressHandle = () => {
-    onPress(data.actions, navigation, route);
+    const options = {'setLoading': setLoading, 'setDisabled': setDisabled};
+    onPress(data.actions, navigation, route, options);
 
     if (data.form_id) {
       dispatch(setForm({ form_id: data.form_id, [data.name]: data.value }));
@@ -32,7 +37,7 @@ const ButtonWidget = (config) => {
     const formData = updatedForm.data[data.form_id];
     const formOriginalData = updatedForm.forms[data.form_id];
 
-    const result = await handleEventAction(
+    await handleEventAction(
       {
         type: 'submit_form',
         form: { ...formOriginalData, data: formData },
@@ -41,10 +46,6 @@ const ButtonWidget = (config) => {
       navigation,
       route
     );
-
-    if (result) {
-      dispatch(resetForm({ form_id: data.form_id }));
-    }
   };
 
   const renderWidget = ({ item }) => <config.factory props={item} />;
@@ -58,6 +59,9 @@ const ButtonWidget = (config) => {
           onLongPress={onLongPressHandle}
           prefix={data.prefix ? <Icon {...data.prefix.props} /> : null}
           suffix={data.suffix ? <Icon {...data.suffix.props} /> : null}
+          loading={loading}
+          disabled={disabled}
+          loaderColor={data.props?.color}
         >
           {config?.nestedComponents?.length > 0 ? (
             <VirtualizedList

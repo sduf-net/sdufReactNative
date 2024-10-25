@@ -3,7 +3,6 @@ import BadgeWidget from './badge';
 import ButtonWidget from './button';
 import CollapseWidget from './collapse';
 import DivWidget from './div';
-import DrawerWidget from './drawer';
 import HeaderWidget from './header';
 import IconWidget from './icon';
 import ImageWidget from './image';
@@ -23,6 +22,5 @@ export const mangusToComponentMap = {
   MangusAvatarWidget: AvatarWidget,
   MangusBadgeWidget: BadgeWidget,
   MangusCollapseWidget: CollapseWidget,
-  MangusDrawerWidget: DrawerWidget,
   MangusInputWidget: InputWidget,
 };

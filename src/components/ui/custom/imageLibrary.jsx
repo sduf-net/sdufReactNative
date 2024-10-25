@@ -30,7 +30,7 @@ const ImageLibraryWidget = (config) => {
 
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.debug('User cancelled image picker');
       } else if (response.error) {
         newError('Oops...Something went wrong');
       } else {

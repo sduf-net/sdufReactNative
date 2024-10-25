@@ -8,12 +8,17 @@ import CustomModal from '../components/layouts/modalWindow';
 import FabWidget from '../components/ui/mangus/fab';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigation, useFocusEffect, useRoute, useIsFocused } from '@react-navigation/native';
-import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../socket/actionName';
-import { selectCurrentScreenByName, setCurrentScreenId } from '../redux/screens';
+import { ASYNC_POST, GET_SCREEN_BY_NAME } from '../constants/actionName';
+import {
+  selectCurrentScreenByName,
+  selectLastEventIDByScreenId,
+  setCurrentScreenId,
+} from '../redux/screens';
 import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
 import { onInit, onMount } from '../event_handler';
+import DrawerWidget from '../components/ui/mangus/drawer';
 
 const INDEX_SCREEN = 'index';
 
@@ -71,9 +76,10 @@ export default function IndexScreen() {
         const event = {
           type: ASYNC_POST,
           url: screen.config.on_mount_url,
-          action: 'on_load',
+          action: 'on_mount',
           screen_name: screenName,
           query_string: queryString,
+          last_event_id: selectLastEventIDByScreenId(screensState, screen.id),
         };
         onMount({ mount: event }, navigation, route);
       }
@@ -84,7 +90,6 @@ export default function IndexScreen() {
         screenName,
       };
       onInit({ init: event }, navigation, route);
-      tryConnectToScreenChannel(screenName);
     }
 
     setTimeout(() => {
@@ -92,10 +97,6 @@ export default function IndexScreen() {
       setForceLoading(false);
     }, 2000);
   }, []);
-
-  const tryConnectToScreenChannel = (screenName) => {
-    joinToScreenChannel(screenName);
-  };
 
   // Fire event after footer is mounted
   // to adjust screen height and prevent overlapping other components
@@ -114,6 +115,7 @@ export default function IndexScreen() {
       <FabWidget />
       <FloatingCard />
       <CustomModal />
+      <DrawerWidget />
     </View>
   );
 }

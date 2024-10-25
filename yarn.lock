@@ -3009,7 +3009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:^8.0.1":
+"@react-native-community/datetimepicker@npm:^8.2.0":
   version: 8.2.0
   resolution: "@react-native-community/datetimepicker@npm:8.2.0"
   dependencies:
@@ -3068,16 +3068,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/masked-view@npm:^0.1.11":
-  version: 0.1.11
-  resolution: "@react-native-community/masked-view@npm:0.1.11"
-  peerDependencies:
-    react: ">=16.0"
-    react-native: ">=0.57"
-  checksum: 246bcd94a6a2cafc415c7a192fb5a76ef7cd9b648b47ea4b2366f06128376ab377dcff3fab676261050fd3a97324bde5d64802aa3e8d1580fe6c0e3b0138cefc
-  languageName: node
-  linkType: hard
-
 "@react-native-community/push-notification-ios@npm:^1.11.0":
   version: 1.11.0
   resolution: "@react-native-community/push-notification-ios@npm:1.11.0"
@@ -3117,6 +3107,16 @@ __metadata:
     expo:
       optional: true
   checksum: 67235c7c5aaaac4986687760003829d74a88001fb9f1ff35f15e31b3933c8a1f6bc442e388a7f4f95ee5a8855cb1f1fc08946b3983eab77a04b7678f360f853e
+  languageName: node
+  linkType: hard
+
+"@react-native-masked-view/masked-view@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@react-native-masked-view/masked-view@npm:0.3.1"
+  peerDependencies:
+    react: ">=16"
+    react-native: ">=0.57"
+  checksum: 880059020709ce856c448657c2d67a905f2ebcd3f42c1c4d344d732761cb2de98efb600172df5591d943f562393dbca42802e8a903b974aa2b038b441c5718fb
   languageName: node
   linkType: hard
 
@@ -11708,13 +11708,13 @@ __metadata:
     "@babel/runtime": ^7.20.0
     "@maplibre/maplibre-react-native": ^10.0.0-alpha.15
     "@react-native-async-storage/async-storage": ^1.19.0
-    "@react-native-community/datetimepicker": ^8.0.1
+    "@react-native-community/datetimepicker": ^8.2.0
     "@react-native-community/eslint-config": ^2.0.0
     "@react-native-community/geolocation": ^3.0.6
-    "@react-native-community/masked-view": ^0.1.11
     "@react-native-community/push-notification-ios": ^1.11.0
     "@react-native-firebase/app": ^20.5.0
     "@react-native-firebase/messaging": ^20.5.0
+    "@react-native-masked-view/masked-view": ^0.3.1
     "@react-native-picker/picker": ^2.4.10
     "@react-native/babel-preset": 0.75.2
     "@react-native/eslint-config": 0.75.2

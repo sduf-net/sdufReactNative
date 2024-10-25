@@ -11,6 +11,7 @@ const excludeWidgets = [FixedTop, FixedBottom, Drawer];
 const initialState = {
   loading: false,
   screens: {},
+  lastEventIDByScreens: {},
   currentScreenId: null,
 };
 
@@ -120,6 +121,9 @@ export const screens = createSlice({
       });
       state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
+    setLastEventID: (state, value) => {
+      state.lastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
+    },
   },
 });
 
@@ -134,6 +138,7 @@ export const {
   remove,
   append,
   replace,
+  setLastEventID,
 } = screens.actions;
 
 export default screens.reducer;
@@ -141,19 +146,20 @@ export default screens.reducer;
 // Export a reusable selector here
 export const selectCurrentFixedTop = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == FixedTop
   );
 };
 export const selectCurrentFixedBottom = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == FixedBottom
   );
 };
 export const selectCurrentScreenMainBody = (state) => {
   if (state.screens.currentScreenId === null) return [];
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.filter(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.filter(
     (widget) => !excludeWidgets.includes(widget.name)
   );
 };
@@ -165,9 +171,12 @@ export const selectCurrentScreenByName = (state, name) => {
   if (state.screens.currentScreenId === null || isEmpty(state.screens)) return [];
   return Object.values(state.screens).filter((item) => item.name === name)[0] ?? null;
 };
+export const selectLastEventIDByScreenId = (state, screenId) => {
+  return state.lastEventIDByScreens[screenId] ?? null;
+};
 export const selectFab = (state, name) => {
   if (state.screens.currentScreenId === null) return {};
-  return state.screens.screens[state.screens.currentScreenId].nestedComponents.find(
+  return state.screens.screens[state.screens.currentScreenId].nestedComponents?.find(
     (widget) => widget.name == Fab
   );
 };

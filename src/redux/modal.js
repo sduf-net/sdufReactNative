@@ -9,10 +9,10 @@ export const modalWindow = createSlice({
   name: 'modalWindow',
   initialState,
   reducers: {
-    showModalWindow: (state, value) => {
+    showModalWindow: (state, _value) => {
       state.showModalWindow = true;
     },
-    hideModalWindow: (state, value) => {
+    hideModalWindow: (state, _value) => {
       state.showModalWindow = false;
     },
     setModalWindowWidgets: (state, value) => {

@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import { View, ActivityIndicator, DeviceEventEmitter } from 'react-native';
-import { PAGINATION } from '../../../socket/actionName';
+import { PAGINATION } from '../../../constants/actionName';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { handleEventAction } from '../../../event_handler';
 

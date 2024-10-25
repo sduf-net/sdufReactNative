@@ -4,8 +4,9 @@ import Modal from 'react-native-modal';
 import { getItem, getItemCount } from '../../utils';
 import ComponentFactory from '../factory';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideModalWindow } from '../../redux/modalWindow';
+import { hideModalWindow } from '../../redux/modal';
 import { useIsFocused } from '@react-navigation/native';
+import ErrorComponent from '../ui/custom/errorMessage';
 
 function CustomModal() {
   const isFocused = useIsFocused();
@@ -31,15 +32,17 @@ function CustomModal() {
           style={styles.view}
         >
           {modalWindow.nestedComponents ? (
-            <VirtualizedList
-              data={modalWindow.nestedComponents}
-              contentContainerStyle={styles.view}
-              initialNumToRender={2}
-              renderItem={renderWidget}
-              keyExtractor={(item) => item.id}
-              getItemCount={getItemCount}
-              getItem={getItem}
-            />
+            <ErrorComponent>
+              <VirtualizedList
+                data={modalWindow.nestedComponents}
+                contentContainerStyle={styles.view}
+                initialNumToRender={2}
+                renderItem={renderWidget}
+                keyExtractor={(item) => item.id}
+                getItemCount={getItemCount}
+                getItem={getItem}
+              />
+            </ErrorComponent>
           ) : null}
         </Modal>
       )}
@@ -53,6 +56,6 @@ const styles = StyleSheet.create({
   view: {
     justifyContent: 'flex-end',
     backgroundColor: 'white',
-    margin: 10,
+    margin: 0,
   },
 });

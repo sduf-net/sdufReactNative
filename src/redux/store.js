@@ -4,7 +4,7 @@ import currentUserReducer from './users';
 import currentFormReducer from './form';
 import floatCardReducer from './floatCard';
 import currentMapReducer from './map';
-import modalWindowReducer from './modalWindow';
+import modalWindowReducer from './modal';
 import ErrorsReducer from './errors';
 import drawerReducer from './drawer';
 import { Persistor } from './persistor';
