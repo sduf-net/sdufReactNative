@@ -90,7 +90,6 @@ export default function IndexScreen() {
         screenName,
       };
       onInit({ init: event }, navigation, route);
-      tryConnectToScreenChannel(screenName);
     }
 
     setTimeout(() => {
@@ -98,10 +97,6 @@ export default function IndexScreen() {
       setForceLoading(false);
     }, 2000);
   }, []);
-
-  const tryConnectToScreenChannel = (screenName) => {
-    joinToScreenChannel(screenName);
-  };
 
   // Fire event after footer is mounted
   // to adjust screen height and prevent overlapping other components
