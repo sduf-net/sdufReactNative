@@ -31,7 +31,7 @@ export const checkApplicationPermission = async () => {
     try {
       await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
     } catch (error) {
-      console.log('[ERROR]', error);
+      console.error('[ERROR]', error);
     }
   }
 };
@@ -45,7 +45,7 @@ export const getFCMToken = async () => {
         await AsyncStorage.setItem('fcmtoken', fcmtoken);
       }
     } catch (error) {
-      console.log('[ERROR]', error);
+      console.error('[ERROR]', error);
     }
   }
 

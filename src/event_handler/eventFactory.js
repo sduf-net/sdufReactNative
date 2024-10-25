@@ -157,7 +157,7 @@ const requestScreenCallback = (event, _navigation, _route) => {
 };
 
 const defaultCallback = (event, _navigation, _route) => {
-  console.log('defaultCallback', event);
+  console.warn('defaultCallback', event);
 };
 
 const map = {
