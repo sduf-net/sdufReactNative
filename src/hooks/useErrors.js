@@ -25,5 +25,5 @@ export function newError(error) {
 
   setTimeout(() => {
     store.dispatch(removeError());
-  }, 2000);
+  }, 5000);
 }
