@@ -44,6 +44,7 @@ import { handleEventAction } from '../event_handler';
 import { ASYNC_POST } from '../constants/actionName';
 import { joinToUserChannel } from '../socket/userChannel';
 import { resetForm } from '../redux/form';
+import { joinToScreenChannel } from '../socket/screenChannel';
 
 export const callbackFactory = (event) => {
   return map[event.action] ?? defaultCallback;
@@ -68,7 +69,7 @@ const removeCallback = (event) => {
 };
 const changeCallback = (data) => {
   //update current screen
-  console.log('changeCallback', data);
+  console.warn('changeCallback', data);
 };
 const replaceCallback = (event) => {
   const data = event.payload;
@@ -109,6 +110,7 @@ const screenReceivedCallback = (event) => {
       insertedAt: new Date().getTime(),
     })
   );
+  joinToScreenChannel(data.id);
 };
 const screenSilentUpdateCallback = (event) => {
   const data = event.payload;
@@ -148,7 +150,7 @@ const hideFloatCardCallback = (_) => {
 };
 const openScreenCallback = (event) => {
   const data = event.payload;
-  console.log('openScreenCallback', data);
+  console.warn('openScreenCallback', data);
 };
 const updateMapMarkersCallback = (event) => {
   const data = event.payload;
@@ -191,7 +193,7 @@ const requestCurrentPositionCallback = (event) => {
   );
 };
 const defaultCallback = (event) => {
-  console.log('defaultCallback', event);
+  console.warn('defaultCallback', event);
 };
 
 const map = {
