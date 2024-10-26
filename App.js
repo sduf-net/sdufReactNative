@@ -70,7 +70,7 @@ export default function App() {
     await closeConnection() .catch(() => console.log("initSocketConnection error"));
     await initSocketConnection() .catch(() => console.log("initSocketConnection error"));
     await joinToUserChannel(store.getState().user.id).catch(() => console.log("joinToUserChannel error"));
-    await joinToAllScreenChannels(store.getState()).catch(() => console.log("joinToUserChannel error"));
+    await joinToAllScreenChannels(store.getState()).catch(() => console.log("joinToAllScreenChannels error"));
   };
 
   if (loading) return null;
