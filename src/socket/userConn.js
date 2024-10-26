@@ -41,7 +41,7 @@ export const initSocketConnection = async () => {
   });
 };
 
-export const closeConnection = () => {
+export const closeConnection = async () => {
   if (!socket) return;
 
   socket.channels.forEach((channel) => channel.leave());
