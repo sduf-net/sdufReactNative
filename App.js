@@ -58,9 +58,9 @@ export default function App() {
   };
 
   const reconnect = async () => {
-    await initSocketConnection();
-    await joinToUserChannel(store.getState().user.id);
-    await joinToAllScreenChannels(store.getState());
+    await initSocketConnection() .catch(() => console.log("initSocketConnection error"));
+    await joinToUserChannel(store.getState().user.id).catch(() => console.log("joinToUserChannel error"));
+    await joinToAllScreenChannels(store.getState()).catch(() => console.log("joinToUserChannel error"));
   };
 
   if (loading) return null;

@@ -18,7 +18,7 @@ const ButtonWidget = (config) => {
   const [disabled, setDisabled] = useState(false);
 
   const onPressHandle = () => {
-    const options = {'setLoading': setLoading, 'setDisabled': setDisabled};
+    const options = { setLoading: setLoading, setDisabled: setDisabled };
     onPress(data.actions, navigation, route, options);
 
     if (data.form_id) {

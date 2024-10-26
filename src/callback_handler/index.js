@@ -3,7 +3,7 @@ import { setLastEventID } from '../redux/screens';
 import { callbackFactory } from './callbackFactory';
 
 export const handleCallbackAction = (event) => {
-  console.debug("handleCallbackAction", event)
+  console.debug('handleCallbackAction', event);
   const processFn = callbackFactory(event);
 
   if (event.event_id) {

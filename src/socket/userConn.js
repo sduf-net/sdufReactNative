@@ -24,7 +24,7 @@ export const initSocketConnection = async () => {
     });
 
     socket.onError((data) => {
-      newError("You are offline");
+      newError('You are offline');
 
       if (data?.message?.includes('403')) {
         console.error('Socket is empty');

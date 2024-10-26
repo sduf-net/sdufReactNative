@@ -7,7 +7,9 @@ let screenChannelList = [];
 export const joinToAllScreenChannels = async (store) => {
   Object.values(store.screens.screens).forEach((element) => {
     // console.log("inside", element)
-    joinToScreenChannel(element.id);
+    joinToScreenChannel(element.id).catch(() =>
+      console.log('joinToAllScreenChannels->joinToScreenChannel error')
+    );
   });
 };
 

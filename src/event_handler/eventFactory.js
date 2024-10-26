@@ -16,7 +16,8 @@ import {
   CLOSE_MODAL,
   OPEN_FLOAT_CARD,
   CLOSE_FLOAT_CARD,
-  SET_STATE
+  SET_STATE,
+  GLOBAL_SYNC_REQUEST,
 } from '../constants/actionName';
 import store from '../redux/store';
 import { hideFloatCard, setFloatCardWidgets, showFloatCard } from '../redux/floatCard';
@@ -103,6 +104,14 @@ const submitFormCallback = async (event, _navigation, _route) => {
   });
 };
 
+const globalSyncRequest = async (event, _navigation, _route) => {
+  return pushEventToChannel(getUserChannel(), {
+    userId: userId,
+    actionName: GLOBAL_SYNC_REQUEST,
+    payload: event,
+  });
+};
+
 const openDrawerCallback = async (event, _navigation, _route) => {
   store.dispatch(setDrawerWidgets({ nestedComponents: event.nestedComponents }));
   store.dispatch(showDrawer());
@@ -131,13 +140,13 @@ const closeFloatCardCallback = async (_event, _navigation, _route) => {
 };
 
 const setStateCallback = async (event, _navigation, _route, state) => {
-  if(event?.loading){
+  if (event?.loading) {
     state.setLoading(event.loading);
   }
-  if(event?.disabled){
+  if (event?.disabled) {
     state.setDisabled(event.disabled);
   }
-  if(event?.reset_timer){
+  if (event?.reset_timer) {
     setTimeout(() => {
       state.setLoading(!event.loading);
       state.setDisabled(!event.disabled);
@@ -169,6 +178,7 @@ const map = {
   [REQUEST_WIDGET]: requestWidgetCallback,
   [GET_SCREEN_BY_NAME]: requestScreenCallback,
   [SUBMIT_FORM]: submitFormCallback,
+  [GLOBAL_SYNC_REQUEST]: globalSyncRequest,
 
   //////////////////
   // local actions

@@ -170,7 +170,7 @@ const showErrorMessageCallback = (event) => {
 };
 const resetFormCallback = (event) => {
   const data = event.payload;
-  store.dispatch(resetForm({ form_id: data.form_id }))
+  store.dispatch(resetForm({ form_id: data.form_id }));
 };
 
 const requestCurrentPositionCallback = (event) => {
