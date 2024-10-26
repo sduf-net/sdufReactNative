@@ -16,7 +16,7 @@ import { closeConnection, initSocketConnection } from './src/socket/userConn';
 import { joinToUserChannel } from './src/socket/userChannel';
 import ErrorComponent from './src/components/ui/custom/errorMessage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { AppState } from 'react-native';
+import { ActivityIndicator, AppState, View } from 'react-native';
 import { joinToAllScreenChannels } from './src/socket/screenChannel';
 import { Persistor } from './src/redux/persistor';
 import { ThemeProvider } from 'react-native-magnus';
@@ -52,9 +52,9 @@ export default function App() {
   useEffect(() => {
     const removeNetInfoSubscription = NetInfo.addEventListener(state => {
       const conn = state.isConnected;
-      if(!conn) {
+      if (!conn) {
         reconnect();
-      } 
+      }
     });
 
     return () => removeNetInfoSubscription();
@@ -67,13 +67,14 @@ export default function App() {
   };
 
   const reconnect = async () => {
-    await closeConnection() .catch(() => console.log("initSocketConnection error"));
-    await initSocketConnection() .catch(() => console.log("initSocketConnection error"));
+    await closeConnection().catch(() => console.log("initSocketConnection error"));
+    await initSocketConnection().catch(() => console.log("initSocketConnection error"));
     await joinToUserChannel(store.getState().user.id).catch(() => console.log("joinToUserChannel error"));
     await joinToAllScreenChannels(store.getState()).catch(() => console.log("joinToAllScreenChannels error"));
   };
 
-  if (loading) return null;
+  //NOTE: we need way to make it dynamic
+  if (loading) return <View style={{flex: 1, justifyContent: 'center'}}><ActivityIndicator size="large" /></View>;
 
   return (
     <ThemeProvider>

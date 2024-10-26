@@ -193,7 +193,7 @@ const requestCurrentPositionCallback = (event) => {
   );
 };
 const defaultCallback = (event) => {
-  console.warn('defaultCallback', event);
+  console.warn('defaultCallback eventFactory', event);
 };
 
 const map = {
