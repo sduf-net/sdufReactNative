@@ -7,6 +7,7 @@
  */
 
 import MainStack from './src/navigation/navigate';
+import NetInfo from '@react-native-community/netinfo';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import React, { useEffect, useState } from 'react';
@@ -25,17 +26,14 @@ export default function App() {
 
   useEffect(() => {
     const unsubscribe = notificationListener();
-
-    loadDataBeforeStart().then(() => {
-      setLoading(false);
-    });
-
     return unsubscribe;
   }, []);
 
   useEffect(() => {
     const reconnectAsync = async () => {
-      await reconnect();
+      loadDataBeforeStart().then(() => {
+        setLoading(false);
+      });
     };
 
     const subscription = AppState.addEventListener('change', nextAppState => {
@@ -51,13 +49,25 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const removeNetInfoSubscription = NetInfo.addEventListener(state => {
+      const conn = state.isConnected;
+      if(!conn) {
+        reconnect();
+      } 
+    });
+
+    return () => removeNetInfoSubscription();
+  });
+
   const loadDataBeforeStart = async () => {
     await Persistor.restoreStore();
     await getFCMToken();
     await reconnect();
   };
 
-  const reconnect = async () => {
+  const reconnect = async (log) => {
+    await closeConnection() .catch(() => console.log("initSocketConnection error"));
     await initSocketConnection() .catch(() => console.log("initSocketConnection error"));
     await joinToUserChannel(store.getState().user.id).catch(() => console.log("joinToUserChannel error"));
     await joinToAllScreenChannels(store.getState()).catch(() => console.log("joinToUserChannel error"));
