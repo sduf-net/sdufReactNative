@@ -66,7 +66,7 @@ export default function App() {
     await reconnect();
   };
 
-  const reconnect = async (log) => {
+  const reconnect = async () => {
     await closeConnection() .catch(() => console.log("initSocketConnection error"));
     await initSocketConnection() .catch(() => console.log("initSocketConnection error"));
     await joinToUserChannel(store.getState().user.id).catch(() => console.log("joinToUserChannel error"));
