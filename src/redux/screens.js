@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   screens: {},
   lastEventIDByScreens: {},
-  lastEventIDGlobal: {},
+  lastEventIDGlobal: null,
   currentScreenId: null,
 };
 
@@ -123,8 +123,8 @@ export const screens = createSlice({
       state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
     setLastEventID: (state, value) => {
-      state.lastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
-      state.lastEventIDGlobal = value.payload.event_id;
+      state.lastEventIDByScreens[value.payload] = value.payload;
+      state.lastEventIDGlobal = value.payload;
     },
   },
 });
