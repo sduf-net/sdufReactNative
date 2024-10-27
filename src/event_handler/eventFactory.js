@@ -17,6 +17,7 @@ import {
   OPEN_FLOAT_CARD,
   CLOSE_FLOAT_CARD,
   SET_STATE,
+  LOGOUT,
   GLOBAL_SYNC_REQUEST,
 } from '../constants/actionName';
 import store from '../redux/store';
@@ -25,6 +26,7 @@ import { getUserChannel } from '../socket/userChannel';
 import { pushEventToChannel } from '../socket/socketAction';
 import { hideModalWindow, setModalWindowWidgets, showModalWindow } from '../redux/modal';
 import { hideDrawer, setDrawerWidgets, showDrawer } from '../redux/drawer';
+import { logOut, setAnonymUserId } from '../redux/users';
 
 const userId = store.getState().user.id;
 
@@ -148,10 +150,19 @@ const setStateCallback = async (event, _navigation, _route, state) => {
   }
   if (event?.reset_timer) {
     setTimeout(() => {
-      state.setLoading(!event.loading);
-      state.setDisabled(!event.disabled);
+      if (event?.loading) {
+        state.setLoading(!event.loading);
+      }
+      if (event?.disabled) {
+        state.setDisabled(!event.disabled);
+      }
     }, event.reset_timer);
   }
+};
+
+const logOutCallback = async (_event, navigation, route) => {
+  store.dispatch(logOut());
+  requestScreenCallback({queryString: "", screenName: "login"}, navigation, route);
 };
 
 const requestScreenCallback = (event, _navigation, _route) => {
@@ -197,6 +208,8 @@ const map = {
   [ROUTE_BACK]: routeBackFormCallback,
 
   [SET_STATE]: setStateCallback,
+
+  [LOGOUT]: logOutCallback
 };
 
 // PUBLIC

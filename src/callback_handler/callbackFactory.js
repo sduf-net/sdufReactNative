@@ -89,6 +89,12 @@ const logInCallback = (event) => {
   const data = event.payload;
   joinToUserChannel(data.id);
   store.dispatch(setCurrentUser({ id: data.id, token: data.token }));
+
+  rootNavigation.navigate('Index', {
+    screenName: 'index',
+    query: '',
+    event: {},
+  });
 };
 const logOutCallback = (_) => {
   store.dispatch(logOut());

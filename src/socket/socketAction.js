@@ -6,7 +6,6 @@ import { handleCallbackAction } from '../callback_handler';
 export const pushEventToChannel = async (channel, params) => {
   const user = store.getState().user;
   const currentScreenId = store.getState().screens.currentScreenId;
-
   const opts = {
     user_id: user.id,
     user_token: user.token,

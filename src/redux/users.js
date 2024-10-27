@@ -18,13 +18,15 @@ export const currentUser = createSlice({
       state.loggedIn = true;
     },
     logOut: (state) => {
-      state.id = APP_ENV + ':anonym:' + uuid.v4();
       state.token = null;
       state.loggedIn = false;
+    },
+    setAnonymUserId: (state) => {
+      state.id = APP_ENV + ':anonym:' + uuid.v4();
     },
   },
 });
 
-export const { setCurrentUser, logOut } = currentUser.actions;
+export const { setCurrentUser, logOut, setAnonymUserId } = currentUser.actions;
 
 export default currentUser.reducer;
