@@ -13,7 +13,10 @@ export const initSocketConnection = async () => {
     }
 
     socket = new Socket(`${SOCKET_URL}`, {
-      params: { token: SOCKET_PROJECT_TOKEN, last_event_id: selectLastEventIDGlobal(store.getState().screens) },
+      params: {
+        token: SOCKET_PROJECT_TOKEN,
+        last_event_id: selectLastEventIDGlobal(store.getState().screens),
+      },
       timeout: 45 * 1000,
     });
 

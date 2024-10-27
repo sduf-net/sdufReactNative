@@ -7,10 +7,10 @@ export const handleEventAction = async (event, navigation, route, options) => {
 
 export const onPress = (actions, navigation, route, options) => {
   if (actions?.click) {
-    return handleEventAction(actions.click, navigation, route);
+    handleEventAction(actions.click, navigation, route);
   }
   if (actions?.after_click) {
-    return handleEventAction(actions.after_click, navigation, route, options);
+    handleEventAction(actions.after_click, navigation, route, options);
   }
 };
 
