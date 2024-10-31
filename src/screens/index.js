@@ -14,10 +14,9 @@ import {
   selectLastEventIDByScreenId,
   setCurrentScreenId,
 } from '../redux/screens';
-import { joinToScreenChannel } from '../socket/screenChannel';
 import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
-import { onInit, onMount } from '../event_handler';
+import { onScreenInit, onScreenMount } from '../event_handler';
 import DrawerWidget from '../components/ui/mangus/drawer';
 
 const INDEX_SCREEN = 'index';
@@ -81,7 +80,7 @@ export default function IndexScreen() {
           query_string: queryString,
           last_event_id: selectLastEventIDByScreenId(screensState, screen.id),
         };
-        onMount({ mount: event }, navigation, route);
+        onScreenMount({ mount: event }, navigation, route);
       }
     } else {
       const event = {
@@ -89,7 +88,7 @@ export default function IndexScreen() {
         queryString,
         screenName,
       };
-      onInit({ init: event }, navigation, route);
+      onScreenInit({ init: event }, navigation, route);
     }
 
     setTimeout(() => {

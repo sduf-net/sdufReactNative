@@ -89,6 +89,12 @@ const logInCallback = (event) => {
   const data = event.payload;
   joinToUserChannel(data.id);
   store.dispatch(setCurrentUser({ id: data.id, token: data.token }));
+
+  rootNavigation.navigate('Index', {
+    screenName: 'index',
+    query: '',
+    event: {},
+  });
 };
 const logOutCallback = (_) => {
   store.dispatch(logOut());
@@ -170,7 +176,7 @@ const showErrorMessageCallback = (event) => {
 };
 const resetFormCallback = (event) => {
   const data = event.payload;
-  store.dispatch(resetForm({ form_id: data.form_id }))
+  store.dispatch(resetForm({ form_id: data.form_id }));
 };
 
 const requestCurrentPositionCallback = (event) => {
@@ -193,7 +199,7 @@ const requestCurrentPositionCallback = (event) => {
   );
 };
 const defaultCallback = (event) => {
-  console.warn('defaultCallback', event);
+  console.warn('defaultCallback eventFactory', event);
 };
 
 const map = {

@@ -7,10 +7,10 @@ export const handleEventAction = async (event, navigation, route, options) => {
 
 export const onPress = (actions, navigation, route, options) => {
   if (actions?.click) {
-    return handleEventAction(actions.click, navigation, route);
+    handleEventAction(actions.click, navigation, route);
   }
   if (actions?.after_click) {
-    return handleEventAction(actions.after_click, navigation, route, options);
+    handleEventAction(actions.after_click, navigation, route, options);
   }
 };
 
@@ -72,13 +72,13 @@ export const onShare = (actions, result, navigation, route) => {
   }
 };
 
-export const onMount = (actions, navigation, route) => {
+export const onScreenMount = (actions, navigation, route) => {
   if (actions?.mount) {
     return handleEventAction(actions.mount, navigation, route);
   }
 };
 
-export const onInit = (actions, navigation, route) => {
+export const onScreenInit = (actions, navigation, route) => {
   if (actions?.init) {
     return handleEventAction(actions.init, navigation, route);
   }

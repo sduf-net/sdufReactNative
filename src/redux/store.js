@@ -28,6 +28,7 @@ store.subscribe(() => {
 
   if (isEmpty(store.getState().screens.screens)) return;
   Persistor.persist(Persistor.SCREENS, store.getState().screens.screens);
+  Persistor.persist(Persistor.SCREENS, store.getState().screens.lastEventIDGlobal);
 });
 
 export default store;

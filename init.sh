@@ -31,12 +31,19 @@ echo "Configuring app.json..."
 find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
-# Run other necessary commands
+# Gather environment info
 echo "Gathering environment info..."
-npx envinfo
+npm install -g envinfo
+if command -v envinfo >/dev/null; then
+    envinfo
+else
+    echo "envinfo is not installed. Please install it globally using 'npm install -g envinfo'."
+    exit 1
+fi
 
 echo "Installing dependencies..."
 yarn install
+chmod +x /node_modules/.bin/rnc-cli
 
 export APP_ENV=${APP_ENV}
 export URL=${URL}

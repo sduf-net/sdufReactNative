@@ -66,7 +66,7 @@ const updateToken = async (token) => {
   };
 
   try {
-    await fetch(URL + '/api/v1/fcm/update', requestOptions).then((response) => {
+    fetch(URL + '/api/v1/fcm/update', requestOptions).then((response) => {
       console.log('Post created at : ', response);
     });
   } catch (error) {

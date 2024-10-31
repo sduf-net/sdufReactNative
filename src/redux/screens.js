@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   screens: {},
   lastEventIDByScreens: {},
+  lastEventIDGlobal: null,
   currentScreenId: null,
 };
 
@@ -122,7 +123,8 @@ export const screens = createSlice({
       state.screens = { ...state.screens, [value.payload.screen_id]: screen };
     },
     setLastEventID: (state, value) => {
-      state.lastEventIDByScreens[value.payload.screen_id] = value.payload.event_id;
+      state.lastEventIDByScreens[value.payload] = value.payload;
+      state.lastEventIDGlobal = value.payload;
     },
   },
 });
@@ -173,6 +175,9 @@ export const selectCurrentScreenByName = (state, name) => {
 };
 export const selectLastEventIDByScreenId = (state, screenId) => {
   return state.lastEventIDByScreens[screenId] ?? null;
+};
+export const selectLastEventIDGlobal = (state) => {
+  return state.lastEventIDGlobal ?? null;
 };
 export const selectFab = (state, name) => {
   if (state.screens.currentScreenId === null) return {};
