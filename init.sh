@@ -33,6 +33,7 @@ find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s
 
 # Gather environment info
 echo "Gathering environment info..."
+npm install -g envinfo
 if command -v envinfo >/dev/null; then
     envinfo
 else
