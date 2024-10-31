@@ -30,5 +30,6 @@ jobs:
         host: ${{ secrets.VPS_IP }}
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
         source: "./"
         target: ${{ secrets.TARGET_DIR }}
