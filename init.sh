@@ -54,6 +54,7 @@ export styleURL=${styleURL}
 # Navigate to android directory and prepare for build
 echo "Preparing Android build..."
 cd android
+chmod +x /node_modules/.bin/rnc-cli
 chmod +x gradlew
 ./gradlew assembleRelease --max-workers=3 --no-daemon
 
