@@ -31,4 +31,4 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.VPS_SSH_KEY }}
         source: "./"
-        target: ${{ secrets.TARGET_DIR }}
+        target: "~/"
