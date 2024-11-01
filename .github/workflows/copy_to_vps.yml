@@ -30,6 +30,6 @@ jobs:
         local: ./
         remote: ~/target/directory
         host: ${{ secrets.VPS_IP }}
-        port: 59666
+        port: 22
         username: ${{ secrets.VPS_USER }}
         privateKey: ${{ secrets.VPS_SSH_KEY }}
