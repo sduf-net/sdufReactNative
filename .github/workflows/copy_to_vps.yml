@@ -7,7 +7,7 @@ name: Deploy CI
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "debug" ]
 
 permissions:
   contents: read
