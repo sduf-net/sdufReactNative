@@ -43,7 +43,7 @@ fi
 
 echo "Installing dependencies..."
 yarn install
-chmod +x /node_modules/.bin/rnc-cli
+chmod +x node_modules/.bin/
 
 export APP_ENV=${APP_ENV}
 export URL=${URL}
