@@ -31,7 +31,7 @@ find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed 
 # find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 # find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
-curl -fsSL https://deb.nodesource.com/setup_20.x
+curl -fsSL https://deb.nodesource.com/setup_20.x  | bash -
 apt install -y nodejs
 node --version
 
