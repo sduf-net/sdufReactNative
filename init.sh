@@ -31,6 +31,10 @@ echo "Configuring app.json..."
 find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
+curl -fsSL https://deb.nodesource.com/setup_20.x
+sudo apt install -y nodejs
+node --version
+
 # Gather environment info
 echo "Gathering environment info..."
 npm install -g envinfo
