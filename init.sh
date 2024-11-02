@@ -56,7 +56,7 @@ export styleURL=${styleURL}
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
-./gradlew assembleRelease --max-workers=3 --no-daemon --stacktrace
+./gradlew assembleRelease --max-workers=3 --no-daemon
 
 # Move APK files to a shared volume
 echo "Moving APK files..."
