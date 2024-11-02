@@ -15,6 +15,7 @@
   "dependencies": {
     "@maplibre/maplibre-react-native": "^10.0.0-alpha.15",
     "@react-native-async-storage/async-storage": "^1.19.0",
+    "@react-native-community/cli": "^14.1.1",
     "@react-native-community/datetimepicker": "^8.2.0",
     "@react-native-community/geolocation": "^3.0.6",
     "@react-native-community/netinfo": "^11.4.1",
