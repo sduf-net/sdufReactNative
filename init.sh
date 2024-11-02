@@ -26,14 +26,10 @@ echo "Replacing package names in the project..."
 # Replace strings in all project files, avoiding the .git and other directories
 find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
 
-# echo "Configuring app.json..."
-# # Replace string specifically in app.json
-# find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
-# find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
-
-curl -fsSL https://deb.nodesource.com/setup_20.x  | bash -
-apt install -y nodejs
-node --version
+echo "Configuring app.json..."
+# Replace string specifically in app.json
+find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
 
 # Gather environment info
 echo "Gathering environment info..."
