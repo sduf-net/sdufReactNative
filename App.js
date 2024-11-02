@@ -24,18 +24,19 @@ import { ThemeProvider } from 'react-native-magnus';
 export default function App() {
   const [loading, setLoading] = useState(true);
 
+  const reconnectAsync = async () => {
+    loadDataBeforeStart().then(() => {
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
     const unsubscribe = notificationListener();
+    reconnectAsync();
     return unsubscribe;
   }, []);
 
   useEffect(() => {
-    const reconnectAsync = async () => {
-      loadDataBeforeStart().then(() => {
-        setLoading(false);
-      });
-    };
-
     const subscription = AppState.addEventListener('change', nextAppState => {
       if (nextAppState === 'active') {
         reconnectAsync();

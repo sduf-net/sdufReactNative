@@ -93,4 +93,6 @@ COPY . /app
 COPY init.sh /usr/local/bin/init.sh
 RUN chmod +x /usr/local/bin/init.sh
 
+RUN npm install -g react-native-cli
+
 ENTRYPOINT ["/usr/local/bin/init.sh"]
