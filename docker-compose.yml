@@ -14,8 +14,8 @@ services:
       APP_NAME: ${APP_NAME}
       APP_PACKAGE_NAME: ${APP_PACKAGE_NAME}
     volumes:
-      - ./node_modules:/app/node_modules
-      - ./init.sh:/app/init.sh
+      - ./node_modules:/node_modules
+      - ./init.sh:/init.sh
       - ./shared:/shared
     working_dir: /app
     cpus: '3.0'
