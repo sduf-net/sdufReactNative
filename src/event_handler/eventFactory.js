@@ -44,6 +44,7 @@ const routeToLocalFormCallback = (event, navigation, route) => {
   navigation.push('Index', {
     screenName: event.screen_name,
     query: queryString,
+    // review it
     event: event,
   });
 };
