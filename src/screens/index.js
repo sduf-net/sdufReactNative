@@ -58,7 +58,6 @@ export default function IndexScreen() {
   );
 
   const onRefresh = useCallback(() => {
-    DeviceEventEmitter.emit('onRefresh', true);
     setLoading(true);
     setForceLoading(true);
   }, []);

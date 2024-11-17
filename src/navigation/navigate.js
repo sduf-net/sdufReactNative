@@ -14,7 +14,7 @@ export default function Navigate() {
         <Stack.Screen
           //NOTE: we need way to make options dynamic
           // options={{ headerShown: false, presentation: 'modal', animationTypeForReplace: 'push', animation: 'slide_from_left' }}
-          options={{ headerShown: false, animation: 'none' }}
+          options={{ headerShown: false, animation: 'none', orientation: 'portrait' }}
           name="Index"
           children={IndexScreen}
         />

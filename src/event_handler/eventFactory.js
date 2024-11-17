@@ -44,6 +44,7 @@ const routeToLocalFormCallback = (event, navigation, route) => {
   navigation.push('Index', {
     screenName: event.screen_name,
     query: queryString,
+    // review it
     event: event,
   });
 };
@@ -162,7 +163,7 @@ const setStateCallback = async (event, _navigation, _route, state) => {
 
 const logOutCallback = async (_event, navigation, route) => {
   store.dispatch(logOut());
-  requestScreenCallback({queryString: "", screenName: "login"}, navigation, route);
+  requestScreenCallback({ queryString: '', screenName: 'login' }, navigation, route);
 };
 
 const requestScreenCallback = (event, _navigation, _route) => {
@@ -209,7 +210,7 @@ const map = {
 
   [SET_STATE]: setStateCallback,
 
-  [LOGOUT]: logOutCallback
+  [LOGOUT]: logOutCallback,
 };
 
 // PUBLIC

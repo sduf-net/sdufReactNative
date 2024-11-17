@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { View, ActivityIndicator, DeviceEventEmitter } from 'react-native';
+import { View, ActivityIndicator, DeviceEventEmitter, Text } from 'react-native';
 import { handleEventAction } from '../../../event_handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -14,10 +14,6 @@ function ApiWidget({ data, id }) {
     if (item.id === id) {
       setLoading(true);
     }
-  };
-
-  const onRefresh = () => {
-    setLoading(true);
   };
 
   useEffect(() => {
@@ -40,7 +36,6 @@ function ApiWidget({ data, id }) {
   }, [loading]);
 
   useEffect(() => {
-    DeviceEventEmitter.addListener('onRefresh', onRefresh);
     DeviceEventEmitter.addListener('onViewableItemsChanged', onViewableItemsChanged);
   }, []);
 
