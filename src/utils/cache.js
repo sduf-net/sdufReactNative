@@ -1,5 +1,5 @@
 export const PERMANENT = 'permanent';
-export const PER_SESSION = 'per_session';
+export const PER_SESSION = 'session';
 export const TTL = 'ttl';
 export const NONE = 'none';
 
