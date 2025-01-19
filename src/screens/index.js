@@ -94,7 +94,7 @@ export default function IndexScreen() {
       setLoading(false);
       setForceLoading(false);
     }, 2000);
-  }, []);
+  }, [route]);
 
   // Fire event after footer is mounted
   // to adjust screen height and prevent overlapping other components

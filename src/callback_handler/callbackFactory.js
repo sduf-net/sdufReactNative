@@ -166,7 +166,7 @@ const navigateToScreenCallback = (event) => {
   const data = event.payload;
   rootNavigation.navigate('Index', {
     screenName: data.screen_name,
-    query: data.queryString,
+    query: data.queryString ?? "",
     event: data,
   });
 };
