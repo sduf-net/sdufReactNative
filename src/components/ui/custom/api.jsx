@@ -36,6 +36,7 @@ function ApiWidget({ data, id }) {
   }, [loading]);
 
   useEffect(() => {
+    setLoading(true);
     DeviceEventEmitter.addListener('onViewableItemsChanged', onViewableItemsChanged);
   }, []);
 
