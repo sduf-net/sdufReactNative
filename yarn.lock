@@ -10379,6 +10379,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pako@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "pako@npm:2.1.0"
+  checksum: 71666548644c9a4d056bcaba849ca6fd7242c6cf1af0646d3346f3079a1c7f4a66ffec6f7369ee0dc88f61926c10d6ab05da3e1fca44b83551839e89edd75a3e
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -11919,6 +11926,7 @@ __metadata:
     jest: ^29.6.3
     lodash: ^4.17.21
     metro-react-native-babel-preset: 0.72.3
+    pako: ^2.1.0
     phoenix: ^1.7.0-rc.0
     prettier: 2.8.8
     react: 18.3.1
