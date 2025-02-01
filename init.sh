@@ -13,7 +13,6 @@ echo "Creating environment variables..."
 {
     echo "APP_ENV=${APP_ENV}"
     echo "URL=${URL}"
-    echo "SOCKET_URL=${URL}/socket"
     echo "SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}"
     echo "SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}"
     echo "styleURL=${styleURL}"
@@ -47,7 +46,6 @@ chmod +x node_modules/.bin/
 
 export APP_ENV=${APP_ENV}
 export URL=${URL}
-export SOCKET_URL="${URL}/socket"
 export SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}
 export SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}
 export styleURL=${styleURL}

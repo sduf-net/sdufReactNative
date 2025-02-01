@@ -1,5 +1,5 @@
 import { Socket } from 'phoenix';
-import { SOCKET_URL, SOCKET_PROJECT_TOKEN } from '@env';
+import { URL, SOCKET_PROJECT_TOKEN } from '@env';
 import { newError } from '../hooks/useErrors';
 import store from '../redux/store';
 import { selectLastEventIDGlobal } from '../redux/screens';
@@ -12,7 +12,7 @@ export const initSocketConnection = async () => {
       resolve(socket);
     }
 
-    socket = new Socket(`${SOCKET_URL}`, {
+    socket = new Socket(`${URL}/socket`, {
       params: {
         token: SOCKET_PROJECT_TOKEN,
         last_event_id: selectLastEventIDGlobal(store.getState().screens),
