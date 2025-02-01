@@ -1,4 +1,4 @@
-import { decompress as decompressData} from "../utils/compressor";
+import { decompress } from "../utils/compressor";
 
 // // Example usage
 
@@ -30,7 +30,6 @@ export class IncomingEvent {
     action,
     payload,
     buffered = false,
-    compressed = false,
     metadata = {}
   }) {
     this.event_id = event_id;
@@ -40,7 +39,6 @@ export class IncomingEvent {
     this.action = action || null;
     this.payload = payload;
     this.buffered = buffered;
-    this.compressed = compressed;
     this.metadata = metadata || { date: Date.now() };
   }
 
@@ -58,21 +56,18 @@ export class IncomingEvent {
     });
   }
 
-  decompress() {
-    if (this.compressed) {
-      try {
-        const decompressedData = this.decompressPayload(this.payload);
-        this.payload = decompressedData;
-        this.compressed = false;
-      } catch (error) {
-        console.error("Decompression error:", error);
-      }
-    }
-    return this;
+  static fromArrayBuffer(event) {
+    const data = decompress(event);
+    return new IncomingEvent({
+      event_id: data.event_id,
+      user_id: data.user_id,
+      project_id: data.project_id,
+      screen_id: data.screen_id,
+      action: data.action,
+      payload: data.payload,
+      buffered: data.buffered,
+      compressed: data.compressed,
+      metadata: data.metadata
+    });
   }
-
-  decompressPayload(compressedPayload) {
-    return decompressData(compressedPayload);
-  }
-
 }
