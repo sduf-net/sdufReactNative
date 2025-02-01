@@ -10,6 +10,7 @@ import {
     initFirebase,
     setBackgroundMessageHandler
 } from './src/push_notfication';
+import { TextDecoder, TextEncoder } from 'text-encoding';
 
 if (__DEV__) {
     require("./ReactotronConfig");
@@ -20,5 +21,9 @@ createNotificationChannels();
 setBackgroundMessageHandler();
 // Must be outside of any component LifeCycle (such as `componentDidMount`).
 configurePushNotification();
+
+// Make TextDecoder and TextEncoder globally available
+global.TextDecoder = TextDecoder;
+global.TextEncoder = TextEncoder;
 
 AppRegistry.registerComponent(appName, () => App);
