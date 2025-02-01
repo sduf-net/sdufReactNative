@@ -1,4 +1,4 @@
-import { decompress as decompressData } from './compressor';  // Importing the decompression utility
+import { decompress as decompressData} from "../utils/compressor";
 
 // // Example usage
 
