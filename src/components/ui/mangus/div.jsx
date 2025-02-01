@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, VirtualizedList } from 'react-native';
+import { VirtualizedList } from 'react-native';
 import { Div } from 'react-native-magnus';
 import { getItem, getItemCount } from '../../../utils';
 

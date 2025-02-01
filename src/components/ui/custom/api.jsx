@@ -6,7 +6,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 function ApiWidget({ data, id }) {
   const navigation = useNavigation();
   const route = useRoute();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // Do not request and render component until it visible
   // note: we can add event handler here
