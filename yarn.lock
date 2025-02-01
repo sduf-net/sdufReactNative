@@ -10525,10 +10525,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"phoenix@npm:^1.7.0-rc.0":
-  version: 1.7.14
-  resolution: "phoenix@npm:1.7.14"
-  checksum: c687f340380df1ba9af5f526c76a06a445cb819d366873bee228a2151f66c9732d1e579dda5371be3c80674e5fd8003bc19549dbadec1fd25220bc8081e30440
+"phoenix@npm:^1.7.19":
+  version: 1.7.19
+  resolution: "phoenix@npm:1.7.19"
+  checksum: 24cbb4d2210fe8e0d3b37f80f696a4baeb250ae679c07cc4e0d51d8143b4f0b52012f1255d3addff3cb95cc2d9e9acb6136bb2c7adf3d4c43bf42f61f09fe497
   languageName: node
   linkType: hard
 
@@ -11927,7 +11927,7 @@ __metadata:
     lodash: ^4.17.21
     metro-react-native-babel-preset: 0.72.3
     pako: ^2.1.0
-    phoenix: ^1.7.0-rc.0
+    phoenix: ^1.7.19
     prettier: 2.8.8
     react: 18.3.1
     react-devtools: ^4.26.1
@@ -11960,6 +11960,7 @@ __metadata:
     react-test-renderer: 18.3.1
     reactotron-react-native: ^5.1.8
     rn-tinder-card: ^1.7.0
+    text-encoding: ^0.7.0
     typescript: 5.0.4
   languageName: unknown
   linkType: soft
@@ -12713,6 +12714,13 @@ __metadata:
     glob: ^7.1.4
     minimatch: ^3.0.4
   checksum: 3b34a3d77165a2cb82b34014b3aba93b1c4637a5011807557dc2f3da826c59975a5ccad765721c4648b39817e3472789f9b0fa98fc854c5c1c7a1e632aacdc28
+  languageName: node
+  linkType: hard
+
+"text-encoding@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "text-encoding@npm:0.7.0"
+  checksum: b6109a843fb1b8748b32e1ecd6df74d370f46c13ac136bcb6ca15db70209bb0b8ec1f296ebb4b0dd9961150e205dcc044b89f8cf7657f6faef78c7569a2a81bc
   languageName: node
   linkType: hard
 
