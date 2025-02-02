@@ -13,7 +13,7 @@
     "prettierFixAll": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
-    "@maplibre/maplibre-react-native": "^10.0.0-alpha.15",
+    "@maplibre/maplibre-react-native": "^10.0.1",
     "@react-native-async-storage/async-storage": "^1.19.0",
     "@react-native-community/cli": "^15.0.1",
     "@react-native-community/datetimepicker": "^8.2.0",
@@ -31,18 +31,16 @@
     "pako": "^2.1.0",
     "phoenix": "^1.7.19",
     "react": "18.3.1",
-    "react-devtools": "^4.26.1",
     "react-intersection-observer": "^9.4.3",
     "react-native": "latest",
     "react-native-animatable": "^1.4.0",
-    "react-native-dotenv": "^3.4.10",
+    "react-native-dotenv": "^3.4.11",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-image-picker": "^7.1.1",
     "react-native-image-viewing": "^0.2.2",
     "react-native-intersection-observer": "^0.0.9",
     "react-native-inviewport": "^1.1.0",
-    "react-native-lightbox": "^0.8.1",
     "react-native-lightbox-v2": "^0.9.0",
     "react-native-magnus": "^1.0.63",
     "react-native-modal": "^13.0.1",
@@ -78,7 +76,8 @@
     "prettier": "2.8.8",
     "react-test-renderer": "18.3.1",
     "reactotron-react-native": "^5.1.12",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "react-devtools": "^4.26.1"
   },
   "engines": {
     "node": ">=18"
