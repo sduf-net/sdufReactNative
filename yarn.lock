@@ -9969,7 +9969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.0.0, lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.21":
+"lodash@npm:^4.17.10, lodash@npm:^4.17.15, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -11858,19 +11858,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-intersection-observer@npm:^9.4.3":
-  version: 9.13.1
-  resolution: "react-intersection-observer@npm:9.13.1"
-  peerDependencies:
-    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-  checksum: 92b3e7d9293365635bf5ede89b912a670030c6244879dce36fa9437e6749c637151087fbcaa72cc160b2fa7045bd5ac861a8535e0a2b7b8f230f11f2e0391005
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0, react-is@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
@@ -11969,15 +11956,6 @@ __metadata:
     react: ">=16.11.0"
     react-native: ">=0.61.3"
   checksum: 17f16958ebc00787453d68ca0a695ee5fd9c59865fc525e192de6f200f4b91caa3af3da5a9908e28c94370ea28382074328f917c5398a27b112dd986985f77a0
-  languageName: node
-  linkType: hard
-
-"react-native-intersection-observer@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "react-native-intersection-observer@npm:0.0.9"
-  dependencies:
-    lodash: ^4.0.0
-  checksum: 345229547a8c876e4e8c3230d40b7d22b8f63d9241e3b8ed03581477873d6a40dd0361e5f2e7853a4b0c707f65381f51f1893cd3d684b0b15c1f3ea45c69ac94
   languageName: node
   linkType: hard
 
@@ -12892,7 +12870,6 @@ __metadata:
     prettier: 2.8.8
     react: 18.3.1
     react-devtools: ^4.26.1
-    react-intersection-observer: ^9.4.3
     react-native: latest
     react-native-animatable: ^1.4.0
     react-native-dotenv: ^3.4.11
@@ -12900,7 +12877,6 @@ __metadata:
     react-native-gesture-handler: ^2.15.0
     react-native-image-picker: ^7.1.1
     react-native-image-viewing: ^0.2.2
-    react-native-intersection-observer: ^0.0.9
     react-native-inviewport: ^1.1.0
     react-native-lightbox-v2: ^0.9.0
     react-native-magnus: ^1.0.63
