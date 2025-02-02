@@ -4914,7 +4914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:^29.6.3, babel-jest@npm:^29.7.0":
+"babel-jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "babel-jest@npm:29.7.0"
   dependencies:
@@ -8851,7 +8851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest@npm:^29.6.3":
+"jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest@npm:29.7.0"
   dependencies:
@@ -10908,16 +10908,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-flipper@npm:^0.164.0":
-  version: 0.164.0
-  resolution: "react-native-flipper@npm:0.164.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-native: ">0.62.0"
-  checksum: 8730d7349bec27a23558760320082bd89b07fb404a87bf039a8d852455f28e4d5419f093bb7900ff5f6d85488274cfb246278b6700878bcabe574d5aacd88dac
-  languageName: node
-  linkType: hard
-
 "react-native-fs@npm:^2.20.0":
   version: 2.20.0
   resolution: "react-native-fs@npm:2.20.0"
@@ -11303,35 +11293,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reactotron-core-client@npm:2.9.4":
-  version: 2.9.4
-  resolution: "reactotron-core-client@npm:2.9.4"
+"reactotron-core-client@npm:2.9.7":
+  version: 2.9.7
+  resolution: "reactotron-core-client@npm:2.9.7"
   dependencies:
-    reactotron-core-contract: 0.2.4
-  checksum: d55cfb71d2b0ea7ff131242b94f0cf7b6f7d1815de911dea72f03c919359a761b8d260f8a4d999d49beff4bde3f32df33c81cc6d338057b924fdbcb1beef31f3
+    reactotron-core-contract: 0.2.5
+  checksum: 6149ad998c5cd8dccc41f9b93a21d96e44e1cde04eda2b5e0697327f7aa7d5366cbdf900d61846be269b281342de8d4b09ee8ba1d64aa2d613082e66c914178d
   languageName: node
   linkType: hard
 
-"reactotron-core-contract@npm:0.2.4":
-  version: 0.2.4
-  resolution: "reactotron-core-contract@npm:0.2.4"
-  checksum: b3c3e21f3137202d3089b00eda409ec1fb72b8ec296d710883dca07dfb98fa8c48564347854b40b031adcbeb17842730adebac53890f516a5304d03d90d1c1c7
+"reactotron-core-contract@npm:0.2.5":
+  version: 0.2.5
+  resolution: "reactotron-core-contract@npm:0.2.5"
+  checksum: 54b56322ba05559a9faa1d94407a45c6777c9e50f2efb2a1759eead2acf17e053f68c27e5c4338ac6f7f2d6eb649b4ad375153288659d836ef931df44859047a
   languageName: node
   linkType: hard
 
-"reactotron-react-native@npm:^5.1.8":
-  version: 5.1.8
-  resolution: "reactotron-react-native@npm:5.1.8"
+"reactotron-react-native@npm:^5.1.12":
+  version: 5.1.12
+  resolution: "reactotron-react-native@npm:5.1.12"
   dependencies:
     mitt: ^3.0.1
-    react-native-flipper: ^0.164.0
-    reactotron-core-client: 2.9.4
+    reactotron-core-client: 2.9.7
   peerDependencies:
     react-native: ">=0.40.0"
-  dependenciesMeta:
-    react-native-flipper:
-      optional: true
-  checksum: 36a5c3a2d573b0e337d65dadc37f451e1a1dfe2de455d7ea68cdadfa4bd25b0ed100920f1bb0d1972109a2c59fded3d6325a77850c17d41e9b811d0ba60d0e1b
+  checksum: 073a7ef85f39b731a1e54ada487a25c5ee75b1161ce2957e226a24acf4ebf6e8911478e5e94981c3eebe4f7ab1d95da70deae79cc94557593780763806bc0948
   languageName: node
   linkType: hard
 
@@ -11847,9 +11833,9 @@ __metadata:
     "@reduxjs/toolkit": ^1.9.0
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
-    babel-jest: ^29.6.3
+    babel-jest: ^29.7.0
     eslint: ^8.19.0
-    jest: ^29.6.3
+    jest: ^29.7.0
     lodash: ^4.17.21
     metro-react-native-babel-preset: 0.72.3
     pako: ^2.1.0
@@ -11883,10 +11869,10 @@ __metadata:
     react-native-wormhole: ^0.2.0
     react-redux: ^8.0.5
     react-test-renderer: 18.3.1
-    reactotron-react-native: ^5.1.8
+    reactotron-react-native: ^5.1.12
     rn-tinder-card: ^1.7.0
     text-encoding: ^0.7.0
-    typescript: 5.0.4
+    typescript: 5.7.3
   languageName: unknown
   linkType: soft
 
@@ -12840,23 +12826,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.0.4":
-  version: 5.0.4
-  resolution: "typescript@npm:5.0.4"
+"typescript@npm:5.7.3":
+  version: 5.7.3
+  resolution: "typescript@npm:5.7.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 82b94da3f4604a8946da585f7d6c3025fff8410779e5bde2855ab130d05e4fd08938b9e593b6ebed165bda6ad9292b230984f10952cf82f0a0ca07bbeaa08172
+  checksum: 6c38b1e989918e576f0307e6ee013522ea480dfce5f3ca85c9b2d8adb1edeffd37f4f30cd68de0c38a44563d12ba922bdb7e36aa2dac9c51de5d561e6e9a2e9c
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.0.4#~builtin<compat/typescript>":
-  version: 5.0.4
-  resolution: "typescript@patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"
+"typescript@patch:typescript@5.7.3#~builtin<compat/typescript>":
+  version: 5.7.3
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#~builtin<compat/typescript>::version=5.7.3&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d26b6ba97b6d163c55dbdffd9bbb4c211667ebebc743accfeb2c8c0154aace7afd097b51165a72a5bad2cf65a4612259344ff60f8e642362aa1695c760d303ac
+  checksum: 633cd749d6cd7bc842c6b6245847173bba99742a60776fae3c0fbcc0d1733cd51a733995e5f4dadd8afb0e64e57d3c7dbbeae953a072ee303940eca69e22f311
   languageName: node
   linkType: hard
 
