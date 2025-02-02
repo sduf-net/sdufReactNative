@@ -4466,7 +4466,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^6.9.1":
+"@react-navigation/native-stack@npm:^6.11.0":
   version: 6.11.0
   resolution: "@react-navigation/native-stack@npm:6.11.0"
   dependencies:
@@ -4482,7 +4482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^6.0.13":
+"@react-navigation/native@npm:^6.1.18":
   version: 6.1.18
   resolution: "@react-navigation/native@npm:6.1.18"
   dependencies:
@@ -4506,7 +4506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^1.9.0":
+"@reduxjs/toolkit@npm:^1.9.7":
   version: 1.9.7
   resolution: "@reduxjs/toolkit@npm:1.9.7"
   dependencies:
@@ -4843,22 +4843,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-test-renderer@npm:^18.0.0":
-  version: 18.3.0
-  resolution: "@types/react-test-renderer@npm:18.3.0"
+"@types/react-test-renderer@npm:^18.3.1":
+  version: 18.3.1
+  resolution: "@types/react-test-renderer@npm:18.3.1"
   dependencies:
-    "@types/react": "*"
-  checksum: c53683990bd194cb68e3987bda79c78eff41517f7a747e92f3e54217c2ce3addd031b8a45bf631982c909cc2caeeb905372f322758e05bb76c03754a3f24426e
+    "@types/react": ^18
+  checksum: f8cc23cc8decdb6068cdc8f8c306e189eab8e569443ce97b216e757ee42eb20b18d2280ef41e2955668413f14be92765a3ba86cfcfeeae6b20c965acd9674786
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.6":
+"@types/react@npm:*":
   version: 18.3.8
   resolution: "@types/react@npm:18.3.8"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
   checksum: a2cc2034746cde564a49a9d7f1ae57214bc83adb0daafd4724dc400569adc54c5a489c0e7d8656752b8748908a364d6811e4d7a2adc7f18a7f7179728d20147a
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18, @types/react@npm:^18.3.18":
+  version: 18.3.18
+  resolution: "@types/react@npm:18.3.18"
+  dependencies:
+    "@types/prop-types": "*"
+    csstype: ^3.0.2
+  checksum: 5933597bc9f53e282f0438f0bb76d0f0fab60faabe760ea806e05ffe6f5c61b9b4d363e1a03a8fea47c510d493c6cf926cdeeba9f7074fa97b61940c350245e7
   languageName: node
   linkType: hard
 
@@ -10147,9 +10157,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"metro-react-native-babel-preset@npm:0.72.3":
-  version: 0.72.3
-  resolution: "metro-react-native-babel-preset@npm:0.72.3"
+"metro-react-native-babel-preset@npm:0.72.4":
+  version: 0.72.4
+  resolution: "metro-react-native-babel-preset@npm:0.72.4"
   dependencies:
     "@babel/core": ^7.14.0
     "@babel/plugin-proposal-async-generator-functions": ^7.0.0
@@ -10192,7 +10202,7 @@ __metadata:
     react-refresh: ^0.4.0
   peerDependencies:
     "@babel/core": "*"
-  checksum: 678595fe00c8f9b39517094dc90facc93d514d68b32bc4bb64b7c58b9ab72a36da80b0969da932ef52e4a8d8b223a8ebc731ca0e88e221fb4187db7a4d7e5e79
+  checksum: eb713f71cb0ed3e6fa7d7efae68f8681a2da8321754185206627b1ebe5d460d1c9fc723ca13e57b682801bf77b59b6e13162da3775e160a62f8e85ace62c3c38
   languageName: node
   linkType: hard
 
@@ -11585,7 +11595,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-devtools@npm:^4.26.1":
+"react-devtools@npm:^4.28.5":
   version: 4.28.5
   resolution: "react-devtools@npm:4.28.5"
   dependencies:
@@ -11687,7 +11697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:*, react-native-gesture-handler@npm:^2.15.0":
+"react-native-gesture-handler@npm:*":
   version: 2.19.0
   resolution: "react-native-gesture-handler@npm:2.19.0"
   dependencies:
@@ -11702,13 +11712,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-image-picker@npm:^7.1.1":
-  version: 7.1.2
-  resolution: "react-native-image-picker@npm:7.1.2"
+"react-native-gesture-handler@npm:^2.22.1":
+  version: 2.22.1
+  resolution: "react-native-gesture-handler@npm:2.22.1"
+  dependencies:
+    "@egjs/hammerjs": ^2.0.17
+    hoist-non-react-statics: ^3.3.0
+    invariant: ^2.2.4
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: af52328b7cb06c28549442f0d923cfa92dde8d5a968a642336df4c882f81adbf0e5e606a14de27f96883a76fa1e03230061c4080011c9107942edebc8e09c478
+  checksum: 31be1a30d35b20dc72426147b3c5b8a2bf23a4666a4208208c423baec098850564e8cb555d360b87435ffe65a4f51f84e5471bf2140979c84589bd787cf5cfe0
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^7.2.3":
+  version: 7.2.3
+  resolution: "react-native-image-picker@npm:7.2.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 96d67516e8e1c1768c593ca1b0a507d5212d8ac5df2610ad9d6f38c188b8d0720966559867849f74b6c19d2500664ce17c907e5fa37ab72487abd363cf493e7d
   languageName: node
   linkType: hard
 
@@ -11722,7 +11746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-lightbox-v2@npm:^0.9.0":
+"react-native-lightbox-v2@npm:^0.9.2":
   version: 0.9.2
   resolution: "react-native-lightbox-v2@npm:0.9.2"
   peerDependencies:
@@ -11772,7 +11796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:*, react-native-reanimated@npm:^3.7.2":
+"react-native-reanimated@npm:*":
   version: 3.15.2
   resolution: "react-native-reanimated@npm:3.15.2"
   dependencies:
@@ -11795,33 +11819,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.10.1":
-  version: 4.11.0
-  resolution: "react-native-safe-area-context@npm:4.11.0"
+"react-native-reanimated@npm:^3.16.7":
+  version: 3.16.7
+  resolution: "react-native-reanimated@npm:3.16.7"
+  dependencies:
+    "@babel/plugin-transform-arrow-functions": ^7.0.0-0
+    "@babel/plugin-transform-class-properties": ^7.0.0-0
+    "@babel/plugin-transform-classes": ^7.0.0-0
+    "@babel/plugin-transform-nullish-coalescing-operator": ^7.0.0-0
+    "@babel/plugin-transform-optional-chaining": ^7.0.0-0
+    "@babel/plugin-transform-shorthand-properties": ^7.0.0-0
+    "@babel/plugin-transform-template-literals": ^7.0.0-0
+    "@babel/plugin-transform-unicode-regex": ^7.0.0-0
+    "@babel/preset-typescript": ^7.16.7
+    convert-source-map: ^2.0.0
+    invariant: ^2.2.4
   peerDependencies:
+    "@babel/core": ^7.0.0-0
     react: "*"
     react-native: "*"
-  checksum: 6d6af265ecf1b9cb45e042a335f2c5da472ad41eb5d4fda8e31a1607b344726f0f4f9501ef3a3a731cec3784ba93485b44cbdafbf5f13055caa130c703bbd307
+  checksum: 108095709cd7a3effc5b5d276d94e161b399bd2d06e32140834168a0051545401bb09228071447e5925571da3f86f335d2a82c76751cdae07f66faf50b25c97f
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:^3.18.2":
-  version: 3.34.0
-  resolution: "react-native-screens@npm:3.34.0"
+"react-native-safe-area-context@npm:^4.14.1":
+  version: 4.14.1
+  resolution: "react-native-safe-area-context@npm:4.14.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: acf94ea2a30a3ec5594b467f8e0942ac48c10cbb5d34d16beba33cc0052f7c82dfd6ace754fa55f41d55143f134d3d3fa908eaf4cc9dec5743d6c4483b23520a
+  languageName: node
+  linkType: hard
+
+"react-native-screens@npm:^3.35.0":
+  version: 3.35.0
+  resolution: "react-native-screens@npm:3.35.0"
   dependencies:
     react-freeze: ^1.0.0
     warn-once: ^0.1.0
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 28c1f6e556c318ffcbd79d153b9612cc8a0b8d8b70f909d3cde2fd6d0586a7c151a449e57400d8996f4ee6c3b5140c5c4f643a427e974f6dc573b2bcd8eb7356
+  checksum: cb8a0c8d8a41a8a1065cc2253e4272a970366a7d80bc54e889b2f48de7ccccd3e828e2701de39c0453a67956ec0cad140fb506324cce04419b5e2eb495c038c2
   languageName: node
   linkType: hard
 
-"react-native-uuid@npm:^2.0.1":
-  version: 2.0.2
-  resolution: "react-native-uuid@npm:2.0.2"
-  checksum: 149f65549132a240ac237f4db34063fd08473e4b3a9b5958e3d0d6722cf10754efb222b1c6085a3dc42e0718ca9575b38cd5535ae83a96534dde0f54d343e915
+"react-native-uuid@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "react-native-uuid@npm:2.0.3"
+  checksum: e47774481feaed5d38f75fb4b03f5189c03e7452038f1b0fa56677add8a8bdef64ec7ad5e83f9fa761d8788cac5c8e554ade07e82a2818145337df7c883e2124
   languageName: node
   linkType: hard
 
@@ -11840,16 +11887,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:^13.8.1":
-  version: 13.12.2
-  resolution: "react-native-webview@npm:13.12.2"
+"react-native-webview@npm:^13.13.2":
+  version: 13.13.2
+  resolution: "react-native-webview@npm:13.13.2"
   dependencies:
     escape-string-regexp: ^4.0.0
     invariant: 2.2.4
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: d84b2e2e75dc484eb40f8e285607b9686693f2d31e95802e2b358dc0820bcc294b438a77174eba157c31d95675c962c61c94885629af999416ad1355e9618fe0
+  checksum: 034b1ac22b32f3c9c66c1be96ec71078657b569ddd0970639a90ddf2f3849fa31bc010cff19e5b9b315ce836b9061926b196a156a72b9438f5cee24512ebc33a
   languageName: node
   linkType: hard
 
@@ -11919,7 +11966,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^8.0.5":
+"react-redux@npm:^8.1.3":
   version: 8.1.3
   resolution: "react-redux@npm:8.1.3"
   dependencies:
@@ -12546,40 +12593,40 @@ __metadata:
     "@react-native/eslint-config": 0.77.0
     "@react-native/metro-config": 0.77.0
     "@react-native/typescript-config": 0.77.0
-    "@react-navigation/native": ^6.0.13
-    "@react-navigation/native-stack": ^6.9.1
-    "@reduxjs/toolkit": ^1.9.0
-    "@types/react": ^18.2.6
-    "@types/react-test-renderer": ^18.0.0
+    "@react-navigation/native": ^6.1.18
+    "@react-navigation/native-stack": ^6.11.0
+    "@reduxjs/toolkit": ^1.9.7
+    "@types/react": ^18.3.18
+    "@types/react-test-renderer": ^18.3.1
     babel-jest: ^29.7.0
     eslint: ^8.57.1
     jest: ^29.7.0
     lodash: ^4.17.21
-    metro-react-native-babel-preset: 0.72.3
+    metro-react-native-babel-preset: 0.72.4
     pako: ^2.1.0
     phoenix: ^1.7.19
     prettier: 2.8.8
     react: 18.3.1
-    react-devtools: ^4.26.1
+    react-devtools: ^4.28.5
     react-native: latest
     react-native-animatable: ^1.4.0
     react-native-dotenv: ^3.4.11
     react-native-fs: ^2.20.0
-    react-native-gesture-handler: ^2.15.0
-    react-native-image-picker: ^7.1.1
+    react-native-gesture-handler: ^2.22.1
+    react-native-image-picker: ^7.2.3
     react-native-image-viewing: ^0.2.2
-    react-native-lightbox-v2: ^0.9.0
+    react-native-lightbox-v2: ^0.9.2
     react-native-magnus: ^1.0.63
     react-native-modal: ^13.0.1
     react-native-push-notification: ^8.1.1
-    react-native-reanimated: ^3.7.2
-    react-native-safe-area-context: ^4.10.1
-    react-native-screens: ^3.18.2
-    react-native-uuid: ^2.0.1
+    react-native-reanimated: ^3.16.7
+    react-native-safe-area-context: ^4.14.1
+    react-native-screens: ^3.35.0
+    react-native-uuid: ^2.0.3
     react-native-vector-icons: ^10.2.0
-    react-native-webview: ^13.8.1
+    react-native-webview: ^13.13.2
     react-native-wormhole: ^0.2.0
-    react-redux: ^8.0.5
+    react-redux: ^8.1.3
     react-test-renderer: 18.3.1
     reactotron-react-native: ^5.1.12
     rn-tinder-card: ^1.7.0
