@@ -15,6 +15,7 @@
 		225798D42314EAF585A419BC /* Pods_sdufNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67BC04FB19F7734EE8AD3ADA /* Pods_sdufNative.framework */; };
 		32756BA32C9D240A00493A80 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = 52502C0D5C0E15EEA3FB7EBE /* MapLibre */; };
 		32756BA42C9D240A00493A80 /* MapLibre in Frameworks */ = {isa = PBXBuildFile; productRef = 9B07EF8E6F59485FBA7E2836 /* MapLibre */; };
+		328EEF8D2D504B6900C96315 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 328EEF8C2D504B6900C96315 /* GoogleService-Info.plist */; };
 		34832308846E5D8D4E546D55 /* Pods_sdufNative_sdufNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC3A899B3DC8B640085C2088 /* Pods_sdufNative_sdufNativeTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		321701A32D503D6E00ADC5E2 /* sdufNativeRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sdufNativeRelease.entitlements; path = sdufNative/sdufNativeRelease.entitlements; sourceTree = "<group>"; };
 		325736CE015E98BE0304F253 /* Pods-sdufNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdufNative.release.xcconfig"; path = "Target Support Files/Pods-sdufNative/Pods-sdufNative.release.xcconfig"; sourceTree = "<group>"; };
 		32756BA62C9D243B00493A80 /* sdufNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sdufNative.entitlements; path = sdufNative/sdufNative.entitlements; sourceTree = "<group>"; };
+		328EEF8C2D504B6900C96315 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B216504928D1E5A0287F16B /* Pods-sdufNative-sdufNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sdufNative-sdufNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-sdufNative-sdufNativeTests/Pods-sdufNative-sdufNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		67BC04FB19F7734EE8AD3ADA /* Pods_sdufNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sdufNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D88AB1929D095ABEDC3EE2D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = sdufNative/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		13B07FAE1A68108700A75B9A /* sdufNative */ = {
 			isa = PBXGroup;
 			children = (
+				328EEF8C2D504B6900C96315 /* GoogleService-Info.plist */,
 				321701A32D503D6E00ADC5E2 /* sdufNativeRelease.entitlements */,
 				32756BA62C9D243B00493A80 /* sdufNative.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				328EEF8D2D504B6900C96315 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				08E6AC159F45027414D362BC /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -639,10 +643,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -726,10 +727,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
