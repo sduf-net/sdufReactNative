@@ -49,7 +49,7 @@ To dowload yarn release remove
 
 ## Configuration
 
-1. Register an account [here](http://144.126.138.185).
+1. Register an account [here](https://sduf.net).
 
 2. Create a new project on the registration platform.
 
