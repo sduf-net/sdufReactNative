@@ -18,6 +18,7 @@ import useBackPress from '../hooks/useBackPress';
 import { isLoadFromCache } from '../utils/cache';
 import { onScreenInit, onScreenMount } from '../event_handler';
 import DrawerWidget from '../components/ui/mangus/drawer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const INDEX_SCREEN = 'index';
 
@@ -106,7 +107,7 @@ export default function IndexScreen() {
   if (!isFocused) return;
 
   return (
-    <View style={[styles.container]}>
+    <SafeAreaView style={[styles.container]}>
       <FixedTop />
       <WidgetList onRefresh={onRefresh} />
       <FixedBottom onLayout={onFooterLayout} />
@@ -114,7 +115,7 @@ export default function IndexScreen() {
       <FloatingCard />
       <CustomModal />
       <DrawerWidget />
-    </View>
+    </SafeAreaView>
   );
 }
 
