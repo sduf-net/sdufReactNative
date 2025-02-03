@@ -18,7 +18,7 @@ export const pushEventToChannel = async (channel, params) => {
     },
   };
 
-  console.log('pushEventToChannel', opts);
+  console.debug('pushEventToChannel', opts);
 
   if (channel) {
     return await pushEvent(channel, 'action_performed', opts);
