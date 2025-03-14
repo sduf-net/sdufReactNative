@@ -13,9 +13,6 @@ services:
       styleURL: ${styleURL}
       APP_NAME: ${APP_NAME}
       APP_PACKAGE_NAME: ${APP_PACKAGE_NAME}
-    volumes:
-      - ./node_modules:/app/node_modules
-      - ./shared:/shared
     working_dir: /app
     cpus: '3.0'
     mem_limit: 6G
