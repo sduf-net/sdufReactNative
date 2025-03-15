@@ -19,21 +19,21 @@ echo "JAVA_HOME is set to: $JAVA_HOME"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Define the path to the Hermes executable
-HERMES_COMMAND_PATH="./node_modules/hermes-engine/dest/bin/hermes-cli"
+# HERMES_COMMAND_PATH="./node_modules/hermes-engine/dest/bin/hermes-cli"
 
-# Check if Hermes is installed and update gradle.properties
-if [ -f "$HERMES_COMMAND_PATH" ]; then
-    echo "Hermes found at $HERMES_COMMAND_PATH. Updating gradle.properties..."
-    # Dynamically set project.react.hermesCommand in gradle.properties
-    echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
-else
-    echo "Hermes not found. Please install Hermes."
-    # Optionally install Hermes here if not found
-    yarn add hermes-engine --dev
-    echo "Hermes installed. Updating gradle.properties..."
-    # Re-check after installation
-    echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
-fi
+# # Check if Hermes is installed and update gradle.properties
+# if [ -f "$HERMES_COMMAND_PATH" ]; then
+#     echo "Hermes found at $HERMES_COMMAND_PATH. Updating gradle.properties..."
+#     # Dynamically set project.react.hermesCommand in gradle.properties
+#     echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
+# else
+#     echo "Hermes not found. Please install Hermes."
+#     # Optionally install Hermes here if not found
+#     yarn add hermes-engine --dev
+#     echo "Hermes installed. Updating gradle.properties..."
+#     # Re-check after installation
+#     echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
+# fi
 
 # Check if essential environment variables are set
 required_vars=("APP_ENV" "URL" "SOCKET_PROJECT_TOKEN" "SOCKET_PROJECT_ID" "styleURL")
