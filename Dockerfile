@@ -62,7 +62,7 @@ WORKDIR /app
 COPY . /app
 
 # ✅ Installing dependencies...
-RUN yarn install --immutable
+RUN yarn install
 
 # Copy init script
 COPY init.sh /usr/local/bin/init.sh
