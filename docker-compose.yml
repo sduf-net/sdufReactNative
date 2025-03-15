@@ -14,6 +14,3 @@ services:
       APP_NAME: ${APP_NAME}
       APP_PACKAGE_NAME: ${APP_PACKAGE_NAME}
     working_dir: /app
-    cpus: '3.0'
-    mem_limit: 6G
-    memswap_limit: 8G
