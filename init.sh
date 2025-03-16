@@ -1,100 +1,73 @@
 #!/bin/sh
-set -e  # Exit immediately if a command fails
+# Exit immediately if a command exits with a non-zero status.
+set -e
 
-trap 'echo "Error occurred in command: $BASH_COMMAND"; exit 1' ERR
-# Detect system architecture and set JAVA_HOME dynamically
-arch=$(uname -m)
-if [ "$arch" = "x86_64" ]; then
-    echo "Setting JAVA_HOME for x86_64"
-    export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
-elif [ "$arch" = "aarch64" ]; then
-    echo "Setting JAVA_HOME for ARM64"
-    export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-arm64"
-else
-    echo "Unknown architecture: $arch"
+# Check if essential environment variables are set before creating .env file
+if [ -z "$APP_ENV" ] || [ -z "$URL" ] || [ -z "$SOCKET_PROJECT_TOKEN" ] || [ -z "$SOCKET_PROJECT_ID" ] || [ -z "$styleURL" ]; then
+    echo "Critical environment variables are missing."
     exit 1
 fi
 
-echo "JAVA_HOME is set to: $JAVA_HOME"
-export PATH="$JAVA_HOME/bin:$PATH"
+# Create a .env file with environment variables
+echo "Creating environment variables..."
+{
+    echo "APP_ENV=${APP_ENV}"
+    echo "URL=${URL}"
+    echo "SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}"
+    echo "SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}"
+    echo "styleURL=${styleURL}"
+} > .env
 
-# Define the path to the Hermes executable
-# HERMES_COMMAND_PATH="./node_modules/hermes-engine/dest/bin/hermes-cli"
-
-# # Check if Hermes is installed and update gradle.properties
-# if [ -f "$HERMES_COMMAND_PATH" ]; then
-#     echo "Hermes found at $HERMES_COMMAND_PATH. Updating gradle.properties..."
-#     # Dynamically set project.react.hermesCommand in gradle.properties
-#     echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
-# else
-#     echo "Hermes not found. Please install Hermes."
-#     # Optionally install Hermes here if not found
-#     yarn add hermes-engine --dev
-#     echo "Hermes installed. Updating gradle.properties..."
-#     # Re-check after installation
-#     echo "project.react.hermesCommand=$HERMES_COMMAND_PATH" >> android/gradle.properties
-# fi
-
-# Check if essential environment variables are set
-required_vars=("APP_ENV" "URL" "SOCKET_PROJECT_TOKEN" "SOCKET_PROJECT_ID" "styleURL")
-for var in "${required_vars[@]}"; do
-    if [ -z "${!var}" ]; then
-        echo "Missing required environment variable: $var"
-        exit 1
-    fi
-done
-
-# Create .env file
-cat <<EOF > .env
-APP_ENV=${APP_ENV}
-URL=${URL}
-SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}
-SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}
-styleURL=${styleURL}
-EOF
 echo "Environment variables set."
 
-# macOS/Linux compatibility for `sed`
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed_command="sed -i ''"
+# Replace strings in all project files, avoiding the .git and other directories
+echo "Replacing package names in the project..."
+# Replace strings in all project files, avoiding the .git and other directories
+find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
+
+echo "Configuring app.json..."
+# Replace string specifically in app.json
+find app.json -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+find android/app/src/main/res/values -name "strings.xml" -type f -exec sed -i "s/sdufNative/${APP_NAME}/g" {} +
+
+# Gather environment info
+echo "Gathering environment info..."
+npm install -g envinfo
+if command -v envinfo >/dev/null; then
+    envinfo
 else
-    sed_command="sed -i"
+    echo "envinfo is not installed. Please install it globally using 'npm install -g envinfo'."
+    exit 1
 fi
 
-# Replace package names
-find . -type f -not -path '*/\.git/*' -not -name 'docker-compose.yml' -exec $sed_command "s/com.sdufnative/${APP_PACKAGE_NAME}/g" {} +
-find . -name "app.json" -exec $sed_command "s/sdufNative/${APP_NAME}/g" {} +
-find android/app/src/main/res/values -name "strings.xml" -exec $sed_command "s/sdufNative/${APP_NAME}/g" {} +
+echo "Installing dependencies..."
+yarn install
+chmod +x node_modules/.bin/
 
-# Check if envinfo is available globally, and if not, use yarn dlx to run it
-if ! yarn dlx envinfo --help >/dev/null 2>&1; then
-    echo "envinfo not found. Installing via yarn..."
-    yarn add envinfo
-else
-    echo "envinfo is already installed."
-fi
-# Run envinfo to gather environment info
-yarn dlx envinfo
+export APP_ENV=${APP_ENV}
+export URL=${URL}
+export SOCKET_PROJECT_TOKEN=${SOCKET_PROJECT_TOKEN}
+export SOCKET_PROJECT_ID=${SOCKET_PROJECT_ID}
+export styleURL=${styleURL}
 
-# Prepare Android build
+# Navigate to android directory and prepare for build
 echo "Preparing Android build..."
 cd android
 chmod +x gradlew
 ./gradlew assembleRelease --max-workers=3 --no-daemon
 
-# Move APK files
+# Move APK files to a shared volume
 echo "Moving APK files..."
-apk_directory="./app/build/outputs/apk/release"
-if [ -d "$apk_directory" ]; then
-    for apk in "$apk_directory"/*.apk; do
-        new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
-        cp "$apk" "/shared/${new_filename}"
-    done
-    echo "Files moved successfully."
-else
-    echo "No APK files found. Exiting."
-    exit 1
-fi
+# Loop through each APK file found in the release directory
+for apk in ./app/build/outputs/apk/release/*.apk; do
+    # Construct the new file name with SOCKET_PROJECT_ID
+    new_filename="${SOCKET_PROJECT_ID}_$(basename "$apk")"
+    
+    # Copy the APK file to the shared directory with the new name
+    cp "$apk" "/shared/${new_filename}"
+done
+echo "Files moved successfully."
 
 echo "Setup complete. Executing command..."
-exec "$@" || exec /bin/bash  # Fallback to bash if no command is provided
+# Execute the command specified to `docker run` or docker-compose
+exec "$@"
